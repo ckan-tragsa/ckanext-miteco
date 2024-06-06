@@ -1,5 +1,5 @@
 name: Tests
-on: [push, pull_request]
+on: [pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -10,7 +10,7 @@ jobs:
       image: openknowledge/ckan-dev:2.9
     services:
       solr:
-        image: ckan/ckan-solr-dev:2.9
+        image: ckan/ckan-solr:2.9-solr9-spatial
       postgres:
         image: ckan/ckan-postgres-dev:2.9
         env:
@@ -19,7 +19,7 @@ jobs:
           POSTGRES_DB: postgres
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
       redis:
-          image: redis:3
+          image: redis:7-alpine
 
     env:
       CKAN_SQLALCHEMY_URL: postgresql://ckan_default:pass@postgres/ckan_test
