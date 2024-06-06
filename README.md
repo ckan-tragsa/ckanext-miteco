@@ -1,6 +1,6 @@
 <p align="center">
   <picture>
-    <img src="https://www.iagua.es/sites/default/files/logo-miteco.png" style="height:100px">
+    <img src="ckanext/miteco/public/images/default/miteco_logo2.png" style="height:150px">
   </picture>
 </p>
 <h1 align="center">ckanext-miteco - CKAN enhancement</h1>
