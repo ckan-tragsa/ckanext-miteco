@@ -105,19 +105,19 @@ ckan.site_description="MITECO SIG CKAN - Des"
 ckan.site_intro_text="[#en#] [![MITECO](https://sede.mapa.gob.es/portal/marm/images/common/logo_miteco.jpg#center)](https://miteco.gob.es/) \
     [![ckan-docker-spatial](https://img.shields.io/badge/ckan--docker--spatial-CKAN%202.9.11-brightgreen?style=social&logo=github#center)](https://github.com/mjanez/ckan-docker) \
     The open data portal of the [**Ministry for the Ecological Transition and the Demographic Challenge**](https://www.miteco.gob.es/) consists of an application using CKAN technology for the distribution of maps, data and spatial metadata and a \
-    [**CSW Catalog**](http://10.31.47.214/csw) (OGC standard) for the metadata publication and discovery about spatial resources on the web. \
+    [**CSW Catalog**]({{ {{ pycsw_url }} }}) (OGC standard) for the metadata publication and discovery about spatial resources on the web. \
     [#es#] [![MITECO](https://sede.mapa.gob.es/portal/marm/images/common/logo_miteco.jpgcenter#center)](https://miteco.gob.es/) \
     [![ckan-docker-espacial](https://img.shields.io/badge/ckan--docker--spatial-CKAN%202.9.11-brightgreen?style=social&logo=github#center)](https://github.com/mjanez/ckan-docker) \
     El portal de datos abiertos del [**Ministerio para la Transición Ecológica y el Reto Demográfico**](https://www.miteco.gob.es/) es una aplicación que utiliza la tecnología CKAN para la distribución de mapas, datos y metadatos espaciales y un \
-    [**Catálogo CSW**](http://10.31.47.214/csw) (estándar OGC) para la publicación y descubrimiento de metadatos sobre recursos espaciales en la web."
+    [**Catálogo CSW**]({{ {{ pycsw_url }} }}) (estándar OGC) para la publicación y descubrimiento de metadatos sobre recursos espaciales en la web."
 ckan.site_about="[#en#] [![MITECO](https://sede.mapa.gob.es/portal/marm/images/common/logo_miteco.jpg#center)](https://miteco.gob.es/) \
     [![ckan-docker-spatial](https://img.shields.io/badge/ckan--docker--spatial-CKAN%202.9.11-brightgreen?style=social&logo=github#center)](https://github.com/mjanez/ckan-docker) \
     The open data portal of the [**Ministry for the Ecological Transition and the Demographic Challenge**](https://www.miteco.gob.es/) consists of an application using CKAN technology for the distribution of maps, data and spatial metadata and a \
-    [**CSW Catalog**](http://10.31.47.214/csw) (OGC standard) for the metadata publication and discovery about spatial resources on the web. \
+    [**CSW Catalog**]({{ {{ pycsw_url }} }}) (OGC standard) for the metadata publication and discovery about spatial resources on the web. \
     [#es#] [![MITECO](https://sede.mapa.gob.es/portal/marm/images/common/logo_miteco.jpgcenter#center)](https://miteco.gob.es/) \
     [![ckan-docker-espacial](https://img.shields.io/badge/ckan--docker--spatial-CKAN%202.9.11-brightgreen?style=social&logo=github#center)](https://github.com/mjanez/ckan-docker) \
     El portal de datos abiertos del [**Ministerio para la Transición Ecológica y el Reto Demográfico**](https://www.miteco.gob.es/) es una aplicación que utiliza la tecnología CKAN para la distribución de mapas, datos y metadatos espaciales y un \
-    [**Catálogo CSW**](http://10.31.47.214/csw) (estándar OGC) para la publicación y descubrimiento de metadatos sobre recursos espaciales en la web."
+    [**Catálogo CSW**]({{ {{ pycsw_url }} }}) (estándar OGC) para la publicación y descubrimiento de metadatos sobre recursos espaciales en la web."
 ```
 
 And in order to replace the default CKAN favicon with the desired, change the appropriate key:
