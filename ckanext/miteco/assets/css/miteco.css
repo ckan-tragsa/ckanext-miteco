@@ -32,8 +32,7 @@
     
     .account-masthead {
         padding: 0px 0;
-        background: #ffdb00;
-        color: #1d1d1b;
+        background: #fbbd00;
         color: #1d1d1b !important;
     }
     
@@ -57,8 +56,8 @@
     }
     
     .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
-        background-color: #fedb00 !important;
-        border-color: #fedb00  !important;
+        background-color: #ffdb00 !important;
+        border-color: #fbbd00  !important;
         color: #351f1a;
     }
     
@@ -80,8 +79,8 @@
         text-decoration: none;
         font-weight: 600;
         color: #351f1a;
-        background-color: #fedb00  ;
-        border: 1px solid #fedb00  ;
+        background-color: #ffdb00  ;
+        border: 1px solid #fbbd00  ;
         -webkit-box-shadow: none;
         box-shadow: none;
     }
@@ -113,6 +112,43 @@
         color: #ad1519;
     }
     
+
+    .masthead .navigation .nav-pills li a {
+        background-color: transparent;
+        color: #1d1d1b;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .masthead .navigation .nav-pills li a:hover, .masthead .navigation .nav-pills li a:focus, .masthead .navigation .nav-pills li.active a {
+        background-color: transparent;
+        text-decoration: underline !important;
+        text-underline-offset: 5px;
+        color: #1d1d1b;
+        font-weight: 600;
+        -webkit-transition: all .2s;
+        transition: all .2s;
+    }
+
+    .masthead {
+        margin-bottom: initial;
+        padding: 10px 0;
+        color: #fff;
+        background-color: #ffdb00 !important;
+        position: relative;
+        padding: 30px 0;
+    }
+    
+    .masthead::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 8px;
+        width: 100%;
+        background: repeating-linear-gradient(to right, #a71e03, #a71e03 25%, #fbbd00 25%, #fbbd00 75%, #a71e03 75%);
+    }
+
     .site-footer {
       margin-top:150px;
       background: #ecece2;
