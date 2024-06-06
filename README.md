@@ -5,7 +5,7 @@
 </p>
 <h1 align="center">ckanext-miteco - CKAN enhancement</h1>
 <p align="center">
-<a href="https://github.com/OpenDataGIS/ckanext-miteco/actions/workflows/test.yml"><img src="https://github.com/OpenDataGIS/ckanext-miteco/actions/workflows/test.yml/badge.svg?branch=main&event=pull_request" alt="ckanext-miteco tests"></a>
+<a href="https://github.com/OpenDataGIS/ckanext-miteco/actions/workflows/test.yml"><img src="https://github.com/OpenDataGIS/ckanext-miteco/actions/workflows/test.yml/badge.svg?branch=develop" alt="ckanext-miteco tests"></a>
 
 <p align="center">
     <a href="#overview">Overview</a> •
