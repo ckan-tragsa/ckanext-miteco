@@ -12,3 +12,5 @@ class MitecoPlugin(plugins.SingletonPlugin):
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic',
             'miteco')
+
+        toolkit.add_resource("assets", "ckanext-miteco")
