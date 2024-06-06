@@ -1,0 +1,14 @@
+# miteco-js:
+#   filter: rjsmin
+#   output: ckanext-miteco/%(version)s-miteco.js
+#   contents:
+#     - js/miteco.js
+#   extra:
+#     preload:
+#       - base/main
+
+miteco-css:
+  filter: cssrewrite
+  output: ckanext-miteco/%(version)s-miteco.css
+  contents:
+    - css/miteco.css

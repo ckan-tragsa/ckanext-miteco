@@ -1,0 +1,119 @@
+/* Remove the feature image */
+.homepage section.featured.media-overlay {
+    display: none;
+    }
+    
+    img[src*='#viewer'] { 
+        border-radius: 5%;
+    }
+    img[src*='#left'] { 
+        float: left;
+        max-height: 200px; 
+    }
+    img[src*='#right'] { 
+        float: right;
+        max-height: 200px; 
+    }
+    img[src*='#center'] { 
+        display: block;
+        margin: auto;
+        max-height: 100px; 
+        max-width:250px;
+    }
+    
+    .account-masthead .account ul li a {
+        display: block;
+        color: #1d1d1b !important;
+        font-size: 13px;
+        font-weight: 500;
+        padding: 0 10px;
+        line-height: 31px;
+    }
+    
+    .account-masthead {
+        padding: 0px 0;
+        background: #ffdb00;
+        color: #1d1d1b;
+        color: #1d1d1b !important;
+    }
+    
+    .account-masthead .account ul li a:hover {
+        /* color: #d9e7eb; */
+        background-color: #a71e03;
+        text-decoration: none;
+    }
+    
+    h1 {
+        color: #ad1519;
+    }
+    
+    .homepage .module-search .module-content .heading-layout2 {
+        color: #ad1519;
+    }
+    
+    .btn-primary {
+        background-color:  #ad1519;
+        border-color:  #ad1519;
+    }
+    
+    .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+        background-color: #fedb00 !important;
+        border-color: #fedb00  !important;
+        color: #351f1a;
+    }
+    
+    a {
+        color: #ad1519;
+    }
+    
+    a.endpoint {
+        width: 40%;
+        text-align: center;
+        background-color: transparent;
+        border-color: #ad1519;
+        color: #ad1519;
+        font-weight: 500;
+        letter-spacing: -0.5px;
+    }
+    
+    a.tag:hover {
+        text-decoration: none;
+        font-weight: 600;
+        color: #351f1a;
+        background-color: #fedb00  ;
+        border: 1px solid #fedb00  ;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+    
+    .toolbar .breadcrumb a {
+        color: #4d4d4d;
+    }
+    
+    body {
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        background-color: #fff;
+        color: #4d4d4d;
+        font-family: var(--bs-font-sans-serif);
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 1.5;
+        margin: 0;
+    }
+    
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+        border-top: 0;
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 3px solid #ad1519;
+    }
+    
+    .masthead .nav > li > a:focus, .masthead .nav > li > a:hover, .masthead .nav > .active > a, .masthead .nav > .active > a:hover, .masthead .nav > .active > a:focus {
+        color: #ad1519;
+    }
+    
+    .site-footer {
+      margin-top:150px;
+      background: #ecece2;
+    }
