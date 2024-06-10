@@ -142,7 +142,7 @@
     .masthead::after {
         content: "";
         position: absolute;
-        bottom: 0;
+        bottom: -8px;
         left: 0;
         height: 8px;
         width: 100%;
