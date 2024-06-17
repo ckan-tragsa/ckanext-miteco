@@ -1,155 +1,155 @@
 /* Remove the feature image */
 .homepage section.featured.media-overlay {
     display: none;
-    }
+}
     
-    img[src*='#viewer'] { 
-        border-radius: 5%;
-    }
-    img[src*='#left'] { 
-        float: left;
-        max-height: 200px; 
-    }
-    img[src*='#right'] { 
-        float: right;
-        max-height: 200px; 
-    }
-    img[src*='#center'] { 
-        display: block;
-        margin: auto;
-        max-height: 100px; 
-        max-width:250px;
-    }
-    
-    .account-masthead .account ul li a {
-        display: block;
-        color: #1d1d1b !important;
-        font-size: 13px;
-        font-weight: 500;
-        padding: 0 10px;
-        line-height: 31px;
-    }
-    
-    .account-masthead {
-        padding: 0px 0;
-        background: #fbbd00;
-        color: #1d1d1b !important;
-    }
-    
-    .account-masthead .account ul li a:hover {
-        /* color: #d9e7eb; */
-        background-color: #a71e03;
-        text-decoration: none;
-    }
-    
-    h1 {
-        color: #ad1519;
-    }
-    
-    .homepage .module-search .module-content .heading-layout2 {
-        color: #ad1519;
-    }
-    
-    .btn-primary {
-        background-color:  #ad1519;
-        border-color:  #ad1519;
-    }
-    
-    .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
-        background-color: #ffdb00 !important;
-        border-color: #fbbd00  !important;
-        color: #351f1a;
-    }
-    
-    a {
-        color: #ad1519;
-    }
-    
-    a.endpoint {
-        width: 40%;
-        text-align: center;
-        background-color: transparent;
-        border-color: #ad1519;
-        color: #ad1519;
-        font-weight: 500;
-        letter-spacing: -0.5px;
-    }
-    
-    a.tag:hover {
-        text-decoration: none;
-        font-weight: 600;
-        color: #351f1a;
-        background-color: #ffdb00  ;
-        border: 1px solid #fbbd00  ;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-    }
-    
-    .toolbar .breadcrumb a {
-        color: #4d4d4d;
-    }
-    
-    body {
-        -webkit-text-size-adjust: 100%;
-        -webkit-tap-highlight-color: rgba(0,0,0,0);
-        background-color: #fff;
-        color: #4d4d4d;
-        font-family: var(--bs-font-sans-serif);
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 1.5;
-        margin: 0;
-    }
-    
-    .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-        border-top: 0;
-        border-left: 0;
-        border-right: 0;
-        border-bottom: 3px solid #ad1519;
-    }
-    
-    .masthead .nav > li > a:focus, .masthead .nav > li > a:hover, .masthead .nav > .active > a, .masthead .nav > .active > a:hover, .masthead .nav > .active > a:focus {
-        color: #ad1519;
-    }
-    
+img[src*='#viewer'] { 
+    border-radius: 5%;
+}
+img[src*='#left'] { 
+    float: left;
+    max-height: 200px; 
+}
+img[src*='#right'] { 
+    float: right;
+    max-height: 200px; 
+}
+img[src*='#center'] { 
+    display: block;
+    margin: auto;
+    max-height: 100px; 
+    max-width:250px;
+}
 
-    .masthead .navigation .nav-pills li a {
-        background-color: transparent;
-        color: #1d1d1b;
-        font-weight: 600;
-        text-decoration: none;
-    }
+.account-masthead .account ul li a {
+    display: block;
+    color: #1d1d1b !important;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 0 10px;
+    line-height: 31px;
+}
 
-    .masthead .navigation .nav-pills li a:hover, .masthead .navigation .nav-pills li a:focus, .masthead .navigation .nav-pills li.active a {
-        background-color: transparent;
-        text-decoration: underline !important;
-        text-underline-offset: 5px;
-        color: #1d1d1b;
-        font-weight: 600;
-        -webkit-transition: all .2s;
-        transition: all .2s;
-    }
+.account-masthead {
+    padding: 0px 0;
+    background: #fbbd00;
+    color: #1d1d1b !important;
+}
 
-    .masthead {
-        margin-bottom: initial;
-        padding: 10px 0;
-        color: #fff;
-        background-color: #ffdb00 !important;
-        position: relative;
-        padding: 30px 0;
-    }
+.account-masthead .account ul li a:hover {
+    /* color: #d9e7eb; */
+    background-color: #a71e03;
+    text-decoration: none;
+}
+
+h1 {
+    color: #ad1519;
+}
+
+.homepage .module-search .module-content .heading-layout2 {
+    color: #ad1519;
+}
+
+.btn-primary {
+    background-color:  #ad1519;
+    border-color:  #ad1519;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus {
+    background-color: #ffdb00 !important;
+    border-color: #fbbd00  !important;
+    color: #351f1a;
+}
+
+a {
+    color: #ad1519;
+}
+
+a.endpoint {
+    width: 40%;
+    text-align: center;
+    background-color: transparent;
+    border-color: #ad1519;
+    color: #ad1519;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+}
+
+a.tag:hover {
+    text-decoration: none;
+    font-weight: 600;
+    color: #351f1a;
+    background-color: #ffdb00  ;
+    border: 1px solid #fbbd00  ;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.toolbar .breadcrumb a {
+    color: #4d4d4d;
+}
+
+body {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    background-color: #fff;
+    color: #4d4d4d;
+    font-family: var(--bs-font-sans-serif);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 3px solid #ad1519;
+}
+
+.masthead .nav > li > a:focus, .masthead .nav > li > a:hover, .masthead .nav > .active > a, .masthead .nav > .active > a:hover, .masthead .nav > .active > a:focus {
+    color: #ad1519;
+}
+
+
+.masthead .navigation .nav-pills li a {
+    background-color: transparent;
+    color: #1d1d1b;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.masthead .navigation .nav-pills li a:hover, .masthead .navigation .nav-pills li a:focus, .masthead .navigation .nav-pills li.active a {
+    background-color: transparent;
+    text-decoration: underline !important;
+    text-underline-offset: 5px;
+    color: #1d1d1b;
+    font-weight: 600;
+    -webkit-transition: all .2s;
+    transition: all .2s;
+}
+
+.masthead {
+    margin-bottom: initial;
+    padding: 10px 0;
+    color: #fff;
+    background-color: #ffdb00 !important;
+    position: relative;
+    padding: 30px 0;
+}
     
-    .masthead::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 8px;
-        width: 100%;
-        background: repeating-linear-gradient(to right, #a71e03, #a71e03 25%, #fbbd00 25%, #fbbd00 75%, #a71e03 75%);
-    }
+.masthead::after {
+    content: "";
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    height: 8px;
+    width: 100%;
+    background: repeating-linear-gradient(to right, #a71e03, #a71e03 25%, #fbbd00 25%, #fbbd00 75%, #a71e03 75%);
+}
 
-    .site-footer {
-      margin-top:150px;
-      background: #ecece2;
-    }
+.site-footer {
+  margin-top:150px;
+  background: #ecece2;
+}
