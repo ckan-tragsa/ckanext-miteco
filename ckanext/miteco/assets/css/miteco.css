@@ -1,3 +1,30 @@
+@font-face {
+    font-family: 'Open Sans';
+    src: url('../fonts/OpenSans-Regular.ttf') format('truetype'),
+         url('../fonts/OpenSans-Bold.ttf') format('truetype'),
+         url('../fonts/OpenSans-Semibold.ttf') format('truetype'),
+         url('../fonts/OpenSans-Light.ttf') format('truetype');
+    font-weight: 300, 400, 600, 500, 700;
+    font-style: normal;
+}
+
+body {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    font-family: 'Open Sans', sans-serif;
+    background-color: #fff;
+    color: #4d4d4d;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+}
+
 /* Remove the feature image */
 .homepage section.featured.media-overlay {
     display: none;
@@ -26,8 +53,18 @@ img[src*='#center'] {
     color: #1d1d1b !important;
     font-size: 13px;
     font-weight: 500;
-    padding: 0 10px;
     line-height: 31px;
+}
+
+.masthead .main-navbar ul li a {
+    padding: 0.6rem 0.9rem;
+    text-decoration: none;
+    color: #1d1d1b;
+    display: inline-block;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.5rem;
 }
 
 .account-masthead {
@@ -89,18 +126,6 @@ a.tag:hover {
     color: #4d4d4d;
 }
 
-body {
-    -webkit-text-size-adjust: 100%;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    background-color: #fff;
-    color: #4d4d4d;
-    font-family: var(--bs-font-sans-serif);
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 1.5;
-    margin: 0;
-}
-
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     border-top: 0;
     border-left: 0;
@@ -112,12 +137,24 @@ body {
     color: #ad1519;
 }
 
-
 .masthead .navigation .nav-pills li a {
     background-color: transparent;
     color: #1d1d1b;
     font-weight: 600;
     text-decoration: none;
+}
+
+.masthead .main-navbar.collapse.navbar-collapse > ul.navbar-nav > li:hover > a, .masthead .main-navbar.collapse.navbar-collapse > ul.navbar-nav > li:focus > a, .masthead .main-navbar.collapse.navbar-collapse > ul.navbar-nav > li.active > a {
+    background-color: transparent;
+    text-decoration: underline !important;
+    text-underline-offset: 5px;
+    color: #1d1d1b;
+    font-weight: 600;
+    -webkit-transition: none;
+    transition: none;
+    border-radius: 0;
+    background-color: transparent;
+    border-bottom: 0;
 }
 
 .masthead .navigation .nav-pills li a:hover, .masthead .navigation .nav-pills li a:focus, .masthead .navigation .nav-pills li.active a {
@@ -137,12 +174,13 @@ body {
     background-color: #ffdb00 !important;
     position: relative;
     padding: 30px 0;
+    height: 138px;
 }
     
 .masthead::after {
     content: "";
     position: absolute;
-    bottom: -5px;
+    bottom: 0; /* Alinear con la parte inferior del contenedor */
     left: 0;
     height: 8px;
     width: 100%;
@@ -152,4 +190,146 @@ body {
 .site-footer {
   margin-top:150px;
   background: #ecece2;
+}
+
+
+/* schemingdcat override */
+.masthead .navbar .logo img {
+    max-height: 75px;
+    margin: 20px 0 20px 0;
+}
+
+.homepage .module-search .module-content .sdct-about-heading {
+    font-size: 4em;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+}
+
+.sct-about-h3 {
+    position: relative;
+    display: inline-block;
+    font-weight: 600;
+    color: #333;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.sct-about-h3:after {
+    content: "";
+    display: block;
+    width: 50px;
+    height: 4px;
+    background-color: #ad1519;
+    margin-left: auto;
+    border-radius: 0.3rem;
+}
+
+.sct-about-h4 {
+    position: relative;
+    display: inline-block;
+    font-weight: 600;
+    color: #333;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    font-size: 18px;
+}
+
+.sct-about-h4:after {
+    content: "";
+    display: block;
+    width: 35px;
+    height: 4px;
+    background-color: #ad1519;
+    margin-left: auto;
+    border-radius: 3px;
+}
+
+.sct-about-figures-alt-card-icon {
+    height: 100%;
+    width: 30%;
+    float: left;
+    border-radius: 4px 30px 30px 4px / 4px 40px 40px 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f8f8;
+}
+
+.sct-about-figures-alt-card-icon i {
+    font-size: 2rem;
+    color: #ad1519;
+}
+
+.sct-about-figures-alt-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    border: 1px solid #00316426;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #ad1519;
+    text-align: center;
+    height: 5rem;
+}
+
+.sct-about-figures-alt-card-text a:hover {
+    color: #ad1519;
+}
+
+.custom-dropdown-menu .dropdown-header {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ad1519;
+    padding: 0.25rem 0.5rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.pill {
+    display: inline-block;
+    background-color: #ad1519;
+    color: #FFF;
+    padding: 2px 10px 1px 10px;
+    margin-right: 5px;
+    font-weight: normal;
+    border-radius: 100px;
+}
+
+.site-footer p:hover, .site-footer a:not(.icon-button):hover, .site-footer label:hover, .site-footer small:hover, .footer-powered-by:hover {
+    color: #ad1519;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+/* Excluir estilos para .nav-tabs */
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+  border-bottom: 3px solid #ad1519;
+  color: #ad1519;
+}
+
+/* Excluir estilos para .module-content.page-header */
+.module-content.page-header .nav > li.active > a,
+.module-content.page-header .nav > li.active > a:hover,
+.module-content.page-header .nav > li.active > a:focus {
+  border-bottom: 3px solid #ad1519;
+  color: #ad1519;
+}
+
+.nav-link, .page-header .nav-tabs li a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #ad1519;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.nav-link:hover, .page-header .nav-tabs li a:hover, .nav-link:focus, .page-header .nav-tabs li a:focus {
+    color: #700c0f;
+    text-decoration: none;
+}
+
+.icon-button:hover {
+    background-color: rgba(163, 60, 47, 0.4);
+    color: #700c0f;
+    text-decoration: none;
 }
