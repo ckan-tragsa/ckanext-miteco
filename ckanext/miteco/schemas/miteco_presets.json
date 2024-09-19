@@ -1,0 +1,7 @@
+{
+  "scheming_presets_version": 1,
+  "about": "These are the default schemingdcat field presets",
+  "about_url": "http://github.com/ckan/ckanext-scheming#preset",
+  "presets": [
+  ]
+}
