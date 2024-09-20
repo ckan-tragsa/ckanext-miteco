@@ -308,6 +308,16 @@ a.tag:hover {
   color: #ad1519;
 }
 
+.nav-pills .nav-link.active, .nav-pills .page-header .nav-tabs li a.active, .page-header .nav-tabs li .nav-pills a.active,
+.nav-pills .show > .nav-link,
+.nav-pills .page-header .nav-tabs li .show > a,
+.page-header .nav-tabs li .nav-pills .show > a {
+  color: #4d4d4d;
+  font-size: 13px;
+  background-color: #fbbd00;
+  font-weight: bold;
+}
+
 /* Excluir estilos para .module-content.page-header */
 .module-content.page-header .nav > li.active > a,
 .module-content.page-header .nav > li.active > a:hover,
@@ -324,7 +334,7 @@ a.tag:hover {
 }
 
 .nav-link:hover, .page-header .nav-tabs li a:hover, .nav-link:focus, .page-header .nav-tabs li a:focus {
-    color: #700c0f;
+    color: #ad1519;
     text-decoration: none;
 }
 
@@ -332,4 +342,13 @@ a.tag:hover {
     background-color: rgba(163, 60, 47, 0.4);
     color: #700c0f;
     text-decoration: none;
+}
+
+
+.accordion-button:not(.collapsed) {
+    color: #ad1519;
+    text-decoration: none;
+    font-weight: 600;
+    background-color: #e9f0f3;
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);
 }
