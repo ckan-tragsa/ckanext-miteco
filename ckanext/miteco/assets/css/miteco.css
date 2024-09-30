@@ -1,12 +1,4 @@
-@font-face {
-    font-family: 'Open Sans';
-    src: url('../fonts/OpenSans-Regular.ttf') format('truetype'),
-         url('../fonts/OpenSans-Bold.ttf') format('truetype'),
-         url('../fonts/OpenSans-Semibold.ttf') format('truetype'),
-         url('../fonts/OpenSans-Light.ttf') format('truetype');
-    font-weight: 300, 400, 600, 500, 700;
-    font-style: normal;
-}
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
 body {
     -webkit-text-size-adjust: 100%;
