@@ -1,0 +1,45 @@
+{#
+Displays a tree of organizations
+
+NB This template can be slow because it is recursive and uses link_for. At
+DGU we speeded up display of the tree 10 times (necessary as we have 1000
+organizations) by replacing this template with a recursive code routine:
+https://github.com/datagovuk/ckanext-dgu/blob/5fb78b354517c2198245bdc9c98fb5d6c82c6bcc/ckanext/dgu/lib/helpers.py#L140
+
+orgs    - List of organizations
+
+Example:
+
+{% snippet 'organization/snippets/organization_tree.html', top_nodes=h.group_tree(type_='organization'), use_longnames=False %}
+
+#}
+
+{% set ckan_min_ver = h.ckan_version().split('.')[1] %}
+{% set file_type = 'asset' if ckan_min_ver|int >= 9 else 'resource' %}
+{% include 'hierarchy/snippets/hierarchy_' ~ file_type ~ '.html' %}
+
+<ul class="hierarchy-tree-top">
+  {% for node in top_nodes recursive %}
+  {% set org_dict = h.schemingdcat_get_group_or_org(h.dataset_display_field_value(node, 'id'), 'organization') %}
+      {% set display_text =  h.scheming_language_text(org_dict.title_translated) %}
+      {% if node.highlighted %}
+         <li class="highlighted" id="node_{{ node.name }}">
+      {% else %}
+      <li id="node_{{ node.name }}">
+      {% endif %}
+      <div class="organization-info">
+        <i class="fas fa-sitemap"></i> {% link_for display_text, controller='organization', action='read', id=node.name %}
+        <div class="hierarchy-org-notes">
+        {% if org_dict.description %}
+            <small>{{ h.scheming_language_text(org_dict.description) }}</small>
+            <br>
+        {% endif %}
+          <small>{{ _('Datasets') }}: {% link_for org_dict.package_count, controller='organization', action='read', id=node.name %}</small>
+        </div>
+      </div>
+      {% if node.children %}
+        <ul class="hierarchy-tree"> {{ loop(node.children) }} </ul>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

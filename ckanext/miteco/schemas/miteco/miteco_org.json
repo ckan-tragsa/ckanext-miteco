@@ -16,6 +16,29 @@
           "output_validators": "schemingdcat_if_empty_same_as_title"
         },
         {
+          "field_name": "longname",
+          "label": {
+            "en": "Long name (ckanext-hierarchy)",
+            "de": "Nombre largo (ckanext-hierarchy)"
+          },
+          "preset": "hidden_field",
+          "output_validators": "schemingdcat_if_empty_same_as_title"
+        },
+        {
+          "field_name": "not_used",
+          "label": {
+            "en": "Parent organization",
+            "es": "Organización superior"
+          },
+          "display_snippet": null,
+          "form_snippet": "org_hierarchy.html",
+          "validators": "ignore_missing",
+          "help_text": {
+            "en": "A hierarchically parent organization on which this organization is dependent or of which this organization is a part.",
+            "es": "Organización jerárquicamente superior de la que depende o a la que pertenece esta organización."
+          }
+        },
+        {
           "field_name": "title_translated",
           "label": {
             "en": "Name",

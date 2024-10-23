@@ -344,3 +344,28 @@ a.tag:hover {
     background-color: #e9f0f3;
     box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);
 }
+
+/* ckanext-hierarchy */
+.organization-info {
+    margin-bottom: 10px;
+  }
+  .hierarchy-org-notes {
+    margin-left: 20px;
+    font-size: 0.9em;
+    color: #666;
+  }
+  .hierarchy-tree-top {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  .hierarchy-tree {
+    list-style-type: none;
+    padding-left: 20px;
+  }
+  .highlighted {
+    background-color: #2b7fc9;
+  }
+  ul.hierarchy-tree-top {
+    list-style-type: none !important;
+    background: none;
+}
