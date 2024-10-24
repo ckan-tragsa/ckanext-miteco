@@ -1,11 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 
+:root {
+    /* sct -> schemingdcat */
+    --sct-primary-color: #ad1519; 
+    --sct-secondary-color: #2f88a3;
+    --sct-secondary-border-color: #fbbd00;
+    --sct-secondary-bg-color: #0031641f;
+    --miteco-flag-primary-color: #a71e03;
+    --miteco-flag-secondary-color: var(--sct-secondary-border-color);
+    --miteco-text-color: #4d4d4d;
+    --miteco-masthead-text-color: #1d1d1b;
+    --miteco-text-color-hover: #351f1a;
+    --miteco-hover-bg-color: #ffdb00;
+    --miteco-citation-hover-bg-color: #fbbd0047;
+  }
+
+
 body {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
     font-family: 'Open Sans', sans-serif;
     background-color: #fff;
-    color: #4d4d4d;
+    color: var(--miteco-text-color);
     font-weight: 400;
     font-size: 14px;
     line-height: 1.5;
@@ -42,7 +58,7 @@ img[src*='#center'] {
 
 .account-masthead .account ul li a {
     display: block;
-    color: #1d1d1b !important;
+    color: var(--miteco-masthead-text-color) !important;
     font-size: 13px;
     font-weight: 500;
     line-height: 31px;
@@ -51,7 +67,7 @@ img[src*='#center'] {
 .masthead .main-navbar ul li a {
     padding: 0.6rem 0.9rem;
     text-decoration: none;
-    color: #1d1d1b;
+    color: var(--miteco-masthead-text-color);
     display: inline-block;
     font-family: 'Open Sans', sans-serif;
     font-weight: 600;
@@ -61,45 +77,45 @@ img[src*='#center'] {
 
 .account-masthead {
     padding: 0px 0;
-    background: #fbbd00;
-    color: #1d1d1b !important;
+    background: var(--sct-secondary-border-color);
+    color: var(--miteco-masthead-text-color) !important;
 }
 
 .account-masthead .account ul li a:hover {
     /* color: #d9e7eb; */
-    background-color: #a71e03;
+    background-color: var(--miteco-flag-primary-color);
     text-decoration: none;
 }
 
 h1 {
-    color: #ad1519;
+    color: var(--sct-primary-color);
 }
 
 .homepage .module-search .module-content .heading-layout2 {
-    color: #ad1519;
+    color: var(--sct-primary-color);
 }
 
 .btn-primary {
-    background-color:  #ad1519;
-    border-color:  #ad1519;
+    background-color:  var(--sct-primary-color);
+    border-color:  var(--sct-primary-color);
 }
 
 .btn-primary:hover, .btn-primary:active, .btn-primary:focus {
-    background-color: #ffdb00 !important;
-    border-color: #fbbd00  !important;
-    color: #351f1a;
+    background-color: var(--miteco-hover-bg-color) !important;
+    border-color: var(--sct-secondary-border-color)  !important;
+    color: var(--miteco-text-color-hover);
 }
 
 a {
-    color: #ad1519;
+    color: var(--sct-primary-color);
 }
 
 a.endpoint {
     width: 40%;
     text-align: center;
     background-color: transparent;
-    border-color: #ad1519;
-    color: #ad1519;
+    border-color: var(--sct-primary-color);
+    color: var(--sct-primary-color);
     font-weight: 500;
     letter-spacing: -0.5px;
 }
@@ -107,31 +123,31 @@ a.endpoint {
 a.tag:hover {
     text-decoration: none;
     font-weight: 600;
-    color: #351f1a;
-    background-color: #ffdb00  ;
-    border: 1px solid #fbbd00  ;
+    color: var(--miteco-text-color-hover);
+    background-color: var(--miteco-hover-bg-color)  ;
+    border: 1px solid var(--sct-secondary-border-color)  ;
     -webkit-box-shadow: none;
     box-shadow: none;
 }
 
 .toolbar .breadcrumb a {
-    color: #4d4d4d;
+    color: var(--miteco-text-color);
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     border-top: 0;
     border-left: 0;
     border-right: 0;
-    border-bottom: 3px solid #ad1519;
+    border-bottom: 3px solid var(--sct-primary-color);
 }
 
 .masthead .nav > li > a:focus, .masthead .nav > li > a:hover, .masthead .nav > .active > a, .masthead .nav > .active > a:hover, .masthead .nav > .active > a:focus {
-    color: #ad1519;
+    color: var(--sct-primary-color);
 }
 
 .masthead .navigation .nav-pills li a {
     background-color: transparent;
-    color: #1d1d1b;
+    color: var(--miteco-masthead-text-color);
     font-weight: 600;
     text-decoration: none;
 }
@@ -140,7 +156,7 @@ a.tag:hover {
     background-color: transparent;
     text-decoration: underline !important;
     text-underline-offset: 5px;
-    color: #1d1d1b;
+    color: var(--miteco-masthead-text-color);
     font-weight: 600;
     -webkit-transition: none;
     transition: none;
@@ -153,7 +169,7 @@ a.tag:hover {
     background-color: transparent;
     text-decoration: underline !important;
     text-underline-offset: 5px;
-    color: #1d1d1b;
+    color: var(--miteco-masthead-text-color);
     font-weight: 600;
     -webkit-transition: all .2s;
     transition: all .2s;
@@ -163,7 +179,7 @@ a.tag:hover {
     margin-bottom: initial;
     padding: 10px 0;
     color: #fff;
-    background-color: #ffdb00 !important;
+    background-color: var(--miteco-hover-bg-color) !important;
     position: relative;
     padding: 30px 0;
     height: 138px;
@@ -176,7 +192,7 @@ a.tag:hover {
     left: 0;
     height: 8px;
     width: 100%;
-    background: repeating-linear-gradient(to right, #a71e03, #a71e03 25%, #fbbd00 25%, #fbbd00 75%, #a71e03 75%);
+    background: repeating-linear-gradient(to right, var(--miteco-flag-primary-color), var(--miteco-flag-primary-color) 25%, var(--miteco-flag-secondary-color) 25%, var(--miteco-flag-secondary-color) 75%, var(--miteco-flag-primary-color) 75%);
 }
 
 .site-footer {
@@ -211,7 +227,7 @@ a.tag:hover {
     display: block;
     width: 50px;
     height: 4px;
-    background-color: #ad1519;
+    background-color: var(--sct-primary-color);
     margin-left: auto;
     border-radius: 0.3rem;
 }
@@ -230,7 +246,7 @@ a.tag:hover {
     display: block;
     width: 35px;
     height: 4px;
-    background-color: #ad1519;
+    background-color: var(--sct-primary-color);
     margin-left: auto;
     border-radius: 3px;
 }
@@ -248,7 +264,7 @@ a.tag:hover {
 
 .sct-about-figures-alt-card-icon i {
     font-size: 2rem;
-    color: #ad1519;
+    color: var(--sct-primary-color);
 }
 
 .sct-about-figures-alt-card {
@@ -259,26 +275,26 @@ a.tag:hover {
     border: 1px solid #00316426;
     border-radius: 8px;
     background-color: transparent;
-    color: #ad1519;
+    color: var(--sct-primary-color);
     text-align: center;
     height: 5rem;
 }
 
 .sct-about-figures-alt-card-text a:hover {
-    color: #ad1519;
+    color: var(--sct-primary-color);
 }
 
 .custom-dropdown-menu .dropdown-header {
     font-size: 13px;
     font-weight: 600;
-    color: #ad1519;
+    color: var(--sct-primary-color);
     padding: 0.25rem 0.5rem;
     border-bottom: 1px solid #dee2e6;
 }
 
 .pill {
     display: inline-block;
-    background-color: #ad1519;
+    background-color: var(--sct-primary-color);
     color: #FFF;
     padding: 2px 10px 1px 10px;
     margin-right: 5px;
@@ -287,7 +303,7 @@ a.tag:hover {
 }
 
 .site-footer p:hover, .site-footer a:not(.icon-button):hover, .site-footer label:hover, .site-footer small:hover, .footer-powered-by:hover {
-    color: #ad1519;
+    color: var(--sct-primary-color);
     font-weight: 400;
     text-decoration: none;
 }
@@ -296,17 +312,17 @@ a.tag:hover {
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
-  border-bottom: 3px solid #ad1519;
-  color: #ad1519;
+  border-bottom: 3px solid var(--sct-primary-color);
+  color: var(--sct-primary-color);
 }
 
 .nav-pills .nav-link.active, .nav-pills .page-header .nav-tabs li a.active, .page-header .nav-tabs li .nav-pills a.active,
 .nav-pills .show > .nav-link,
 .nav-pills .page-header .nav-tabs li .show > a,
 .page-header .nav-tabs li .nav-pills .show > a {
-  color: #4d4d4d;
+  color: var(--miteco-text-color);
   font-size: 13px;
-  background-color: #fbbd00;
+  background-color: var(--sct-secondary-border-color);
   font-weight: bold;
 }
 
@@ -314,35 +330,42 @@ a.tag:hover {
 .module-content.page-header .nav > li.active > a,
 .module-content.page-header .nav > li.active > a:hover,
 .module-content.page-header .nav > li.active > a:focus {
-  border-bottom: 3px solid #ad1519;
-  color: #ad1519;
+  border-bottom: 3px solid var(--sct-primary-color);
+  color: var(--sct-primary-color);
 }
 
 .nav-link, .page-header .nav-tabs li a {
     display: block;
     padding: 0.5rem 1rem;
-    color: #ad1519;
+    color: var(--sct-primary-color);
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 
 .nav-link:hover, .page-header .nav-tabs li a:hover, .nav-link:focus, .page-header .nav-tabs li a:focus {
-    color: #ad1519;
+    color: var(--sct-primary-color);
     text-decoration: none;
 }
 
 .icon-button:hover {
     background-color: rgba(163, 60, 47, 0.4);
-    color: #700c0f;
+    color: var(--sct-primary-color);
     text-decoration: none;
 }
 
 
 .accordion-button:not(.collapsed) {
-    color: #ad1519;
+    color: var(--sct-primary-color);
     text-decoration: none;
     font-weight: 600;
     background-color: #e9f0f3;
     box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.125);
+}
+
+.citation {
+    .citation-string:hover {
+        background-color: var(--miteco-citation-hover-bg-color);
+        border-color: var(--sct-primary-color);
+    }
 }
 
 /* ckanext-hierarchy */
@@ -368,4 +391,23 @@ a.tag:hover {
   ul.hierarchy-tree-top {
     list-style-type: none !important;
     background: none;
+}
+
+.card:hover, .card:focus-within, .card:active, .card:focus {
+    opacity: 1;
+    color: var(--miteco-masthead-text-color);
+    background-color: var(--bs-table-bg);
+}
+
+.card:hover .card-header, .card:focus-within .card-header {
+    background-color: var(--miteco-hover-bg-color);
+    color: var(--sct-primary-color);
+    font-weight: normal;
+    border-bottom: 1px solid var(--sct-primary-color);
+}
+
+.stages li.active:after {
+    border-color: rgba(140, 198, 138, 0);
+    border-top-color: var(--miteco-flag-secondary-color);
+    border-bottom-color: var(--miteco-flag-secondary-color);
 }

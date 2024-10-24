@@ -21,15 +21,16 @@
 `ckanext-miteco` extension is a tool designed to extend and customise the CKAN metadata and Open Data catalogue for the Spanish Ministry for Ecological Transition and Demographic Challenge ([MITECO](https://www.miteco.gob.es/)). This extension provides specific and thematic functionalities that allow a better management, visualisation and analysis of data related to the ecological transition and the demographic challenge. 
 
 ## TODO: Requirements
+### Compatibility
 Compatibility with core CKAN versions:
 
-| CKAN version    | Compatible?   |
-| --------------- | ------------- |
-| 2.8             | not tested    |
-| 2.9             | yes           |
-| 2.10            | not tested    |
+| CKAN version | Compatible?     |
+|--------------|-----------------|
+| 2.8          | ❔ Not tested  |
+| 2.9          | ✅ Yes |
+| 2.10         | ✅ Yes |
 
-
+### Plugins
 `ckanext-miteco` needs the following extensions:
 
 * [`mjanez/ckanext-dcat`](https://github.com/mjanez/ckanext-dcat):
