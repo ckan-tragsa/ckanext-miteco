@@ -3,5 +3,39 @@
   "about": "These are the default schemingdcat field presets",
   "about_url": "http://github.com/ckan/ckanext-scheming#preset",
   "presets": [
+    {
+      "preset_name": "miteco_dataset_organization",
+      "values": {
+        "validators": "owner_org_validator unicode_safe",
+        "form_snippet": "miteco/form_snippets/organization.html"
+      }
+    },
+    {
+      "preset_name": "miteco_multiple_text_raws_ordered",
+      "values": {
+        "form_snippet": "schemingdcat/form_snippets/multiple_text.html",
+        "display_snippet": "schemingdcat/display_snippets/list_raws_ordered.html",
+        "validators": "not_empty scheming_required schemingdcat_multiple_text",
+        "output_validators": "scheming_load_json"
+      }
+    },
+    {
+      "preset_name": "miteco_multiple_choice_icon",
+      "values": {
+        "form_snippet": "schemingdcat/form_snippets/multiple_select_icon.html",
+        "display_snippet": "schemingdcat/display_snippets/multiple_choice_icon.html",
+        "validators": "not_empty scheming_required schemingdcat_multiple_choice",
+        "output_validators": "scheming_multiple_choice_output"
+      }
+    },
+    {
+      "preset_name": "miteco_select_spatial_icon_dependent_fields",
+      "values": {
+        "form_snippet": "schemingdcat/form_snippets/select_spatial_uri.html",
+        "display_snippet": "schemingdcat/display_snippets/select_spatial_icon.html",
+        "validators": "not_empty scheming_required schemingdcat_multiple_choice schemingdcat_fill_spatial_uri_dependent_fields"
+      }
+    }
+
   ]
 }

@@ -345,8 +345,31 @@ dataset_fields:
   help_text:
     en: Entity (organisation) responsible for making the Dataset available.
     es: Entidad (organización) responsable de publicar el conjunto de datos.
-  preset: dataset_organization
+  preset: miteco_dataset_organization
   form_group_id: general_info
+
+# Dataset privacy (M)
+- field_name: private
+  label:
+    en: Dataset visibility
+    es: Visiblidad del conjunto de datos
+  required: True
+  preset: dataset_private
+  form_include_blank_choice: False
+  choices:
+  - label:
+      en: Private
+      es: Privado
+    value: True
+  - label:
+      en: Public
+      es: Público
+    value: False
+  form_group_id: general_info
+  help_text:
+    en: The publicity or the visibility of the dataset. Only an <code>admin</code> can publish.
+    es: Publicidad o visiblidad del conjunto de datos. Solo un <code>administrador</code> puede publicar.
+  help_allow_html: True
 
 # Graphic overview (O)
 - field_name: graphic_overview
@@ -529,7 +552,7 @@ dataset_fields:
   label:
     en: Themes (NTI-RISP)
     es: Temáticas (NTI-RISP)
-  preset: multiple_choice_icon
+  preset: miteco_multiple_choice_icon
   display_property: dcat:theme
   select_size: 10
   required: True
@@ -887,7 +910,9 @@ dataset_fields:
   display_snippet: schemingdcat/display_snippets/link_schema.html
   form_snippet: schemingdcat/form_snippets/select_hvd_category.html
   select_size: 10
+  required: False
   sorted_choices: False
+  form_include_blank_choice: False
   choices:
   - label:
       en: Meteorological
@@ -1331,7 +1356,7 @@ dataset_fields:
   display_snippet: schemingdcat/display_snippets/link_schema.html
   form_include_blank_choice: False
   required: True
-  sorted_choices: True
+  sorted_choices: False
   choices:
   - label:
       en: Spanish
@@ -2211,7 +2236,8 @@ dataset_fields:
   label:
     en: Update frequency
     es: Frecuencia de actualización
-  preset: select
+  preset: select_not_empty
+  required: True
   display_property: dct:accrualPeriodicity
   display_snippet: schemingdcat/display_snippets/link_schema.html
   sorted_choices: True
@@ -2353,7 +2379,8 @@ dataset_fields:
     en: Sources
     es: Fuentes
   display_property: dct:source
-  preset: multiple_text_raws_ordered
+  preset: miteco_multiple_text_raws_ordered
+  required: True
   form_placeholder: Términos Municipales según el Registro Central de Cartografía. Diciembre de 2013
   help_text:
     en: Information about the data source used in the creation of the data specified in the scope. Best practice is to identify the related resource by means of a URI or a string conforming to a formal identification system. 
@@ -2365,7 +2392,8 @@ dataset_fields:
   label: 
     en: Process steps
     es: Pasos del proceso
-  preset: multiple_text_raws_ordered
+  preset: miteco_multiple_text_raws_ordered
+  required: True
   form_placeholder: 'Selección de geometría que representa entes del mundo real.'
   help_text:
     en: General description of how the resource was developed or an event associated with the resource. 
@@ -2639,7 +2667,7 @@ dataset_fields:
   label: 
     en: Geographic identifier
     es: Identificador geográfico
-  preset: select_spatial_icon_dependent_fields
+  preset: miteco_select_spatial_icon_dependent_fields
   dependent_fields:
     field_name: spatial_coverage
     subfields:
@@ -2647,7 +2675,9 @@ dataset_fields:
       - field_name: text
   display_property: dcat:theme
   select_size: 10
+  required: True
   sorted_choices: False
+  form_include_blank_choice: False
   choices:
   - label:
       ca: España
@@ -3609,6 +3639,7 @@ resource_fields:
     es: Fecha de creación
   display_property: dct:created
   preset: date_created
+  required: True
   form_group_id: resource_identification
 
 # Date of last revision (M)
