@@ -20,13 +20,22 @@ info:
   version: '0.1'
 security:
   - default: []
+basePath: /v1
+tags:
+  - name: datastore
+    description: La API de datos
+    externalDocs:
+      description: Más información
+      url: https://docs.ckan.org/en/2.10/maintaining/datastore.html#the-data-api
 paths:
   /action/datastore_search:
     post:
+      tags:
+        - datastore
       summary: "Buscar un recurso en el datastore"
       description: >
         La acción datastore_search permite buscar datos en un recurso.
-        Los archivos CSV bien formateados que se suben (no enlazados) se cargan automáticamente en el datastore.
+        Los archivos CSV/TSV bien formateados que se suben o se enlazan se cargan automáticamente en el datastore.
       requestBody:
         required: true
         content:
@@ -106,8 +115,6 @@ paths:
                 value:
                   resource_id: d22d2aca-155b-4978-b5c1-1d39837e1993
                   sort: '"Date and Time Deleted/Fecha y hora de eliminación" desc'
-      tags:
-      - action
       responses:
         '200':
           description: "Lista de paquetes (conjuntos de datos) incluyendo todos los metadatos disponibles."

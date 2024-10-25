@@ -17,16 +17,25 @@ info:
   license:
     name: CC BY 4.0
     url: https://creativecommons.org/licenses/by/4.0/
-  version: '0.1'
+  version: 0.1
 security:
   - default: []
+basePath: /v1
+tags:
+  - name: datastore
+    description: The Data API
+    externalDocs:
+      description: Find out more
+      url: https://docs.ckan.org/en/2.10/maintaining/datastore.html#the-data-api
 paths:
   /action/datastore_search:
     post:
+      tags:
+        - datastore
       summary: Search a datastore resource
       description: >
         The datastore_search action allows you to search data in a resource.
-        Well-formatted CSV files that are uploaded (not linked) are automatically loaded into the datastore.
+        Well-formatted CSV/TSV files that are uploaded or linked are automatically loaded into the datastore.
       requestBody:
         required: true
         content:
@@ -106,8 +115,6 @@ paths:
                 value:
                   resource_id: d22d2aca-155b-4978-b5c1-1d39837e1993
                   sort: '"Date and Time Deleted/Fecha y hora de eliminación" desc'
-      tags:
-      - action
       responses:
         '200':
           description: List of packages (datasets) including all metadata available.
