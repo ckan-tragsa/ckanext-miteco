@@ -1,0 +1,113 @@
+openapi: 3.0.0
+servers:
+- url: https://des.gis.miteco.gob.es/catalogo/api
+  description: Development Portal [RESTRICTED ACCESS]
+- url: https://pre.gis.miteco.gob.es/catalogo/api
+  description: Staging portal [RESTRICTED ACCESS]
+info:
+  title: MITECO Open Data Portal - Datastore API
+  description: >
+    This API provides live access to the Datastore portion of the Ministry for the Ecological Transition and the Demographic Challenge (MiTEco) Open Data Portal.
+    Our staging portals are for sharing upcoming features and testing restricted network integration, and development sites are for features under development.
+  termsOfService: https://creativecommons.org/licenses/by/4.0/
+  contact:
+    name: Ministry for the Ecological Transition and the Demographic Challenge (MiTEco)
+    url: https://www.miteco.gob.es/en.html
+    email: informacionma@miteco.es
+  license:
+    name: CC BY 4.0
+    url: https://creativecommons.org/licenses/by/4.0/
+  version: '0.1'
+security:
+  - default: []
+paths:
+  /action/datastore_search:
+    post:
+      summary: Search a datastore resource
+      description: >
+        The datastore_search action allows you to search data in a resource.
+        Well-formatted CSV files that are uploaded (not linked) are automatically loaded into the datastore.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                resource_id:
+                  type: string
+                  format: uuid
+                  description: id or alias of the resource to be searched against
+                  examples:
+                    Air Quality:
+                      value: 499383b6-cd2a-466a-9fcf-910d3e427700
+                filters:
+                  type: object
+                  description: matching conditions to select, `application/json` POST requests only
+                  examples:
+                    (Value not supported for GET requests):
+                      value: ''
+                q:
+                  oneOf:
+                  - type: string
+                    description: full text query searching across all columns in each row
+                  - type: object
+                    description: fill text search on each field given
+                distinct:
+                  type: boolean
+                  description: return only distinct rows
+                  default: false
+                plain:
+                  type: boolean
+                  description: treat as plain text query
+                  default: true
+                language:
+                  type: string
+                  description: language of the full text query
+                  default: english
+                limit:
+                  type: integer
+                  description: maximum number of rows to return
+                  default: 100
+                offset:
+                  type: integer
+                  description: offset this number of rows
+                fields:
+                  oneOf:
+                  - type: string
+                    description: comma-separated string of column names to return
+                  - type: array
+                    description: list of column names to return
+                sort:
+                  type: string
+                  description: comma-separated string of column names with sort order
+                  example: reporting_period desc, line_number
+                include_total:
+                  type: boolean
+                  description: calculate and return the total number of matching rows, set to `false` for improved performance
+                  default: true
+                records_format:
+                  type: string
+                  description: the format for the records return value, set to `csv` or `tsv` for improved performance
+                  default: objects
+                  enum:
+                  - objects
+                  - lists
+                  - csv
+                  - tsv
+            examples:
+              Air Quality:
+                value:
+                  resource_id: 499383b6-cd2a-466a-9fcf-910d3e427700
+                  q: 2020-2021
+                  filters:
+                    codine: 28
+              Top 10 most recently deleted datasets:
+                value:
+                  resource_id: d22d2aca-155b-4978-b5c1-1d39837e1993
+                  sort: '"Date and Time Deleted/Fecha y hora de eliminación" desc'
+      tags:
+      - action
+      responses:
+        '200':
+          description: List of packages (datasets) including all metadata available.
