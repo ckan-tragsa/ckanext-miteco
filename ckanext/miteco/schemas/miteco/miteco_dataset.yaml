@@ -3436,6 +3436,7 @@ dataset_fields:
     es: Licencia
   form_snippet: license.html
   display_property: dct:license
+  validators: default(CC-BY-4.0)
   help_text:
     en: 'License definitions and additional information can be found at: <a href="http://opendefinition.org/" target="_blank" rel="noopener">Open Definition</a>'
     es: 'Las definiciones de las licencias y la información adicional pueden encontrarse en: <a href="http://opendefinition.org/" target="_blank" rel="noopener">Open Definition</a>'
@@ -3447,8 +3448,7 @@ dataset_fields:
   label:
     en: Access Rights
     es: Derechos de acceso
-  preset: select
-  display_snippet: schemingdcat/display_snippets/link_schema.html
+  preset: access_rights
   display_property: dct:accessRights
   form_include_blank_choice: False
   choices:
