@@ -1443,6 +1443,10 @@ dataset_fields:
       es: Lituano
     value: http://publications.europa.eu/resource/authority/language/LIT
   - label:
+      en: Luxembourgish
+      es: Luxemburgués
+    value: http://publications.europa.eu/resource/authority/language/LTZ
+  - label:
       en: Maltese
       es: Maltés
     value: http://publications.europa.eu/resource/authority/language/MLT
@@ -1462,46 +1466,6 @@ dataset_fields:
       en: Romanian
       es: Rumano
     value: http://publications.europa.eu/resource/authority/language/ROM
-  - label:
-      en: Bulgarian
-      es: Búlgaro
-    value: http://publications.europa.eu/resource/authority/language/BUL
-  - label:
-      en: Irish
-      es: Irlandés
-    value: http://publications.europa.eu/resource/authority/language/GLE
-  - label:
-      en: Croatian
-      es: Croata
-    value: http://publications.europa.eu/resource/authority/language/HRV
-  - label:
-      en: Luxembourgish
-      es: Luxemburgués
-    value: http://publications.europa.eu/resource/authority/language/LTZ
-  - label:
-      en: Slovak
-      es: Eslovaco
-    value: http://publications.europa.eu/resource/authority/language/SLK
-  - label:
-      en: Slovene
-      es: Esloveno
-    value: http://publications.europa.eu/resource/authority/language/SLV
-  - label:
-      en: Maltese
-      es: Maltés
-    value: http://publications.europa.eu/resource/authority/language/MLT
-  - label:
-      en: Romanian
-      es: Rumano
-    value: http://publications.europa.eu/resource/authority/language/ROM
-  - label:
-      en: Bulgarian
-      es: Búlgaro
-    value: http://publications.europa.eu/resource/authority/language/BUL
-  - label:
-      en: Irish
-      es: Irlandés
-    value: http://publications.europa.eu/resource/authority/language/GLE
   form_group_id: identification
 
 # Date of creation (O)
@@ -2005,6 +1969,7 @@ dataset_fields:
     es: Nombre del mantenedor
   display_property: dcat:contactPoint
   form_placeholder: José Blanco
+  validators: default() unicode_safe
   help_text:
     en: "Person or organization responsible for maintaining or updating a dataset."
     es: "Persona u organización responsable de mantener o actualizar un conjunto de datos."
@@ -2062,6 +2027,7 @@ dataset_fields:
     es: Nombre del autor
   display_property: dct:creator
   form_placeholder: José Blanco
+  validators: default() unicode_safe
   help_text:
     en: "A party that creates or produces a particular dataset."
     es: "Persona u organización creadora o productora de un conjunto de datos"
@@ -2171,7 +2137,10 @@ dataset_fields:
   label: 
     en: Applicable legislation 
     es: Legislación aplicable
-  preset: multiple_text_links
+  form_snippet: schemingdcat/form_snippets/multiple_text.html
+  display_snippet: schemingdcat/display_snippets/list_links.html
+  validators: schemingdcat_hvd_category_applicable_legislation ignore_missing schemingdcat_multiple_text
+  output_validators: scheming_load_json
   display_property: dcatap:applicableLegislation
   form_placeholder: 'http://data.europa.eu/eli/reg_impl/2023/138/oj'
   help_text:
@@ -2236,12 +2205,15 @@ dataset_fields:
   label:
     en: Update frequency
     es: Frecuencia de actualización
-  preset: select_not_empty
-  required: True
+  preset: select
   display_property: dct:accrualPeriodicity
   display_snippet: schemingdcat/display_snippets/link_schema.html
-  sorted_choices: True
+  sorted_choices: False
   choices:
+  - label:
+      en: Provisional data
+      es: Datos provisionales
+    value: http://publications.europa.eu/resource/authority/frequency/OP_DATPRO
   - label:
       en: Annual
       es: Anual
@@ -2298,10 +2270,6 @@ dataset_fields:
       en: Never
       es: Nunca
     value: http://publications.europa.eu/resource/authority/frequency/NEVER
-  - label:
-      en: Provisional data
-      es: Datos provisionales
-    value: http://publications.europa.eu/resource/authority/frequency/OP_DATPRO
   - label:
       en: Quarterly
       es: Trimestral
@@ -3911,6 +3879,10 @@ resource_fields:
       es: Lituano
     value: http://publications.europa.eu/resource/authority/language/LIT
   - label:
+      en: Luxembourgish
+      es: Luxemburgués
+    value: http://publications.europa.eu/resource/authority/language/LTZ
+  - label:
       en: Maltese
       es: Maltés
     value: http://publications.europa.eu/resource/authority/language/MLT
@@ -3930,46 +3902,6 @@ resource_fields:
       en: Romanian
       es: Rumano
     value: http://publications.europa.eu/resource/authority/language/ROM
-  - label:
-      en: Bulgarian
-      es: Búlgaro
-    value: http://publications.europa.eu/resource/authority/language/BUL
-  - label:
-      en: Irish
-      es: Irlandés
-    value: http://publications.europa.eu/resource/authority/language/GLE
-  - label:
-      en: Croatian
-      es: Croata
-    value: http://publications.europa.eu/resource/authority/language/HRV
-  - label:
-      en: Luxembourgish
-      es: Luxemburgués
-    value: http://publications.europa.eu/resource/authority/language/LTZ
-  - label:
-      en: Slovak
-      es: Eslovaco
-    value: http://publications.europa.eu/resource/authority/language/SLK
-  - label:
-      en: Slovene
-      es: Esloveno
-    value: http://publications.europa.eu/resource/authority/language/SLV
-  - label:
-      en: Maltese
-      es: Maltés
-    value: http://publications.europa.eu/resource/authority/language/MLT
-  - label:
-      en: Romanian
-      es: Rumano
-    value: http://publications.europa.eu/resource/authority/language/ROM
-  - label:
-      en: Bulgarian
-      es: Búlgaro
-    value: http://publications.europa.eu/resource/authority/language/BUL
-  - label:
-      en: Irish
-      es: Irlandés
-    value: http://publications.europa.eu/resource/authority/language/GLE
   form_group_id: resource_identification
 
 # Additional format information (O)
