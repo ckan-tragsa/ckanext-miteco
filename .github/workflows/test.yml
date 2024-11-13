@@ -36,6 +36,12 @@ jobs:
         pip install -r requirements.txt
         pip install -r dev-requirements.txt
         pip install -e .
+    - name: Setup other extensions
+      run: |
+        # Install ckanext-schemingdcat
+        git clone https://github.com/mjanez/ckanext-schemingdcat
+        pip install -e ckanext-schemingdcat
+        pip install -r ckanext-schemingdcat/requirements.txt
     - name: Setup extension
       # Extra initialization steps
       run: |
