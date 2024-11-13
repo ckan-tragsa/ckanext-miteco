@@ -51,6 +51,12 @@ Compatibility with core CKAN versions:
   pip install -r ./src/ckanext-spatial/requirements.txt
   ```
 
+* [`ckanext-fluent`](https://github.com/mjanez/ckanext-fluent):
+  ```bash
+  pip install -e git+https://github.com/mjanez/ckanext-fluent.git@v1.0.1#egg=ckanext-fluent
+  pip install -r ./src/ckanext-fluent/requirements.txt
+  ```
+
 * [`mjanez/ckanext-schemingdcat`](https://github.com/mjanez/ckanext-schemingdcat):
   ```bash
   pip install -e git+https://github.com/mjanez/ckanext-schemingdcat.git@v3.0.0#egg=ckanext_schemingdcat
