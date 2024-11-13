@@ -1,0 +1,87 @@
+{% macro render_field(field, user_has_role=False) %}
+    {% set truncate = 120 %}
+    {% set _class = 'list-unstyled' %}
+    {% set label = None %}
+    {% if field.choices %}
+        {% set choices = h.scheming_field_choices(field) %}
+        {% if pkg_dict[field.field_name] %}
+            {% set search_url = h.url_for('dataset.search', **{field.field_name: pkg_dict[field.field_name]}) %}
+            {% set label_text = h.scheming_choices_label(choices, pkg_dict[field.field_name]) %}
+            {% set label = '<a href="' ~ search_url ~ '" target="_blank">' ~ label_text ~ '</a>' %}
+        {% endif %}
+    {% elif field.field_name == "flight_year" %}
+        {% set search_url = h.url_for('dataset.search', **{field.field_name: pkg_dict[field.field_name]}) %}
+        {% set label_text = pkg_dict[field.field_name] %}
+        {% set label = '<a href="' ~ search_url ~ '" target="_blank">' ~ label_text ~ '</a>' %}
+    {% else %}
+        {% if pkg_dict.get(field.field_name) %}
+            {% set label = pkg_dict[field.field_name] %}
+        {% endif %}
+    {% endif %}
+
+    {% if label %}
+        <tr>
+            <td>{{ h.scheming_language_text(field.label) }}</td>
+            <td>
+                {% if field.field_name == 'miteco_identifier' %}
+                    <div class="block-code miteco-code">
+                        {{ label | safe }}
+                    </div>
+                {% elif user_has_role and field.field_name == 'miteco_responsible_data_name' %}
+                    {{ label | safe }}
+                {% elif user_has_role and field.field_name == 'miteco_responsible_data_email' %}
+                    <span class="truncate-text">{{ h.mail_to(email_address=label,
+                            name=label) }}</span>
+                {% elif field.field_name == 'miteco_publication_date' %}
+                    {{ h.schemingdcat_parse_localised_date(label.split()[0]) }}
+                {% elif field.field_name == 'miteco_date_methodology' %}
+                    {{ h.schemingdcat_parse_localised_date(label.split()[0]) }}
+                {% elif field.field_name == 'miteco_meth' %}
+                    <ul class="{{ _class }}">
+                        {% for value in label if label|length %}
+                        {% set value = h.schemingdcat_prettify_url(h.scheming_clean_json_value(value.replace(' ', ''))) %}
+                        <li>
+                            <a href="{{ value }}" class="truncate-link">{{ value }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                {% elif field.field_name == 'miteco_data_population' %}
+                    {{ h.markdown_extract(h.scheming_language_text(label), extract_length=truncate) }}
+                {% else %}
+                    <span class="truncate-text">
+                        {{ label | safe }}
+                    </span>
+                {% endif %}
+            </td>
+        </tr>
+    {% endif %}
+{% endmacro %}
+
+{% block fototeca_info %}
+    {% set dataset_fields = h.schemingdcat_get_dataset_schema(dataset_type).dataset_fields %}
+    {% set filtered_fields = [] %}
+    {% for field in dataset_fields %}
+        {% if field.field_name.startswith('miteco_') %}
+            {% set filtered_fields = filtered_fields.append(field) %}
+        {% endif %}
+    {% endfor %}
+
+    {% set owner_org = pkg_dict.get('owner_org') %}
+    {% set user_is_sysadmin = h.check_access('sysadmin') %}
+    {% set user_is_orgadmin = h.schemingdcat_user_is_org_member(owner_org, g.userobj, role="admin") %}
+    {% set user_is_orgeditor = h.schemingdcat_user_is_org_member(owner_org, g.userobj, role="editor") %}
+    {% set user_is_orgmember = h.schemingdcat_user_is_org_member(owner_org, g.userobj, role="member") %}
+    {% set user_has_role = user_is_sysadmin or user_is_orgadmin or user_is_orgeditor or user_is_orgmember %}
+
+    <section class="module module-narrow module-shallow publisher_info">
+        <h2 class="module-heading"><i class="fas fa-database"></i></i> {{ _('Dataset information') }}</h2>
+
+        <table class="table">
+            <tbody>
+                {% for field in filtered_fields %}
+                    {{ render_field(field, user_has_role) }}
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endblock %}

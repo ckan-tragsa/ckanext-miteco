@@ -1,0 +1,386 @@
+miteco_id_tipo-dato:
+  - id: default
+    label: Otro
+    miteco_id_code: 00
+  - id: hvd_category
+    label: HVD
+    miteco_id_code: 01
+miteco_id_area-subarea:
+  - id: default
+    area: null
+    miteco_id_code: 00
+  - id: http://data.europa.eu/bna/c_164e0bf5
+    area: null
+    miteco_id_code: 01
+  - id: http://data.europa.eu/bna/c_13e3cf16
+    area: http://data.europa.eu/bna/c_164e0bf5
+    miteco_id_code: 02
+  - id: http://data.europa.eu/bna/c_36807466
+    area: http://data.europa.eu/bna/c_164e0bf5
+    miteco_id_code: 03
+  - id: http://data.europa.eu/bna/c_3af3368c
+    area: http://data.europa.eu/bna/c_164e0bf5
+    miteco_id_code: 04
+  - id: http://data.europa.eu/bna/c_be47b010
+    area: http://data.europa.eu/bna/c_164e0bf5
+    miteco_id_code: 05
+  - id: http://data.europa.eu/bna/c_d13a4420
+    area: http://data.europa.eu/bna/c_164e0bf5
+    miteco_id_code: 06
+  - id: http://data.europa.eu/bna/c_a9135398
+    area: http://data.europa.eu/bna/c_164e0bf5
+    miteco_id_code: 07
+  - id: http://data.europa.eu/bna/c_56a1bf47
+    area: http://data.europa.eu/bna/c_164e0bf5
+    miteco_id_code: 08
+  - id: http://data.europa.eu/bna/c_8f0fac04
+    area: http://data.europa.eu/bna/c_164e0bf5
+    miteco_id_code: 09
+  - id: http://data.europa.eu/bna/c_ac64a52d
+    area: null
+    miteco_id_code: 10
+
+  - id: http://data.europa.eu/bna/c_642643e6
+    area: http://data.europa.eu/bna/c_ac64a52d
+    miteco_id_code: 12
+  - id: http://data.europa.eu/bna/c_6a3f6896
+    area: http://data.europa.eu/bna/c_ac64a52d
+    miteco_id_code: 13
+  - id: http://data.europa.eu/bna/c_6c2bb82d
+    area: http://data.europa.eu/bna/c_ac64a52d
+    miteco_id_code: 14
+  - id: http://data.europa.eu/bna/c_9427236f
+    area: http://data.europa.eu/bna/c_ac64a52d
+    miteco_id_code: 15
+  - id: http://data.europa.eu/bna/c_c3de25e4
+    area: http://data.europa.eu/bna/c_ac64a52d
+    miteco_id_code: 16
+  - id: http://data.europa.eu/bna/c_fbd2fc3f
+    area: http://data.europa.eu/bna/c_ac64a52d
+    miteco_id_code: 17
+  - id: http://data.europa.eu/bna/c_b79e35eb
+    area: null
+    miteco_id_code: 18
+  - id: http://data.europa.eu/bna/c_4b74ea13
+    area: http://data.europa.eu/bna/c_b79e35eb
+    miteco_id_code: 19
+  - id: http://data.europa.eu/bna/c_b151a0ba
+    area: http://data.europa.eu/bna/c_b79e35eb
+    miteco_id_code: 20
+  - id: http://data.europa.eu/bna/c_03ba8d92
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 21
+  - id: http://data.europa.eu/bna/c_1226dc1a
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 22
+  - id: http://data.europa.eu/bna/c_1e787364
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 23
+  - id: http://data.europa.eu/bna/c_2037ada4
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 24
+  - id: http://data.europa.eu/bna/c_25f43866
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 25
+  - id: http://data.europa.eu/bna/c_298ffb73
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 26
+  - id: http://data.europa.eu/bna/c_3e8e3bf7
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 27
+  - id: http://data.europa.eu/bna/c_407951ff
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 28
+  - id: http://data.europa.eu/bna/c_593bc53d
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 29
+  - id: http://data.europa.eu/bna/c_664c9e5a
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 30
+  - id: http://data.europa.eu/bna/c_66b946cb
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 31
+  - id: http://data.europa.eu/bna/c_7e19ef26
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 32
+  - id: http://data.europa.eu/bna/c_883d0205
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 33
+  - id: http://data.europa.eu/bna/c_99bc517f
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 34
+  - id: http://data.europa.eu/bna/c_9cbe4435
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 35
+  - id: http://data.europa.eu/bna/c_b121e2f6
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 36
+  - id: http://data.europa.eu/bna/c_b24028d7
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 37
+  - id: http://data.europa.eu/bna/c_bc8941d9
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 38
+  - id: http://data.europa.eu/bna/c_c19af83a
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 39
+  - id: http://data.europa.eu/bna/c_e50004c6
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 40
+  - id: http://data.europa.eu/bna/c_e5f69a04
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 41
+  - id: http://data.europa.eu/bna/c_f6886b00
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 42
+  - id: http://data.europa.eu/bna/c_f76b01e6
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 43
+  - id: http://data.europa.eu/bna/c_fa2a1c3a
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 44
+  - id: http://data.europa.eu/bna/c_fef208ab
+    area: http://data.europa.eu/bna/c_b151a0ba
+    miteco_id_code: 45
+  - id: http://data.europa.eu/bna/c_dd313021
+    area: null
+    miteco_id_code: 46
+  - id: http://data.europa.eu/bna/c_06b1eec4
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 47
+  - id: http://data.europa.eu/bna/c_315692ad
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 48
+  - id: http://data.europa.eu/bna/c_38933a65
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 49
+  - id: http://data.europa.eu/bna/c_43f88346
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 50
+  - id: http://data.europa.eu/bna/c_4ba9548e
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 51
+  - id: http://data.europa.eu/bna/c_4d63300b
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 52
+  - id: http://data.europa.eu/bna/c_4dd389c5
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 53
+  - id: http://data.europa.eu/bna/c_59c93ba5
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 54
+  - id: http://data.europa.eu/bna/c_59e64dd4
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 55
+  - id: http://data.europa.eu/bna/c_63b37dd4
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 56
+  - id: http://data.europa.eu/bna/c_63be22bd
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 57
+  - id: http://data.europa.eu/bna/c_793164b6
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 58
+  - id: http://data.europa.eu/bna/c_7b8fbb64
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 59
+  - id: http://data.europa.eu/bna/c_83aa10a6
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 60
+  - id: http://data.europa.eu/bna/c_87a129d9
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 61
+  - id: http://data.europa.eu/bna/c_91185a85
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 62
+  - id: http://data.europa.eu/bna/c_ad9ae929
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 63
+  - id: http://data.europa.eu/bna/c_af646f5b
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 64
+  - id: http://data.europa.eu/bna/c_b21e1296
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 65
+  - id: http://data.europa.eu/bna/c_b40e6d46
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 66
+  - id: http://data.europa.eu/bna/c_b7de66cd
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 67
+  - id: http://data.europa.eu/bna/c_b7f6a4f3
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 68
+  - id: http://data.europa.eu/bna/c_c3919aec
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 69
+  - id: http://data.europa.eu/bna/c_c873f344
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 70
+  - id: http://data.europa.eu/bna/c_e3f55603
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 71
+  - id: http://data.europa.eu/bna/c_e4358335
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 72
+  - id: http://data.europa.eu/bna/c_f399050e
+    area: http://data.europa.eu/bna/c_dd313021
+    miteco_id_code: 73
+  - id: http://data.europa.eu/bna/c_e1da4e07
+    area: null
+    miteco_id_code: 74
+  - id: http://data.europa.eu/bna/c_04bf94a3
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 75
+  - id: http://data.europa.eu/bna/c_20cd11bb
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 76
+  - id: http://data.europa.eu/bna/c_23385471
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 77
+  - id: http://data.europa.eu/bna/c_2aed31f9
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 78
+  - id: http://data.europa.eu/bna/c_317b9493
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 79
+  - id: http://data.europa.eu/bna/c_34abf8c1
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 80
+  - id: http://data.europa.eu/bna/c_424bb0b4
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 81
+  - id: http://data.europa.eu/bna/c_4ac557e7
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 82
+  - id: http://data.europa.eu/bna/c_4acb6bf3
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 83
+  - id: http://data.europa.eu/bna/c_59627af3
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 84
+  - id: http://data.europa.eu/bna/c_6a7250c1
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 85
+  - id: http://data.europa.eu/bna/c_92874eb2
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 86
+  - id: http://data.europa.eu/bna/c_95da87c7
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 87
+  - id: http://data.europa.eu/bna/c_a2c6dcd8
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 88
+  - id: http://data.europa.eu/bna/c_a3767648
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 89
+  - id: http://data.europa.eu/bna/c_a49ec591
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 90
+  - id: http://data.europa.eu/bna/c_a8b937c4
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 91
+  - id: http://data.europa.eu/bna/c_b72b721f
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 92
+  - id: http://data.europa.eu/bna/c_c0022235
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 93
+  - id: http://data.europa.eu/bna/c_dd8f4797
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 94
+  - id: http://data.europa.eu/bna/c_f2b50efd
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 95
+  - id: http://data.europa.eu/bna/c_fd4e881c
+    area: http://data.europa.eu/bna/c_e1da4e07
+    miteco_id_code: 96
+
+# Fallback if miteco_id_area-subarea not hvd_category
+miteco_id_area_theme_es:
+- miteco_id_code: EM
+  label: Medio ambiente
+  id: default
+- miteco_id_code: EA
+  label: Ciencia y tecnología
+  id: http://datos.gob.es/kos/sector-publico/sector/ciencia-tecnologia
+- miteco_id_code: EB
+  label: Comercio
+  id: http://datos.gob.es/kos/sector-publico/sector/comercio
+- miteco_id_code: EC
+  label: Cultura y ocio
+  id: http://datos.gob.es/kos/sector-publico/sector/cultura-ocio
+- miteco_id_code: ED
+  label: Demografía
+  id: http://datos.gob.es/kos/sector-publico/sector/demografia
+- miteco_id_code: EE
+  label: Deporte
+  id: http://datos.gob.es/kos/sector-publico/sector/deporte
+- miteco_id_code: EF
+  label: Economía
+  id: http://datos.gob.es/kos/sector-publico/sector/economia
+- miteco_id_code: EG
+  label: Educación
+  id: http://datos.gob.es/kos/sector-publico/sector/educacion
+- miteco_id_code: EH
+  label: Empleo
+  id: http://datos.gob.es/kos/sector-publico/sector/empleo
+- miteco_id_code: EI
+  label: Energía
+  id: http://datos.gob.es/kos/sector-publico/sector/energia
+- miteco_id_code: EJ
+  label: Hacienda
+  id: http://datos.gob.es/kos/sector-publico/sector/hacienda
+- miteco_id_code: EK
+  label: Industria
+  id: http://datos.gob.es/kos/sector-publico/sector/industria
+- miteco_id_code: EL
+  label: Legislación y justicia
+  id: http://datos.gob.es/kos/sector-publico/sector/legislacion-justicia
+- miteco_id_code: EM
+  label: Medio ambiente
+  id: http://datos.gob.es/kos/sector-publico/sector/medio-ambiente
+- miteco_id_code: EN
+  label: Medio Rural
+  id: http://datos.gob.es/kos/sector-publico/sector/medio-rural-pesca
+- miteco_id_code: EO
+  label: Salud
+  id: http://datos.gob.es/kos/sector-publico/sector/salud
+- miteco_id_code: EP
+  label: Sector público
+  id: http://datos.gob.es/kos/sector-publico/sector/sector-publico
+- miteco_id_code: EQ
+  label: Seguridad
+  id: http://datos.gob.es/kos/sector-publico/sector/seguridad
+- miteco_id_code: ER
+  label: Sociedad y bienestar
+  id: http://datos.gob.es/kos/sector-publico/sector/sociedad-bienestar
+- miteco_id_code: ES
+  label: Transporte
+  id: http://datos.gob.es/kos/sector-publico/sector/transporte
+- miteco_id_code: ET
+  label: Turismo
+  id: http://datos.gob.es/kos/sector-publico/sector/turismo
+- miteco_id_code: EV
+  label: Urbanismo e infraestructuras
+  id: http://datos.gob.es/kos/sector-publico/sector/urbanismo-infraestructuras
+- miteco_id_code: EW
+  label: Vivienda
+  id: http://datos.gob.es/kos/sector-publico/sector/vivienda
+
+miteco_id_categoria:
+  - id: default
+    label: Otros
+    miteco_id_code: 0
+  - id: spatial_dataset
+    label: INSPIRE
+    miteco_id_code: 1
+  - id: non_spatial_dataset
+    label: INSITU
+    miteco_id_code: 2
+miteco_id_dataset:
+  description: ID de tres dígitos entre 001 y 999
+  format: ^[0-9]{3}$
+  range:
+    min: 1
+    max: 999

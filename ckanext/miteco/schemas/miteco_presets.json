@@ -11,10 +11,27 @@
       }
     },
     {
+      "preset_name": "miteco_identifier",
+      "values": {
+        "validators": "miteco_internal_identifier",
+        "form_snippet": "miteco/form_snippets/miteco_identifier.html",
+        "display_snippet": null
+      }
+    },
+    {
       "preset_name": "miteco_multiple_text_raws_ordered",
       "values": {
         "form_snippet": "schemingdcat/form_snippets/multiple_text.html",
         "display_snippet": "schemingdcat/display_snippets/list_raws_ordered.html",
+        "validators": "not_empty scheming_required schemingdcat_multiple_text",
+        "output_validators": "scheming_load_json"
+      }
+    },
+    {
+      "preset_name": "miteco_multiple_text_links",
+      "values": {
+        "form_snippet": "schemingdcat/form_snippets/multiple_text.html",
+        "display_snippet": "schemingdcat/display_snippets/list_links.html",
         "validators": "not_empty scheming_required schemingdcat_multiple_text",
         "output_validators": "scheming_load_json"
       }
@@ -33,9 +50,24 @@
       "values": {
         "form_snippet": "schemingdcat/form_snippets/select_spatial_uri.html",
         "display_snippet": "schemingdcat/display_snippets/select_spatial_icon.html",
-        "validators": "not_empty scheming_required schemingdcat_multiple_choice schemingdcat_fill_spatial_uri_dependent_fields"
+        "validators": "not_empty scheming_required schemingdcat_fill_spatial_uri_dependent_fields"
+      }
+    },
+    {
+      "preset_name": "required_date",
+      "values": {
+        "form_snippet": "date.html",
+        "display_snippet": "schemingdcat/display_snippets/date_localised.html",
+        "validators": "not_empty scheming_required isodate convert_to_json_if_date"
+      }
+    },
+    {
+      "preset_name": "miteco_geo_level",
+      "values": {
+        "form_snippet": "select.html",
+        "display_snippet": "select.html",
+        "validators": "default('6') scheming_required scheming_choices"
       }
     }
-
   ]
 }

@@ -33,6 +33,26 @@ schema_form_groups:
       en: Abstract
       es: Resumen
     fa_icon: fa-file-text
+  - form_group_id: miteco_information
+    label:
+      en: Basic information
+      es: Información básica
+    fa_icon: fa-landmark
+  - form_group_id: miteco_identification
+    label:
+      en: Identification
+      es: Identificación
+    fa_icon: fa-id-card
+  - form_group_id: miteco_coverage
+    label:
+      en: Coverage
+      es: Cobertura
+    fa_icon: fa-globe
+  - form_group_id: miteco_quality
+    label:
+      en: Quality and methodology
+      es: Calidad y metodología
+    fa_icon: fa-check-circle
   - form_group_id: vocabs
     label:
       en: Vocabs information
@@ -169,6 +189,16 @@ schema_form_tabs:
       - general_info
       - identification
       - notes
+  - form_tab: miteco_tab
+    tab_type: dataset_fields
+    label:
+      en: Ministerial information
+      es: Información Ministerio
+    form_group_id:
+      - miteco_information
+      - miteco_identification
+      - miteco_coverage
+      - miteco_quality
   - form_tab: vocabs_tab
     tab_type: dataset_fields
     label:
@@ -384,19 +414,16 @@ dataset_fields:
   form_group_id: general_info
 
 # Metadata file identifier (M)
-## Unique resource identifier (UUID)  (Mandatory). If it does not exist, CKAN creates a UUID (Metadata file identifier 'package_id')
+## Unique resource identifier (UUID) 
 - field_name: identifier
   label: 
     en: Metadata identifier
     es: Identificador de los metadatos
-  preset: schemingdcat_identifier
-  required: True
+  validators: miteco_uuid_identifier
+  form_snippet: null
+  display_snippet: null
+  required: False
   display_property: dct:identifier
-  form_placeholder: 123e4567-e89b-12d3-a456-426614174000
-  help_text:
-    en: e.g. Unique resource identifier (UUID).
-    es: Ej. Identificador único de recurso (UUID).
-  help_allow_html: True
   form_group_id: identification
 
 # Dataset locator (O)
@@ -405,12 +432,10 @@ dataset_fields:
   label: 
     en: URL
     es: URL
-  preset: schemingdcat_dataset_slug
   display_property: dcat:landingPage
-  form_placeholder:
-    en: URL title Dataset
-    es: Título de la URL del Dataset
-  form_slug_related: identifier
+  validators: miteco_uuid_identifier
+  form_snippet: null
+  display_snippet: null
   form_group_id: identification
 
 # Dataset type (M)
@@ -1487,6 +1512,146 @@ dataset_fields:
   preset: date_modified
   form_group_id: identification
 
+# MITECO file identifier (M)
+- field_name: miteco_identifier
+  label: 
+    en: Metadata identifier (Ministry)
+    es: Identificador de los metadatos (Ministerio)
+  preset: miteco_identifier
+  required: True
+  display_property: dct:identifier
+  form_placeholder: 123e4567-e89b-12d3-a456-426614174000
+  help_text:
+    en: Internal unique identifier. <code>Cannot be edited</code>.
+    es: Identificador único interno. <code>No se puede editar</code>.
+  help_allow_html: True
+  form_group_id: miteco_information
+
+# (M) MITECO Responsible data
+- field_name: miteco_responsible_data_name
+  label:
+    en: Name of data responsible
+    es: Nombre del responsable del dato
+  form_placeholder: José Blanco
+  display_snippet: null
+  form_group_id: miteco_identification
+
+- field_name: miteco_responsible_data_email
+  label:
+    en: Email of data responsible
+    es: Email del responsable del dato
+  validators: not_empty scheming_required schemingdcat_valid_email
+  required: True
+  display_snippet: null
+  display_snippet: email.html
+  form_placeholder: joseblanco@example.com
+  form_group_id: miteco_identification
+
+# (O) Date of publication
+- field_name: miteco_publication_date
+  label: 
+    en: Date of publication
+    es: Fecha de publicación
+  preset: date_not_required
+  required: False
+  help_text:
+    en: 'It is desirable to know the exact date when the data is published.'
+    es: 'Deseable conocer la fecha exacta de cuando se publican los datos.'
+  form_group_id: miteco_quality
+
+# (O) Date of last methodological change
+- field_name: miteco_date_methodology
+  label: 
+    en: Date of last methodological change
+    es: Fecha de última modificación metodológica
+  preset: date_not_required
+  form_group_id: miteco_quality
+
+# (O) Technical report/methodology
+- field_name: miteco_meth
+  label:
+    en: Technical report/methodology
+    es: Informe técnico/Metodología
+  required: True
+  preset: required_multiple_text_links
+  form_placeholder: 'http://example.es/reports/my-report/1'
+  help_text:
+    en: URI(s) or reference to the Technical Report of the source, if available
+    es: URI(s) o referencia al Informe técnico de la fuente, si existe.
+  form_group_id: miteco_quality
+
+# (O) Population of interest
+- field_name: miteco_geo_level
+  label:
+    en: Level of geographic disaggregation
+    es: Nivel de desagregación geográfica
+  preset: miteco_geo_level
+  form_include_blank_choice: False
+  required: True
+  sorted_choices: False
+  choices:
+  - label:
+      en: National
+      es: Nacional
+    value: '6'
+  - label:
+      en: Regional
+      es: Autonómico
+    value: '7'
+  - label:
+      en: Provincial
+      es: Provincial
+    value: '8'
+  - label:
+      en: Municipal
+      es: Municipal
+    value: '9'
+  - label:
+      en: Postal address
+      es: Dirección postal
+    value: '10'
+  - label:
+      en: NUTS 1
+      es: NUTS 1
+    value: '1'
+  - label:
+      en: NUTS 2
+      es: NUTS 2
+    value: '2'
+  - label:
+      en: NUTS 3
+      es: NUTS 3
+    value: '3'
+  - label:
+      en: Countries
+      es: Países
+    value: '4'
+  - label:
+      en: Country grouping
+      es: Agrupación de países
+    value: '5'
+  - label:
+      en: Not classifiable under other headings
+      es: Nivel de desagregación no clasificable en otros epígrafes
+    value: '11'
+  help_text:
+    en: 'Maximum level of geographic disaggregation of the data.'
+    es: 'Máximo nivel de desagreción geográfica de los datos.'
+  help_allow_html: True
+  form_group_id: miteco_coverage
+
+# (O) Population of interest
+- field_name: miteco_data_population
+  label:
+    en: Population of interest
+    es: Ámbito poblacional
+  preset: schemingdcat_fluent_markdown
+  help_text:
+    en: The definition or the characteristics of the elements of the population for which the information is provided by the source.
+    es: Definición o características de los elementos de la población para los que la fuente proporciona la información.
+  form_languages: ["es", "en"]
+  form_group_id: miteco_coverage
+
 # # Dataset abstract translated (M)
 - field_name: notes_translated
   label: 
@@ -1568,12 +1733,12 @@ dataset_fields:
   label: 
     en: Keywords
     es: Palabras clave
-  preset: tag_string_autocomplete
+  preset: normalize_tag_string_autocomplete
   display_property: dct:subject
-  form_placeholder: 'gsaa'
+  form_placeholder: 'medio-ambiente'
   help_text:
-    en: 'e.g. Labels from <a href="http://inspire.ec.europa.eu/metadata-codelist" target="_blank" rel="noopener">Metadata code list register</a> (INSPIRE)'
-    es: 'ej: Etiquetas del <a href="http://inspire.ec.europa.eu/metadata-codelist" target="_blank" rel="noopener">Registro de listas controladas de metadatos</a> (INSPIRE)'
+    en: 'Keywords to describe the dataset. Limited to 30 characters, only letters of the spanish alphabet and numbers are accepted. Strange characters, capital letters, accents and spaces will be normalised.'
+    es: 'Palabras clave para etiquetar el conjunto de datos. Limitadas a 30 caracteres, solo se aceptan letras del abecedario español y números. Los caracteres extraños, mayusculas, acentos y espacios se normalizaran.'
   help_allow_html: True
   form_group_id: vocabs
 
@@ -1767,7 +1932,6 @@ dataset_fields:
     en: 'Contact information for enquiries about the dataset.'
     es: 'Información de contacto para consultas sobre el conjunto de datos.'
   form_group_id: contact
-
 
 # GeoDCAT-AP: https://semiceu.github.io/GeoDCAT-AP/releases/3.0.0#responsible-party-and-metadata-point-of-contact---dataset-responsible-party-and-metadata-point-of-contact
 - field_name: publisher_name
@@ -2159,6 +2323,8 @@ dataset_fields:
       - field_name: start
   display_property: dct:temporal
   preset: date_dependent_fields
+  validators: not_empty scheming_required
+  required: True
   form_group_id: temporal_info
 
 # Temporal end (O)
@@ -2205,7 +2371,9 @@ dataset_fields:
   label:
     en: Update frequency
     es: Frecuencia de actualización
-  preset: select
+  preset: select_not_empty
+  form_include_blank_choice: False
+  required: True
   display_property: dct:accrualPeriodicity
   display_snippet: schemingdcat/display_snippets/link_schema.html
   sorted_choices: False
@@ -2347,8 +2515,8 @@ dataset_fields:
     en: Sources
     es: Fuentes
   display_property: dct:source
-  preset: miteco_multiple_text_raws_ordered
-  required: True
+  preset: multiple_text_raws_ordered
+  required: False
   form_placeholder: Términos Municipales según el Registro Central de Cartografía. Diciembre de 2013
   help_text:
     en: Information about the data source used in the creation of the data specified in the scope. Best practice is to identify the related resource by means of a URI or a string conforming to a formal identification system. 
@@ -2360,8 +2528,8 @@ dataset_fields:
   label: 
     en: Process steps
     es: Pasos del proceso
-  preset: miteco_multiple_text_raws_ordered
-  required: True
+  preset: multiple_text_raws_ordered
+  required: False
   form_placeholder: 'Selección de geometría que representa entes del mundo real.'
   help_text:
     en: General description of how the resource was developed or an event associated with the resource. 
