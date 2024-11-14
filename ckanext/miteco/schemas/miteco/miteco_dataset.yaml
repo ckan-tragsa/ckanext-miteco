@@ -2201,7 +2201,7 @@ dataset_fields:
 - field_name: author_name
   label:
     en: Name of the dataset author
-    es: Nombre del mantenedor
+    es: Nombre del autor
   validators: if_empty_same_as(author) unicode_safe
   preset: hide_fallback
   form_group_id: author
