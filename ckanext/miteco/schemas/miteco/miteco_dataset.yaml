@@ -1540,10 +1540,8 @@ dataset_fields:
   label:
     en: Email of data responsible
     es: Email del responsable del dato
-  validators: not_empty scheming_required schemingdcat_valid_email
-  required: True
+  preset: schemingdcat_valid_email
   display_snippet: null
-  display_snippet: email.html
   form_placeholder: joseblanco@example.com
   form_group_id: miteco_identification
 
