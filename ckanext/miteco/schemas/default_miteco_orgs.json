@@ -1,0 +1,1566 @@
+[
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de energía. Dirección general de política energética y minas",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-hidrocarburos-y-nuevos-combustibles",
+        "id": "a7e5c20f-943c-4dde-99df-4863ec23e3e4",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-hidrocarburos-y-nuevos-combustibles",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de hidrocarburos y nuevos combustibles",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de energía. Dirección general de política energética y minas",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-energia-electrica",
+        "id": "4bd26a2b-6f64-41c5-b349-53396e9a1380",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-energia-electrica",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de energía eléctrica",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de energía. Dirección general de política energética y minas",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-minas",
+        "id": "475b61ce-e7cb-4e7b-9b1f-dd760b13d2b3",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-minas",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de minas",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de energía. Dirección general de política energética y minas",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-energias-renovables",
+        "id": "2e88f864-af9b-485b-86d1-2cf0411ea0a7",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-energias-renovables",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de energías renovables",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de energía. Dirección general de política energética y minas",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-infraestructuras-e-integracion-del-sistema-energetico",
+        "id": "d702a9d6-9630-4cf0-98b6-7a18937e6742",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-infraestructuras-e-integracion-del-sistema-energetico",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de infraestructuras e integración del sistema energético",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de energía. Dirección general de política energética y minas",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-almacenamiento-y-flexibilidad",
+        "id": "44690fbf-6a91-4fdf-8d08-1d04ee3e733e",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-almacenamiento-y-flexibilidad",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de almacenamiento y flexibilidad",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de energía. Dirección general de planificación y coordinación energética",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-general-de-prospectiva-y-estadisticas-energeticas",
+        "id": "40d1f129-d8fc-46fc-91e6-69fbfe875c4e",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-general-de-prospectiva-y-estadisticas-energeticas",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG general de prospectiva y estadísticas energéticas",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de energía. Dirección general de planificación y coordinación energética",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-energia-nuclear",
+        "id": "8d73fcc2-5469-4d33-83b0-254277e28b32",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-energia-nuclear",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de energía nuclear",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de energía. Dirección general de planificación y coordinación energética",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-eficiencia-y-acceso-a-la-energia",
+        "id": "7c1ef7b3-4d94-4226-b08a-ecd9b2c42408",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-eficiencia-y-acceso-a-la-energia",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de eficiencia y acceso a la energía",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de energía. Dirección general de planificación y coordinación energética",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "division-de-coordinacion-energetica",
+        "id": "a72be288-544f-4462-a282-6ca1cb15a5ad",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "division-de-coordinacion-energetica",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "División de Coordinación Energética",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaría de estado de energía. Dirección general de planificación y coordinación energética",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "unidad-de-apoyo",
+        "id": "730270f3-8c55-4e61-b61a-56ab27f85215",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "unidad-de-apoyo",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "Unidad de Apoyo",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaría de estado de energía. ",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "gabinete",
+        "id": "d6b03db3-c8c4-45cd-bb79-ea115d405ce1",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "gabinete",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "Gabinete",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de medio ambiente. Dirección general del agua",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-planificacion-hidrologica",
+        "id": "f9cacd4b-5415-4570-bf0f-05f0f17380cf",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-planificacion-hidrologica",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de planificación hidrológica",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de medio ambiente. Dirección general del agua",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-general-de-programacion-y-gestion-economica-y-presupuesta",
+        "id": "5493e1e9-3836-4bc6-8598-9a0e55f572d2",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-general-de-programacion-y-gestion-economica-y-presupuesta",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG general de programación y gestión económica y presupuestaria",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de medio ambiente. Dirección general del agua",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-proteccion-de-las-aguas-y-gestion-de-riesgos",
+        "id": "19189acb-e12e-4802-b14e-e7adb58409c2",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-proteccion-de-las-aguas-y-gestion-de-riesgos",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de protección de las aguas y gestión de riesgos",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de medio ambiente. Dirección general del agua",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-dominio-publico-hidraulico-e-infraestructuras",
+        "id": "0d9114fb-271c-460b-a999-17772fb2d65c",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-dominio-publico-hidraulico-e-infraestructuras",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de dominio público hidráulico e infraestructuras",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de medio ambiente. Oficina de cambio climático",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "subdireccion-general-de-mitigacion-del-cambio-climatico",
+        "id": "a7a133b0-4abd-42b6-8df9-514988e67069",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "subdireccion-general-de-mitigacion-del-cambio-climatico",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "Subdirección general de mitigación del cambio climático",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de medio ambiente. Oficina de cambio climático",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-mercados-de-carbono",
+        "id": "6199f274-2315-48aa-be6b-ada016ea848d",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-mercados-de-carbono",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de mercados de carbono",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de medio ambiente. Oficina de cambio climático",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-adaptacion-al-cambio-climatico",
+        "id": "9f0865b9-f454-4dbd-ba7b-a78a458e42f9",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-adaptacion-al-cambio-climatico",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de adaptación al cambio climático",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de medio ambiente. Dirección general de calidad y evaluación ambiental",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-residuos",
+        "id": "2f2a63ea-a4e6-4a27-9c8f-22552ec2770b",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-residuos",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de residuos",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de medio ambiente. Dirección general de calidad y evaluación ambiental",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-prevencion-de-la-contaminacion",
+        "id": "e4ad0221-7a64-4a61-8af9-363defbd641a",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-prevencion-de-la-contaminacion",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de prevención de la contaminación",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de medio ambiente. Dirección general de calidad y evaluación ambiental",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-evaluacion-ambiental",
+        "id": "37d3216a-3994-4441-8fba-45fb4d591b3a",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-evaluacion-ambiental",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de evaluación ambiental",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de medio ambiente. Dirección general de la costa y el mar",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-dominio-publico-maritimo-terrestre",
+        "id": "309f158e-d05f-468d-a685-26176ee986d3",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-dominio-publico-maritimo-terrestre",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de dominio público marítimo-terrestre",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de medio ambiente. Dirección general de la costa y el mar",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-para-la-proteccion-de-la-costa",
+        "id": "c952eba6-1ff3-4cae-81de-c38373287843",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-para-la-proteccion-de-la-costa",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de para la protección de la costa",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de medio ambiente. Dirección general de la costa y el mar",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-para-la-proteccion-del-mar",
+        "id": "512ef979-eb23-47b1-8e7d-82a170f8e59e",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-para-la-proteccion-del-mar",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG para la protección del mar",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de medio ambiente. Dirección general de biodiversidad, bosques y desertificación.",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-biodiversidad-terrestre-y-marina",
+        "id": "9a68979a-7440-414b-a42c-4905e0f9fa67",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-biodiversidad-terrestre-y-marina",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de biodiversidad terrestre y marina",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de medio ambiente. Dirección general de biodiversidad, bosques y desertificación.",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-politica-forestal-y-lucha-contra-la-desertificacion",
+        "id": "2863eeb0-0932-468a-ba2e-00eaa0de1604",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-politica-forestal-y-lucha-contra-la-desertificacion",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de política forestal y lucha contra la desertificación",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria de estado de medio ambiente. Dirección general de biodiversidad, bosques y desertificación.",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-del-sistema-integrado-de-informacion-de-la-biodiversidad",
+        "id": "3fae6ea2-40e0-4b70-b0a0-29ddd1c97417",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-del-sistema-integrado-de-informacion-de-la-biodiversidad",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG del sistema integrado de información de la biodiversidad",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria general para el reto demográfico. Dirección general de políticas contra la despoblación",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-coordinacion-e-iniciativas",
+        "id": "7ab9d8e6-cfdc-40c2-a7f8-54fe135eed05",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-coordinacion-e-iniciativas",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de coordinación e iniciativas",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria general para el reto demográfico. Dirección general de políticas contra la despoblación",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-analisis--planificacion-y-ayudas",
+        "id": "a286a89c-b789-4c78-83f8-9a5df08d89e9",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-analisis--planificacion-y-ayudas",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de análisis, planificación y ayudas",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Secretaria general para el reto demográfico. ",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "gabinete-tecnico",
+        "id": "175c7045-3aff-474e-a3e9-b45f8b9a511d",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "gabinete-tecnico",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "Gabinete Técnico",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-relaciones-internacionales",
+        "id": "79e2d526-9652-40f1-8133-86e7dfeb9bcb",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-relaciones-internacionales",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de relaciones internacionales",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Subsecretaría para la transición ecológica y el reto demográfico. Secretaria general técnica.",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "vicesecretaria-general-tecnica",
+        "id": "e5fd9b59-5a33-434f-bc48-982cd8476fe8",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "vicesecretaria-general-tecnica",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "Vicesecretaría General Técnica",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Subsecretaría para la transición ecológica y el reto demográfico. Secretaria general técnica.",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-legislacion-y-desarrollo-normativo.",
+        "id": "0863983f-e250-4146-8ae8-24ab465fdb6f",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-legislacion-y-desarrollo-normativo.",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de legislación y desarrollo normativo.",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Subsecretaría para la transición ecológica y el reto demográfico. Secretaria general técnica.",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-relaciones-institucionales.",
+        "id": "fbcf517c-969b-4cf3-bebe-4620a8beba1e",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-relaciones-institucionales.",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de relaciones institucionales.",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Subsecretaría para la transición ecológica y el reto demográfico. Secretaria general técnica.",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "division-de-recursos--reclamaciones-y-relaciones-con-la-admi",
+        "id": "23b150bb-0bfd-4fa9-a795-f813432b52f5",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "division-de-recursos--reclamaciones-y-relaciones-con-la-admi",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "División de recursos, reclamaciones y relaciones con la Administración de Justicia",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Subsecretaría para la transición ecológica y el reto demográfico. Dirección general de servicios.",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "oficina-presupuestaria",
+        "id": "2e6f5dc9-3971-41b2-963e-5d3b9f146593",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "oficina-presupuestaria",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "Oficina presupuestaria",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Subsecretaría para la transición ecológica y el reto demográfico. Dirección general de servicios.",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "oficialia-mayor",
+        "id": "143b2ef9-f7a8-44a3-a967-66cbbe4a3148",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "oficialia-mayor",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "Oficialía Mayor",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Subsecretaría para la transición ecológica y el reto demográfico. Dirección general de servicios.",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "sg-de-recursos-humanos-e-inspeccion-de-servicios.",
+        "id": "380ca807-83ec-4762-9f43-e8e78eaa1ed9",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "sg-de-recursos-humanos-e-inspeccion-de-servicios.",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "SG de recursos humanos e inspección de servicios.",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Subsecretaría para la transición ecológica y el reto demográfico. Dirección general de servicios.",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "division-de-sistemas-y-tecnologias-de-la-informacion-y-de-la",
+        "id": "ca88ead5-6957-40cc-96fa-63b45bd70e10",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "division-de-sistemas-y-tecnologias-de-la-informacion-y-de-la",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "División de sistemas y tecnologías de la información y de las comunicaciones",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Subsecretaría para la transición ecológica y el reto demográfico. Dirección general de servicios.",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "division-para-el-seguimiento-y-coordinacion-del-prtr",
+        "id": "6d0fdf9e-e636-4219-98cd-f203ad382529",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "division-para-el-seguimiento-y-coordinacion-del-prtr",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "División para el seguimiento y coordinación del PRTR",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Subsecretaría para la transición ecológica y el reto demográfico. Dirección general de servicios.",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "division-para-el-seguimiento-y-aplicacion-de-la-normativa-me",
+        "id": "6417c7cf-8c27-4b92-a894-2ae6e2b2b0b0",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "division-para-el-seguimiento-y-aplicacion-de-la-normativa-me",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "División para el seguimiento y aplicación de la normativa medioambiental",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "division-de-estadistica-y-gestion-de-la-informacion",
+        "id": "e566d712-c05b-4c02-a967-e593508a1b8a",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "division-de-estadistica-y-gestion-de-la-informacion",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "División de estadística y gestión de la información",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "abogacia-del-estado",
+        "id": "b0bfa208-1b10-4ad9-b2ba-2688a855e679",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "abogacia-del-estado",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "Abogacía del estado",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "intervencion-delegada-en-el-departamento",
+        "id": "35145de5-63b4-43ff-a10c-4f628f28387c",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "intervencion-delegada-en-el-departamento",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "Intervención delegada en el departamento",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+        "description_translated": {
+            "en": "Subsecretaría para la transición ecológica y el reto demográfico. ",
+            "es": "Subsecretaría para la transición ecológica y el reto demográfico. "
+        },
+        "display_name": "gabinete-tecnico",
+        "id": "b3d9c53a-0746-4e6e-8136-9cb349e64ceb",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001",
+        "image_display_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "image_url": "https://pre.gis.miteco.gob.es/catalogo/images/default/logo_miteco.jpg",
+        "is_organization": true,
+        "name": "gabinete-tecnico",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacionma@miteco.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.miteco.gob.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "Gabinete Técnico",
+        "title_translated": {
+            "en": "Gabinete Técnico",
+            "es": "Gabinete Técnico"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
+    }
+]
