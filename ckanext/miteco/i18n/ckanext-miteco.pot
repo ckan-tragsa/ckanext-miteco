@@ -1,0 +1,26 @@
+# Translations template for ckanext-miteco.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the ckanext-miteco
+# project.
+# FIRST AUTHOR mjanez, 2024.
+#
+# Translators:
+# mnl.janez@gmail.com, 2024
+msgid ""
+msgstr ""
+"Project-Id-Version: ckanext-miteco 0.0.1\n"
+"Report-Msgid-Bugs-To: mnl.janez@gmail.com\n"
+"POT-Creation-Date: 2024-10-25 12:00+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: mnl.janez@gmail.com\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.7.0\n"
+"X-Generator: Poedit 3.4.2\n"
+
+#: ckanext/miteco/templates/miteco/snippets/miteco_dataset_info.html
+msgid "Dataset information"
+msgstr ""

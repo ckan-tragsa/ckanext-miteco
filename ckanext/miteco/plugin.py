@@ -2,6 +2,7 @@ import logging
 import typing
 
 import ckan.plugins as p
+from ckan.lib.plugins import DefaultTranslation
 from ckan import logic
 
 from ckanext.miteco import helpers, validators, blueprint, config
@@ -18,13 +19,14 @@ except AttributeError:
         return cls
 
 @config_declarations
-class MitecoPlugin(p.SingletonPlugin):
+class MitecoPlugin(p.SingletonPlugin, DefaultTranslation):
     p.implements(p.IConfigurer)
     p.implements(p.IActions)
     p.implements(p.IAuthFunctions)
     p.implements(p.IBlueprint)
     p.implements(p.ITemplateHelpers)
     p.implements(p.IValidators)
+    p.implements(p.ITranslation)
 
     # IConfigurer
     def update_config(self, config_):
