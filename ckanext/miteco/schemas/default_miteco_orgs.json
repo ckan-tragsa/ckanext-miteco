@@ -1562,5 +1562,39 @@
         "users": [],
         "tags": [],
         "groups": []
+    },
+    {
+        "approval_status": "approved",
+        "created": "2024-11-15T15:37:15.859987",
+        "description": "Agencia Estatal de Meteorología",
+        "description_translated": {
+            "en": "Agencia Estatal de Meteorología",
+            "es": "State Meteorological Agency"
+        },
+        "display_name": "aemet",
+        "id": "a3b72254-0ce5-410e-bacd-298ccc02173a",
+        "identifier": "http://datos.gob.es/recurso/sector-publico/org/Organismo/EA0022545",
+        "image_display_url": "https://www.aemet.es/es/imagen-logo1",
+        "image_url": "https://www.aemet.es/es/imagen-logo1",
+        "is_organization": true,
+        "name": "aemet",
+        "num_followers": 0,
+        "package_count": 0,
+        "publisher_email": "informacion@aemet.es",
+        "publisher_type": "http://purl.org/adms/publishertype/NationalAuthority",
+        "publisher_url": "https://www.aemet.es/",
+        "state": "active",
+        "theme_es": [
+            "http://datos.gob.es/kos/sector-publico/sector/sector-publico"
+        ],
+        "title": "AEMET",
+        "title_translated": {
+            "en": "AEMET",
+            "es": "AEMET"
+        },
+        "type": "organization",
+        "users": [],
+        "tags": [],
+        "groups": []
     }
 ]

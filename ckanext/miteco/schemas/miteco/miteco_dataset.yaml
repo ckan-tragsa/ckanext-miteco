@@ -1512,7 +1512,7 @@ dataset_fields:
   preset: date_modified
   form_group_id: identification
 
-# MITECO file identifier (M)
+# MITECO Schema: file identifier (M)
 - field_name: miteco_identifier
   label: 
     en: Metadata identifier (Ministry)
@@ -1527,7 +1527,7 @@ dataset_fields:
   help_allow_html: True
   form_group_id: miteco_information
 
-# (M) MITECO Responsible data
+# (R) MITECO Schema: Responsible data
 - field_name: miteco_responsible_data_name
   label:
     en: Name of data responsible
@@ -1545,7 +1545,7 @@ dataset_fields:
   form_placeholder: joseblanco@example.com
   form_group_id: miteco_identification
 
-# (O) Date of publication
+# (O) MITECO Schema: Date of publication
 - field_name: miteco_publication_date
   label: 
     en: Date of publication
@@ -1557,7 +1557,7 @@ dataset_fields:
     es: 'Deseable conocer la fecha exacta de cuando se publican los datos.'
   form_group_id: miteco_quality
 
-# (O) Date of last methodological change
+# (O) MITECO Schema: Date of last methodological change
 - field_name: miteco_date_methodology
   label: 
     en: Date of last methodological change
@@ -1565,7 +1565,7 @@ dataset_fields:
   preset: date_not_required
   form_group_id: miteco_quality
 
-# (O) Technical report/methodology
+# (O) MITECO Schema: Technical report/methodology
 - field_name: miteco_meth
   label:
     en: Technical report/methodology
@@ -1578,7 +1578,7 @@ dataset_fields:
     es: URI(s) o referencia al Informe técnico de la fuente, si existe.
   form_group_id: miteco_quality
 
-# (O) Population of interest
+# (O) MITECO Schema: Level of geographic disaggregation
 - field_name: miteco_geo_level
   label:
     en: Level of geographic disaggregation
@@ -1638,7 +1638,7 @@ dataset_fields:
   help_allow_html: True
   form_group_id: miteco_coverage
 
-# (O) Population of interest
+# (O) MITECO Schema: Population of interest
 - field_name: miteco_data_population
   label:
     en: Population of interest
@@ -1650,7 +1650,7 @@ dataset_fields:
   form_languages: ["es", "en"]
   form_group_id: miteco_coverage
 
-# # Dataset abstract translated (M)
+# (M) Dataset abstract translated (M)
 - field_name: notes_translated
   label: 
     en: Dataset abstract 
