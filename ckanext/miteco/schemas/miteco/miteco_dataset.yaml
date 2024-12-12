@@ -1574,8 +1574,8 @@ dataset_fields:
   preset: required_multiple_text_links
   form_placeholder: 'http://example.es/reports/my-report/1'
   help_text:
-    en: URI(s) or reference to the Technical Report of the source, if available
-    es: URI(s) o referencia al Informe técnico de la fuente, si existe.
+    en: URI(s) or reference to the Technical Report of the source.
+    es: URI(s) o referencia al Informe técnico de la fuente.
   form_group_id: miteco_quality
 
 # (O) MITECO Schema: Level of geographic disaggregation
