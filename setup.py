@@ -86,6 +86,9 @@ setup(
         [ckan.plugins]
         miteco=ckanext.miteco.plugin:MitecoPlugin
 
+        # Harvesters
+        miteco_csw_harvester=ckanext.miteco.harvesters:MITECOCSWHarvester
+
         [babel.extractors]
         ckan = ckan.lib.extract:extract_ckan
     ''',
