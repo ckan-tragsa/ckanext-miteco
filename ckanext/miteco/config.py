@@ -1,4 +1,11 @@
 # Default MITECO DCAT metadata configuration
+MITECO_DEFAULT_HVD_CATEGORY = 'http://data.europa.eu/bna/c_dd313021'
+MITECO_INSPIRE_GENERAL_TYPE = 'http://publications.europa.eu/resource/authority/dataset-type/GEOSPATIAL'
+MITECO_HVD_GENERAL_TYPE = 'http://publications.europa.eu/resource/authority/dataset-type/HVD'
+MITECO_DEFAULT_GENERAL_TYPE_HVDS = [MITECO_INSPIRE_GENERAL_TYPE, MITECO_HVD_GENERAL_TYPE]
+
+
+# OGC2CKAN Harvester Metadata Configuration
 OGC2CKAN_HARVESTER_MD_CONFIG = {
     'access_rights': 'http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations',
     'conformance': [
@@ -34,7 +41,8 @@ OGC2CKAN_HARVESTER_MD_CONFIG = {
     'inspireid_theme': 'HB',
     'language': 'http://publications.europa.eu/resource/authority/language/ENG',
     'license': 'http://creativecommons.org/licenses/by/4.0/',
-    'license_id': 'cc-by',
+    'license_id': 'CC-BY-4.0',
+    'license_url': 'https://publications.europa.eu/resource/authority/licence/CC_BY_4_0',
     'lineage_process_steps': 'Ministerio para la Transición Ecológica y el Reto Demográfico lineage process steps.',
     'maintainer_name': 'Ministerio para la Transición Ecológica y el Reto Demográfico',
     'maintainer_email': 'bzn-sig-miteco@miteco.es',

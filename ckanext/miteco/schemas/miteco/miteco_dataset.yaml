@@ -366,6 +366,54 @@ dataset_fields:
       value: spatial_dataset
   form_group_id: general_info
 
+# MITECO: DCAT-AP Dataset Type (M)
+- field_name: miteco_dataset_type
+  label:
+    en: Dataset categorisation
+    es: Categorización del conjunto de datos
+  preset: schemingdcat_dataset_type
+  form_include_blank_choice: False
+  required: True
+  display_snippet: schemingdcat/display_snippets/link_schema.html
+  choices:
+    - label:
+        en: "Statistical dataset"
+        es: "Conjunto de datos estadísticos"
+      value: http://publications.europa.eu/resource/authority/dataset-type/STATISTICAL
+    - label:
+        en: "INSPIRE Spatial dataset"
+        es: "Conjunto de datos espacial INSPIRE"
+      value: http://publications.europa.eu/resource/authority/dataset-type/GEOSPATIAL
+    - label:
+        en: "High Value Datasets (DCAT-AP HVD)"
+        es: "Conjunto de datos de alto valor (DCAT-AP HVD)"
+      value: http://publications.europa.eu/resource/authority/dataset-type/HVD
+    - label:
+        en: "Test dataset"
+        es: "Conjunto de datos de prueba"
+      value: http://publications.europa.eu/resource/authority/dataset-type/TEST_DATA
+    - label:
+        en: "Provisional dataset"
+        es: "Conjunto de datos provisional"
+      value: http://publications.europa.eu/resource/authority/dataset-type/OP_DATPRO
+    - label:
+        en: "Codelist"
+        es: "Lista controlada"
+      value: http://publications.europa.eu/resource/authority/dataset-type/CODE_LIST
+    - label:
+        en: "Synthetic data"
+        es: "Datos sintéticos"
+      value: http://publications.europa.eu/resource/authority/dataset-type/SYNTHETIC_DATA
+    - label:
+        en: "Taxonomy"
+        es: "Taxonomía"
+      value: http://publications.europa.eu/resource/authority/dataset-type/TAXONOMY
+    - label:
+        en: "Thesaurus"
+        es: "Tesauro"
+      value: http://publications.europa.eu/resource/authority/dataset-type/THESAURUS
+  form_group_id: general_info
+
 # CKAN Organization (M) // Dataset privacy (M)
 - field_name: owner_org
   label:
@@ -436,6 +484,16 @@ dataset_fields:
   validators: miteco_uuid_identifier
   form_snippet: null
   display_snippet: null
+  form_group_id: identification
+
+- field_name: url
+  label: 
+    en: Dataset landing page
+    es: Página de acceso al conjunto de datos
+  preset: dataset_url
+  help_text:
+    en: Web page that can be navigated to gain access to the dataset, its distributions and/or additional information.
+    es: Página web por la que se puede navegar para acceder al conjunto de datos, sus distribuciones y/o información adicional.
   form_group_id: identification
 
 # Dataset type (M)
@@ -930,10 +988,8 @@ dataset_fields:
   label: 
     en: High-value dataset category
     es: Categoría del conjunto de alto valor (HVD)
-  preset: select
+  preset: miteco_hvd_category
   display_property: dcatap:hvdCategory
-  display_snippet: schemingdcat/display_snippets/link_schema.html
-  form_snippet: schemingdcat/form_snippets/select_hvd_category.html
   select_size: 10
   required: False
   sorted_choices: False
@@ -1570,8 +1626,8 @@ dataset_fields:
   label:
     en: Technical report/methodology
     es: Informe técnico/Metodología
-  required: True
-  preset: required_multiple_text_links
+  required: False
+  preset: multiple_text_links
   form_placeholder: 'http://example.es/reports/my-report/1'
   help_text:
     en: URI(s) or reference to the Technical Report of the source.
@@ -1585,7 +1641,7 @@ dataset_fields:
     es: Nivel de desagregación geográfica
   preset: miteco_geo_level
   form_include_blank_choice: False
-  required: True
+  required: False
   sorted_choices: False
   choices:
   - label:
@@ -1765,7 +1821,7 @@ dataset_fields:
     field_name: contact
     subfields:
       - field_name: uri
-  validators: schemingdcat_fill_dependent_fields
+  validators: schemingdcat_contact_as_default_publisher schemingdcat_fill_dependent_fields
   display_snippet: schemingdcat/display_snippets/link_name.html
   form_placeholder: http://orgs.vocab.org/some-org
   form_group_id: contact
@@ -1779,7 +1835,7 @@ dataset_fields:
     field_name: contact
     subfields:
       - field_name: name
-  validators: schemingdcat_fill_dependent_fields
+  validators: schemingdcat_contact_as_default_publisher schemingdcat_fill_dependent_fields
   display_property: dcat:contactPoint
   form_placeholder: José Blanco
   form_group_id: contact
@@ -1793,8 +1849,8 @@ dataset_fields:
     field_name: contact
     subfields:
       - field_name: email
-  validators: not_empty scheming_required schemingdcat_valid_email schemingdcat_fill_dependent_fields
-  required: True
+  validators: schemingdcat_contact_as_default_publisher not_empty scheming_required schemingdcat_valid_email schemingdcat_fill_dependent_fields
+  required: False
   display_property: vcard:hasEmail
   display_snippet: email.html
   form_placeholder: joseblanco@example.com
@@ -1809,7 +1865,8 @@ dataset_fields:
     field_name: contact
     subfields:
       - field_name: url
-  preset: valid_url_dependent_fields
+  validators: schemingdcat_contact_as_default_publisher ignore_missing schemingdcat_valid_url schemingdcat_fill_dependent_fields
+  display_snippet: schemingdcat/display_snippets/link.html
   display_property: vcard:hasURL
   form_placeholder: http://www.example.com
   form_group_id: contact
@@ -1824,7 +1881,8 @@ dataset_fields:
     field_name: contact
     subfields:
       - field_name: role
-  preset: select_dependent_fields
+  validators: schemingdcat_contact_as_default_publisher scheming_required scheming_choices schemingdcat_fill_dependent_fields
+  form_snippet: select.html
   display_snippet: schemingdcat/display_snippets/link_schema.html
   choices:
     - label:
@@ -1943,6 +2001,7 @@ dataset_fields:
     subfields:
       - field_name: name
   validators: schemingdcat_fill_dependent_fields
+  form_snippet: schemingdcat/form_snippets/publisher_name.html
   help_text:
     en: "A party that makes a dataset available to others."
     es: "Persona u organización que pone a disposición de otros el conjunto de datos."
@@ -1960,6 +2019,7 @@ dataset_fields:
   validators: schemingdcat_fill_dependent_fields
   display_property: dct:identifier
   form_placeholder: http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001
+  form_snippet: schemingdcat/form_snippets/publisher_identifier.html
   help_text:
     en: "Unique identifier of the publisher. Spain: Unique identifier (DIR3) of the public organization (<a href='http://datos.gob.es/es/recurso/sector-publico/org/Organismo' target='_blank'>datos.gob.es</a>)."
     es: "Identificador único del publicador. España: Identificador único (DIR3) del organismo público. (<a href='http://datos.gob.es/es/recurso/sector-publico/org/Organismo' target='_blank'>datos.gob.es</a>)"
@@ -1977,8 +2037,8 @@ dataset_fields:
       - field_name: uri
   validators: schemingdcat_fill_dependent_fields
   display_snippet: schemingdcat/display_snippets/link_name.html
-  form_snippet: schemingdcat/form_snippets/publisher_uri.html
   form_placeholder: http://orgs.vocab.org/some-org
+  form_snippet: schemingdcat/form_snippets/publisher_uri.html
   help_text:
     en: This property refers to an Agent (organisation) responsible for making the Catalogue Record available. URI
     es: Esta propiedad se refiere a un agente (organización) responsable de poner a disposición el recurso del catálogo. URI
@@ -1996,6 +2056,7 @@ dataset_fields:
   preset: schemingdcat_valid_email_dependent_fields
   display_property: foaf:mbox
   form_placeholder: joseblanco@example.com
+  form_snippet: schemingdcat/form_snippets/publisher_email.html
   form_group_id: publisher
 
 # Publisher URL (O)
@@ -2010,6 +2071,7 @@ dataset_fields:
     subfields:
       - field_name: url
   preset: valid_url_dependent_fields
+  form_snippet: schemingdcat/form_snippets/publisher_url.html
   help_text:
     en: Esta propiedad se refiere a una página web que actúa como página principal del publicador. URL
     es: Esta propiedad se refiere a una página web que actúa como página principal del publicador. URL
@@ -2027,6 +2089,7 @@ dataset_fields:
   preset: select_dependent_fields
   display_property: dct:type
   display_snippet: schemingdcat/display_snippets/link_schema.html
+  form_snippet: schemingdcat/form_snippets/publisher_type.html
   choices:
   - label:
       en: National authority
@@ -2452,8 +2515,6 @@ dataset_fields:
       - field_name: start
   display_property: dct:temporal
   preset: date_dependent_fields
-  validators: not_empty scheming_required
-  required: True
   form_group_id: temporal_info
 
 # Temporal end (O)
@@ -2500,9 +2561,7 @@ dataset_fields:
   label:
     en: Update frequency
     es: Frecuencia de actualización
-  preset: select_not_empty
-  form_include_blank_choice: False
-  required: True
+  preset: select
   display_property: dct:accrualPeriodicity
   display_snippet: schemingdcat/display_snippets/link_schema.html
   sorted_choices: False
@@ -2938,7 +2997,7 @@ dataset_fields:
     subfields:
       - field_name: uri
       - field_name: text
-  display_property: dcat:theme
+  display_property: dct:spatial
   select_size: 10
   required: True
   sorted_choices: False
@@ -3829,7 +3888,7 @@ resource_fields:
   label:
     en: Access URL
     es: URL de acceso
-  validators: if_empty_same_as(url) unicode_safe
+  validators: schemingdcat_access_url_if_empty_same_as_url unicode_safe
   form_snippet: null
   display_property: dcat:accessURL
   display_snippet: schemingdcat/display_snippets/link.html
@@ -3843,7 +3902,7 @@ resource_fields:
   label:
     en: Download URL
     es: URL de descarga
-  validators: if_empty_same_as(url) unicode_safe
+  validators: schemingdcat_download_url_if_empty_same_as_url unicode_safe
   display_property: dcat:downloadURL
   display_snippet: schemingdcat/display_snippets/link.html
   help_text:
@@ -3872,8 +3931,9 @@ resource_fields:
         es: Título del servicio de acceso
     - field_name: endpoint_description
       label:
-        en: Endpoint description
-        es: Descripción del punto final
+        en: Description of the access point features
+        es: Descripción de las características del punto de acceso
+      preset: valid_url
     - field_name: endpoint_url
       label:
         en: Endpoint URL
@@ -3897,7 +3957,6 @@ resource_fields:
   form_placeholder:
     en: e.g. Web Map Service
     es: ej. Web Map Service
-  display_property: dct:title
   form_group_id: resource_title
 
 #FIX: Resource abstract (M) -- description_translated field dont work
@@ -3919,7 +3978,6 @@ resource_fields:
     es: Fecha de creación
   display_property: dct:created
   preset: date_created
-  required: True
   form_group_id: resource_identification
 
 # Date of last revision (M)

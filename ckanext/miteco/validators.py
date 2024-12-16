@@ -6,7 +6,17 @@ from ckan.common import _
 
 from ckanext.schemingdcat.utils import _load_yaml
 
+from ckanext.schemingdcat.config import (
+    INSPIRE_HVD_CATEGORY,
+    DCAT_AP_HVD_CATEGORY_LEGISLATION
+)
 import ckanext.miteco.helpers as miteco_helpers
+from ckanext.miteco.config import (
+    MITECO_DEFAULT_HVD_CATEGORY,   
+    MITECO_DEFAULT_GENERAL_TYPE_HVDS,
+    MITECO_INSPIRE_GENERAL_TYPE
+    
+)
 
 log = logging.getLogger(__name__)
 
@@ -145,3 +155,47 @@ def miteco_uuid_identifier(field, schema):
                 data[name_key] = id_value
 
     return validator
+
+@scheming_validator
+@validator
+def miteco_miteco_dataset_type_hvd_dataset(field, schema):
+    """Validator for MITECO general type HVD dataset.
+
+    This validator checks the `miteco_dataset_type` field and sets the 
+    `hvd_category` field accordingly. If `miteco_dataset_type` is 
+    'http://publications.europa.eu/resource/authority/dataset-type/GEOSPATIAL', it sets `hvd_category` to `INSPIRE_HVD_CATEGORY`. 
+    Otherwise, it sets `hvd_category` to `MITECO_DEFAULT_HVD_CATEGORY`. 
+    Additionally, it ensures that `DCAT_AP_HVD_CATEGORY_LEGISLATION` is 
+    included in the `applicable_legislation_key` list.
+
+    Args:
+        field (str): The field name being validated.
+        schema (dict): The schema definition.
+
+    Returns:
+        function: The validator function.
+    """
+    def validator(key, data, errors, context):
+        hvd_category = data.get(key)
+        applicable_legislation_key = ('applicable_legislation_key', )
+        miteco_dataset_type = data.get(('miteco_dataset_type', ))
+
+        if not hvd_category or miteco_dataset_type in MITECO_DEFAULT_GENERAL_TYPE_HVDS:
+            if miteco_dataset_type == MITECO_INSPIRE_GENERAL_TYPE:
+                data[key] = INSPIRE_HVD_CATEGORY
+            else:
+                data[key] = MITECO_DEFAULT_HVD_CATEGORY
+
+            if isinstance(data.get(applicable_legislation_key), list):
+                if DCAT_AP_HVD_CATEGORY_LEGISLATION not in data[applicable_legislation_key]:
+                    data[applicable_legislation_key].append(DCAT_AP_HVD_CATEGORY_LEGISLATION)
+            else:
+                if data.get(applicable_legislation_key) != DCAT_AP_HVD_CATEGORY_LEGISLATION:
+                    data[applicable_legislation_key] = [DCAT_AP_HVD_CATEGORY_LEGISLATION]
+
+    return validator
+
+@scheming_validator
+@validator
+def miteco_miteco_contact_point(field, schema):
+    pass
