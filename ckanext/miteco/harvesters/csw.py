@@ -29,7 +29,7 @@ class MITECOCSWHarvester(SingletonPlugin):
         # Update URLs
         self._update_urls(package_dict)
 
-        # Apply MITECO defaultlt values if required fields are empty
+        # Apply MITECO default values if required fields are empty
         self._remove_miteco_fields('miteco_identifier')
         self._apply_default_values(package_dict)
 
