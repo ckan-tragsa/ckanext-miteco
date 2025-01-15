@@ -1,0 +1,10 @@
+version: 1
+groups:
+  - annotation: General settings
+    options:
+      - key: ckanext.miteco.miteco_identifier_schema
+        default: 'ckanext.miteco:codelists/miteco_identifier_schema.yaml'
+        description: |
+          The module path to the YAML file that contains the MTIECO identifier field schema. Like `module:file.yaml`.
+        required: false
+        example: 'ckanext.myplugin:codelists/miteco_identifier_schema.yaml'

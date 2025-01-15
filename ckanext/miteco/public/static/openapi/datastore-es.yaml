@@ -1,0 +1,120 @@
+openapi: 3.0.0
+servers:
+- url: https://des.gis.miteco.gob.es/catalogo/api
+  description: "Portal de Desarrollo [ACCESO RESTRINGIDO]"
+- url: https://pre.gis.miteco.gob.es/catalogo/api
+  description: "Portal de Staging [ACCESO RESTRINGIDO]"
+info:
+  title: "Portal de Datos Abiertos de MITECO - API de Datastore"
+  description: >
+    Esta API proporciona acceso en vivo a la porción de Datastore del Portal de Datos Abiertos del Ministerio para la Transición Ecológica y el Reto Demográfico (MiTEco).
+    Nuestros portales de staging son para compartir características próximas y probar la integración de la red restringida, y los sitios de desarrollo son para características en desarrollo.
+  termsOfService: https://creativecommons.org/licenses/by/4.0/
+  contact:
+    name: "Ministerio para la Transición Ecológica y el Reto Demográfico (MiTEco)"
+    url: https://www.miteco.gob.es/en.html
+    email: informacionma@miteco.es
+  license:
+    name: "CC BY 4.0"
+    url: https://creativecommons.org/licenses/by/4.0/
+  version: '0.1'
+security:
+  - default: []
+basePath: /v1
+tags:
+  - name: datastore
+    description: La API de datos
+    externalDocs:
+      description: Más información
+      url: https://docs.ckan.org/en/2.10/maintaining/datastore.html#the-data-api
+paths:
+  /action/datastore_search:
+    post:
+      tags:
+        - datastore
+      summary: "Buscar un recurso en el datastore"
+      description: >
+        La acción datastore_search permite buscar datos en un recurso.
+        Los archivos CSV/TSV bien formateados que se suben o se enlazan se cargan automáticamente en el datastore.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                resource_id:
+                  type: string
+                  format: uuid
+                  description: "ID o alias del recurso a buscar"
+                  examples:
+                    Air Quality:
+                      value: 499383b6-cd2a-466a-9fcf-910d3e427700
+                filters:
+                  type: object
+                  description: "Condiciones de coincidencia para seleccionar, solo solicitudes POST `application/json`"
+                  examples:
+                    (Value not supported for GET requests):
+                      value: ''
+                q:
+                  oneOf:
+                  - type: string
+                    description: "Consulta de texto completo que busca en todas las columnas de cada fila"
+                  - type: object
+                    description: "Búsqueda de texto completo en cada campo dado"
+                distinct:
+                  type: boolean
+                  description: "Devolver solo filas distintas"
+                  default: false
+                plain:
+                  type: boolean
+                  description: "Tratar como consulta de texto plano"
+                  default: true
+                language:
+                  type: string
+                  description: "Idioma de la consulta de texto completo"
+                  default: english
+                limit:
+                  type: integer
+                  description: "Número máximo de filas a devolver"
+                  default: 100
+                offset:
+                  type: integer
+                  description: "Desplazar este número de filas"
+                fields:
+                  oneOf:
+                  - type: string
+                    description: "Cadena separada por comas de nombres de columnas a devolver"
+                  - type: array
+                    description: "Lista de nombres de columnas a devolver"
+                sort:
+                  type: string
+                  description: "Cadena separada por comas de nombres de columnas con orden de clasificación"
+                  example: "reporting_period desc, line_number"
+                include_total:
+                  type: boolean
+                  description: "Calcular y devolver el número total de filas coincidentes, establecer en `false` para mejorar el rendimiento"
+                  default: true
+                records_format:
+                  type: string
+                  description: "El formato para el valor de retorno de los registros, establecer en `csv` o `tsv` para mejorar el rendimiento"
+                  default: objects
+                  enum:
+                  - objects
+                  - lists
+                  - csv
+                  - tsv
+            examples:
+              Air Quality:
+                value:
+                  resource_id: 499383b6-cd2a-466a-9fcf-910d3e427700
+                  q: 2020-2021
+                  filters:
+                    codine: 28
+              Top 10 most recently deleted datasets:
+                value:
+                  resource_id: d22d2aca-155b-4978-b5c1-1d39837e1993
+                  sort: '"Date and Time Deleted/Fecha y hora de eliminación" desc'
+      responses:
+        '200':
+          description: "Lista de paquetes (conjuntos de datos) incluyendo todos los metadatos disponibles."
