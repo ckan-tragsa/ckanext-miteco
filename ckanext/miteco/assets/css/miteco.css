@@ -773,3 +773,18 @@ ul.logo_open_data  li a:after {border-bottom: 0 none !important;}
 }
 .site-footer ul li:hover a::after {border: 0; } 
 .site-footer p, .site-footer a, .site-footer label, .site-footer small, .site-footer strong {color: #333;}
+.box{text-align: initial;}
+.sct-about-themes-card-count {color: #3d4245;}
+.label[data-bs-format=wms], .label[data-bs-format*=wms] {background-color: #d7d575; color: black;}
+.label[data-bs-format=wmts], .label[data-bs-format*=wmts] {background-color: #e3cfb7; color: black;}
+.badge-label:hover {background-color: #ffdb00 !important;}
+ul.nav.nav-simple.nav-facet.tags_facet .active .separator {color: white;}
+.filters .module .sorting .label {font-size: 1em; margin-left: 5px;}
+.badge {font-size: 0.9em;}
+.metadata-sidebar-nav li:hover .metadata-sidebar-template-description{color: #eee;}
+.activity .item .date {color: #595959 !important;}
+.activity_buttons > a.btn.disabled {color: #595959 !important;  opacity: 1 !important;}
+.control-required {color: #ad1519;}
+.tip .quote-alert-title {color: #175923;}
+.caution .quote-alert-title, .quote-alert.caution strong {color: #ad1519;}
+.label {font-size: 80%;}
