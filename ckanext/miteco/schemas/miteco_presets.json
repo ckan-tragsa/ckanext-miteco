@@ -23,7 +23,7 @@
       "values": {
         "form_snippet": "schemingdcat/form_snippets/select_hvd_category.html",
         "display_snippet": "schemingdcat/display_snippets/link_schema.html",
-        "validators": "miteco_miteco_dataset_type_hvd_dataset scheming_required scheming_choices"
+        "validators": "miteco_miteco_dataset_type_hvd_dataset scheming_required schemingdcat_multiple_choice"
       }
     },
     {
