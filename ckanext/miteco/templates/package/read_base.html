@@ -28,12 +28,6 @@
     {% endif %}
   {% endblock %}
 
-  {% block package_publisher_info %}
-    {% if pkg.publisher_name %}
-      {% snippet "schemingdcat/snippets/publisher_info.html", pkg_dict=pkg, dataset_type=dataset_type %}
-    {% endif %}
-  {% endblock %}
-
   {% block package_contact_info %}
     {% if pkg.contact_name %}
       {% snippet "schemingdcat/snippets/contact_info.html", pkg_dict=pkg, dataset_type=dataset_type %}
