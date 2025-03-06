@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('/catalogo/static/fonts/icomoon.ttf');
 
 :root {
     /* sct -> schemingdcat */
@@ -566,11 +567,14 @@ a.tag:hover {
 
 .dataset-resources li a {
     background-color: #f6f6f6;
-    color: #4e5f65;
+    color: black;
     border: 1px solid #d9e0e8;
     border-radius: 0;
 }
 
+.label[data-bs-format=xml], .label[data-bs-format*=xml] {
+    background-color: #f79e61;
+}
 .module-narrow .nav-item > a .badge, .module-narrow .nav-aside li a .badge {
     background-color: #f6f6f6;
     border-radius: 0;
@@ -777,7 +781,7 @@ ul.logo_open_data  li a:after {border-bottom: 0 none !important;}
 .sct-about-themes-card-count {color: #3d4245;}
 .label[data-bs-format=wms], .label[data-bs-format*=wms] {background-color: #d7d575; color: black;}
 .label[data-bs-format=wmts], .label[data-bs-format*=wmts] {background-color: #e3cfb7; color: black;}
-.badge-label:hover {background-color: #ffdb00 !important;}
+.badge-label:hover {color:black; background-color: #ffdb00 !important;}
 ul.nav.nav-simple.nav-facet.tags_facet .active .separator {color: white;}
 .filters .module .sorting .label {font-size: 1em; margin-left: 5px;}
 .badge {font-size: 0.9em;}
@@ -813,4 +817,1122 @@ ul.nav.nav-simple.nav-facet.tags_facet .active .separator {color: white;}
     overflow: auto;
     max-height: 130px;
     font-size: 11px;
+}
+
+ul.logo_miteco_blanco{display: block; margin-top: 1em !important; margin-left: -2.5em !important;}
+ul.logo_miteco_blanco li{color:#6c6c6c; list-style:none; margin: 0 !important; font-weight: bold;}
+ul.logo_miteco_blanco li img{margin: 0em 0 1em 0; width: 300px;}
+
+/**************************css para iconos***************************/
+@font-face {
+    font-display: block;
+    font-family: icomoon;
+    font-style: normal;
+    font-weight: 400;
+    src: url(/catalogo/static/fonts/icomoon.ttf?a2kpci);
+    src: url(/catalogo/static/fonts/icomoon.ttf?a2kpci) format("embedded-opentype"),url(/catalogo/static/fonts/icomoon.ttf?a2kpci) format("truetype");
+}
+
+[class*=" ficon-"],[class^=ficon-] {
+    speak: never;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: icomoon!important;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 1;
+    text-transform: none
+}
+
+.ficon-twitter-x:before {
+    content: ""
+}
+
+.ficon-xls-file:before {
+    content: ""
+}
+
+.ficon-xlsx-file:before {
+    content: ""
+}
+
+.ficon-excel-file:before {
+    content: ""
+}
+
+.ficon-pdf-file:before {
+    content: ""
+}
+
+.ficon-ppt-file:before {
+    content: ""
+}
+
+.ficon-list:before {
+    content: ""
+}
+
+.ficon-ministerio:before {
+    content: ""
+}
+
+.ficon-energia:before {
+    content: ""
+}
+
+.ficon-biodiversidade:before {
+    content: ""
+}
+
+.ficon-reto_demografico:before {
+    content: ""
+}
+
+.ficon-agua:before {
+    content: ""
+}
+
+.ficon-costas_medio_marino:before {
+    content: ""
+}
+
+.ficon-calidad_evaluacion_ambiental:before {
+    content: ""
+}
+
+.ficon-educacion_ambiental:before {
+    content: ""
+}
+
+.ficon-cambio_climatico:before {
+    content: ""
+}
+
+.ficon-participacion_publica:before {
+    content: ""
+}
+
+.ficon-cartografia_sig:before {
+    content: ""
+}
+
+.ficon-sede_eletronica:before {
+    content: ""
+}
+
+.ficon-sala_prensa:before {
+    content: ""
+}
+
+.ficon-atencion_ciudadano:before {
+    content: ""
+}
+
+.ficon-alert-triangle:before {
+    content: ""
+}
+
+.ficon-alert-circle:before {
+    content: ""
+}
+
+.ficon-x-square:before {
+    content: ""
+}
+
+.ficon-arrow-up:before {
+    content: ""
+}
+
+.ficon-arrow-up-left:before {
+    content: ""
+}
+
+.ficon-arrow-left:before {
+    content: ""
+}
+
+.ficon-arrow-down-left:before {
+    content: ""
+}
+
+.ficon-arrow-down:before {
+    content: ""
+}
+
+.ficon-arrow-down-right:before {
+    content: ""
+}
+
+.ficon-arrow-right:before {
+    content: ""
+}
+
+.ficon-arrow-up-right:before {
+    content: ""
+}
+
+.ficon-arrow-left-circle:before {
+    content: ""
+}
+
+.ficon-arrow-down-circle:before {
+    content: ""
+}
+
+.ficon-arrow-right-circle:before {
+    content: ""
+}
+
+.ficon-arrow-up-circle:before {
+    content: ""
+}
+
+.ficon-chevron-left:before {
+    content: ""
+}
+
+.ficon-chevron-down:before {
+    content: ""
+}
+
+.ficon-chevron-right:before {
+    content: ""
+}
+
+.ficon-chevron-up:before {
+    content: ""
+}
+
+.ficon-chevrons-left:before {
+    content: ""
+}
+
+.ficon-chevrons-down:before {
+    content: ""
+}
+
+.ficon-chevrons-right:before {
+    content: ""
+}
+
+.ficon-chevrons-up:before {
+    content: ""
+}
+
+.ficon-navigation:before {
+    content: ""
+}
+
+.ficon-navigation-2:before {
+    content: ""
+}
+
+.ficon-activity:before {
+    content: ""
+}
+
+.ficon-anchor:before {
+    content: ""
+}
+
+.ficon-archive:before {
+    content: ""
+}
+
+.ficon-at-sign:before {
+    content: ""
+}
+
+.ficon-award:before {
+    content: ""
+}
+
+.ficon-bell:before {
+    content: ""
+}
+
+.ficon-bell-off:before {
+    content: ""
+}
+
+.ficon-box:before {
+    content: ""
+}
+
+.ficon-briefcase:before {
+    content: ""
+}
+
+.ficon-calendar:before {
+    content: ""
+}
+
+.ficon-camera:before {
+    content: ""
+}
+
+.ficon-camera-off:before {
+    content: ""
+}
+
+.ficon-check:before {
+    content: ""
+}
+
+.ficon-check-circle:before {
+    content: ""
+}
+
+.ficon-circle:before {
+    content: ""
+}
+
+.ficon-clipboard:before {
+    content: ""
+}
+
+.ficon-clock:before {
+    content: ""
+}
+
+.ficon-cloud:before {
+    content: ""
+}
+
+.ficon-cloud-off:before {
+    content: ""
+}
+
+.ficon-compass:before {
+    content: ""
+}
+
+.ficon-delete:before {
+    content: ""
+}
+
+.ficon-disc:before {
+    content: ""
+}
+
+.ficon-download:before {
+    content: ""
+}
+
+.ficon-download-cloud:before {
+    content: ""
+}
+
+.ficon-edit:before {
+    content: ""
+}
+
+.ficon-external-link:before {
+    content: ""
+}
+
+.ficon-eye:before {
+    content: ""
+}
+
+.ficon-eye-off:before {
+    content: ""
+}
+
+.ficon-film:before {
+    content: ""
+}
+
+.ficon-filter:before {
+    content: ""
+}
+
+.ficon-framer:before {
+    content: ""
+}
+
+.ficon-smile:before {
+    content: ""
+}
+
+.ficon-meh:before {
+    content: ""
+}
+
+.ficon-frown:before {
+    content: ""
+}
+
+.ficon-gift:before {
+    content: ""
+}
+
+.ficon-globe:before {
+    content: ""
+}
+
+.ficon-grid:before {
+    content: ""
+}
+
+.ficon-hard-drive:before {
+    content: ""
+}
+
+.ficon-hash:before {
+    content: ""
+}
+
+.ficon-headphones:before {
+    content: ""
+}
+
+.ficon-heart:before {
+    content: ""
+}
+
+.ficon-help-circle:before {
+    content: ""
+}
+
+.ficon-hexagon:before {
+    content: ""
+}
+
+.ficon-inbox:before {
+    content: ""
+}
+
+.ficon-info:before {
+    content: ""
+}
+
+.ficon-italic:before {
+    content: ""
+}
+
+.ficon-key:before {
+    content: ""
+}
+
+.ficon-link:before {
+    content: ""
+}
+
+.ficon-lock:before {
+    content: ""
+}
+
+.ficon-log-in:before {
+    content: ""
+}
+
+.ficon-log-out:before {
+    content: ""
+}
+
+.ficon-mail:before {
+    content: ""
+}
+
+.ficon-map-pin:before {
+    content: ""
+}
+
+.ficon-maximize:before {
+    content: ""
+}
+
+.ficon-message-circle:before {
+    content: ""
+}
+
+.ficon-mic:before {
+    content: ""
+}
+
+.ficon-mic-off:before {
+    content: ""
+}
+
+.ficon-minimize-2:before {
+    content: ""
+}
+
+.ficon-minus:before {
+    content: ""
+}
+
+.ficon-monitor:before {
+    content: ""
+}
+
+.ficon-moon:before {
+    content: ""
+}
+
+.ficon-more-horizontal:before {
+    content: ""
+}
+
+.ficon-more-vertical:before {
+    content: ""
+}
+
+.ficon-mouse-pointer:before {
+    content: ""
+}
+
+.ficon-move:before {
+    content: ""
+}
+
+.ficon-octagon:before {
+    content: ""
+}
+
+.ficon-package:before {
+    content: ""
+}
+
+.ficon-paperclip:before {
+    content: ""
+}
+
+.ficon-percent:before {
+    content: ""
+}
+
+.ficon-phone:before {
+    content: ""
+}
+
+.ficon-pie-chart:before {
+    content: ""
+}
+
+.ficon-pocket:before {
+    content: ""
+}
+
+.ficon-power:before {
+    content: ""
+}
+
+.ficon-radio:before {
+    content: ""
+}
+
+.ficon-search:before {
+    content: ""
+}
+
+.ficon-send:before {
+    content: ""
+}
+
+.ficon-settings:before {
+    content: ""
+}
+
+.ficon-share:before {
+    content: ""
+}
+
+.ficon-shield:before {
+    content: ""
+}
+
+.ficon-shield-off:before {
+    content: ""
+}
+
+.ficon-shopping-bag:before {
+    content: ""
+}
+
+.ficon-shuffle:before {
+    content: ""
+}
+
+.ficon-sidebar:before {
+    content: ""
+}
+
+.ficon-slash:before {
+    content: ""
+}
+
+.ficon-sliders:before {
+    content: ""
+}
+
+.ficon-smartphone:before {
+    content: ""
+}
+
+.ficon-speaker:before {
+    content: ""
+}
+
+.ficon-square:before {
+    content: ""
+}
+
+.ficon-star:before {
+    content: ""
+}
+
+.ficon-tablet:before {
+    content: ""
+}
+
+.ficon-tag:before {
+    content: ""
+}
+
+.ficon-target:before {
+    content: ""
+}
+
+.ficon-terminal:before {
+    content: ""
+}
+
+.ficon-thermometer:before {
+    content: ""
+}
+
+.ficon-thumbs-down:before {
+    content: ""
+}
+
+.ficon-thumbs-up:before {
+    content: ""
+}
+
+.ficon-toggle-left:before {
+    content: ""
+}
+
+.ficon-toggle-right:before {
+    content: ""
+}
+
+.ficon-tool:before {
+    content: ""
+}
+
+.ficon-trending-down:before {
+    content: ""
+}
+
+.ficon-trending-up:before {
+    content: ""
+}
+
+.ficon-triangle:before {
+    content: ""
+}
+
+.ficon-truck:before {
+    content: ""
+}
+
+.ficon-tv:before {
+    content: ""
+}
+
+.ficon-umbrella:before {
+    content: ""
+}
+
+.ficon-unlock:before {
+    content: ""
+}
+
+.ficon-upload:before {
+    content: ""
+}
+
+.ficon-upload-cloud:before {
+    content: ""
+}
+
+.ficon-voicemail:before {
+    content: ""
+}
+
+.ficon-watch:before {
+    content: ""
+}
+
+.ficon-wifi:before {
+    content: ""
+}
+
+.ficon-wifi-off:before {
+    content: ""
+}
+
+.ficon-wind:before {
+    content: ""
+}
+
+.ficon-x:before {
+    content: ""
+}
+
+.ficon-zap:before {
+    content: ""
+}
+
+.ficon-zap-off:before {
+    content: ""
+}
+
+.ficon-file-text:before {
+    content: ""
+}
+
+.ficon-pdf:before {
+    content: ""
+}
+
+.ficon-share-2:before {
+    content: ""
+}
+
+.ficon-twitch:before {
+    content: ""
+}
+
+.ficon-twitter:before {
+    content: ""
+}
+
+.ficon-youtube:before {
+    content: ""
+}
+
+.ficon-aperture:before {
+    content: ""
+}
+
+.ficon-chrome:before {
+    content: ""
+}
+
+.ficon-facebook:before {
+    content: ""
+}
+
+.ficon-feather:before {
+    content: ""
+}
+
+.ficon-figma:before {
+    content: ""
+}
+
+.ficon-github:before {
+    content: ""
+}
+
+.ficon-gitlab:before {
+    content: ""
+}
+
+.ficon-instagram:before {
+    content: ""
+}
+
+.ficon-linkedin:before {
+    content: ""
+}
+
+.ficon-trello:before {
+    content: ""
+}
+
+.ficon-rewind:before {
+    content: ""
+}
+
+.ficon-skip-back:before {
+    content: ""
+}
+
+.ficon-pause:before {
+    content: ""
+}
+
+.ficon-play:before {
+    content: ""
+}
+
+.ficon-skip-forward:before {
+    content: ""
+}
+
+.ficon-fast-forward:before {
+    content: ""
+}
+
+.ficon-pause-circle:before {
+    content: ""
+}
+
+.ficon-stop-circle:before {
+    content: ""
+}
+
+.ficon-play-circle:before {
+    content: ""
+}
+
+.ficon-video:before {
+    content: ""
+}
+
+.ficon-video-off:before {
+    content: ""
+}
+
+.ficon-volume:before {
+    content: ""
+}
+
+.ficon-volume-1:before {
+    content: ""
+}
+
+.ficon-volume-2:before {
+    content: ""
+}
+
+.ficon-volume-x:before {
+    content: ""
+}
+
+.ficon-zoom-in:before {
+    content: ""
+}
+
+.ficon-zoom-out:before {
+    content: ""
+}
+
+.ficon-airplay:before {
+    content: ""
+}
+
+.ficon-cast:before {
+    content: ""
+}
+
+.ficon-layers:before {
+    content: ""
+}
+
+.ficon-layout:before {
+    content: ""
+}
+
+.ficon-life-buoy:before {
+    content: ""
+}
+
+.ficon-message-square:before {
+    content: ""
+}
+
+.ficon-rss:before {
+    content: ""
+}
+
+.ficon-server:before {
+    content: ""
+}
+
+.ficon-code:before {
+    content: ""
+}
+
+.ficon-coffee:before {
+    content: ""
+}
+
+.ficon-columns:before {
+    content: ""
+}
+
+.ficon-command:before {
+    content: ""
+}
+
+.ficon-copy:before {
+    content: ""
+}
+
+.ficon-crosshair:before {
+    content: ""
+}
+
+.ficon-database:before {
+    content: ""
+}
+
+.ficon-flag:before {
+    content: ""
+}
+
+.ficon-minimize:before {
+    content: ""
+}
+
+.ficon-music:before {
+    content: ""
+}
+
+.ficon-pen-tool:before {
+    content: ""
+}
+
+.ficon-sun:before {
+    content: ""
+}
+
+.ficon-sunrise:before {
+    content: ""
+}
+
+.ficon-sunset:before {
+    content: ""
+}
+
+.ficon-bold:before {
+    content: ""
+}
+
+.ficon-book:before {
+    content: ""
+}
+
+.ficon-book-open:before {
+    content: ""
+}
+
+.ficon-bookmark:before {
+    content: ""
+}
+
+.ficon-loader:before {
+    content: ""
+}
+
+.ficon-maximize-2:before {
+    content: ""
+}
+
+.ficon-refresh-ccw:before {
+    content: ""
+}
+
+.ficon-refresh-cw:before {
+    content: ""
+}
+
+.ficon-crop:before {
+    content: ""
+}
+
+.ficon-menu:before {
+    content: ""
+}
+
+.ficon-align-center:before {
+    content: ""
+}
+
+.ficon-align-justify:before {
+    content: ""
+}
+
+.ficon-align-left:before {
+    content: ""
+}
+
+.ficon-align-right:before {
+    content: ""
+}
+
+.ficon-bar-chart:before {
+    content: ""
+}
+
+.ficon-bar-chart-2:before {
+    content: ""
+}
+
+.ficon-corner-down-left:before {
+    content: ""
+}
+
+.ficon-corner-down-right:before {
+    content: ""
+}
+
+.ficon-corner-left-down:before {
+    content: ""
+}
+
+.ficon-corner-left-up:before {
+    content: ""
+}
+
+.ficon-corner-right-down:before {
+    content: ""
+}
+
+.ficon-corner-right-up:before {
+    content: ""
+}
+
+.ficon-corner-up-left:before {
+    content: ""
+}
+
+.ficon-corner-up-right:before {
+    content: ""
+}
+
+.ficon-edit-2:before {
+    content: ""
+}
+
+.ficon-edit-3:before {
+    content: ""
+}
+
+.ficon-image:before {
+    content: ""
+}
+
+.ficon-link-2:before {
+    content: ""
+}
+
+.ficon-minus-circle:before {
+    content: ""
+}
+
+.ficon-minus-square:before {
+    content: ""
+}
+
+.ficon-plus:before {
+    content: ""
+}
+
+.ficon-plus-circle:before {
+    content: ""
+}
+
+.ficon-x-circle:before {
+    content: ""
+}
+
+.ficon-plus-square:before {
+    content: ""
+}
+
+.ficon-printer:before {
+    content: ""
+}
+
+.ficon-repeat:before {
+    content: ""
+}
+
+.ficon-rotate-ccw:before {
+    content: ""
+}
+
+.ficon-rotate-cw:before {
+    content: ""
+}
+
+.ficon-save:before {
+    content: ""
+}
+
+.ficon-scissors:before {
+    content: ""
+}
+
+.ficon-trash:before {
+    content: ""
+}
+
+.ficon-trash-2:before {
+    content: ""
+}
+
+.ficon-type:before {
+    content: ""
+}
+
+.ficon-underline:before {
+    content: ""
+}
+
+.ficon-user:before {
+    content: ""
+}
+
+.ficon-user-check:before {
+    content: ""
+}
+
+.ficon-user-minus:before {
+    content: ""
+}
+
+.ficon-user-plus:before {
+    content: ""
+}
+
+.ficon-user-x:before {
+    content: ""
+}
+
+.ficon-users:before {
+    content: ""
+}
+
+.ficon-folder:before {
+    content: ""
+}
+
+.ficon-folder-minus:before {
+    content: ""
+}
+
+.ficon-folder-plus:before {
+    content: ""
+}
+
+.ficon-file:before {
+    content: ""
+}
+
+.ficon-file-minus:before {
+    content: ""
+}
+
+.ficon-file-plus:before {
+    content: ""
 }
