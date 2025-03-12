@@ -39,7 +39,7 @@
                 {% elif field.field_name == 'miteco_meth' %}
                     <ul class="{{ _class }}">
                         {% for value in label if label|length %}
-                        {% set value = h.schemingdcat_prettify_url(h.scheming_clean_json_value(value.replace(' ', ''))) %}
+                        {% set value = h.scheming_clean_json_value(value.replace(' ', '')) %}
                         <li>
                             <a href="{{ value }}" class="truncate-link">{{ value }}</a>
                         </li>

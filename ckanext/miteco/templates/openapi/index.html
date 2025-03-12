@@ -1,0 +1,71 @@
+{% extends 'page.html' %}
+
+{% block styles %}
+  {{ super() }}
+  {% asset 'pages/index-css' %}
+{% endblock %}
+
+{% block breadcrumb_content %}
+<li class="active"><a href="{{ h.url_for('openapi.openapi_index') }}" title="{{ _('OpenAPI Endpoints') }}">{{ _('OpenAPI Endpoints') }}</a></li>
+{% endblock %}
+
+{% block secondary_content %}
+  <div class="module module-narrow module-shallow">
+    <h2 class="module-heading">
+      <i class="fa fa-info-circle icon-info-sign"></i>
+      {{ _('OpenAPI Endpoints') }}
+    </h2>
+    <div class="module-content">
+        <center><img src="{{ h.url_for_static_or_external('/images/openapi_logo.png') }}" alt="Open API Logo" title="Open API Logo" style="width: 150px;"/></center>
+        <br>
+        <p>{% trans %}
+        The OpenAPI Specification (OAS) defines a standard, language-agnostic interface to HTTP APIs which allows both humans and computers to discover and understand the capabilities of the service without access to source code, documentation, or through network traffic inspection. When properly defined, a consumer can understand and interact with the remote service with a minimal amount of implementation logic.
+        {% endtrans %}</p>
+        <p>
+          {{ _('More info') }}:
+        </p>
+      <ul>
+        <li><a href="{{ h.url_for_static_or_external('https://swagger.io/specification/') }}" target="_blank" rel="noopener noreferrer"><strong>OpenAPI Specification</strong></a></li>
+        <li><a href="{{ h.url_for_static_or_external('https://github.com/mjanez/ckanext-openapi') }}" target="_blank" rel="noopener noreferrer"><strong>ckanext-openapi</strong></a></li>
+      </ul>
+    </div>
+  </div>
+{% endblock %}
+
+{% block primary_content %}
+{% set templates = h.openapi_get_endpoints() %}
+{% set truncate = truncate or 180 %}
+
+<div class="box">
+  <div class="inner">
+      <h1>{{ _('OpenAPI Endpoints') }}</h1> 
+      <div class="addons">
+            {% if templates %}
+                <ul class="metadata-sidebar-nav">
+                    {% for template in templates %}
+                        <li>
+                            <a href="{{ h.url_for('openapi.openapi_endpoint', name=template.name) }}" target="_blank" rel="noopener noreferrer">
+                                <i class="fa fa-code"></i>{{ h.scheming_language_text(template.title) }}
+                                <div class="metadata-sidebar-template-description">{{ h.markdown_extract(h.scheming_language_text(template.description), extract_length=truncate) }}</div>
+                                <small>{{ h.url_for_static_or_external(template.url)|truncate(120) }}</small>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="metadata-sidebar-no-templates">
+                    <p><i class="fa fa-exclamation-triangle"></i> <strong>{{ _('Not OpenAPI endpoints available') }}</strong></p>
+                    <p>
+                      {{ _('To retrieve them, check the <code>ckan.ini</code> config file and documentation of') }}, <a href="{{ h.url_for_static_or_external('https://github.com/mjanez/ckanext-openapi') }}" target="_blank" rel="noopener noreferrer"><strong>ckanext-openapi</strong></a>:
+                    </p>
+        
+                    <div class="block-code">
+                      ckanext.openapi.endpoints = '[{"url":"/static/openapi/sample.json","name":"sample","title":{"en":"OpenAPI sample 1","es":"Ejemplo de OpenAPI 1"},"description":{"en":"API with examples.","es":"API con ejemplos."}},{"url":"https://raw.githubusercontent.com/OAI/OpenAPI-Specification/refs/heads/main/examples/v3.0/petstore.json","name":"petstore","title":{"en":"Petstore OpenAPI example","es":"Ejemplo OpenAPI Petstore"},"description":{"en":"This is a sample Pet Store Server based on the OpenAPI 3.0 specification.","es":"Este es un ejemplo de Servidor de Tienda de Mascotas basado en la especificación OpenAPI 3.0."}}]'
+                    </div>
+                
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,135 @@
+
+"openapi": "3.0.1"
+"info":
+  "title": "Datos Abiertos MITECO - API DataStore"
+  "version": "1.0.0"
+"servers":
+  -
+    "url": "https://catalogo.datosabiertos.miteco.gob.es/catalogo/api/3/action/"
+"security":
+  -
+    "default": []
+"paths":
+  "/datastore_search":
+    "get":
+      "summary": "The datastore_search action allows you to search data in a resource."
+      "description": "Search a datastore resource"
+      "parameters":
+        -
+          "name": "resource_id"
+          "in": "query"
+          "description": "ID or alias of the resource to be searched against. \n\nID o alias del recurso a buscar."
+          "required": true
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+            "default": "19088adf-d259-4947-8ce3-fb95b3866cfa"
+        -
+          "name": "filters"
+          "in": "query"
+          "description": "Matching conditions to select, not supported in GET requests. \n\nCondiciones de coincidencia para seleccionar, no admitidas en solicitudes GET."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "object"
+        -
+          "name": "q"
+          "in": "query"
+          "description": "Full text query across all columns in each row. \n\nConsulta de texto completo en todas las columnas de cada fila."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "distinct"
+          "in": "query"
+          "description": "Return only distinct rows. \n\nDevolver solo filas distintas."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+        -
+          "name": "plain"
+          "in": "query"
+          "description": "Treat as plain text query. \n\nTratar como consulta de texto plano."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+        -
+          "name": "language"
+          "in": "query"
+          "description": "Language of the full text query \n\nIdioma de la consulta de texto completo."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "limit"
+          "in": "query"
+          "description": "Maximum number of rows to return \n\nNúmero máximo de filas a devolver."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+            "default": 100
+        -
+          "name": "offset"
+          "in": "query"
+          "description": "Offset this number of rows \n\nDesplazar este número de filas."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+        -
+          "name": "fields"
+          "in": "query"
+          "description": "List of column names to return. \n\nLista de nombres de columnas a devolver."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "sort"
+          "in": "query"
+          "description": "Comma-separated string of column names with sort order. \n\nCadena de nombres de columnas separada por comas con orden de clasificación."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "include_total"
+          "in": "query"
+          "description": "Calculate and return the total number of matching rows. \n\nCalcular y devolver el número total de filas coincidentes."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+        -
+          "name": "records_format"
+          "in": "query"
+          "description": "The format for the records return value. \n\nEl formato del valor de retorno de los registros."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+            "enum":
+              - "objects"
+              - "lists"
+              - "csv"
+              - "tsv"
+      "responses":
+        "200":
+          "description": "ok"
