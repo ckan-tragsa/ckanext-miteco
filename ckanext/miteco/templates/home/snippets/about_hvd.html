@@ -28,17 +28,17 @@
 </a>
 {% endmacro %}
 
-{% set theme_field = h.schemingdcat_get_default_package_item_icon() %}
-{% set themes_stats = h.schemingdcat_get_open_data_statistics(theme_field) %}
+{% set theme_field = "hvd_category" %}
+{% set themes_stats = h.miteco_get_high_value_data_statistics() %}
 {% if themes_stats %}
     <div class="sct-about-themes">
         <div class="sct-about-h2-container">
-        <h2 class="sct-about-h2">{{ _('INSPIRE theme categories') }}</h2>
+        <h2 class="sct-about-h2">{{ _('High value dataset categories (HVD)') }}</h2>
         </div>
         <div class="sct-about-themes-card-container">
-            {% for theme_id, theme in themes_stats.items() %}
-                {{ render_svg_card(theme.icon, theme.label, theme.stat_count, h.url_for('dataset.search'), theme_field, theme.value) }}
-            {% endfor %}
+             {% for theme_id, theme in themes_stats.items() %}
+                {{ render_svg_card(theme.icon, theme.label[h.lang()], theme.stat_count, h.url_for('dataset.search'), theme_field, theme.value) }}
+            {% endfor %} 
         </div>
     </div>
 {% endif %}

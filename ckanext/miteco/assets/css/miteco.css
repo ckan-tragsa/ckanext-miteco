@@ -820,8 +820,31 @@ ul.nav.nav-simple.nav-facet.tags_facet .active .separator {color: white;}
 }
 
 ul.logo_miteco_blanco{display: block; margin-top: 1em !important; margin-left: -2.5em !important;}
-ul.logo_miteco_blanco li{color:#6c6c6c; list-style:none; margin: 0 !important; font-weight: bold;}
+ul.logo_miteco_blanco li{color:#6c6c6c !important; list-style:none; margin: 0 !important; font-weight: bold;}
 ul.logo_miteco_blanco li img{margin: 0em 0 1em 0; width: 300px;}
+
+@media (min-width: 996px) {
+    .sct-about-figures__items {
+        flex-grow: 2;
+        display: flex; 
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        .sct-about-figures-alt-card {
+          display: flex;
+          flex-basis: 30%;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 1rem;
+          border: 1px solid #00316426;
+          border-radius: 0px;
+          background-color: transparent;
+          color: var(--sct-primary-color);
+          text-align: center;
+          height: 5rem;
+        }
+    }
+}
 
 /**************************css para iconos***************************/
 @font-face {

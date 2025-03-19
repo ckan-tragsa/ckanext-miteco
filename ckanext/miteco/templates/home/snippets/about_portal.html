@@ -28,23 +28,25 @@
 </div>
 {% endmacro %}
 
+
 <section>
     <div class="sct-about-figures sct-about-figures--col-3 ecl-u-mv-xl ecl-u-border-color-grey-10 ecl-u-border-width-1 ecl-u-border-all">
-        <div class="sct-about-h2-container">
-            <h2 class="sct-about-h2">{{ _('Explore and use Open Data') }}</h2>
+        <div class="sct-about-h3-container">
+            <h3 class="sct-about-h3">{{ _('Explore and use Open Data') }}</h3>
         </div>
         <div class="sct-about-figures__items">
+
             {{ render_card(stats.datasets.icon, stats.datasets.stat_count, _('Dataset') if stats.datasets.stat_count == 1 else _('Datasets'), h.url_for('dataset.search')) }}
 
             {{ render_card(stats.spatial_datasets.icon, stats.spatial_datasets.stat_count, _('Spatial dataset') if stats.spatial_dataset_count == 1 else _('Spatial datasets'), h.url_for('dataset.search', dataset_scope='spatial_dataset')) }}
 
-            {{ render_card(stats.tags.icon, stats.tags.stat_count, _('Tag') if stats.tag_count == 1 else _('Tags'), h.url_for('api.action', ver=3, logic_function='tag_list'), target_blank=True) }}
+           {#{ render_card(stats.datasets.icon, h.get_hv_datasets(), _('High value dataset') if stats.hv_datasets_count == 1 else _('High value datasets'), h.url_for('dataset.search', hvd_category="")) }#}
 
             {{ render_card(stats.organizations.icon, stats.organizations.stat_count, _('Organization') if stats.organization_count == 1 else _('Organizations'), h.url_for('organization.index')) }}
+            
+            {{ render_card(stats.tags.icon, stats.tags.stat_count, _('Tag') if stats.tag_count == 1 else _('Tags'), h.url_for('api.action', ver=3, logic_function='tag_list'), target_blank=True) }}
 
             {{ render_card(stats.endpoints.icon, stats.endpoints.stat_count, _('Catalog endpoints'), h.url_for('schemingdcat.endpoint_index')) }}
-
-            {{ render_card(stats.groups.icon, stats.groups.stat_count, _('Group') if stats.group_count == 1 else _('Groups'), h.url_for('group.index')) }}
         </div>
-    </div>
+    </div>  
 </section>
