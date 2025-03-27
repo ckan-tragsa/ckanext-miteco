@@ -6,22 +6,10 @@
       {{ _('¿Que son las palabras clave?') }}
     </h2>
     <div class="module-content">
-      <!-- <p>{{ _("Las palabras clave son términos o etiquetas utilizadas para clasificar y describir 
-        el contenido o tema principal de un conjunto de datos. En el contexto de una plataforma como CKAN, las 
-        palabras clave permiten una búsqueda y filtrado eficiente de los datos disponibles. Estas palabras sirven 
-        para agrupar y organizar la información, haciendo más fácil encontrar datasets relacionados con temas específicos.") }}</p>
 
-      <p>{{ _("En una instancia de CKAN, las palabras clave están asociadas a los datasets y actúan como una especie de etiquetas 
-        que representan conceptos clave relacionados con el contenido del conjunto de datos. Los usuarios pueden buscar o filtrar 
-        datasets por palabras clave, facilitando la localización de información relevante para sus necesidades.") }}</p>
-      
-      <p>{{ _("Por ejemplo, una plataforma de datos abiertos podría tener palabras clave como \"educación\", \"salud\", o \"cambio climático\", 
-        y cada dataset relacionado con estos temas podría estar etiquetado con estas palabras clave, permitiendo que los usuarios encuentren 
-        rápidamente información sobre esas áreas específicas.") }}</p> -->
-      
       <p>{{ _("Las palabras clave se utilizan para identificar y clasificar conceptos dentro de un sistema de información. 
-        Sirven para mejorar la organización, búsqueda y recuperación de datos. Según el contexto, pueden estar relacionadas 
-        con taxonomías, etiquetas o metadatos, facilitando el acceso eficiente a la información relevante.") }}</p>
+        Sirven para mejorar la organización, búsqueda y recuperación de datos.  En el contexto del Catálogo de Datos estas palabras 
+        clave son elegidas de forma libre por el publicador facilitando el acceso eficiente a la información relevante.") }}</p>
     
     </div>
   </div>
@@ -29,37 +17,15 @@
 
 {% block primary_content_inner %}
     <h1><center>{{ _( "Lista de palabras clave" ) }}</center></h1>
-    <div id="tagList" class="mt-3"></div>
-    <script>
-        async function fetchData() {
-            try {
-                let response = await fetch('/catalogo/api/3/action/tag_list');
-                let data = await response.json();
-                let tagList = document.getElementById('tagList');
-                tagList.innerHTML = '';
-                data.result.sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
-                data.result.forEach(tag => {
-                    let link = document.createElement('a');
-                    link.classList.add('tag', 'endpoints_index_cards');  // Añadir las clases
-                    let tagUrl = `/catalogo/dataset/?tags=${encodeURIComponent(tag)}`;
-                    link.href = tagUrl;
-                    
-                    // Crear el icono con Font Awesome
-                    let icon = document.createElement('i');
-                    icon.classList.add('fa', 'fa-share-alt-square');
-                    
-                    // Añadir el icono y el texto del tag al enlace
-                    link.appendChild(icon);
-                    link.appendChild(document.createTextNode(` ${tag}`)); // Espacio antes del texto del tag
-                    
-                    tagList.appendChild(link); // Añadir el enlace al contenedor
-                });  
-            } catch (error) {
-                console.error('Error al obtener los datos:', error);
-            }
-        }
-        window.onload = fetchData;
-    </script>
+    <div id="tagList" class="mt-3">
+      {%set tags = h.miteco_get_tags()%}
+      {% for tag in tags %}
+      <a class="tag endpoints_index_cards" href="">
+        <i class="fa fa-share-alt-square"></i>
+        {{ tag }}
+      </a>
+      {% endfor %}
+    </div>
 {% endblock %}
 
 
