@@ -20,7 +20,7 @@
     <div id="tagList" class="mt-3">
       {%set tags = h.miteco_get_tags()%}
       {% for tag in tags %}
-      <a class="tag endpoints_index_cards" href="">
+      <a class="tag endpoints_index_cards" href="{{ h.url_for('dataset.search', tags=tag) }}">
         <i class="fa fa-share-alt-square"></i>
         {{ tag }}
       </a>
