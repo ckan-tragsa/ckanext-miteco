@@ -105,3 +105,18 @@ def get_hv_datasets(count=10, return_count=True):
         return result['count']
     else:
         return result['results']
+
+
+
+@helper
+def miteco_get_tags():
+    """this helper function returns all the tags in the portal
+
+    parameters:
+
+    returns: 
+        list of tags
+
+    """
+
+    return logic.get_action('tag_list')()

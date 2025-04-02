@@ -43,8 +43,8 @@
             {{ render_card(stats.datasets.icon, h.get_hv_datasets(), _('High value dataset') if stats.hv_datasets_count == 1 else _('High value datasets'), h.url_for('dataset.search', hvd="hvd")) }}
 
             {{ render_card(stats.organizations.icon, stats.organizations.stat_count, _('Organization') if stats.organization_count == 1 else _('Organizations'), h.url_for('organization.index')) }}
-            
-            {{ render_card(stats.tags.icon, stats.tags.stat_count, _('Tag') if stats.tag_count == 1 else _('Tags'), h.url_for('api.action', ver=3, logic_function='tag_list'), target_blank=True) }}
+                    
+            {{ render_card(stats.tags.icon, stats.tags.stat_count, _('Tag') if stats.tag_count == 1 else _('Tags'), h.url_for('miteco.tags')) }}
 
             {{ render_card(stats.endpoints.icon, stats.endpoints.stat_count, _('Catalog endpoints'), h.url_for('schemingdcat.endpoint_index')) }}
         </div>
