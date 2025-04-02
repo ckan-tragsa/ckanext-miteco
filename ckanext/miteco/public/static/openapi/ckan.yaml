@@ -1,6 +1,6 @@
 openapi: 3.0.0
 servers:
-- url: https://demo.ckan.org/api
+- url: https://catalogo.datosabiertos.miteco.gob.es/catalogo/api
   description: Development Portal [PUBLIC]
 info:
   title: Open Data Portal - CKAN API

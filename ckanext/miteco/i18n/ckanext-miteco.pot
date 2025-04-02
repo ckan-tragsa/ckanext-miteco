@@ -1,26 +1,170 @@
 # Translations template for ckanext-miteco.
-# Copyright (C) 2024 ORGANIZATION
-# This file is distributed under the same license as the ckanext-miteco
-# project.
-# FIRST AUTHOR mjanez, 2024.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the ckanext-miteco project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
 #
-# Translators:
-# mnl.janez@gmail.com, 2024
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ckanext-miteco 0.0.1\n"
-"Report-Msgid-Bugs-To: mnl.janez@gmail.com\n"
-"POT-Creation-Date: 2024-10-25 12:00+0200\n"
+"Project-Id-Version: ckanext-miteco 0.1.0\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-03-19 13:05+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: mnl.janez@gmail.com\n"
-"Language-Team: \n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.7.0\n"
-"X-Generator: Poedit 3.4.2\n"
+"Generated-By: Babel 2.10.3\n"
 
-#: ckanext/miteco/templates/miteco/snippets/miteco_dataset_info.html
+#: ckanext/miteco/templates/header.html:19
+#: ckanext/miteco/templates/home/snippets/about_portal.html:39
+#: ckanext/miteco/templates/organization/snippets/organization_tree.html:37
+msgid "Datasets"
+msgstr ""
+
+#: ckanext/miteco/templates/header.html:21
+#: ckanext/miteco/templates/package/base.html:10
+msgid "Organizations"
+msgstr ""
+
+#: ckanext/miteco/templates/header.html:23
+msgid "Groups"
+msgstr ""
+
+#: ckanext/miteco/templates/header.html:24
+msgid "About"
+msgstr ""
+
+#: ckanext/miteco/templates/header.html:25
+msgid "OpenAPI"
+msgstr ""
+
+#: ckanext/miteco/templates/home/snippets/about_hvd.html:36
+msgid "High value dataset categories (HVD)"
+msgstr ""
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:35
+msgid "Explore and use Open Data"
+msgstr ""
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:39
+msgid "Dataset"
+msgstr ""
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:41
+msgid "Spatial dataset"
+msgstr ""
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:41
+msgid "Spatial datasets"
+msgstr ""
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:43
+msgid "High value dataset"
+msgstr ""
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:43
+msgid "High value datasets"
+msgstr ""
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:45
+msgid "Tag"
+msgstr ""
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:45
+msgid "Tags"
+msgstr ""
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:47
+msgid "Catalog endpoints"
+msgstr ""
+
+#: ckanext/miteco/templates/home/snippets/about_themes.html:36
+msgid "INSPIRE theme categories"
+msgstr ""
+
+#: ckanext/miteco/templates/home/snippets/search.html:3
+msgid "E.g. environment"
+msgstr ""
+
+#: ckanext/miteco/templates/home/snippets/search.html:5
+msgid "Open Data Catalog"
+msgstr ""
+
+#: ckanext/miteco/templates/home/snippets/search.html:18
+msgid ""
+"Find data published by various organizations to help you develop products and"
+" services."
+msgstr ""
+
+#: ckanext/miteco/templates/home/snippets/search.html:27
+msgid "Search datasets"
+msgstr ""
+
+#: ckanext/miteco/templates/home/snippets/search.html:30
+msgid "Search"
+msgstr ""
+
+#: ckanext/miteco/templates/home/snippets/search.html:34
+msgid "Popular tags"
+msgstr ""
+
+#: ckanext/miteco/templates/miteco/form_snippets/miteco_identifier.html:2
+msgid "This field is required"
+msgstr ""
+
+#: ckanext/miteco/templates/miteco/form_snippets/miteco_identifier.html:2
+msgid "Custom"
+msgstr ""
+
+#: ckanext/miteco/templates/miteco/form_snippets/miteco_identifier.html:8
+msgid "Waiting for metadata fields"
+msgstr ""
+
+#: ckanext/miteco/templates/miteco/snippets/miteco_dataset_info.html:77
 msgid "Dataset information"
 msgstr ""
+
+#: ckanext/miteco/templates/openapi/index.html:9
+#: ckanext/miteco/templates/openapi/index.html:16
+#: ckanext/miteco/templates/openapi/index.html:41
+msgid "OpenAPI Endpoints"
+msgstr ""
+
+#: ckanext/miteco/templates/openapi/index.html:21
+msgid ""
+"The OpenAPI Specification (OAS) defines a standard, language-agnostic "
+"interface to HTTP APIs which allows both humans and computers to discover and"
+" understand the capabilities of the service without access to source code, "
+"documentation, or through network traffic inspection. When properly defined, "
+"a consumer can understand and interact with the remote service with a minimal"
+" amount of implementation logic."
+msgstr ""
+
+#: ckanext/miteco/templates/openapi/index.html:25
+msgid "More info"
+msgstr ""
+
+#: ckanext/miteco/templates/openapi/index.html:57
+msgid "Not OpenAPI endpoints available"
+msgstr ""
+
+#: ckanext/miteco/templates/openapi/index.html:59
+msgid ""
+"To retrieve them, check the <code>ckan.ini</code> config file and "
+"documentation of"
+msgstr ""
+
+#: ckanext/miteco/templates/package/base.html:22
+msgid "Create Dataset"
+msgstr ""
+
+#: ckanext/miteco/templates/scheming/form_snippets/org_hierarchy.html:3
+msgid "Parent"
+msgstr ""
+
+#: ckanext/miteco/templates/scheming/form_snippets/org_hierarchy.html:7
+msgid "None - top level"
+msgstr ""
+

@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-miteco 0.0.1\n"
 "Report-Msgid-Bugs-To: mnl.janez@gmail.com\n"
-"POT-Creation-Date: 2023-07-04 11:54+0200\n"
-"PO-Revision-Date: 2024-03-01 18:51+0100\n"
+"POT-Creation-Date: 2025-03-19 13:05+0100\n"
+"PO-Revision-Date: 2025-03-19 13:30+0100\n"
 "Last-Translator: mnl.janez@gmail.com\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -19,9 +19,170 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.7.0\n"
-"X-Generator: Poedit 3.4.2\n"
+"Generated-By: Babel 2.10.3\n"
+"X-Generator: Poedit 3.5\n"
 
-#: ckanext/miteco/templates/miteco/snippets/miteco_dataset_info.html
+#: ckanext/miteco/templates/header.html:19
+#: ckanext/miteco/templates/home/snippets/about_portal.html:39
+#: ckanext/miteco/templates/organization/snippets/organization_tree.html:37
+msgid "Datasets"
+msgstr "Conjuntos de datos"
+
+#: ckanext/miteco/templates/header.html:21
+#: ckanext/miteco/templates/package/base.html:10
+msgid "Organizations"
+msgstr "Organizaciones"
+
+#: ckanext/miteco/templates/header.html:23
+msgid "Groups"
+msgstr "Grupos"
+
+#: ckanext/miteco/templates/header.html:24
+msgid "About"
+msgstr "Sobre nosotros"
+
+#: ckanext/miteco/templates/header.html:25
+msgid "OpenAPI"
+msgstr "OpenAPI"
+
+#: ckanext/miteco/templates/home/snippets/about_hvd.html:36
+msgid "High value dataset categories (HVD)"
+msgstr "Categorías temáticas datos de alto valor (HVD)"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:35
+msgid "Explore and use Open Data"
+msgstr "Explora y utiliza datos abiertos"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:39
+msgid "Dataset"
+msgstr "Conjuntos de datos"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:41
+msgid "Spatial dataset"
+msgstr "Conjunto de datos espaciales"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:41
+msgid "Spatial datasets"
+msgstr "Conjuntos de datos espaciales"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:43
+msgid "High value dataset"
+msgstr "Conjunto de datos de alto valor"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:43
+msgid "High value datasets"
+msgstr "Conjuntos de datos de alto valor"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:45
+msgid "Tag"
+msgstr "Palabras clave"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:45
+msgid "Tags"
+msgstr "Palabras clave"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:47
+msgid "Catalog endpoints"
+msgstr "Puntos finales del catalogo"
+
+#: ckanext/miteco/templates/home/snippets/about_themes.html:36
+msgid "INSPIRE theme categories"
+msgstr "Categorías temáticas INSPIRE"
+
+#: ckanext/miteco/templates/home/snippets/search.html:3
+msgid "E.g. environment"
+msgstr "E.j. ambiente"
+
+#: ckanext/miteco/templates/home/snippets/search.html:5
+msgid "Open Data Catalog"
+msgstr "Portal de Datos Abiertos"
+
+#: ckanext/miteco/templates/home/snippets/search.html:18
+msgid ""
+"Find data published by various organizations to help you develop "
+"products and services."
+msgstr ""
+"Encontrar datos publicados por diversas organizaciones para ayudarte a "
+"desarrollar productos y servicios."
+
+#: ckanext/miteco/templates/home/snippets/search.html:27
+msgid "Search datasets"
+msgstr "Buscar conjuntos de datos"
+
+#: ckanext/miteco/templates/home/snippets/search.html:30
+msgid "Search"
+msgstr "Buscar"
+
+#: ckanext/miteco/templates/home/snippets/search.html:34
+msgid "Popular tags"
+msgstr "Etiquetas populares"
+
+#: ckanext/miteco/templates/miteco/form_snippets/miteco_identifier.html:2
+msgid "This field is required"
+msgstr "Este campo es obligatorio"
+
+#: ckanext/miteco/templates/miteco/form_snippets/miteco_identifier.html:2
+msgid "Custom"
+msgstr "Personalizado"
+
+#: ckanext/miteco/templates/miteco/form_snippets/miteco_identifier.html:8
+msgid "Waiting for metadata fields"
+msgstr "Esperando los campos de metadatos"
+
+#: ckanext/miteco/templates/miteco/snippets/miteco_dataset_info.html:77
 msgid "Dataset information"
 msgstr "Información del conjunto de datos"
+
+#: ckanext/miteco/templates/openapi/index.html:9
+#: ckanext/miteco/templates/openapi/index.html:16
+#: ckanext/miteco/templates/openapi/index.html:41
+msgid "OpenAPI Endpoints"
+msgstr "Puntos finales de OpenAPI"
+
+#: ckanext/miteco/templates/openapi/index.html:21
+msgid ""
+"The OpenAPI Specification (OAS) defines a standard, language-agnostic "
+"interface to HTTP APIs which allows both humans and computers to "
+"discover and understand the capabilities of the service without access "
+"to source code, documentation, or through network traffic inspection. "
+"When properly defined, a consumer can understand and interact with the "
+"remote service with a minimal amount of implementation logic."
+msgstr ""
+"La especificación OpenAPI (OAS) define una interfaz estándar e "
+"independiente del idioma para las APIs HTTP que permite tanto a humanos "
+"como a ordenadores descubrir y comprender las capacidades del servicio "
+"sin necesidad de acceder al código fuente, la documentación o mediante "
+"la inspección del tráfico de red. Cuando se define correctamente, un "
+"consumidor puede entender e interactuar con el servicio remoto con una "
+"cantidad mínima de lógica de implementación."
+
+#: ckanext/miteco/templates/openapi/index.html:25
+msgid "More info"
+msgstr "Mas información"
+
+#: ckanext/miteco/templates/openapi/index.html:57
+msgid "Not OpenAPI endpoints available"
+msgstr "No hay puntos finales de OpenAPI disponibles"
+
+#: ckanext/miteco/templates/openapi/index.html:59
+msgid ""
+"To retrieve them, check the <code>ckan.ini</code> config file and "
+"documentation of"
+msgstr ""
+"Para recuperarlos, consulte el archivo de configuración <code>ckan.ini</"
+"code> y la documentación de"
+
+#: ckanext/miteco/templates/package/base.html:22
+msgid "Create Dataset"
+msgstr "Crear conjunto de datos"
+
+#: ckanext/miteco/templates/scheming/form_snippets/org_hierarchy.html:3
+msgid "Parent"
+msgstr "Padre"
+
+#: ckanext/miteco/templates/scheming/form_snippets/org_hierarchy.html:7
+msgid "None - top level"
+msgstr "Ninguno - nivel superior"
+
+#~ msgid "Organization"
+#~ msgstr "Organizacion"

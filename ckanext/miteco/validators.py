@@ -162,10 +162,15 @@ def miteco_miteco_dataset_type_hvd_dataset(field, schema):
     """Validator for MITECO general type HVD dataset.
 
     This validator checks the `miteco_dataset_type` field and sets the 
-    `hvd_category` field accordingly. If `miteco_dataset_type` is 
-    'http://publications.europa.eu/resource/authority/dataset-type/GEOSPATIAL', it sets `hvd_category` to `INSPIRE_HVD_CATEGORY`. 
-    Otherwise, it sets `hvd_category` to `MITECO_DEFAULT_HVD_CATEGORY`. 
-    Additionally, it ensures that `DCAT_AP_HVD_CATEGORY_LEGISLATION` is 
+    `hvd_category` field accordingly. If `miteco_dataset_type` is in 
+    MITECO_DEFAULT_GENERAL_TYPE_HVDS:
+    - If it's 'http://publications.europa.eu/resource/authority/dataset-type/GEOSPATIAL', 
+      sets `hvd_category` to `INSPIRE_HVD_CATEGORY`
+    - Otherwise, sets `hvd_category` to `MITECO_DEFAULT_HVD_CATEGORY`
+    
+    For datasets not in MITECO_DEFAULT_GENERAL_TYPE_HVDS, leaves hvd_category untouched.
+
+    When a category is assigned, ensures that `DCAT_AP_HVD_CATEGORY_LEGISLATION` is 
     included in the `applicable_legislation_key` list.
 
     Args:
@@ -177,21 +182,26 @@ def miteco_miteco_dataset_type_hvd_dataset(field, schema):
     """
     def validator(key, data, errors, context):
         hvd_category = data.get(key)
-        applicable_legislation_key = ('applicable_legislation_key', )
         miteco_dataset_type = data.get(('miteco_dataset_type', ))
-
-        if not hvd_category or miteco_dataset_type in MITECO_DEFAULT_GENERAL_TYPE_HVDS:
+        
+        # Only set hvd_category if dataset type is in the HVD list
+        if miteco_dataset_type in MITECO_DEFAULT_GENERAL_TYPE_HVDS:
             if miteco_dataset_type == MITECO_INSPIRE_GENERAL_TYPE:
                 data[key] = INSPIRE_HVD_CATEGORY
             else:
                 data[key] = MITECO_DEFAULT_HVD_CATEGORY
-
+            
+            # Now that we've set an HVD category, ensure the legislation is also set
+            applicable_legislation_key = ('applicable_legislation_key', )
+            
             if isinstance(data.get(applicable_legislation_key), list):
                 if DCAT_AP_HVD_CATEGORY_LEGISLATION not in data[applicable_legislation_key]:
                     data[applicable_legislation_key].append(DCAT_AP_HVD_CATEGORY_LEGISLATION)
             else:
                 if data.get(applicable_legislation_key) != DCAT_AP_HVD_CATEGORY_LEGISLATION:
                     data[applicable_legislation_key] = [DCAT_AP_HVD_CATEGORY_LEGISLATION]
+        # If not an HVD dataset type and hvd_category is empty, leave it as None
+        # (no action needed as we're not modifying data[key])
 
     return validator
 
