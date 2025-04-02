@@ -366,6 +366,24 @@ dataset_fields:
       value: spatial_dataset
   form_group_id: general_info
 
+  # 
+- field_name: hvd
+  label:
+    en: High value dataset
+    es: Conjunto de datos de alto valor
+  preset: miteco_hvd
+  required: False
+  choices:
+    - label:
+        en: "Not high value dataset"
+        es: "Conjunto de datos de no alto valor"
+      value: non_hvd
+    - label:
+        en: "High value dataset"
+        es: "Conjunto de datos de alto valor"
+      value: hvd
+  form_group_id: general_info
+
 # MITECO: DCAT-AP Dataset Type (M)
 - field_name: miteco_dataset_type
   label:
@@ -1228,7 +1246,7 @@ dataset_fields:
       es: Zonas sujetas a ordenación, a restricciones o reglamentaciones y unidades de notificación
     value: http://data.europa.eu/bna/c_af646f5b
     narrower: http://data.europa.eu/bna/c_dd313021
-    narrower_level: NT1
+    narrower_level: NT1 
   - label:
       en: Land cover
       es: Cubierta terrestre

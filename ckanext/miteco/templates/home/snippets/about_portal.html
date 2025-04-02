@@ -40,7 +40,7 @@
 
             {{ render_card(stats.spatial_datasets.icon, stats.spatial_datasets.stat_count, _('Spatial dataset') if stats.spatial_dataset_count == 1 else _('Spatial datasets'), h.url_for('dataset.search', dataset_scope='spatial_dataset')) }}
 
-           {#{ render_card(stats.datasets.icon, h.get_hv_datasets(), _('High value dataset') if stats.hv_datasets_count == 1 else _('High value datasets'), h.url_for('dataset.search', hvd_category="")) }#}
+            {{ render_card(stats.datasets.icon, h.get_hv_datasets(), _('High value dataset') if stats.hv_datasets_count == 1 else _('High value datasets'), h.url_for('dataset.search', hvd="hvd")) }}
 
             {{ render_card(stats.organizations.icon, stats.organizations.stat_count, _('Organization') if stats.organization_count == 1 else _('Organizations'), h.url_for('organization.index')) }}
             

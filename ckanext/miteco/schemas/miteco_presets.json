@@ -28,6 +28,14 @@
       }
     },
     {
+      "preset_name": "miteco_hvd",
+      "values": {
+        "form_snippet": null,
+        "display_snippet": null,
+        "validators": "default(non_hvd)"
+      }
+    },
+    {
       "preset_name": "miteco_multiple_text_raws_ordered",
       "values": {
         "form_snippet": "schemingdcat/form_snippets/multiple_text.html",

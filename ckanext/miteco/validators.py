@@ -60,13 +60,13 @@ def miteco_internal_identifier(field, schema):
         # Check if the identifier already exists
         existing_identifier = data.get(('miteco_identifier', ))
         if existing_identifier:
-            #log.debug('Existing identifier found: %s', existing_identifier)
+            ##log.debug('Existing identifier found: %s', existing_identifier)
             return
         
         hvd_category = data.get(('hvd_category', ))
         theme_es = data.get(('theme_es', ))
         dataset_scope = data.get(('dataset_scope', ))
-        #log.debug('hvd_category: %s, theme_es: %s and dataset_scope: %s', hvd_category, theme_es, dataset_scope)
+        ##log.debug('hvd_category: %s, theme_es: %s and dataset_scope: %s', hvd_category, theme_es, dataset_scope)
         
         # Tipo de dato
         tipo_dato = next((item['miteco_id_code'] for item in miteco_identifier_schema['miteco_id_tipo-dato'] if item['id'] == 'hvd_category'), '00')
@@ -114,7 +114,7 @@ def miteco_internal_identifier(field, schema):
             
             identifier = f"{str(tipo_dato).zfill(1)}-{str(area).zfill(2)}-{str(categoria).zfill(1)}-{str(subarea).zfill(2)}-{prefix}{str(dataset_code).zfill(4)}"
         
-        #log.debug('miteco_identifier: %s', identifier)
+        ##log.debug('miteco_identifier: %s', identifier)
         
         # Assign the identifier to the key
         data[key] = identifier
@@ -182,10 +182,33 @@ def miteco_miteco_dataset_type_hvd_dataset(field, schema):
     """
     def validator(key, data, errors, context):
         hvd_category = data.get(key)
+        #log.debug("key: %s",key)
+        #log.debug("Texto de algún tipo = %s", data)
         miteco_dataset_type = data.get(('miteco_dataset_type', ))
+        
+        hvd = "hvd"
         
         # Only set hvd_category if dataset type is in the HVD list
         if miteco_dataset_type in MITECO_DEFAULT_GENERAL_TYPE_HVDS:
+            if hvd in data.values():
+            #    log.debug("HVD ENCONTRADO")
+            #    claves = [k for k, v in data.items() if v == hvd]
+            #    log.debug("Data de alto valor = %s", claves)
+            #    log.debug("Data de alto valor2 = %s", claves[0][1])
+            #    num_extra = claves[0][1]
+            #    data['extras', num_extra, 'value'] = "hvd"
+            #    #data[claves(0)] = "hvd"
+                try:
+                    for a, value in data.items():
+                        if value == 'hvd' and len(a) == 3:
+                            #log.debug("value of a: %s",a)
+                            num_hvd = a[1]
+                            data['extras', num_hvd, 'value'] = "hvd"
+                            #log.debug("Data de alto valor = %s", num_hvd)    
+                            break   
+                except:
+                    pass
+            
             if miteco_dataset_type == MITECO_INSPIRE_GENERAL_TYPE:
                 data[key] = INSPIRE_HVD_CATEGORY
             else:
@@ -202,7 +225,7 @@ def miteco_miteco_dataset_type_hvd_dataset(field, schema):
                     data[applicable_legislation_key] = [DCAT_AP_HVD_CATEGORY_LEGISLATION]
         # If not an HVD dataset type and hvd_category is empty, leave it as None
         # (no action needed as we're not modifying data[key])
-
+        #log.debug("Texto de algún tipo post = %s", data)
     return validator
 
 @scheming_validator
