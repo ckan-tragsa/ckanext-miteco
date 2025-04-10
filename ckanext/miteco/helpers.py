@@ -57,7 +57,7 @@ def miteco_get_high_value_data_statistics():
 
     # Retrieve the statistics list from the action
     stats_list = sh.schemingdcat_get_theme_statistics(theme_field="hvd_category",icons_dir="/images/icons/hvd_category/")
-    log.debug('stats_list : %s',stats_list)
+    #log.debug('stats_list : %s',stats_list)
     # Convert the list of dictionaries to a summarized dictionary
     for stat in stats_list:
         stat_id = _hvd_mapping[stat['value']]['en']
@@ -100,7 +100,7 @@ def get_hv_datasets(count=10, return_count=True):
     context = {'model': model, 'session': model.Session}
     result = logic.get_action('package_search')(context, search_dict)
     
-    log.debug('result : %s',result)
+    #log.debug('result : %s',result)
     if return_count:
         return result['count']
     else:
