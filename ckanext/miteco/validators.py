@@ -18,6 +18,8 @@ from ckanext.miteco.config import (
     
 )
 
+from ckan.lib.navl.dictization_functions import Missing
+
 log = logging.getLogger(__name__)
 
 all_validators = {}
@@ -189,26 +191,7 @@ def miteco_miteco_dataset_type_hvd_dataset(field, schema):
         hvd = "hvd"
         
         # Only set hvd_category if dataset type is in the HVD list
-        if miteco_dataset_type in MITECO_DEFAULT_GENERAL_TYPE_HVDS:
-            if hvd in data.values():
-            #    log.debug("HVD ENCONTRADO")
-            #    claves = [k for k, v in data.items() if v == hvd]
-            #    log.debug("Data de alto valor = %s", claves)
-            #    log.debug("Data de alto valor2 = %s", claves[0][1])
-            #    num_extra = claves[0][1]
-            #    data['extras', num_extra, 'value'] = "hvd"
-            #    #data[claves(0)] = "hvd"
-                try:
-                    for a, value in data.items():
-                        if value == 'hvd' and len(a) == 3:
-                            #log.debug("value of a: %s",a)
-                            num_hvd = a[1]
-                            data['extras', num_hvd, 'value'] = "hvd"
-                            #log.debug("Data de alto valor = %s", num_hvd)    
-                            break   
-                except:
-                    pass
-            
+        if miteco_dataset_type in MITECO_DEFAULT_GENERAL_TYPE_HVDS:        
             if miteco_dataset_type == MITECO_INSPIRE_GENERAL_TYPE:
                 data[key] = INSPIRE_HVD_CATEGORY
             else:
@@ -225,7 +208,17 @@ def miteco_miteco_dataset_type_hvd_dataset(field, schema):
                     data[applicable_legislation_key] = [DCAT_AP_HVD_CATEGORY_LEGISLATION]
         # If not an HVD dataset type and hvd_category is empty, leave it as None
         # (no action needed as we're not modifying data[key])
-        #log.debug("Texto de algún tipo post = %s", data)
+        claves = [data.get(('hvd_category', ))]
+        if all(not isinstance(x, Missing) for x in claves):
+            for a, value in data.items():
+                if value == 'hvd' and len(a) == 3:
+                    num_hvd = a[1]
+                    data['extras', num_hvd, 'value'] = "hvd"
+        else:
+            for a, value in data.items():
+                if value == 'hvd' and len(a) == 3:
+                    num_hvd = a[1]
+                    data['extras', num_hvd, 'value'] = "non_hvd"
     return validator
 
 @scheming_validator
