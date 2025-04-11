@@ -846,6 +846,26 @@ ul.logo_miteco_blanco li img{margin: 0em 0 1em 0; width: 300px;}
     }
 }
 
+/*tags*/
+
+#tagList{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+/**************************css para footer***************************/
+.footer-socicons_miteco{
+    justify-content: flex-end;
+}
+
+
+
+/**************************css para footer***************************/
+.footer-socicons_miteco{
+    justify-content: flex-end;
+}
 /**************************css para iconos***************************/
 @font-face {
     font-display: block;

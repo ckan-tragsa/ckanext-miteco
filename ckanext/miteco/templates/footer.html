@@ -35,33 +35,36 @@
                 <li><a href="http://www.opendefinition.org/okd/"><img src="{{ h.url_for_static('/base/images/od_80x15_blue.png') }}" alt="Open Data"></a></li>
               </ul>#}
             </div>
-          {% endblock %}
-        </div>
-        <div class="col-md-4 attribution d-flex flex-column align-items-start">
-          {% block footer_attribution %}
-            {#<div class="footer-powered-ckan">
-              <p>{% trans %}<strong>Powered by</strong> <a class="hide-text ckan-footer-logo" href="http://ckan.org">CKAN</a>{% endtrans %}</p>
-            </div>#}
-          {% endblock %}
-          {% block footer_social %}
-          {% set social = h.schemingdcat_get_social_links() %}
-            <div class="footer-socicons">
-                <a href="{{ h.url_for_static_or_external('https://www.instagram.com/miteco.gob/') }}" class="icon-button">
-                    <span class="ficon-instagram"></span>
-                </a>
-                <a href="{{ h.url_for_static_or_external(social.x) }}" class="icon-button">
-                  <span class="ficon-twitter-x"></span>
-                </a>
-                <a href="{{ h.url_for_static_or_external('https://www.facebook.com/profile.php?id=100086412188137') }}" class="icon-button">
-                  <span class="ficon-facebook"></span>
-                </a>
-                <a href="{{ h.url_for_static_or_external(social.linkedin) }}" class="icon-button">
-                  <span class="ficon-linkedin"></span>
-                </a>
+            <div class="col-md-4 attribution d-flex flex-column align-items-start">
+              {% block footer_attribution %}
+                {#<div class="footer-powered-ckan">
+                  <p>{% trans %}<strong>Powered by</strong> <a class="hide-text ckan-footer-logo" href="http://ckan.org">CKAN</a>{% endtrans %}</p>
+                </div>#}
+              {% endblock %}
+              {% block footer_social %}
+              {% set social = h.schemingdcat_get_social_links() %}
+                <div class="footer-socicons footer-socicons_miteco">
+                    <a href="{{ h.url_for_static_or_external('https://www.instagram.com/miteco.gob/') }}" class="icon-button">
+                        <span class="ficon-instagram"></span>
+                    </a>
+                    <a href="{{ h.url_for_static_or_external(social.x) }}" class="icon-button">
+                      <span class="ficon-twitter-x"></span>
+                    </a>
+                    <a href="{{ h.url_for_static_or_external('https://www.facebook.com/profile.php?id=100086412188137') }}" class="icon-button">
+                      <span class="ficon-facebook"></span>
+                    </a>
+                    <!-- <a href="{{ h.url_for_static_or_external(social.linkedin) }}" class="icon-button">
+                      <span class="ficon-linkedin"></span>
+                    </a> -->
+                </div>
+              {% endblock %}
             </div>
           {% endblock %}
         </div>
+        
       </div>
-      {% endblock %}
+      
     </div>
-  </footer>
+    {% endblock %}
+  </div>
+</footer>
