@@ -9,6 +9,8 @@ import ckan.authz as authz
 from ckan import model
 import ckan.logic as logic
 import ckanext.schemingdcat.helpers as sh
+import ckanext.hierarchy.helpers as hh
+from ckan.common import request
 
 log = logging.getLogger(__name__)
 
@@ -120,3 +122,77 @@ def miteco_get_tags():
     """
 
     return logic.get_action('tag_list')()
+
+@helper
+def group_tree_miteco(organizations=[], type_='organization'):
+    full_tree_list = p.toolkit.get_action('group_tree')({}, {'type': type_})
+
+    # Añadir lógica de ordenación basada en 'title asc/desc'
+    sort = request.params.get('sort', 'title asc').strip().lower()
+    reverse = sort == 'title desc'
+    def sort_nodes(nodes):
+        sorted_nodes = sorted(
+            nodes,
+            key=lambda n: n.get('name', '').lower(),
+            reverse=reverse
+        )
+        for node in sorted_nodes:
+            if node.get('children'):
+                node['children'] = sort_nodes(node['children'])
+        return sorted_nodes
+
+    if not organizations:
+        return sort_nodes(full_tree_list)
+    else:
+        filtered_tree_list = group_tree_filter_miteco(organizations, full_tree_list)
+        return sort_nodes(filtered_tree_list)
+    
+@helper   
+def group_tree_highlight_miteco(organizations, group_tree_list):
+    selected_names = {o.get('name', None) for o in organizations if o.get('name')}
+
+    def traverse_and_mark(node):
+        # Recorremos hijos primero (postorden)
+        matched = node.get('name') in selected_names
+        highlighted_child = False
+
+        children = node.get('children', [])
+        for child in children:
+            if traverse_and_mark(child):
+                highlighted_child = True
+
+        # Marcar el nodo si coincide directamente o algún hijo lo hace
+        node['highlighted'] = matched or highlighted_child
+        return node['highlighted']
+
+    # Aplicamos sobre el árbol completo
+    for top_node in group_tree_list:
+        traverse_and_mark(top_node)
+
+    return group_tree_list
+
+@helper
+def group_tree_filter_miteco(organizations, group_tree_list, highlight=False):
+    # this method leaves only the sections of the tree corresponding to the
+    # list since it was developed for the users, all children organizations
+    # from the organizations in the list are included
+    def traverse_select_highlighted(group_tree, selection=[], highlight=False):
+        # add highlighted branches to the filtered tree
+        if group_tree['highlighted']:
+            # add to the selection and remove highlighting if necessary
+            if highlight:
+                selection += [group_tree]
+            else:
+                selection += hh.group_tree_highlight([], [group_tree])
+        else:
+            # check if there is any highlighted child tree
+            for child in group_tree.get('children', []):
+                traverse_select_highlighted(child, selection)
+
+    filtered_tree = []
+    # first highlights all the organizations from the list in the three
+    for group in hh.group_tree_highlight(organizations, group_tree_list):
+        traverse_select_highlighted(group, filtered_tree, highlight)
+
+    return filtered_tree
+
