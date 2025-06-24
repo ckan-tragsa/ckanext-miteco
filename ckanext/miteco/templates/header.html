@@ -19,8 +19,6 @@
     (dataset_type ~ '.search', h.humanize_entity_type('package', dataset_type, 'main nav') or _('Datasets'), ["dataset", "resource"]),
     (org_type ~ '.index',
       h.humanize_entity_type('organization', org_type, 'main nav') or _('Organizations'), ['organization']),
-    (group_type ~ '.index',
-      h.humanize_entity_type('group', group_type, 'main nav') or _('Groups'), ['group']),
     ('home.about', _('About')) ,
     ('openapi.openapi_index', _('OpenAPI')) 
     ) }}
