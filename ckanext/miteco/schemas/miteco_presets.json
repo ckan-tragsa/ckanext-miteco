@@ -49,7 +49,16 @@
       "values": {
         "form_snippet": "schemingdcat/form_snippets/multiple_text.html",
         "display_snippet": "schemingdcat/display_snippets/list_links.html",
-        "validators": "not_empty scheming_required schemingdcat_multiple_text",
+        "validators": "not_empty scheming_required schemingdcat_multiple_text"
+      }
+    },
+    {
+      "preset_name": "miteco_multiple_text_var",
+      "values": {
+        "form_snippet": "schemingdcat/form_snippets/multiple_text.html",
+        "display_snippet": "schemingdcat/display_snippets/list_links.html",
+        "validators": "schemingdcat_multiple_text",
+        "after_validators": "miteco_save_as_string",
         "output_validators": "scheming_load_json"
       }
     },

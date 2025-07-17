@@ -1,0 +1,10 @@
+{#
+  Render a markdown of variables
+#}
+
+{% set _class = _class or 'var-list' %}
+{% set choices = data[field.field_name] %}
+
+{% block values %}
+    {{{{ h.render_markdown(choices) }}}}
+{% endblock %}
