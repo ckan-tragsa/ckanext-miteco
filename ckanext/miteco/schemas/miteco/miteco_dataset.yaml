@@ -2772,6 +2772,168 @@ dataset_fields:
     value: http://publications.europa.eu/resource/authority/frequency/TRIDECENNIAL
   form_group_id: temporal_info
 
+  # Update frequency (O)
+- field_name: data_frequency
+  label:
+    en: Data collection frequency
+    es: Frecuencia de recogida de datos
+  preset: select
+  display_snippet: schemingdcat/display_snippets/link_schema.html
+  sorted_choices: False
+  choices:
+  - label:
+      en: Provisional data
+      es: Datos provisionales
+    value: http://publications.europa.eu/resource/authority/frequency/OP_DATPRO
+  - label:
+      en: Annual
+      es: Anual
+    value: http://publications.europa.eu/resource/authority/frequency/ANNUAL
+  - label:
+      en: Semiannual
+      es: Semestral
+    value: http://publications.europa.eu/resource/authority/frequency/ANNUAL_2
+  - label:
+      en: Three times a year
+      es: Cuatrimestral
+    value: http://publications.europa.eu/resource/authority/frequency/ANNUAL_3
+  - label:
+      en: Biennial
+      es: Bienal
+    value: http://publications.europa.eu/resource/authority/frequency/BIENNIAL
+  - label:
+      en: Bimonthly
+      es: Bimestral
+    value: http://publications.europa.eu/resource/authority/frequency/BIMONTHLY
+  - label:
+      en: Biweekly
+      es: Quincenal
+    value: http://publications.europa.eu/resource/authority/frequency/BIWEEKLY
+  - label:
+      en: Continuous
+      es: Continuo
+    value: http://publications.europa.eu/resource/authority/frequency/CONT
+  - label:
+      en: Daily
+      es: Diario
+    value: http://publications.europa.eu/resource/authority/frequency/DAILY
+  - label:
+      en: Twice a day
+      es: Dos veces al día
+    value: http://publications.europa.eu/resource/authority/frequency/DAILY_2
+  - label:
+      en: Irregular
+      es: Irregular
+    value: http://publications.europa.eu/resource/authority/frequency/IRREG
+  - label:
+      en: Monthly
+      es: Mensual
+    value: http://publications.europa.eu/resource/authority/frequency/MONTHLY
+  - label:
+      en: Semimonthly
+      es: Bimensual
+    value: http://publications.europa.eu/resource/authority/frequency/MONTHLY_2
+  - label:
+      en: Three times a month
+      es: Tres veces por mes
+    value: http://publications.europa.eu/resource/authority/frequency/MONTHLY_3
+  - label:
+      en: Never
+      es: Nunca
+    value: http://publications.europa.eu/resource/authority/frequency/NEVER
+  - label:
+      en: Quarterly
+      es: Trimestral
+    value: http://publications.europa.eu/resource/authority/frequency/QUARTERLY
+  - label:
+      en: Triennial
+      es: Trienal
+    value: http://publications.europa.eu/resource/authority/frequency/TRIENNIAL
+  - label:
+      en: Unknown
+      es: Desconocida
+    value: http://publications.europa.eu/resource/authority/frequency/UNKNOWN
+  - label:
+      en: Continuously updated
+      es: Continuamente actualizado
+    value: http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT
+  - label:
+      en: Semiweekly
+      es: Bisemanal
+    value: http://publications.europa.eu/resource/authority/frequency/WEEKLY_2
+  - label:
+      en: Three times a week
+      es: Tres veces por semana
+    value: http://publications.europa.eu/resource/authority/frequency/WEEKLY_3
+  - label:
+      en: Quinquennial
+      es: Cada cinco años
+    value: http://publications.europa.eu/resource/authority/frequency/QUINQUENNIAL
+  - label:
+      en: Decennial
+      es: Cada diez años
+    value: http://publications.europa.eu/resource/authority/frequency/DECENNIAL
+  - label:
+      en: Hourly
+      es: Cada hora
+    value: http://publications.europa.eu/resource/authority/frequency/HOURLY
+  - label:
+      en: Quadrennial
+      es: Cada cuatro años
+    value: http://publications.europa.eu/resource/authority/frequency/QUADRENNIAL
+  - label:
+      en: Bihourly
+      es: Cada dos horas
+    value: http://publications.europa.eu/resource/authority/frequency/BIHOURLY
+  - label:
+      en: Trihourly
+      es: Cada tres horas
+    value: http://publications.europa.eu/resource/authority/frequency/TRIHOURLY
+  - label:
+      en: Bidecennial
+      es: Cada veinte años
+    value: http://publications.europa.eu/resource/authority/frequency/BIDECENNIAL
+  - label:
+      en: Tridecennial
+      es: Cada treinta años
+    value: http://publications.europa.eu/resource/authority/frequency/TRIDECENNIAL
+  form_group_id: temporal_info
+
+# Next release (O)
+- field_name: next_release
+  label: 
+    en: Next release
+    es: Siguiente actualización
+  preset: date
+  display_snippet: miteco/display_snippets/miteco_calendar.html
+  form_group_id: temporal_info
+
+# Study variables (O)
+- field_name: study_variables
+  label: 
+    en: Study variables
+    es: Variables de estudio
+  preset: schemingdcat_fluent_markdown
+  help_text:
+    en: 'Variables that are studied on the dataset'
+    es: 'Variables que se estudian en el dataset'
+  form_languages: ["es", "en"]
+  help_allow_html: True
+  form_group_id: miteco_quality
+
+  # Classification variables (O)
+- field_name: classification_variables
+  label: 
+    en: classification variables
+    es: Variables de clasificación
+  preset: schemingdcat_fluent_markdown
+  help_text:
+    en: 'Variables that are used to clasify data on the dataset'
+    es: 'Variables que se usan para clasificar datos en el dataset'
+  form_languages: ["es", "en"]
+  help_allow_html: True
+  form_group_id: miteco_quality
+
 # Source dataset (C)
 - field_name: source
   label: 

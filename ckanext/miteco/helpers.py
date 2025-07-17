@@ -1,6 +1,8 @@
 import json
 import logging
 import typing
+import datetime
+import calendar
 from functools import lru_cache
 
 import ckan.lib.helpers as h
@@ -196,3 +198,12 @@ def group_tree_filter_miteco(organizations, group_tree_list, highlight=False):
 
     return filtered_tree
 
+@helper 
+def miteco_get_calendar(datestr):
+    try:
+        date = datetime.date.fromisoformat(datestr)
+        cal = calendar.Calendar()
+        log.debug(cal.monthdayscalendar(date.year,date.month))
+        return [date.day, cal.monthdayscalendar(date.year,date.month),date.strftime("%Y-%m")]
+    except:
+        return None
