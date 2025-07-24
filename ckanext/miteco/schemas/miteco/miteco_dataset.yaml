@@ -1794,6 +1794,18 @@ dataset_fields:
   form_languages: ["es", "en"]
   form_group_id: miteco_coverage
 
+# (O) MITECO Schema: Territory of interest
+- field_name: miteco_data_territory
+  label:
+    en: Territory of interest
+    es: Ámbito territorial
+  preset: schemingdcat_fluent_markdown
+  help_text: 
+    en: The definition or the characteristics of the elements of the territory for which the information is provided by the source.
+    es: Definición o características de los elementos del territorio para los que la fuente proporciona la información.
+  form_languages: ["es", "en"]
+  form_group_id: miteco_coverage
+
 # (M) Dataset abstract translated (M)
 - field_name: notes_translated
   label: 
@@ -2903,7 +2915,7 @@ dataset_fields:
 - field_name: next_release
   label: 
     en: Next release
-    es: Siguiente actualización
+    es: Próxima actualización
   preset: date
   display_snippet: miteco/display_snippets/miteco_calendar.html
   form_group_id: temporal_info
