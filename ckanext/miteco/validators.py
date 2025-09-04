@@ -1,5 +1,6 @@
 import logging
 import uuid
+from urllib.parse import urlparse
 
 import ckan.plugins as p
 from ckan.common import _
@@ -225,3 +226,17 @@ def miteco_miteco_dataset_type_hvd_dataset(field, schema):
 @validator
 def miteco_miteco_contact_point(field, schema):
     pass
+
+@scheming_validator
+@validator
+def miteco_miteco_dataset_ogc_normalize(field, schema):
+    """
+    Validator to detect OGC services and rewrite the URL to point towards GetCapabilities request
+    """
+    def validator(key, data, errors, context):
+        format = data[(key[0],key[1],'format')].upper()
+        if format in ["WMS","WFS","WMTS","WCS","WPS"]:
+            url = urlparse(data[key])
+            data[key] = url.scheme+"://"+url.netloc+url.path+"?request=GetCapabilities&service="+format
+        
+    return validator

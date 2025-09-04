@@ -4150,7 +4150,7 @@ resource_fields:
   label:
     en: Access URL
     es: URL de acceso
-  validators: schemingdcat_access_url_if_empty_same_as_url unicode_safe
+  validators: schemingdcat_access_url_if_empty_same_as_url unicode_safe miteco_miteco_dataset_ogc_normalize
   form_snippet: null
   display_property: dcat:accessURL
   display_snippet: schemingdcat/display_snippets/link.html
