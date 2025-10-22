@@ -2781,6 +2781,10 @@ dataset_fields:
       es: Continuamente actualizado
     value: http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT
   - label:
+      en: Weekly
+      es: Semanal
+    value: http://publications.europa.eu/resource/authority/frequency/WEEKLY
+  - label:
       en: Semiweekly
       es: Bisemanal
     value: http://publications.europa.eu/resource/authority/frequency/WEEKLY_2
@@ -2822,7 +2826,7 @@ dataset_fields:
     value: http://publications.europa.eu/resource/authority/frequency/TRIDECENNIAL
   form_group_id: temporal_info
 
-  # Update frequency (O)
+  # data frequency (O)
 - field_name: data_frequency
   label:
     en: Data collection frequency
@@ -2907,6 +2911,10 @@ dataset_fields:
       en: Continuously updated
       es: Continuamente actualizado
     value: http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT
+  - label:
+      en: Weekly
+      es: Semanal
+    value: http://publications.europa.eu/resource/authority/frequency/WEEKLY
   - label:
       en: Semiweekly
       es: Bisemanal
