@@ -1828,8 +1828,8 @@ dataset_fields:
 ## Recommended  (GeoDCAT-AP)  / INSPIRE Mandatory as topic
 - field_name: topic
   label: 
-    en: ISO 19115 topic category
-    es: Categoría temática ISO 19115
+    en: ISO 19115 topic category (inspire)
+    es: Categoría temática ISO 19115 (inspire)
   preset: select_not_empty
   display_property: dcat:keyword
   display_snippet: schemingdcat/display_snippets/link_schema.html
@@ -1837,43 +1837,81 @@ dataset_fields:
   required: True
   sorted_choices: True
   choices:
-  - label: biota
+  - label: 
+      es: Biota
+      en: Biota
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/biota
-  - label: boundaries
+  - label: 
+      es: Limites
+      en: Boundaries
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/boundaries
-  - label: climatologyMeteorologyAtmosphere
+  - label: 
+      es: Atmósfera climatológica y meteorológica
+      en: Climatology / Meteorology / Atmosphere
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/climatologyMeteorologyAtmosphere
-  - label: economy
+  - label: 
+      es: Economía
+      en: Economy
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/economy
-  - label: elevation
+  - label: 
+      es: Elevación
+      en: Elevation
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/elevation
-  - label: environment
+  - label: 
+      es: Medio ambiente
+      en: Environment
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/environment
-  - label: farming
+  - label: 
+      es: Agricultura
+      en: Farming
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/farming
-  - label: geoscientificInformation
+  - label: 
+      es: Información geocientífica
+      en: Geoscientific Information
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/geoscientificInformation
-  - label: health
+  - label: 
+      es: Salud
+      en: Health
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/health
-  - label: imageryBaseMapsEarthCover
+  - label: 
+      es: Cobertura de la Tierra con mapas básicos e imágenes
+      en: Imagery / Base Maps / Earth Cover
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/imageryBaseMapsEarthCover
-  - label: inlandWaters
+  - label: 
+      es: Aguas interiores
+      en: Inland Waters
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/inlandWaters
-  - label: intelligenceMilitary
+  - label: 
+      es: Inteligencia militar
+      en: Intelligence / Military
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/intelligenceMilitary
-  - label: location
+  - label: 
+      es: Localización
+      en: Location
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/location
-  - label: oceans
+  - label: 
+      es: Océanos
+      en: Oceans
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/oceans
-  - label: planningCadastre
+  - label: 
+      es: Planeamiento catastral
+      en: Planning / Cadastre
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/planningCadastre
-  - label: society
+  - label: 
+      es: Sociedad
+      en: Society
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/society
-  - label: structure
+  - label: 
+      es: Estructura
+      en: Structure
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/structure
-  - label: transportation
+  - label: 
+      es: Transporte
+      en: Transportation
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/transportation
-  - label: utilitiesCommunication
+  - label: 
+      es: Redes de suministro
+      en: Utilities / Communication
     value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/utilitiesCommunication
   help_text:
     en: 'e.g. Labels from <a href="http://inspire.ec.europa.eu/metadata-codelist" target="_blank" rel="noopener">Metadata code list register</a> (INSPIRE)'

@@ -2,7 +2,7 @@
 'notes_translated', 'tag_string', 'license_id', 'owner_org', 'graphic_overview',
 'access_rights', 'publisher_uri', 'publisher_name', 'publisher_identifier',
 'publisher_url', 'publisher_email', 'publisher_type', 'contact_uri',
-'contact_name', 'contact_email', 'contact_url', 'reference', 'author', 'maintainer' ] %} {# MD Fields #}
+'contact_name', 'contact_email', 'contact_url', 'reference', 'maintainer' ] %} {# MD Fields #}
 {# Basic info: Sublist #} {% set basic = [ 'dcat_type', 'created', 'issued',
 'modified', 'next_release', 'identifier', 'language', 'theme_es', 'theme_eu','hvd_category', 'topic', ] %} {%
 set basic_toggle = [ 'alternate_identifier', 'tag_uri', 'encoding', 'study_variables', 'classification_variables'] %} {#
@@ -13,9 +13,8 @@ spatial_toggle = [ 'spatial', 'spatial_uri', 'spatial_resolution_in_meters', 'mi
 'metadata_profile', 'applicable_legislation'] %} {% set provenance_toggle = [ 'conforms_to', 'source',
 'reference', 'frequency', 'data_frequency', 'lineage_source', 'purpose', 'lineage_process_steps',
 'temporal_start', 'temporal_end', 'version_notes', 'version', 'valid', ] %} {#
-Provenance info: Sublist #} {% set responsible_party = [ 'author_name', 'maintainer_name',
-] %} {% set responsible_party_toggle = [ 'author_uri', 'author_email',
-'author_url', 'maintainer_uri', 'maintainer_email', 'maintainer_url', ] %} {%
+Provenance info: Sublist #} {% set responsible_party = ['maintainer_name',
+] %} {% set responsible_party_toggle = ['maintainer_uri', 'maintainer_email', 'maintainer_url', ] %} {%
 set dataset_fields = schema.dataset_fields %} {% set metadata_fields = {} %} {%
 for field in dataset_fields if field.field_name not in exclude_fields %} {% set
 _ = metadata_fields.update({field.field_name: field}) %} {% endfor %}
