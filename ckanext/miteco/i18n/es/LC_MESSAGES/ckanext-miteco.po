@@ -90,8 +90,8 @@ msgid "INSPIRE theme categories"
 msgstr "Categorías temáticas INSPIRE"
 
 #: ckanext/miteco/templates/home/snippets/search.html:3
-msgid "E.g. environment"
-msgstr "E.j. ambiente"
+msgid "Term to search in the catalog"
+msgstr "Término a buscar dentro del catálogo"
 
 #: ckanext/miteco/templates/home/snippets/search.html:5
 msgid "Open Data Catalog"

@@ -85,7 +85,7 @@ msgid "INSPIRE theme categories"
 msgstr ""
 
 #: ckanext/miteco/templates/home/snippets/search.html:3
-msgid "E.g. environment"
+msgid "Term to search in the catalog"
 msgstr ""
 
 #: ckanext/miteco/templates/home/snippets/search.html:5
