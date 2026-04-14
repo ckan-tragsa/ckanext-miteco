@@ -55,7 +55,7 @@
         },
         {
           "field_name": "identifier",
-          "label": {
+          "label": { 
             "en": "Identifier of the publisher",
             "es": "Identificador del publicador"
           },

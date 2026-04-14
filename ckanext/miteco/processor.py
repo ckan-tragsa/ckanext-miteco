@@ -1,11 +1,9 @@
+
 import dateutil.parser
 from dateutil.tz import tzutc
 from feedgen.feed import FeedGenerator
 from datetime import datetime
 import re
-import logging
-
-log = logging.getLogger(__name__)
 
 INVALID_XML_RE = re.compile(
     r"[\x00-\x08\x0B\x0C\x0E-\x1F]"
@@ -32,6 +30,7 @@ def build_entry_id(pkg: dict, site_url: str) -> str:
     return pkg.get("url") if pkg.get("url") else f"{site_url}/dataset/{pkg['name']}"
 
 
+
 class AtomSerializer:
     def __init__(self):
         pass
@@ -45,9 +44,6 @@ class AtomSerializer:
             fe = fg.add_entry()
 
             resource_url = r["url"]
-
-            for tag in dataset_dict.get("tags", []):
-                fe.category(term=tag.get("name"))
 
             # ID = link de descarga
             fe.id(resource_url)
@@ -81,28 +77,12 @@ class AtomSerializer:
     def _add_dataset_entry(self, fg, dataset_dict, site_url):
 
         fe = fg.add_entry()
-
-        if dataset_dict.get("inspire_code"):
-            fe.extension_element(
-                "spatial_dataset_identifier_code",
-                dataset_dict["inspire_code"],
-                namespace="inspire_dls"
-            )
-
-        if dataset_dict.get("inspire_namespace"):
-            fe.extension_element(
-                "spatial_dataset_identifier_namespace",
-                dataset_dict["inspire_namespace"],
-                namespace="inspire_dls"
-            )
-
         dataset_feed_url = f"{site_url}/catalogo/miteco/dataset/{dataset_dict['name']}.atom"
-
-        for tag in dataset_dict.get("tags", []):
-            fe.category(term=tag.get("name"))
+    
 
         # ID
         fe.id(dataset_feed_url)
+
 
         # Link al atom del dataset
         fe.link(
@@ -134,15 +114,19 @@ class AtomSerializer:
         if dataset_dict.get("notes"):
             fe.summary(clean_xml_text(dataset_dict["notes"]))
 
+    
+                
+
+
 
     def serialize_dataset(self, dataset_dict, site_url):
         fg = FeedGenerator()
 
         dataset_feed_url = f"{site_url}/catalogo/miteco/dataset/{dataset_dict['name']}.atom"
+
         dataset_url = f"{site_url}/catalogo/dataset/{dataset_dict['name']}"
+    
         catalog_url = f"{site_url}/catalogo/miteco/catalog.atom"
-
-
 
         # ID → atom del dataset
         fg.id(dataset_feed_url)
@@ -190,8 +174,7 @@ class AtomSerializer:
         fg = FeedGenerator()
 
         catalog_url = catalog_dict.get("url") or site_url
-
-
+    
         fg.id(catalog_url)
         fg.title(catalog_dict.get("title", "Catalog ATOM"))
         fg.link(href=f"{catalog_url}/catalogo/miteco/catalog.atom", rel="self")
@@ -203,3 +186,4 @@ class AtomSerializer:
                 self._add_dataset_entry(fg, dataset_dict, site_url)
 
         return fg.atom_str(pretty=True)
+ 

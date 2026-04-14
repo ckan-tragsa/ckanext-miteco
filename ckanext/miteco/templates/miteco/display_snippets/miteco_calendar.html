@@ -1,0 +1,37 @@
+{#
+  Render a list of variables
+
+  values - list of cleaned values
+#}
+
+{% set _class = _class or 'var-list' %}
+
+{% block values %}
+    {% if data[field.field_name] is string %}
+    {% set calendar = h.miteco_get_calendar(data[field.field_name])  %}
+    <div class="calendar">
+        <div class="title">
+            {{calendar[2]}}
+        </div>
+        <div>
+        {% for week in calendar[1] %}
+            {% for day in week %}
+                {% if day==calendar[0] %}
+                <div class="highlight">
+                    {{ day }}
+                </div>
+                {% elif day==0 %}
+                <div class="placeholder">
+
+                </div>
+                {% else %}
+                <div>
+                    {{ day }}
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+        </div>       
+    </div>
+    {% endif %}
+{% endblock %}
