@@ -1,0 +1,28 @@
+{% ckan_extends %}
+
+{% block data_preview %}
+{# Obtenemos el recurso actual para evaluar su tipo.
+Dependiendo del contexto de la plantilla, puede llamarse 'res' o 'resource' #}
+{% set current_res = res | default(resource) %}
+
+{# Comprobamos que el formato no sea HTML (ignorando mayúsculas/minúsculas) #}
+{% set is_html = (current_res.format|lower in ['html', 'htm'] or current_res.mimetype == 'text/html') %}
+
+{% if not is_html %}
+{# Si NO es HTML, llamamos a super() para que renderice todo el bloque original
+(las pestañas y el iframe) tal y como lo hacía antes #}
+{{ super() }}
+{% else %}
+{# Si ES HTML, reemplazamos el previsualizador por un mensaje amigable #}
+<div class="module-content">
+    <div class="data-viewer-info"
+        style="padding: 20px; text-align: center; background-color: #f9f9f9; border-radius: 4px;">
+        <p class="text-muted" style="margin: 0;">
+            <i class="fa fa-info-circle"></i>
+            {{ _("La previsualización integrada no está disponible para recursos HTML por motivos de seguridad y
+            visualización. Por favor, utiliza el botón superior de 'Ir al recurso' para acceder a la página web.") }}
+        </p>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
