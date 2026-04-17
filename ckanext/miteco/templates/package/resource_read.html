@@ -12,17 +12,6 @@ Dependiendo del contexto de la plantilla, puede llamarse 'res' o 'resource' #}
 {# Si NO es HTML, llamamos a super() para que renderice todo el bloque original
 (las pestañas y el iframe) tal y como lo hacía antes #}
 {{ super() }}
-{% else %}
-{# Si ES HTML, reemplazamos el previsualizador por un mensaje amigable #}
-<div class="module-content">
-    <div class="data-viewer-info"
-        style="padding: 20px; text-align: center; background-color: #f9f9f9; border-radius: 4px;">
-        <p class="text-muted" style="margin: 0;">
-            <i class="fa fa-info-circle"></i>
-            {{ _("La previsualización integrada no está disponible para recursos HTML por motivos de seguridad y
-            visualización. Por favor, utiliza el botón superior de 'Ir al recurso' para acceder a la página web.") }}
-        </p>
-    </div>
-</div>
 {% endif %}
+{# Al no haber un {% else %}, si el recurso es HTML este bloque se quedará vacío y no se mostrará nada #}
 {% endblock %}
