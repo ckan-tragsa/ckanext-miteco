@@ -1678,7 +1678,8 @@ dataset_fields:
     es: Fecha de última modificación
   display_snippet: schemingdcat/display_snippets/last_update.html
   display_property: dct:modified
-  preset: date_modified
+  form_snippet: null
+  validators: miteco_preserve_date_modified scheming_required isodate convert_to_json_if_date
   form_group_id: identification
 
 # MITECO Schema: file identifier (M)
@@ -4328,7 +4329,8 @@ resource_fields:
     en: Date of last revision
     es: Fecha de última modificación
   display_property: dct:modified
-  preset: date_modified
+  form_snippet: null
+  validators: miteco_preserve_date_modified scheming_required isodate convert_to_json_if_date
   form_group_id: resource_identification
 
 # Resource character encoding (C)

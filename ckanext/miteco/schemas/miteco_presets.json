@@ -79,6 +79,16 @@
         "validators": "not_empty scheming_required schemingdcat_fill_spatial_uri_dependent_fields"
       }
     },
+          
+    {     
+      "preset_name": "date_modified",     
+      "values": {     
+        "form_snippet": null,     
+        "display_snippet": "schemingdcat/display_snippets/date_localised.html",     
+        "validators": "miteco_preserve_date_modified scheming_required isodate convert_to_json_if_date"     
+      }     
+    },
+        
     {
       "preset_name": "required_date",
       "values": {
