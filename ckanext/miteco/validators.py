@@ -1,9 +1,11 @@
 import logging
 import uuid
+import datetime
 from urllib.parse import urlparse
 
 import ckan.plugins as p
 from ckan.common import _
+from ckantoolkit import missing
 
 from ckanext.schemingdcat.utils import _load_yaml
 
@@ -239,4 +241,17 @@ def miteco_miteco_dataset_ogc_normalize(field, schema):
             url = urlparse(data[key])
             data[key] = url.scheme+"://"+url.netloc+url.path+"?request=GetCapabilities&service="+format
         
+    return validator
+
+@scheming_validator
+@validator
+def miteco_preserve_date_modified(field, schema):
+    """
+    Preserves the existing modified date if available.
+    Only sets datetime.now() if the field is empty or missing.
+    """
+    def validator(key, data, errors, context):
+        value = data[key]
+        if value is missing or value is None or value == '':
+            data[key] = datetime.datetime.now().isoformat()
     return validator
