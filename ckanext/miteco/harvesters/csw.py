@@ -1,3 +1,4 @@
+import json
 import logging
 from urllib.parse import urlparse
 
@@ -11,6 +12,9 @@ from ckanext.miteco.config import (
 )
 
 log = logging.getLogger(__name__)
+
+# Date fields to preserve from the original harvest content
+HARVEST_DATE_FIELDS = ['modified', 'created', 'issued']
 
 class MITECOCSWHarvester(SingletonPlugin):
     '''
@@ -34,7 +38,58 @@ class MITECOCSWHarvester(SingletonPlugin):
         self._apply_default_values(package_dict)
 
         return package_dict, []
-    
+
+    def before_create(self, harvest_object, package_dict, schema, harvester_tmp_dict):
+        """
+        Preserve original harvest dates before creating the package.
+        Re-injects dates from harvest_object.content into package_dict
+        to prevent them from being lost during the pipeline.
+        """
+        self._preserve_harvest_dates(harvest_object, package_dict)
+        return None
+
+    def before_update(self, harvest_object, package_dict, harvester_tmp_dict):
+        """
+        Preserve original harvest dates before updating the package.
+        Re-injects dates from harvest_object.content into package_dict
+        to prevent them from being lost during the pipeline.
+        """
+        self._preserve_harvest_dates(harvest_object, package_dict)
+        return None
+
+    @staticmethod
+    def _preserve_harvest_dates(harvest_object, package_dict):
+        """
+        Reads the original dates from the harvest object content (JSON)
+        and ensures they are present in the package_dict before saving.
+        
+        This avoids modifying ckanext-schemingdcat's CSWMetadataExtractor
+        while still preserving the original source dates (modified, created, issued).
+
+        Args:
+            harvest_object: The HarvestObject with the original content JSON.
+            package_dict (dict): The package dictionary about to be saved.
+        """
+        try:
+            if not harvest_object or not harvest_object.content:
+                return
+
+            original_content = json.loads(harvest_object.content)
+
+            for date_field in HARVEST_DATE_FIELDS:
+                original_value = original_content.get(date_field)
+                current_value = package_dict.get(date_field)
+
+                if original_value and (not current_value or current_value != original_value):
+                    log.debug(
+                        'MITECO: Preserving harvest date %s: %s (was: %s)',
+                        date_field, original_value, current_value
+                    )
+                    package_dict[date_field] = original_value
+
+        except (ValueError, TypeError) as e:
+            log.warning('MITECO: Error preserving harvest dates: %s', str(e))
+
     def _remove_miteco_fields(self, prefix='miteco_'):
         """
         Remove field names starting with prefix from self._schema_required_fields.

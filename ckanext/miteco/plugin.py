@@ -26,7 +26,7 @@ class MitecoPlugin(p.SingletonPlugin, DefaultTranslation):
     p.implements(p.IBlueprint)
     p.implements(p.ITemplateHelpers)
     p.implements(p.IValidators)
-    p.implements(p.ITranslation)
+    p.implements(p.ITranslation) 
 
     # IConfigurer
     def update_config(self, config_):

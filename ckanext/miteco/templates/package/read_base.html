@@ -1,5 +1,10 @@
 {% ckan_extends %}
 
+{% block content_primary_nav %}
+  {{ h.build_nav_icon(dataset_type ~ '.read', _('Dataset'),  id=pkg.name, icon='sitemap') }}
+  {{ h.build_nav_icon(dataset_type ~ '.groups', h.humanize_entity_type('group', default_group_type, 'content tab') or _('Groups'), id=pkg.name, icon='users') }}
+{% endblock %}
+
 {% block secondary_content %}
   {% block secondary_help_content %}{% endblock %}
 
@@ -25,12 +30,6 @@
   {% block package_data_access %}
     {% if pkg.license_id and pkg.access_rights %}
       {% snippet "schemingdcat/snippets/data_access_license.html", pkg_dict=pkg, dataset_type=dataset_type %}
-    {% endif %}
-  {% endblock %}
-
-  {% block package_publisher_info %}
-    {% if pkg.publisher_name %}
-      {% snippet "schemingdcat/snippets/publisher_info.html", pkg_dict=pkg, dataset_type=dataset_type %}
     {% endif %}
   {% endblock %}
 

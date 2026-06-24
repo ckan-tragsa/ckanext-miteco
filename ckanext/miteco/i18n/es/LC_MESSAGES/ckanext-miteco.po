@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-miteco 0.0.1\n"
 "Report-Msgid-Bugs-To: mnl.janez@gmail.com\n"
-"POT-Creation-Date: 2023-07-04 11:54+0200\n"
-"PO-Revision-Date: 2024-03-01 18:51+0100\n"
+"POT-Creation-Date: 2025-10-16 08:14+0000\n"
+"PO-Revision-Date: 2025-10-16 11:44+0200\n"
 "Last-Translator: mnl.janez@gmail.com\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -19,9 +19,332 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Generated-By: Babel 2.7.0\n"
-"X-Generator: Poedit 3.4.2\n"
+"Generated-By: Babel 2.10.3\n"
+"X-Generator: Poedit 3.8\n"
 
-#: ckanext/miteco/templates/miteco/snippets/miteco_dataset_info.html
+#: ckanext/miteco/templates/header.html:19
+#: ckanext/miteco/templates/home/snippets/about_portal.html:39
+#: ckanext/miteco/templates/organization/snippets/organization_tree.html:35
+#: ckanext/miteco/templates/organization/snippets/organization_tree.html:54
+msgid "Datasets"
+msgstr "Conjuntos de datos"
+
+#: ckanext/miteco/templates/header.html:21
+#: ckanext/miteco/templates/home/snippets/about_portal.html:45
+#: ckanext/miteco/templates/package/base.html:10
+msgid "Organizations"
+msgstr "Organizaciones"
+
+#: ckanext/miteco/templates/header.html:22
+msgid "About"
+msgstr "Sobre nosotros"
+
+#: ckanext/miteco/templates/header.html:23
+msgid "OpenAPI"
+msgstr "OpenAPI"
+
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:21
+msgid "CKAN Data API"
+msgstr "API de datos CKAN"
+
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:25
+msgid "Access resource data via a web API with powerful query support"
+msgstr ""
+"Acceda a los datos de los recursos a través de una API web con un "
+"potente soporte de consultas"
+
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:27
+msgid ""
+"In order to facilitate integration with our service, we have provided a "
+"set of sample API Data calls. These examples demonstrate how to access "
+"and query the data resource via its identifier and can serve as a "
+"reference for constructing API calls tailored to various requirements "
+"and programming languages."
+msgstr ""
+"Para facilitar la integración con nuestro servicio, hemos proporcionado "
+"un conjunto de ejemplos de llamadas a la API de datos. Estos ejemplos "
+"demuestran cómo acceder y consultar el recurso de datos a través de su "
+"identificador y pueden servir de referencia para construir llamadas a la "
+"API adaptadas a diversos requisitos y lenguajes de programación."
+
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:30
+msgid "The portal's API section can be found at the following link:"
+msgstr ""
+"La sección API del portal puede consultarse en el siguiente enlace:"
+
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:32
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:88
+#, fuzzy
+#| msgid "OpenAPI Endpoints"
+msgid "Endpoints"
+msgstr "Puntos finales de OpenAPI"
+
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:33
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:92
+msgid ""
+"The Data API can be accessed via the following actions of the CKAN "
+"action API."
+msgstr ""
+"Se puede acceder a la API de datos a través de las siguientes acciones "
+"de CKAN."
+
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:39
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:98
+msgid "Create"
+msgstr "Crear"
+
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:43
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:102
+msgid "Update / Insert"
+msgstr "Actualizar / Insertar"
+
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:48
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:107
+msgid "Query"
+msgstr "Consulta"
+
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:53
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:112
+msgid "Query (via SQL)"
+msgstr "Consulta (via SQL)"
+
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:60
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:124
+msgid "Querying"
+msgstr "Consultas"
+
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:62
+msgid "Query example with resource identifier"
+msgstr "Ejemplo de consulta con el identificador del recurso"
+
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:67
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:128
+msgid "Query example (first 5 results)"
+msgstr "Ejemplo de consulta obteniendo los 5 primeros resultados"
+
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:72
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:133
+msgid "Query example (results containing 'medio-ambiente')"
+msgstr ""
+"Ejemplo de consulta con resultados que contengan \"medio-ambiente\""
+
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:78
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:138
+msgid "Query example (via SQL statement)"
+msgstr "Ejemplo de consulta a través de SQL"
+
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:166
+msgid ""
+"Further information in the <a href=\"http://docs.ckan.org/en/latest/"
+"maintaining/datastore.html\" target=\"_blank\">main CKAN Data API and "
+"DataStore documentation</a>."
+msgstr ""
+"Más información en la <a href=\"http://docs.ckan.org/en/latest/"
+"maintaining/datastore.html\" target=\"_blank\">documentación de API de "
+"datos de CKAN y DataStore</a>."
+
+#: ckanext/miteco/templates/home/tags.html:6
+msgid "¿Que son las palabras clave?"
+msgstr ""
+
+#: ckanext/miteco/templates/home/tags.html:10
+msgid ""
+"Las palabras clave se utilizan para identificar y clasificar conceptos "
+"dentro de un sistema de información. \n"
+"        Sirven para mejorar la organización, búsqueda y recuperación de "
+"datos.  En el contexto del Catálogo de Datos estas palabras \n"
+"        clave son elegidas de forma libre por el publicador facilitando "
+"el acceso eficiente a la información relevante."
+msgstr ""
+
+#: ckanext/miteco/templates/home/tags.html:19
+msgid "Lista de palabras clave"
+msgstr ""
+
+#: ckanext/miteco/templates/home/snippets/about_hvd.html:36
+msgid "High value dataset categories (HVD)"
+msgstr "Categorías temáticas datos de alto valor (HVD)"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:35
+msgid "Explore and use Open Data"
+msgstr "Explora y utiliza datos abiertos"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:39
+msgid "Dataset"
+msgstr "Conjuntos de datos"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:41
+msgid "Spatial dataset"
+msgstr "Conjunto de datos espaciales"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:41
+msgid "Spatial datasets"
+msgstr "Conjuntos de datos espaciales"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:43
+msgid "High value dataset"
+msgstr "Conjunto de datos de alto valor"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:43
+msgid "High value datasets"
+msgstr "Conjuntos de datos de alto valor"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:45
+#, fuzzy
+#| msgid "Organizations"
+msgid "Organization"
+msgstr "Organizaciones"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:47
+msgid "Tag"
+msgstr "Palabras clave"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:47
+msgid "Tags"
+msgstr "Palabras clave"
+
+#: ckanext/miteco/templates/home/snippets/about_portal.html:49
+msgid "Catalog endpoints"
+msgstr "Puntos finales del catalogo"
+
+#: ckanext/miteco/templates/home/snippets/about_themes.html:36
+msgid "INSPIRE theme categories"
+msgstr "Categorías temáticas INSPIRE"
+
+#: ckanext/miteco/templates/home/snippets/search.html:3
+msgid "Term to search in the catalog"
+msgstr "Término a buscar dentro del catálogo"
+
+#: ckanext/miteco/templates/home/snippets/search.html:5
+msgid "Open Data Catalog"
+msgstr "Portal de Datos Abiertos"
+
+#: ckanext/miteco/templates/home/snippets/search.html:18
+msgid ""
+"Find data published by various organizations to help you develop "
+"products and services."
+msgstr ""
+"Encontrar datos publicados por diversas organizaciones para ayudarte a "
+"desarrollar productos y servicios."
+
+#: ckanext/miteco/templates/home/snippets/search.html:27
+msgid "Search datasets"
+msgstr "Buscar conjuntos de datos"
+
+#: ckanext/miteco/templates/home/snippets/search.html:30
+msgid "Search"
+msgstr "Buscar"
+
+#: ckanext/miteco/templates/home/snippets/search.html:34
+msgid "Popular tags"
+msgstr "Etiquetas populares"
+
+#: ckanext/miteco/templates/miteco/form_snippets/miteco_identifier.html:2
+msgid "This field is required"
+msgstr "Este campo es obligatorio"
+
+#: ckanext/miteco/templates/miteco/form_snippets/miteco_identifier.html:2
+msgid "Custom"
+msgstr "Personalizado"
+
+#: ckanext/miteco/templates/miteco/form_snippets/miteco_identifier.html:8
+msgid "Waiting for metadata fields"
+msgstr "Esperando los campos de metadatos"
+
+#: ckanext/miteco/templates/miteco/snippets/miteco_dataset_info.html:77
 msgid "Dataset information"
 msgstr "Información del conjunto de datos"
+
+#: ckanext/miteco/templates/openapi/index.html:9
+#: ckanext/miteco/templates/openapi/index.html:16
+#: ckanext/miteco/templates/openapi/index.html:41
+msgid "OpenAPI Endpoints"
+msgstr "Puntos finales de OpenAPI"
+
+#: ckanext/miteco/templates/openapi/index.html:21
+msgid ""
+"The OpenAPI Specification (OAS) defines a standard, language-agnostic "
+"interface to HTTP APIs which allows both humans and computers to "
+"discover and understand the capabilities of the service without access "
+"to source code, documentation, or through network traffic inspection. "
+"When properly defined, a consumer can understand and interact with the "
+"remote service with a minimal amount of implementation logic."
+msgstr ""
+"La especificación OpenAPI (OAS) define una interfaz estándar e "
+"independiente del idioma para las APIs HTTP que permite tanto a humanos "
+"como a ordenadores descubrir y comprender las capacidades del servicio "
+"sin necesidad de acceder al código fuente, la documentación o mediante "
+"la inspección del tráfico de red. Cuando se define correctamente, un "
+"consumidor puede entender e interactuar con el servicio remoto con una "
+"cantidad mínima de lógica de implementación."
+
+#: ckanext/miteco/templates/openapi/index.html:25
+msgid "More info"
+msgstr "Mas información"
+
+#: ckanext/miteco/templates/openapi/index.html:57
+msgid "Not OpenAPI endpoints available"
+msgstr "No hay puntos finales de OpenAPI disponibles"
+
+#: ckanext/miteco/templates/openapi/index.html:59
+msgid ""
+"To retrieve them, check the <code>ckan.ini</code> config file and "
+"documentation of"
+msgstr ""
+"Para recuperarlos, consulte el archivo de configuración <code>ckan.ini</"
+"code> y la documentación de"
+
+#: ckanext/miteco/templates/package/base.html:22
+msgid "Create Dataset"
+msgstr "Crear conjunto de datos"
+
+#: ckanext/miteco/templates/scheming/form_snippets/org_hierarchy.html:3
+msgid "Parent"
+msgstr "Padre"
+
+#: ckanext/miteco/templates/scheming/form_snippets/org_hierarchy.html:7
+msgid "None - top level"
+msgstr "Ninguno - nivel superior"
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/data_api_button.html:7
+msgid "Loading..."
+msgstr "Cargando..."
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/data_api_button.html:9
+msgid "API usage"
+msgstr "Uso de API"
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/metadata_info.html:27
+msgid "Metadata"
+msgstr "Metadatos"
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/metadata_info.html:45
+#, fuzzy
+#| msgid "Dataset information"
+msgid "Basic information"
+msgstr "Información del conjunto de datos"
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/metadata_info.html:104
+#, fuzzy
+#| msgid "Dataset information"
+msgid "Spatial information"
+msgstr "Información del conjunto de datos"
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/metadata_info.html:163
+msgid "Provenance"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/metadata_info.html:222
+msgid "Responsible party"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/snippets/search_form.html:8
+msgid "Submit"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/snippets/search_form.html:19
+msgid "Order by"
+msgstr ""
+
+#~ msgid "Groups"
+#~ msgstr "Grupos"

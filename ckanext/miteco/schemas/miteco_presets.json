@@ -23,7 +23,16 @@
       "values": {
         "form_snippet": "schemingdcat/form_snippets/select_hvd_category.html",
         "display_snippet": "schemingdcat/display_snippets/link_schema.html",
-        "validators": "miteco_miteco_dataset_type_hvd_dataset scheming_required scheming_choices"
+        "validators": "miteco_miteco_dataset_type_hvd_dataset scheming_required schemingdcat_multiple_choice",
+        "output_validators": "scheming_multiple_choice_output" 
+      }
+    },
+    {
+      "preset_name": "miteco_hvd",
+      "values": {
+        "form_snippet": null,
+        "display_snippet": null,
+        "validators": "default(non_hvd)"
       }
     },
     {
@@ -40,7 +49,16 @@
       "values": {
         "form_snippet": "schemingdcat/form_snippets/multiple_text.html",
         "display_snippet": "schemingdcat/display_snippets/list_links.html",
-        "validators": "not_empty scheming_required schemingdcat_multiple_text",
+        "validators": "not_empty scheming_required schemingdcat_multiple_text"
+      }
+    },
+    {
+      "preset_name": "miteco_multiple_text_var",
+      "values": {
+        "form_snippet": "schemingdcat/form_snippets/multiple_text.html",
+        "display_snippet": "schemingdcat/display_snippets/list_links.html",
+        "validators": "schemingdcat_multiple_text",
+        "after_validators": "miteco_save_as_string",
         "output_validators": "scheming_load_json"
       }
     },
@@ -61,6 +79,16 @@
         "validators": "not_empty scheming_required schemingdcat_fill_spatial_uri_dependent_fields"
       }
     },
+          
+    {     
+      "preset_name": "date_modified",     
+      "values": {     
+        "form_snippet": null,     
+        "display_snippet": "schemingdcat/display_snippets/date_localised.html",     
+        "validators": "miteco_preserve_date_modified scheming_required isodate convert_to_json_if_date"     
+      }     
+    },
+        
     {
       "preset_name": "required_date",
       "values": {

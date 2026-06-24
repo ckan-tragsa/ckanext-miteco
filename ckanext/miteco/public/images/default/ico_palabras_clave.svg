@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_1" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 37.5 37.3">
+  <!-- Generator: Adobe Illustrator 29.0.1, SVG Export Plug-In . SVG Version: 2.1.0 Build 192)  -->
+  <defs>
+    <style>
+      .st0, .st1 {
+        fill: #fff;
+        stroke: #1d355e;
+        stroke-miterlimit: 10;
+      }
+
+      .st1 {
+        opacity: .2;
+      }
+
+      .st2 {
+        fill: #1d355e;
+        font-family: MyriadPro-Regular, 'Myriad Pro';
+        font-size: 12px;
+      }
+    </style>
+  </defs>
+  <circle class="st1" cx="18.7" cy="18.7" r="18"/>
+  <path class="st0" d="M26.9,17.6c0,1.8-.6,3.5-1.6,4.9s2.2,3.7,1.6,4.2-4.2-1.9-4.7-1.7c-1,.5-2.2.8-3.4.8-4.5,0-8.2-3.7-8.2-8.2s3.7-8.2,8.2-8.2,8.2,3.7,8.2,8.2Z"/>
+  <text class="st2" transform="translate(16.4 21.7)"><tspan x="0" y="0">?</tspan></text>
+</svg>

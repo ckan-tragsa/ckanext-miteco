@@ -1,120 +1,973 @@
-openapi: 3.0.0
-servers:
-- url: https://des.gis.miteco.gob.es/catalogo/api
-  description: Development Portal [RESTRICTED ACCESS]
-- url: https://pre.gis.miteco.gob.es/catalogo/api
-  description: Staging portal [RESTRICTED ACCESS]
-info:
-  title: MITECO Open Data Portal - Datastore API
-  description: >
-    This API provides live access to the Datastore portion of the Ministry for the Ecological Transition and the Demographic Challenge (MiTEco) Open Data Portal.
-    Our staging portals are for sharing upcoming features and testing restricted network integration, and development sites are for features under development.
-  termsOfService: https://creativecommons.org/licenses/by/4.0/
-  contact:
-    name: Ministry for the Ecological Transition and the Demographic Challenge (MiTEco)
-    url: https://www.miteco.gob.es/en.html
-    email: informacionma@miteco.es
-  license:
-    name: CC BY 4.0
-    url: https://creativecommons.org/licenses/by/4.0/
-  version: 0.1
-security:
-  - default: []
-basePath: /v1
-tags:
-  - name: datastore
-    description: The Data API
-    externalDocs:
-      description: Find out more
-      url: https://docs.ckan.org/en/2.10/maintaining/datastore.html#the-data-api
-paths:
-  /action/datastore_search:
-    post:
-      tags:
-        - datastore
-      summary: Search a datastore resource
-      description: >
-        The datastore_search action allows you to search data in a resource.
-        Well-formatted CSV/TSV files that are uploaded or linked are automatically loaded into the datastore.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                resource_id:
-                  type: string
-                  format: uuid
-                  description: id or alias of the resource to be searched against
-                  examples:
-                    Air Quality:
-                      value: 499383b6-cd2a-466a-9fcf-910d3e427700
-                filters:
-                  type: object
-                  description: matching conditions to select, `application/json` POST requests only
-                  examples:
-                    (Value not supported for GET requests):
-                      value: ''
-                q:
-                  oneOf:
-                  - type: string
-                    description: full text query searching across all columns in each row
-                  - type: object
-                    description: fill text search on each field given
-                distinct:
-                  type: boolean
-                  description: return only distinct rows
-                  default: false
-                plain:
-                  type: boolean
-                  description: treat as plain text query
-                  default: true
-                language:
-                  type: string
-                  description: language of the full text query
-                  default: english
-                limit:
-                  type: integer
-                  description: maximum number of rows to return
-                  default: 100
-                offset:
-                  type: integer
-                  description: offset this number of rows
-                fields:
-                  oneOf:
-                  - type: string
-                    description: comma-separated string of column names to return
-                  - type: array
-                    description: list of column names to return
-                sort:
-                  type: string
-                  description: comma-separated string of column names with sort order
-                  example: reporting_period desc, line_number
-                include_total:
-                  type: boolean
-                  description: calculate and return the total number of matching rows, set to `false` for improved performance
-                  default: true
-                records_format:
-                  type: string
-                  description: the format for the records return value, set to `csv` or `tsv` for improved performance
-                  default: objects
-                  enum:
-                  - objects
-                  - lists
-                  - csv
-                  - tsv
-            examples:
-              Air Quality:
-                value:
-                  resource_id: 499383b6-cd2a-466a-9fcf-910d3e427700
-                  q: 2020-2021
-                  filters:
-                    codine: 28
-              Top 10 most recently deleted datasets:
-                value:
-                  resource_id: d22d2aca-155b-4978-b5c1-1d39837e1993
-                  sort: '"Date and Time Deleted/Fecha y hora de eliminación" desc'
-      responses:
-        '200':
-          description: List of packages (datasets) including all metadata available.
+
+"openapi": "3.0.1"
+"info":
+  "title": "Pro Miteco"
+  "version": "1.0.0"
+"servers":
+  -
+    "url": "https://catalogo.datosabiertos.miteco.gob.es/catalogo/api/3/action/"
+"security":
+  -
+    "default": []
+"paths":
+  "/datastore_search":
+    "get":
+      "summary": "The datastore_search action allows you to search data in a resource."
+      "description": "Search a datastore resource"
+      "parameters":
+        -
+          "name": "resource_id"
+          "in": "query"
+          "description": "ID or alias of the resource to be searched against. \n\nID o alias del recurso a buscar."
+          "required": true
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+            "default": "19088adf-d259-4947-8ce3-fb95b3866cfa"
+        -
+          "name": "filters"
+          "in": "query"
+          "description": "Matching conditions to select, not supported in GET requests. \n\nCondiciones de coincidencia para seleccionar, no admitidas en solicitudes GET."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "object"
+        -
+          "name": "q"
+          "in": "query"
+          "description": "Full text query across all columns in each row. \n\nConsulta de texto completo en todas las columnas de cada fila."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "distinct"
+          "in": "query"
+          "description": "Return only distinct rows. \n\nDevolver solo filas distintas."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+        -
+          "name": "plain"
+          "in": "query"
+          "description": "Treat as plain text query. \n\nTratar como consulta de texto plano."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+        -
+          "name": "language"
+          "in": "query"
+          "description": "Language of the full text query \n\nIdioma de la consulta de texto completo."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "limit"
+          "in": "query"
+          "description": "Maximum number of rows to return \n\nNúmero máximo de filas a devolver."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+            "default": 100
+        -
+          "name": "offset"
+          "in": "query"
+          "description": "Offset this number of rows \n\nDesplazar este número de filas."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+        -
+          "name": "fields"
+          "in": "query"
+          "description": "List of column names to return. \n\nLista de nombres de columnas a devolver."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "sort"
+          "in": "query"
+          "description": "Comma-separated string of column names with sort order. \n\nCadena de nombres de columnas separada por comas con orden de clasificación."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "include_total"
+          "in": "query"
+          "description": "Calculate and return the total number of matching rows. \n\nCalcular y devolver el número total de filas coincidentes."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+        -
+          "name": "records_format"
+          "in": "query"
+          "description": "The format for the records return value. \n\nEl formato del valor de retorno de los registros."
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+            "enum":
+              - "objects"
+              - "lists"
+              - "csv"
+              - "tsv"
+      "responses":
+        "200":
+          "description": "ok"
+  "/package_list":
+    "get":
+      "tags":
+        - "packages"
+      "summary": "Return a list of the names of the site’s datasets (packages)"
+      "description": "The package_list action returns a list of the names of the site’s datasets (packages).\n"
+      "parameters":
+        -
+          "name": "limit"
+          "in": "query"
+          "description": "The maximum number of datasets to return"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+        -
+          "name": "offset"
+          "in": "query"
+          "description": "The offset to start returning packages from"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+      "responses":
+        "200":
+          "description": "A list of dataset names"
+          "content":
+            "application/json":
+              "schema":
+                "type": "array"
+                "items":
+                  "type": "string"
+  "/current_package_list_with_resources":
+    "get":
+      "tags":
+        - "packages"
+      "summary": "Return a list of the site’s datasets (packages) and their resources"
+      "description": "The current_package_list_with_resources action returns a list of the site’s datasets (packages) and their resources. The list is sorted most-recently-modified first.\n"
+      "parameters":
+        -
+          "name": "limit"
+          "in": "query"
+          "description": "The maximum number of datasets to return"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+        -
+          "name": "offset"
+          "in": "query"
+          "description": "The offset to start returning packages from"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+        -
+          "name": "page"
+          "in": "query"
+          "description": "Deprecated: use offset"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+      "responses":
+        "200":
+          "description": "A list of datasets and their resources"
+          "content":
+            "application/json":
+              "schema":
+                "type": "array"
+                "items":
+                  "type": "object"
+                  "properties":
+                    "id":
+                      "type": "string"
+                    "name":
+                      "type": "string"
+                    "resources":
+                      "type": "array"
+                      "items":
+                        "type": "object"
+                        "properties":
+                          "id":
+                            "type": "string"
+                          "name":
+                            "type": "string"
+                          "format":
+                            "type": "string"
+                          "url":
+                            "type": "string"
+  "/group_list":
+    "get":
+      "tags":
+        - "groups"
+      "summary": "Return a list of the names of the site’s groups"
+      "description": "The group_list action returns a list of the names of the site’s groups.\n"
+      "parameters":
+        -
+          "name": "type"
+          "in": "query"
+          "description": "The type of group to list"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+            "default": "group"
+        -
+          "name": "order_by"
+          "in": "query"
+          "description": "The field to sort the list by, must be ''name'' or ''packages''"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+            "default": "name"
+        -
+          "name": "sort"
+          "in": "query"
+          "description": "Sorting of the search results"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+            "default": "title asc"
+        -
+          "name": "limit"
+          "in": "query"
+          "description": "The maximum number of groups returned"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+            "default": 1000
+        -
+          "name": "offset"
+          "in": "query"
+          "description": "The offset to start returning groups from"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+        -
+          "name": "groups"
+          "in": "query"
+          "description": "A list of names of the groups to return"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "array"
+            "items":
+              "type": "string"
+        -
+          "name": "all_fields"
+          "in": "query"
+          "description": "Return group dictionaries instead of just names"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": false
+        -
+          "name": "include_dataset_count"
+          "in": "query"
+          "description": "If all_fields, include the full package_count"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": true
+        -
+          "name": "include_extras"
+          "in": "query"
+          "description": "If all_fields, include the group extra fields"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": false
+        -
+          "name": "include_tags"
+          "in": "query"
+          "description": "If all_fields, include the group tags"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": false
+        -
+          "name": "include_groups"
+          "in": "query"
+          "description": "If all_fields, include the groups the groups are in"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": false
+        -
+          "name": "include_users"
+          "in": "query"
+          "description": "If all_fields, include the group users"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": false
+      "responses":
+        "200":
+          "description": "A list of group names"
+          "content":
+            "application/json":
+              "schema":
+                "type": "array"
+                "items":
+                  "type": "string"
+  "/organization_list":
+    "get":
+      "tags":
+        - "organizations"
+      "summary": "Return a list of the names of the site’s organizations"
+      "description": "The organization_list action returns a list of the names of the site’s organizations.\n"
+      "parameters":
+        -
+          "name": "type"
+          "in": "query"
+          "description": "The type of organization to list"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+            "default": "organization"
+        -
+          "name": "order_by"
+          "in": "query"
+          "description": "The field to sort the list by, must be ''name'' or ''packages''"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+            "default": "name"
+        -
+          "name": "sort"
+          "in": "query"
+          "description": "Sorting of the search results"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+            "default": "title asc"
+        -
+          "name": "limit"
+          "in": "query"
+          "description": "The maximum number of organizations returned"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+            "default": 1000
+        -
+          "name": "offset"
+          "in": "query"
+          "description": "The offset to start returning organizations from"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+        -
+          "name": "organizations"
+          "in": "query"
+          "description": "A list of names of the organizations to return"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "array"
+            "items":
+              "type": "string"
+        -
+          "name": "all_fields"
+          "in": "query"
+          "description": "Return organization dictionaries instead of just names"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": false
+        -
+          "name": "include_dataset_count"
+          "in": "query"
+          "description": "If all_fields, include the full package_count"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": true
+        -
+          "name": "include_extras"
+          "in": "query"
+          "description": "If all_fields, include the organization extra fields"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": false
+        -
+          "name": "include_tags"
+          "in": "query"
+          "description": "If all_fields, include the organization tags"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": false
+        -
+          "name": "include_groups"
+          "in": "query"
+          "description": "If all_fields, include the organizations the organizations are in"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": false
+        -
+          "name": "include_users"
+          "in": "query"
+          "description": "If all_fields, include the organization users"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": false
+      "responses":
+        "200":
+          "description": "A list of organization names"
+          "content":
+            "application/json":
+              "schema":
+                "type": "array"
+                "items":
+                  "type": "string"
+  "/license_list":
+    "get":
+      "tags":
+        - "basic"
+      "summary": "Return the list of licenses available for datasets on the site"
+      "description": "The license_list action returns the list of licenses available for datasets on the site.\n"
+      "responses":
+        "200":
+          "description": "A list of licenses"
+          "content":
+            "application/json":
+              "schema":
+                "type": "array"
+                "items":
+                  "type": "object"
+                  "properties":
+                    "id":
+                      "type": "string"
+                    "title":
+                      "type": "string"
+                    "url":
+                      "type": "string"
+  "/tag_list":
+    "get":
+      "tags":
+        - "basic"
+      "summary": "Return a list of the site’s tags"
+      "description": "The tag_list action returns a list of the site’s tags. By default only free tags (tags that don’t belong to a vocabulary) are returned. If the vocabulary_id argument is given then only tags belonging to that vocabulary will be returned instead.\n"
+      "parameters":
+        -
+          "name": "query"
+          "in": "query"
+          "description": "A tag name query to search for, if given only tags whose names contain this string will be returned"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "vocabulary_id"
+          "in": "query"
+          "description": "The id or name of a vocabulary, if given only tags that belong to this vocabulary will be returned"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "all_fields"
+          "in": "query"
+          "description": "Return full tag dictionaries instead of just names"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": false
+      "responses":
+        "200":
+          "description": "A list of tags"
+          "content":
+            "application/json":
+              "schema":
+                "oneOf":
+                  -
+                    "type": "array"
+                    "items":
+                      "type": "string"
+                  -
+                    "type": "array"
+                    "items":
+                      "type": "object"
+                      "properties":
+                        "id":
+                          "type": "string"
+                        "name":
+                          "type": "string"
+                        "vocabulary_id":
+                          "type": "string"
+  "/package_show":
+    "get":
+      "tags":
+        - "packages"
+      "summary": "Return the metadata of a dataset (package) and its resources"
+      "description": "The package_show action returns the metadata of a dataset (package) and its resources.\n"
+      "parameters":
+        -
+          "name": "id"
+          "in": "query"
+          "description": "The id or name of the dataset"
+          "required": true
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "use_default_schema"
+          "in": "query"
+          "description": "Use default package schema instead of a custom schema defined with an IDatasetForm plugin"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": false
+        -
+          "name": "include_tracking"
+          "in": "query"
+          "description": "Add tracking information to dataset and resources"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": false
+        -
+          "name": "include_plugin_data"
+          "in": "query"
+          "description": "Include the internal plugin data object (sysadmin only)"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": false
+      "responses":
+        "200":
+          "description": "The metadata of the dataset"
+          "content":
+            "application/json":
+              "schema":
+                "type": "object"
+  "/package_search":
+    "get":
+      "tags":
+        - "packages"
+      "summary": "Searches for packages satisfying a given search criteria"
+      "description": "The package_search action searches for packages satisfying a given search criteria.\n"
+      "parameters":
+        -
+          "name": "q"
+          "in": "query"
+          "description": "The solr query"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+            "default": "*:*"
+        -
+          "name": "fq"
+          "in": "query"
+          "description": "Any filter queries to apply"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "fq_list"
+          "in": "query"
+          "description": "Additional filter queries to apply"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "array"
+            "items":
+              "type": "string"
+        -
+          "name": "sort"
+          "in": "query"
+          "description": "Sorting of the search results"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+            "default": "score desc, metadata_modified desc"
+        -
+          "name": "rows"
+          "in": "query"
+          "description": "The maximum number of matching rows (datasets) to return"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+            "default": 10
+        -
+          "name": "start"
+          "in": "query"
+          "description": "The offset in the complete result for where the set of returned datasets should begin"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+        -
+          "name": "facet"
+          "in": "query"
+          "description": "Whether to enable faceted results"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": true
+        -
+          "name": "facet.mincount"
+          "in": "query"
+          "description": "The minimum counts for facet fields should be included in the results"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+        -
+          "name": "facet.limit"
+          "in": "query"
+          "description": "The maximum number of values the facet fields return"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+            "default": 50
+        -
+          "name": "facet.field"
+          "in": "query"
+          "description": "The fields to facet upon"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "array"
+            "items":
+              "type": "string"
+        -
+          "name": "include_drafts"
+          "in": "query"
+          "description": "If True, draft datasets will be included in the results"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": false
+        -
+          "name": "include_deleted"
+          "in": "query"
+          "description": "If True, deleted datasets will be included in the results"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": false
+        -
+          "name": "include_private"
+          "in": "query"
+          "description": "If True, private datasets will be included in the results"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": false
+        -
+          "name": "use_default_schema"
+          "in": "query"
+          "description": "Use default package schema instead of a custom schema defined with an IDatasetForm plugin"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "boolean"
+            "default": false
+        -
+          "name": "qf"
+          "in": "query"
+          "description": "Query fields"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "wt"
+          "in": "query"
+          "description": "Writer type"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "bf"
+          "in": "query"
+          "description": "Boost functions"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "boost"
+          "in": "query"
+          "description": "Boost query"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "tie"
+          "in": "query"
+          "description": "Tie breaker"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "defType"
+          "in": "query"
+          "description": "Default type"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "mm"
+          "in": "query"
+          "description": "Minimum match"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+      "responses":
+        "200":
+          "description": "A dictionary of search results"
+          "content":
+            "application/json":
+              "schema":
+                "type": "object"
+                "properties":
+                  "count":
+                    "type": "integer"
+                  "results":
+                    "type": "array"
+                    "items":
+                      "type": "object"
+                  "search_facets":
+                    "type": "object"
+  "/resource_search":
+    "get":
+      "tags":
+        - "packages"
+      "summary": "Searches for resources in public Datasets satisfying the search criteria"
+      "description": "The resource_search action searches for resources in public Datasets satisfying the search criteria.\n"
+      "parameters":
+        -
+          "name": "query"
+          "in": "query"
+          "description": "The search criteria"
+          "required": true
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "order_by"
+          "in": "query"
+          "description": "A field on the Resource model that orders the results"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "offset"
+          "in": "query"
+          "description": "Apply an offset to the query"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+        -
+          "name": "limit"
+          "in": "query"
+          "description": "Apply a limit to the query"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+      "responses":
+        "200":
+          "description": "A dictionary of search results"
+          "content":
+            "application/json":
+              "schema":
+                "type": "object"
+                "properties":
+                  "count":
+                    "type": "integer"
+                  "results":
+                    "type": "array"
+                    "items":
+                      "type": "object"
+  "/tag_search":
+    "get":
+      "tags":
+        - "basic"
+      "summary": "Return a list of tags whose names contain a given string"
+      "description": "The tag_search action returns a list of tags whose names contain a given string. By default only free tags (tags that don’t belong to any vocabulary) are searched. If the vocabulary_id argument is given then only tags belonging to that vocabulary will be searched instead.\n"
+      "parameters":
+        -
+          "name": "query"
+          "in": "query"
+          "description": "The string(s) to search for"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "vocabulary_id"
+          "in": "query"
+          "description": "The id or name of the tag vocabulary to search in"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "string"
+        -
+          "name": "limit"
+          "in": "query"
+          "description": "The maximum number of tags to return"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+        -
+          "name": "offset"
+          "in": "query"
+          "description": "When limit is given, the offset to start returning tags from"
+          "required": false
+          "style": "form"
+          "explode": true
+          "schema":
+            "type": "integer"
+      "responses":
+        "200":
+          "description": "A dictionary of search results"
+          "content":
+            "application/json":
+              "schema":
+                "type": "object"
+                "properties":
+                  "count":
+                    "type": "integer"
+                  "results":
+                    "type": "array"
+                    "items":
+                      "type": "object"

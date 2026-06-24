@@ -1,8 +1,11 @@
 import logging
 import uuid
+import datetime
+from urllib.parse import urlparse
 
 import ckan.plugins as p
 from ckan.common import _
+from ckantoolkit import missing
 
 from ckanext.schemingdcat.utils import _load_yaml
 
@@ -17,6 +20,8 @@ from ckanext.miteco.config import (
     MITECO_INSPIRE_GENERAL_TYPE
     
 )
+
+from ckan.lib.navl.dictization_functions import Missing
 
 log = logging.getLogger(__name__)
 
@@ -60,13 +65,13 @@ def miteco_internal_identifier(field, schema):
         # Check if the identifier already exists
         existing_identifier = data.get(('miteco_identifier', ))
         if existing_identifier:
-            #log.debug('Existing identifier found: %s', existing_identifier)
+            ##log.debug('Existing identifier found: %s', existing_identifier)
             return
         
         hvd_category = data.get(('hvd_category', ))
         theme_es = data.get(('theme_es', ))
         dataset_scope = data.get(('dataset_scope', ))
-        #log.debug('hvd_category: %s, theme_es: %s and dataset_scope: %s', hvd_category, theme_es, dataset_scope)
+        ##log.debug('hvd_category: %s, theme_es: %s and dataset_scope: %s', hvd_category, theme_es, dataset_scope)
         
         # Tipo de dato
         tipo_dato = next((item['miteco_id_code'] for item in miteco_identifier_schema['miteco_id_tipo-dato'] if item['id'] == 'hvd_category'), '00')
@@ -114,7 +119,7 @@ def miteco_internal_identifier(field, schema):
             
             identifier = f"{str(tipo_dato).zfill(1)}-{str(area).zfill(2)}-{str(categoria).zfill(1)}-{str(subarea).zfill(2)}-{prefix}{str(dataset_code).zfill(4)}"
         
-        #log.debug('miteco_identifier: %s', identifier)
+        ##log.debug('miteco_identifier: %s', identifier)
         
         # Assign the identifier to the key
         data[key] = identifier
@@ -162,10 +167,15 @@ def miteco_miteco_dataset_type_hvd_dataset(field, schema):
     """Validator for MITECO general type HVD dataset.
 
     This validator checks the `miteco_dataset_type` field and sets the 
-    `hvd_category` field accordingly. If `miteco_dataset_type` is 
-    'http://publications.europa.eu/resource/authority/dataset-type/GEOSPATIAL', it sets `hvd_category` to `INSPIRE_HVD_CATEGORY`. 
-    Otherwise, it sets `hvd_category` to `MITECO_DEFAULT_HVD_CATEGORY`. 
-    Additionally, it ensures that `DCAT_AP_HVD_CATEGORY_LEGISLATION` is 
+    `hvd_category` field accordingly. If `miteco_dataset_type` is in 
+    MITECO_DEFAULT_GENERAL_TYPE_HVDS:
+    - If it's 'http://publications.europa.eu/resource/authority/dataset-type/GEOSPATIAL', 
+      sets `hvd_category` to `INSPIRE_HVD_CATEGORY`
+    - Otherwise, sets `hvd_category` to `MITECO_DEFAULT_HVD_CATEGORY`
+    
+    For datasets not in MITECO_DEFAULT_GENERAL_TYPE_HVDS, leaves hvd_category untouched.
+
+    When a category is assigned, ensures that `DCAT_AP_HVD_CATEGORY_LEGISLATION` is 
     included in the `applicable_legislation_key` list.
 
     Args:
@@ -177,25 +187,71 @@ def miteco_miteco_dataset_type_hvd_dataset(field, schema):
     """
     def validator(key, data, errors, context):
         hvd_category = data.get(key)
-        applicable_legislation_key = ('applicable_legislation_key', )
+        #log.debug("key: %s",key)
+        #log.debug("Texto de algún tipo = %s", data)
         miteco_dataset_type = data.get(('miteco_dataset_type', ))
-
-        if not hvd_category or miteco_dataset_type in MITECO_DEFAULT_GENERAL_TYPE_HVDS:
+        
+        hvd = "hvd"
+        
+        # Only set hvd_category if dataset type is in the HVD list
+        if miteco_dataset_type in MITECO_DEFAULT_GENERAL_TYPE_HVDS:        
             if miteco_dataset_type == MITECO_INSPIRE_GENERAL_TYPE:
                 data[key] = INSPIRE_HVD_CATEGORY
             else:
                 data[key] = MITECO_DEFAULT_HVD_CATEGORY
-
+            
+            # Now that we've set an HVD category, ensure the legislation is also set
+            applicable_legislation_key = ('applicable_legislation_key', )
+            
             if isinstance(data.get(applicable_legislation_key), list):
                 if DCAT_AP_HVD_CATEGORY_LEGISLATION not in data[applicable_legislation_key]:
                     data[applicable_legislation_key].append(DCAT_AP_HVD_CATEGORY_LEGISLATION)
             else:
                 if data.get(applicable_legislation_key) != DCAT_AP_HVD_CATEGORY_LEGISLATION:
                     data[applicable_legislation_key] = [DCAT_AP_HVD_CATEGORY_LEGISLATION]
-
+        # If not an HVD dataset type and hvd_category is empty, leave it as None
+        # (no action needed as we're not modifying data[key])
+        claves = [data.get(('hvd_category', ))]
+        if all(not isinstance(x, Missing) for x in claves):
+            for a, value in data.items():
+                if value == 'hvd' and len(a) == 3:
+                    num_hvd = a[1]
+                    data['extras', num_hvd, 'value'] = "hvd"
+        else:
+            for a, value in data.items():
+                if value == 'hvd' and len(a) == 3:
+                    num_hvd = a[1]
+                    data['extras', num_hvd, 'value'] = "non_hvd"
     return validator
 
 @scheming_validator
 @validator
 def miteco_miteco_contact_point(field, schema):
     pass
+
+@scheming_validator
+@validator
+def miteco_miteco_dataset_ogc_normalize(field, schema):
+    """
+    Validator to detect OGC services and rewrite the URL to point towards GetCapabilities request
+    """
+    def validator(key, data, errors, context):
+        format = data[(key[0],key[1],'format')].upper()
+        if format in ["WMS","WFS","WMTS","WCS","WPS"]:
+            url = urlparse(data[key])
+            data[key] = url.scheme+"://"+url.netloc+url.path+"?request=GetCapabilities&service="+format
+        
+    return validator
+
+@scheming_validator
+@validator
+def miteco_preserve_date_modified(field, schema):
+    """
+    Preserves the existing modified date if available.
+    Only sets datetime.now() if the field is empty or missing.
+    """
+    def validator(key, data, errors, context):
+        value = data[key]
+        if value is missing or value is None or value == '':
+            data[key] = datetime.datetime.now().isoformat()
+    return validator
