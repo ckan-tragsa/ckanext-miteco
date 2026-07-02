@@ -1,0 +1,100 @@
+{% import 'macros/form.html' as form %}
+
+{#% asset 'ckanext-miteco/highlight' %#}
+{#% asset 'ckanext-miteco/highlight-css' %#}
+{% asset 'ckanext-miteco/miteco-xml-load'%}
+
+<div class="alert alert-warning d-inline-flex align-items-center me-auto" role="alert">
+    <i class="fa-solid fa-triangle-exclamation p-3"></i>
+    <div>
+        {{_("When this functionality is enabled the rest of the form gets ignored, use with caution. <br/>This exists for advanced users who want to fill inspire fields that aren't yet on the main metadata schema or want more control over their metadata")}}
+    </div>
+</div>
+<pre><textarea class="form-control" id="xml-text" rows="20" readonly onload="hljs.highlightAll()">
+<?xml version="1.0" encoding="UTF-8"?>
+<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/gmd.xsd">
+  <gmd:fileIdentifier>
+    <gco:CharacterString>example-identifier</gco:CharacterString>
+  </gmd:fileIdentifier>
+  <gmd:language>
+    <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng">eng</gmd:LanguageCode>
+  </gmd:language>
+  <gmd:characterSet>
+    <gmd:MD_CharacterSetCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8">utf8</gmd:MD_CharacterSetCode>
+  </gmd:characterSet>
+  <gmd:contact>
+    <gmd:CI_ResponsibleParty>
+      <gmd:organisationName>
+        <gco:CharacterString>Example Organization</gco:CharacterString>
+      </gmd:organisationName>
+      <gmd:contactInfo>
+        <gmd:CI_Contact>
+          <gmd:address>
+            <gmd:CI_Address>
+              <gmd:electronicMailAddress>
+                <gco:CharacterString>contact@example.com</gco:CharacterString>
+              </gmd:electronicMailAddress>
+            </gmd:CI_Address>
+          </gmd:address>
+        </gmd:CI_Contact>
+      </gmd:contactInfo>
+      <gmd:role>
+        <gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact">pointOfContact</gmd:CI_RoleCode>
+      </gmd:role>
+    </gmd:CI_ResponsibleParty>
+  </gmd:contact>
+  <gmd:dateStamp>
+    <gco:Date>2023-01-01</gco:Date>
+  </gmd:dateStamp>
+  <gmd:metadataStandardName>
+    <gco:CharacterString>ISO 19115</gco:CharacterString>
+  </gmd:metadataStandardName>
+  <gmd:metadataStandardVersion>
+    <gco:CharacterString>2003/Cor.1:2006</gco:CharacterString>
+  </gmd:metadataStandardVersion>
+  <gmd:referenceSystemInfo>
+    <gmd:MD_ReferenceSystem>
+      <gmd:referenceSystemIdentifier>
+        <gmd:RS_Identifier>
+          <gmd:code>
+            <gco:CharacterString>EPSG:4326</gco:CharacterString>
+          </gmd:code>
+        </gmd:RS_Identifier>
+      </gmd:referenceSystemIdentifier>
+    </gmd:MD_ReferenceSystem>
+  </gmd:referenceSystemInfo>
+</gmd:MD_Metadata>
+</textarea></pre>
+<button type="button" class="btn btn-danger collapse show multi-collapse" id="warnButton" data-bs-toggle="modal" data-bs-target="#xmlWarn">{{_("enable custom xml")}}</button>
+<div class="modal fade" id="xmlWarn" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="alert alert-danger" role="alert">
+            {{_("Modifiying this field will lock you out of using the form and you will be completely responsible of the contents of the inspire xml metadata.")}}<br/>
+            {{_("This functionality is only a temporal measure to conform with the full inspire schema, and it's only meant for advanced users who are familiar with the iso19139 standard.")}}<br/>
+            {{_("this option can not be undone.")}}<br/>
+            
+            <br/><br/>
+            {{_("do you want to continue?")}}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="collapse show multi-collapse">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">{{_("Take me back!")}}</button>
+            <button type="button" class="btn btn-info" data-bs-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2" data-bs-toggle="modal">{{_("Understood")}}</button>
+        </div>
+        <div class="collapse multi-collapse">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{_("custom xml enabled")}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="collapse multi-collapse">
+    <input id="field-xml-upload" type="file" name="upload" value="" placeholder="" class="form-control" accept=".xml">
+    <button type="button" class="btn btn-link gy-4" id="loadButton" onclick="loadXml()"><i class="fa fa-upload" aria-hidden="true"></i>{{_("import xml")}}</button>
+</div>
+{%- snippet 'scheming/form_snippets/fluent_help_text.html',
+    field=field,
+    lang=lang -%}

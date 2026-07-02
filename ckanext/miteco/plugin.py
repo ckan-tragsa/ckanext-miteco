@@ -7,6 +7,7 @@ from ckan import logic
 
 from ckanext.miteco import helpers, validators, blueprint, config
 import ckanext.miteco.logic.auth.ckan as ckan_auth
+import ckanext.miteco.inspire.model as insp_model
 
 log = logging.getLogger(__name__)
 
@@ -74,3 +75,15 @@ def _get_logic_functions(module_root, logic_functions={}):
                 logic_functions[key] = value
 
     return logic_functions
+
+class InspirePlugin(p.SingletonPlugin, DefaultTranslation):
+    p.implements(p.IActions)
+    p.implements(p.IConfigurable)
+
+    #IConfigurable
+    def configure(self, config):
+        insp_model.setup()
+
+    #IActions
+    def get_actions(self):
+        return _get_logic_functions('ckanext.miteco.inspire.logic.action')

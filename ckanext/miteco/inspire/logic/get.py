@@ -1,0 +1,33 @@
+from ckan.logic import side_effect_free, NotFound
+
+from ckanext.miteco.inspire import model as inspire_model
+
+@side_effect_free
+def inspire_get_document(context, data_dict):
+    """
+    Retrieve a specific portal statistic by its ID and type.
+
+    Args:
+        context (dict): The context of the API call.
+        data_dict (dict): A dictionary containing the parameters for the API call.
+            id (str): The ID of the document to retrieve
+            hash (str): the hash of the specific version of the document to retrieve
+
+    Returns:
+        string: the raw XML string
+
+    Example:
+        To use this API, you can make a GET request to the following URL:
+        ```
+        http://<your-ckan-instance>/api/3/action/inspire_get_document?md5=<document md5>
+        ```
+    """
+    uuid = data_dict.get('id',None)
+    md5 = data_dict.get('hash'None)
+    if not uuid and not md5:
+        raise NotFound
+
+    out = stats_model.InspireHandler.get(id=uuid, md5=md5)
+    if out:
+        out = stats_model.table_dictize(out, context)
+    return out

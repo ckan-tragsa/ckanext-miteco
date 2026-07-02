@@ -7,8 +7,31 @@
 #     preload:
 #       - base/main
 
+miteco-xml-load:
+  filter: rjsmin
+  output: ckanext-miteco/%(version)s-xmlload.js 
+  contents: 
+    - js/loadXml.js 
+
 miteco-css:
   filter: cssrewrite
   output: ckanext-miteco/%(version)s-miteco.css
   contents:
     - css/miteco.css
+
+highlight:
+  filter: rjsmin
+  output: ckanext-miteco/%(version)s-highlight.js
+  contents:
+    - vendor/highlight/highlight.js
+    - vendor/highlight/languages/xml.js
+  extra:
+    preload:
+      - ckanext-miteco/highlight-css
+
+highlight-css:
+  filter: cssrewrite
+  output: ckanext-miteco/%(version)s-highlight.css
+  contents:
+    - vendor/highlight/styles/default.min.css 
+

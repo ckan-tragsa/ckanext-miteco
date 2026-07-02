@@ -8,6 +8,10 @@ from ckan.common import _
 from ckantoolkit import missing
 
 from ckanext.schemingdcat.utils import _load_yaml
+from ckanext.schemingdcat.lib.csw_mapper.xslt_transformer import XSLTTransformer
+from ckanext.dcat.processors import RDFParserException, RDFParser
+from ckanext.miteco.lib.rdfParser import mitecoRDFParser
+
 
 from ckanext.schemingdcat.config import (
     INSPIRE_HVD_CATEGORY,
@@ -21,6 +25,7 @@ from ckanext.miteco.config import (
     
 )
 
+
 from ckan.lib.navl.dictization_functions import Missing
 
 log = logging.getLogger(__name__)
@@ -28,6 +33,9 @@ log = logging.getLogger(__name__)
 all_validators = {}
 
 FORM_EXTRAS = ('__extras',)
+
+DEFAULT_RDF_PROFILES = ['eu_geodcat_ap_3']
+DEBUG_MODE = p.toolkit.asbool(p.toolkit.config.get('debug', False))
 
 def validator(fn):
     """
@@ -254,4 +262,22 @@ def miteco_preserve_date_modified(field, schema):
         value = data[key]
         if value is missing or value is None or value == '':
             data[key] = datetime.datetime.now().isoformat()
+    return validator
+
+@scheming_validator
+@validator
+def miteco_xsl_fill(field, schema):
+    """
+    Fills the rest of fields of the schema based on the provided xml document and validates the document
+    """
+    def validator(key, data, errors, context):
+        parser = RDFParser()
+        log.debug('Load profiles TO RDFParser: %s', DEFAULT_RDF_PROFILES)
+        parser._profiles = parser._load_profiles(DEFAULT_RDF_PROFILES)
+        ssl_verify = self.config['ssl_verify']
+        csw_mapping_file = self.config.get('csw_mapping_file', None)
+        transformer = XSLTTransformer(csw_mapping_file, None)
+        parser.parse(transformer.transform(data[key]), _format='xml')
+        log.debug(parser)
+
     return validator

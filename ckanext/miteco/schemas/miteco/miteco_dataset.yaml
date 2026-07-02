@@ -177,6 +177,11 @@ schema_form_groups:
       en: Related resources
       es: Recursos relacionados
     fa_icon: fa-code-fork
+  - form_group_id: spatial_xml_metadata
+    label:
+      en: Inspire metadata (XML)
+      es: Metadato inspire (XML)
+    fa_icon: fa-file-code
 schema_form_tabs:
   # Dataset tabs
   - form_tab: basic_tab
@@ -252,6 +257,13 @@ schema_form_tabs:
     form_group_id:
       - spatial_info
       - inspire
+  - form_tab: spatial_advanced
+    tab_type: dataset_fields
+    label:
+      en: Advanced spatial
+      es: Espacial avanzado
+    form_group_id:
+      - spatial_xml_metadata
   - form_tab: license_tab
     tab_type: dataset_fields
     label:
@@ -260,6 +272,7 @@ schema_form_tabs:
     form_group_id:
       - license_info
       - version_notes
+
   # Distribution tabs
   - form_tab: resource_basic_tab
     tab_type: resource_fields
@@ -1860,7 +1873,7 @@ dataset_fields:
   display_property: dcat:keyword
   display_snippet: schemingdcat/display_snippets/link_schema.html
   form_include_blank_choice: False
-  required: True
+  required: False
   sorted_choices: True
   choices:
   - label: 
@@ -4213,6 +4226,27 @@ dataset_fields:
   display_property: dct:valid
   preset: date
   form_group_id: version_notes
+
+- field_name: is_spatial_advanced
+  label: 
+    en: Metadata identifier
+    es: Identificador de los metadatos
+  validators: null
+  form_snippet: schemingdcat/form_snippets/spatial_advanced.html
+  display_snippet: null
+  required: False
+  form_group_id: spatial_xml_metadata
+
+- field_name: spatial_advanced_xml
+  label: 
+    en: Metadata identifier
+    es: Identificador de los metadatos
+  validators: miteco_iso_validator
+  before_validators: miteco_xsl_fill
+  form_snippet: schemingdcat/form_snippets/inspire_xml.html
+  display_snippet: null
+  required: False
+  form_group_id: spatial_xml_metadata
 
 #--Resource/Distribution (dcat:Distribution) fields--#
 resource_fields:
