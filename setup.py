@@ -85,6 +85,7 @@ setup(
     entry_points='''
         [ckan.plugins]
         miteco=ckanext.miteco.plugin:MitecoPlugin
+        miteco_inspire=ckanext.miteco.plugin:InspirePlugin
 
         # Harvesters
         miteco_csw_harvester=ckanext.miteco.harvesters:MITECOCSWHarvester

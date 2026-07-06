@@ -1,6 +1,5 @@
 from ckan.logic import side_effect_free, NotFound
-
-from ckanext.miteco.inspire import model as inspire_model
+from ckanext.miteco.inspire import model as insp_model
 
 @side_effect_free
 def inspire_get_document(context, data_dict):
@@ -23,11 +22,11 @@ def inspire_get_document(context, data_dict):
         ```
     """
     uuid = data_dict.get('id',None)
-    md5 = data_dict.get('hash'None)
+    md5 = data_dict.get('hash',None)
     if not uuid and not md5:
         raise NotFound
 
-    out = stats_model.InspireHandler.get(id=uuid, md5=md5)
+    out = insp_model.InspireHandler.get(uuid=uuid, md5=md5)
     if out:
-        out = stats_model.table_dictize(out, context)
+        out = insp_model.table_dictize(out, context)
     return out

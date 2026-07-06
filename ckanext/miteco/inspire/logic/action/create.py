@@ -1,8 +1,9 @@
-from ckanext.miteco.inspire import model as inspire_model
+from ckanext.miteco.inspire import model as insp_model
 import ckan.plugins as p
 from ckan import model
 
-def inspire_push_document():
+
+def inspire_push_document(context, data_dict):
     """
     push a XML document into the database
 
