@@ -2,6 +2,8 @@ import logging
 import uuid
 import datetime
 from urllib.parse import urlparse
+from ckan.lib.navl.dictization_functions import flatten_dict, unflatten
+from ckanext.dcat.processors import RDFParserException, RDFParser
 
 import ckan.plugins as p
 from ckan.common import _
@@ -21,7 +23,8 @@ import ckanext.miteco.helpers as miteco_helpers
 from ckanext.miteco.config import (
     MITECO_DEFAULT_HVD_CATEGORY,   
     MITECO_DEFAULT_GENERAL_TYPE_HVDS,
-    MITECO_INSPIRE_GENERAL_TYPE
+    MITECO_INSPIRE_GENERAL_TYPE,
+    miteco_rdf_parser
     
 )
 
@@ -268,16 +271,87 @@ def miteco_preserve_date_modified(field, schema):
 @validator
 def miteco_xsl_fill(field, schema):
     """
-    Fills the rest of fields of the schema based on the provided xml document and validates the document
+    Fills the rest of fields of the schema based on the provided xml document
     """
     def validator(key, data, errors, context):
-        parser = RDFParser()
-        log.debug('Load profiles TO RDFParser: %s', DEFAULT_RDF_PROFILES)
-        parser._profiles = parser._load_profiles(DEFAULT_RDF_PROFILES)
-        ssl_verify = self.config['ssl_verify']
-        csw_mapping_file = self.config.get('csw_mapping_file', None)
-        transformer = XSLTTransformer(csw_mapping_file, None)
-        parser.parse(transformer.transform(data[key]), _format='xml')
-        log.debug(parser)
+        log.debug("Filling dataset fields")
+        if True:
+        #if data['is_spatial_advanced'] != "True":
+            parser = RDFParser()
+            profiles = ['miteco_dcat_ap']
+            log.debug('Load profiles TO RDFParser: %s', profiles)
+            parser._profiles = parser._load_profiles(profiles)
 
+            #hacemos la transformación
+            transformer = XSLTTransformer("semiceu.xsl", None)
+            transformed_xml = transformer.transform(data[('spatial_advanced_xml',)])
+            #log.debug(transformed_xml)
+            try:
+                parser.parse(transformed_xml, _format='xml')            
+                parsed_dataset = list(parser.datasets())[0]
+            except Exception as e:
+                errors[key].append(f'Error parsing the RDF file in upload: {e}')
+                return None
+
+            data_unflattened = unflatten(data)
+            for extra in parsed_dataset.pop('extras',[]):
+                if 'extras' in data_unflattened:
+                    for index in range(0,len(data_unflattened['extras'])):
+                        if data_unflattened['extras'][index]['key'] == extra['key']:
+                            data_unflattened['extras'][index]['value'] = extra['value']
+                            break
+                    else:
+                        data_unflattened['extras'].append(extra)
+                else:
+                    data_unflattened['extras'] = [extra]
+            data = flatten_dict(data_unflattened)
+            
+            flat_dataset = flatten_dict(parsed_dataset)
+            for k in list(flat_dataset.keys()):
+                if not flat_dataset[k]:
+                    flat_dataset.pop(k,None)
+                data.update(flat_dataset)        
+            data[('name',)] = data[('title',)]
+
+
+
+            
+            for kextra, kdict in (
+                ('notes_translated-es', [('notes_translated',),'es']),
+                ('notes_translated-en', [('notes_translated',),'en']),
+                ('title_translated-es', [('title_translated',),'es']),
+                ('title_translated-en', [('title_translated',),'en']),
+                ('tags', ('tags',)),
+                ('pkg_name', ('id',))
+                ):
+                if isinstance(kdict,list):
+                    data[('__extras',)][kextra] = data[kdict[0]][kdict[1]]
+                else:
+                    data[('__extras',)][kextra] = data[kdict]
+
+
+        log.debug(data)
+        
+
+    return validator
+ 
+@scheming_validator
+@validator
+def miteco_iso_validator(field, schema):
+    """
+    TODO: use ckanext-spatial validators to validate provided xml, upload document to api and set the field to the document hash
+    """
+    def validator(key, data, errors, context):
+        pass 
+    return validator
+
+@scheming_validator
+@validator
+def miteco_boolean(field, schema):
+    """
+    Checks if the field is "True" or "False"
+    """
+    def validator(key, data, errors, context):
+        data[key] = "True"
+        pass 
     return validator

@@ -12,6 +12,8 @@ from ckanext.miteco import helpers, validators, blueprint, config
 import ckanext.miteco.logic.auth.ckan as ckan_auth 
 import ckanext.miteco.inspire.model as insp_model
 import ckanext.miteco.inspire.logic.action as inspire_api
+import ckanext.miteco.config as miteco_config
+from ckanext.miteco.lib.rdfParser import mitecoRDFParser
 
 
 log = logging.getLogger(__name__)
@@ -88,6 +90,7 @@ class InspirePlugin(p.SingletonPlugin, DefaultTranslation):
 
     #IConfigurable
     def configure(self, config):
+        miteco_config.miteco_rdf_parser = mitecoRDFParser() 
         insp_model.setup()
 
     #IActions

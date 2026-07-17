@@ -10,7 +10,10 @@
         {{_("When this functionality is enabled the rest of the form gets ignored, use with caution. <br/>This exists for advanced users who want to fill inspire fields that aren't yet on the main metadata schema or want more control over their metadata")}}
     </div>
 </div>
-<pre><textarea class="form-control" id="xml-text" rows="20" readonly onload="hljs.highlightAll()">
+<textarea class="form-control" id="xml-text" rows="20" readonly onload="hljs.highlightAll()" 
+                name="{{ field.field_name }}"
+                {{ form.attributes(dict(
+                {"class": "form-control"}, **field.get('form_select_attrs', {}))) }}>
 <?xml version="1.0" encoding="UTF-8"?>
 <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/gmd.xsd">
   <gmd:fileIdentifier>
@@ -64,7 +67,7 @@
     </gmd:MD_ReferenceSystem>
   </gmd:referenceSystemInfo>
 </gmd:MD_Metadata>
-</textarea></pre>
+</textarea>
 <button type="button" class="btn btn-danger collapse show multi-collapse" id="warnButton" data-bs-toggle="modal" data-bs-target="#xmlWarn">{{_("enable custom xml")}}</button>
 <div class="modal fade" id="xmlWarn" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">

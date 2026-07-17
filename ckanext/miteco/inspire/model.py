@@ -105,9 +105,28 @@ class InspireHandler(DomainObject):
         if md5:
             return query.filter_by(md5=md5).first()
         elif uuid:
-            return query.filter_by(uuid=uuid).order_by(sa.sql.text('inspire_xml desc')).first()
+            return query.filter_by(uuid=uuid).order_by(sa.sql.text('inspire_xml.time desc')).first()
         else:
             raise ValueError
+
+    @classmethod
+    def list(cls, uuid=None, offset=0) -> any:
+        """lists all versions of a specific UUID or all documents with an offset"""
+        query = model.Session.query(cls).autoflush(False).with_entities(getattr(cls, 'md5'),getattr(cls, 'uuid'),getattr(cls, 'time'))
+        if uuid:
+            return query.filter_by(uuid=uuid).order_by(sa.sql.text('inspire_xml.time desc')).all()
+        else:
+            return query.order_by(sa.sql.text('inspire_xml.time desc')).limit(20).offset(offset).all()
+
+    @classmethod
+    def delete(cls, md5=None) -> any:
+        """deletes a single spatial document from the database"""
+        delete = model.Session.delete(cls)
+        if md5:
+            return delete.where(getattr(cls,"md5")==md5)
+        else:
+            raise ValueError
+
 
 def setDocument(uuid, xml):
     """
@@ -133,6 +152,15 @@ def setDocument(uuid, xml):
         log.error("Error loading spatial xml: %s", e)
         model.Session.rollback()
 
+def delete_document(md5):
+    """
+    deletes a single spatial document from the database
+    attacks the md5 hash
+    """
+    pass
+
+
+
 def table_dictize(obj_or_list, context):
     """
     Converts a model object or a list of model objects into a dictionary or a list of dictionaries.
@@ -151,6 +179,7 @@ def table_dictize(obj_or_list, context):
     """
     def dictize(obj):
         result_dict = {}
+        log.debug(obj)
 
         if isinstance(obj, Row):
             fields = obj.keys()
