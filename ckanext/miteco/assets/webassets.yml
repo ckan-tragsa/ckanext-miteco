@@ -33,5 +33,15 @@ highlight-css:
   filter: cssrewrite
   output: ckanext-miteco/%(version)s-highlight.css
   contents:
-    - vendor/highlight/styles/default.min.css 
+    - vendor/highlight/styles/default.min.css
+
+miteco-xml-viewer:
+  filter: rjsmin
+  output: ckanext-miteco/%(version)s-xmlviewer.js
+  contents:
+    - js/xmlViewer.js
+  extra:
+    preload:
+      - ckanext-miteco/highlight
+      - ckanext-miteco/miteco-xml-load
 

@@ -1,6 +1,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import url('/catalogo/static/fonts/icomoon.ttf');
 
+/* ── Inspire XML viewer buttons ───────────────────────────────────────────── */
+.btn-miteco-primary {
+    color: #fff;
+    background-color: var(--sct-primary-color);
+    border-color: var(--sct-primary-color);
+}
+.btn-miteco-primary:hover, .btn-miteco-primary:focus {
+    color: #fff;
+    background-color: var(--miteco-flag-primary-color);
+    border-color: var(--miteco-flag-primary-color);
+}
+.btn-miteco-secondary {
+    color: #fff;
+    background-color: var(--sct-secondary-color);
+    border-color: var(--sct-secondary-color);
+}
+.btn-miteco-secondary:hover, .btn-miteco-secondary:focus {
+    color: #fff;
+    background-color: #236f87;
+    border-color: #236f87;
+}
+.btn-miteco-secondary-outline {
+    color: var(--sct-secondary-color);
+    background-color: transparent;
+    border-color: var(--sct-secondary-color);
+}
+.btn-miteco-secondary-outline:hover, .btn-miteco-secondary-outline:focus {
+    color: #fff;
+    background-color: var(--sct-secondary-color);
+    border-color: var(--sct-secondary-color);
+}
+.btn-miteco-primary-outline {
+    color: var(--sct-primary-color);
+    background-color: transparent;
+    border-color: var(--sct-primary-color);
+}
+.btn-miteco-primary-outline:hover, .btn-miteco-primary-outline:focus {
+    color: #fff;
+    background-color: var(--sct-primary-color);
+    border-color: var(--sct-primary-color);
+}
+
 :root {
     /* sct -> schemingdcat */
     --sct-primary-color: #ad1519; 
