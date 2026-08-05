@@ -18,7 +18,7 @@ miteco = Blueprint(u'miteco', __name__)
 def tags():
     return render_template('home/tags.html')
 
-miteco.add_url_rule('/miteco/tags/', view_func=tags)
+miteco.add_url_rule('/tags/', view_func=tags)
 
 
 #ESTAS FUNCIONES DEVUELVEN COMO TAL EL SERIALIZADO
@@ -41,8 +41,8 @@ def dataset_atom(_id):
 
 # 1 regla para el catalogo y otra para el dataset, cada una con su función correspondiente. 
 # La función catalog_atom genera el feed ATOM para el catálogo completo, mientras que dataset_atom genera el feed ATOM para un dataset específico identificado por su ID. Ambas funciones devuelven la respuesta HTTP con el contenido del feed y el tipo de contenido adecuado.
-miteco.add_url_rule('/miteco/catalog.atom', view_func=catalog_atom)
-miteco.add_url_rule('/miteco/dataset/<_id>.atom', view_func=dataset_atom)
+miteco.add_url_rule('/catalog.atom', view_func=catalog_atom)
+miteco.add_url_rule('/dataset/<_id>.atom', view_func=dataset_atom)
 
 
 # ── Inspire XML endpoints ────────────────────────────────────────────────────
@@ -66,7 +66,7 @@ def dataset_inspire_xml(_id):
     """
     Returns the latest stored Inspire XML document for a dataset.
 
-    GET /miteco/dataset/<slug-or-uuid>/xml
+    GET /dataset/<slug-or-uuid>/xml
     """
     uuid = _resolve_dataset_uuid(_id)
 
@@ -86,7 +86,7 @@ def dataset_inspire_xml_version(_id, _hash):
     """
     Returns a specific version of the Inspire XML document identified by its md5 hash.
 
-    GET /miteco/dataset/<slug-or-uuid>/xml/<md5-hash>
+    GET /dataset/<slug-or-uuid>/xml/<md5-hash>
     """
     _resolve_dataset_uuid(_id)  # authorisation + existence check
 
@@ -102,5 +102,5 @@ def dataset_inspire_xml_version(_id, _hash):
     return response
 
 
-miteco.add_url_rule('/miteco/dataset/<_id>/xml', view_func=dataset_inspire_xml)
-miteco.add_url_rule('/miteco/dataset/<_id>/xml/<_hash>', view_func=dataset_inspire_xml_version)
+miteco.add_url_rule('/dataset/<_id>/xml', view_func=dataset_inspire_xml)
+miteco.add_url_rule('/dataset/<_id>/xml/<_hash>', view_func=dataset_inspire_xml_version)

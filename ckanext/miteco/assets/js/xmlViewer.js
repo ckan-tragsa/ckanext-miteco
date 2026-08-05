@@ -91,7 +91,7 @@
     function loadVersion(datasetName, hash) {
         var url = window.location.origin +
             getSitePrefix() +
-            '/miteco/dataset/' + encodeURIComponent(datasetName) + '/xml/' + hash;
+            '/dataset/' + encodeURIComponent(datasetName) + '/xml/' + hash;
 
         fetch(url)
             .then(function (r) {

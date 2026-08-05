@@ -77,7 +77,7 @@ class AtomSerializer:
     def _add_dataset_entry(self, fg, dataset_dict, site_url):
 
         fe = fg.add_entry()
-        dataset_feed_url = f"{site_url}/catalogo/miteco/dataset/{dataset_dict['name']}.atom"
+        dataset_feed_url = f"{site_url}/catalogo/dataset/{dataset_dict['name']}.atom"
     
 
         # ID
@@ -122,11 +122,11 @@ class AtomSerializer:
     def serialize_dataset(self, dataset_dict, site_url):
         fg = FeedGenerator()
 
-        dataset_feed_url = f"{site_url}/catalogo/miteco/dataset/{dataset_dict['name']}.atom"
+        dataset_feed_url = f"{site_url}/catalogo/dataset/{dataset_dict['name']}.atom"
 
         dataset_url = f"{site_url}/catalogo/dataset/{dataset_dict['name']}"
     
-        catalog_url = f"{site_url}/catalogo/miteco/catalog.atom"
+        catalog_url = f"{site_url}/catalogo/catalog.atom"
 
         # ID → atom del dataset
         fg.id(dataset_feed_url)
@@ -177,7 +177,7 @@ class AtomSerializer:
     
         fg.id(catalog_url)
         fg.title(catalog_dict.get("title", "Catalog ATOM"))
-        fg.link(href=f"{catalog_url}/catalogo/miteco/catalog.atom", rel="self")
+        fg.link(href=f"{catalog_url}/catalogo/catalog.atom", rel="self")
         fg.language("es")
         fg.updated(datetime.now(tzutc()))
 
