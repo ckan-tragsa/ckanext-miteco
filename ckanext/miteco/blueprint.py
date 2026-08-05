@@ -18,7 +18,7 @@ miteco = Blueprint(u'miteco', __name__)
 def tags():
     return render_template('home/tags.html')
 
-miteco.add_url_rule('/tags/', view_func=tags)
+miteco.add_url_rule('/miteco/tags/', view_func=tags)
 
 
 #ESTAS FUNCIONES DEVUELVEN COMO TAL EL SERIALIZADO
@@ -41,8 +41,8 @@ def dataset_atom(_id):
 
 # 1 regla para el catalogo y otra para el dataset, cada una con su función correspondiente. 
 # La función catalog_atom genera el feed ATOM para el catálogo completo, mientras que dataset_atom genera el feed ATOM para un dataset específico identificado por su ID. Ambas funciones devuelven la respuesta HTTP con el contenido del feed y el tipo de contenido adecuado.
-miteco.add_url_rule('/catalog.atom', view_func=catalog_atom)
-miteco.add_url_rule('/dataset/<_id>.atom', view_func=dataset_atom)
+miteco.add_url_rule('/miteco/catalog.atom', view_func=catalog_atom)
+miteco.add_url_rule('/miteco/dataset/<_id>.atom', view_func=dataset_atom)
 
 
 # ── Inspire XML endpoints ────────────────────────────────────────────────────
