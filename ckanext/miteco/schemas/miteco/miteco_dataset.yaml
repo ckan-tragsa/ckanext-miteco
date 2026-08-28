@@ -11,7 +11,7 @@ schema_title: MITECO Metadata Profile
 schema_description: "Geospatial extension to the DCAT application profile for data portals in Europe (GeoDCAT-AP). It is adapted to the Spanish context and includes compatibility with the Technical Interoperability Standard (NTI-RISP), the open data profile for Spain: https://datos.gob.es/en/documentacion/guia-de-aplicacion-de-la-norma-tecnica-de-interoperabilidad-de-reutilizacion-de"
 schema_profile_version: 3.0.0
 schema_profile_url: https://semiceu.github.io/GeoDCAT-AP/releases/3.0.0
-before_validators: miteco_xsl_fill
+#before_validators:  miteco_xsl_fill
 schema_form_groups:
   # Basic Info parties form_page (#1)
   - form_group_id: title
@@ -4245,7 +4245,6 @@ dataset_fields:
   label: 
     en: Metadata identifier
     es: Identificador de los metadatos
-  validators: miteco_iso_validator
   form_snippet: schemingdcat/form_snippets/inspire_xml.html
   display_snippet: null
   required: False

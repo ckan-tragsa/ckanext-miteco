@@ -207,3 +207,6 @@ def miteco_get_calendar(datestr):
         return [date.day, cal.monthdayscalendar(date.year,date.month),date.strftime("%Y-%m")]
     except:
         return None
+
+
+

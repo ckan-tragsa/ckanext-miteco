@@ -70,7 +70,7 @@ class MitecoDCATAPProfile(EuGeoDCATAP2Profile, EuDCATAP3Profile, EuDCATAPSchemin
         return dataset_dict
     
     def _parse_dataset_miteco(self, dataset_dict, dataset_ref):
-        
+        #log.debug(dataset_dict)
         value = self.g.query("".join([RDF_PREFIX,
                              f"""
                                 SELECT ?id

@@ -143,7 +143,7 @@ def setDocument(uuid, xml):
         time=timestamp,
         xml=xml
     )
-    log.debug(f"{row}")
+    #log.debug(f"{row}")
     model.Session.add(row)
     try:
         model.Session.commit()
@@ -151,6 +151,7 @@ def setDocument(uuid, xml):
     except Exception as e:
         log.error("Error loading spatial xml: %s", e)
         model.Session.rollback()
+    return pk
 
 def delete_document(md5):
     """
@@ -179,7 +180,7 @@ def table_dictize(obj_or_list, context):
     """
     def dictize(obj):
         result_dict = {}
-        log.debug(obj)
+        #log.debug(obj)
 
         if isinstance(obj, Row):
             fields = obj.keys()

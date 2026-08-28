@@ -169,7 +169,7 @@ def miteco_uuid_identifier(field, schema):
             if id_value != identifier_value or id_value != name_value:
                 data[identifier_key] = id_value
                 data[name_key] = id_value
-
+        #log.debug(data)
     return validator
 
 @scheming_validator
@@ -247,10 +247,11 @@ def miteco_miteco_dataset_ogc_normalize(field, schema):
     Validator to detect OGC services and rewrite the URL to point towards GetCapabilities request
     """
     def validator(key, data, errors, context):
-        format = data[(key[0],key[1],'format')].upper()
-        if format in ["WMS","WFS","WMTS","WCS","WPS"]:
-            url = urlparse(data[key])
-            data[key] = url.scheme+"://"+url.netloc+url.path+"?request=GetCapabilities&service="+format
+        if data[(key[0],key[1],'format')]:
+            format = data[(key[0],key[1],'format')].upper()
+            if format in ["WMS","WFS","WMTS","WCS","WPS"]:
+                url = urlparse(data[key])
+                data[key] = url.scheme+"://"+url.netloc+url.path+"?request=GetCapabilities&service="+format
         
     return validator
 
@@ -330,7 +331,7 @@ def miteco_xsl_fill(field, schema):
                     data[('__extras',)][kextra] = data[kdict]
 
 
-        log.debug(data)
+        #log.debug(data[('topic',)])
         
 
     return validator

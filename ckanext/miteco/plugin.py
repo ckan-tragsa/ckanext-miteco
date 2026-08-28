@@ -11,6 +11,7 @@ from ckan import logic
 from ckanext.miteco import helpers, validators, blueprint, config
 import ckanext.miteco.logic.auth.ckan as ckan_auth 
 import ckanext.miteco.inspire.model as insp_model
+import ckanext.miteco.inspire.blueprint as insp_blueprint
 import ckanext.miteco.inspire.logic.action as inspire_api
 import ckanext.miteco.config as miteco_config
 from ckanext.miteco.lib.rdfParser import mitecoRDFParser
@@ -48,7 +49,7 @@ class MitecoPlugin(p.SingletonPlugin, DefaultTranslation):
 
     # Blueprints
     def get_blueprint(self):
-        return [blueprint.miteco]
+        return [blueprint.miteco, insp_blueprint.inspire]
 
     # Helpers
     def get_helpers(self):

@@ -26,3 +26,5 @@ for call_type in [create,delete,get,patch,update]:
             log.debug(f"added {function[0]} to api_call")
             api_call(function[1])
 
+
+
