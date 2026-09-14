@@ -340,10 +340,38 @@ def miteco_xsl_fill(field, schema):
 @validator
 def miteco_iso_validator(field, schema):
     """
-    TODO: use ckanext-spatial validators to validate provided xml, upload document to api and set the field to the document hash
+    Validates the ISO 19139 XML and persists it to the inspire_xml table for versioning.
+    The full XML is kept in the dataset field so the form can reload it correctly.
     """
     def validator(key, data, errors, context):
-        pass 
+        from ckantoolkit import missing as tk_missing
+        from lxml import etree
+        from ckanext.miteco.inspire import model as insp_model
+
+        xml_content = data.get(key)
+        if xml_content is tk_missing or not xml_content or not xml_content.strip():
+            return
+
+        # Validate well-formed XML
+        try:
+            etree.fromstring(xml_content.encode('utf-8'))
+        except etree.XMLSyntaxError as e:
+            errors[key].append(_('Invalid XML: %s') % str(e))
+            return
+
+        # Retrieve the dataset UUID (available on update, not on create before first save)
+        dataset_id = data.get(('id',))
+        if not dataset_id or dataset_id is tk_missing:
+            log.debug('miteco_iso_validator: no dataset id yet, skipping inspire_xml persistence')
+            return
+
+        # Persist the XML document to the versioned inspire_xml table
+        try:
+            insp_model.setDocument(str(dataset_id), xml_content)
+            log.debug('miteco_iso_validator: XML persisted for dataset %s', dataset_id)
+        except Exception as e:
+            log.error('miteco_iso_validator: error persisting XML for dataset %s: %s', dataset_id, e)
+
     return validator
 
 @scheming_validator

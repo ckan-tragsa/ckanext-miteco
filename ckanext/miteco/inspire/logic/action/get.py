@@ -53,12 +53,9 @@ def inspire_list_documents(context, data_dict):
         http://<your-ckan-instance>/api/3/action/inspire_list_documents?id=<document UUID>
         ```
     """
-    uuid = data_dict.get('id',None)
-    start = data_dict.get('start',None)
+    uuid = data_dict.get('id', None)
+    start = data_dict.get('start', 0)
 
     out = insp_model.InspireHandler.list(uuid=uuid, offset=start)
-    if out:
-        return insp_model.table_dictize(out, context)
-    else:
-        raise NotFound
+    return insp_model.table_dictize(out, context) if out else []
 

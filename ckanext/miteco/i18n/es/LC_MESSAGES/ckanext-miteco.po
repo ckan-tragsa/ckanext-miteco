@@ -346,5 +346,61 @@ msgstr ""
 msgid "Order by"
 msgstr ""
 
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "enable custom xml"
+msgstr "habilitar XML personalizado"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "Download XML"
+msgstr "Descargar XML"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "Take me back!"
+msgstr "¡Volver atrás!"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "Understood"
+msgstr "Entendido"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "custom xml enabled"
+msgstr "XML personalizado habilitado"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "import xml"
+msgstr "importar XML"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "Version history"
+msgstr "Historial de versiones"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "Date"
+msgstr "Fecha"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "No saved versions yet."
+msgstr "Aún no hay versiones guardadas."
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "do you want to continue?"
+msgstr "¿Desea continuar?"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "When this functionality is enabled the rest of the form gets ignored, use with caution. <br/>This exists for advanced users who want to fill inspire fields that aren't yet on the main metadata schema or want more control over their metadata"
+msgstr "Al habilitar esta funcionalidad, el resto del formulario se ignora. Úsela con precaución. <br/>Está destinada a usuarios avanzados que deseen rellenar campos INSPIRE que aún no están en el esquema principal de metadatos."
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "Modifiying this field will lock you out of using the form and you will be completely responsible of the contents of the inspire xml metadata."
+msgstr "Modificar este campo bloqueará el acceso al formulario y usted será completamente responsable del contenido del XML de metadatos INSPIRE."
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "This functionality is only a temporal measure to conform with the full inspire schema, and it's only meant for advanced users who are familiar with the iso19139 standard."
+msgstr "Esta funcionalidad es una medida temporal para cumplir con el esquema INSPIRE completo, y está destinada únicamente a usuarios avanzados familiarizados con el estándar ISO 19139."
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "this option can not be undone."
+msgstr "Esta acción no se puede deshacer."
+
 #~ msgid "Groups"
 #~ msgstr "Grupos"
