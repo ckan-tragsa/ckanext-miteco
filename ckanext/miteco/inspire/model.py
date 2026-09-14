@@ -5,6 +5,7 @@ from collections import defaultdict
 import logging
 from hashlib import md5
 import datetime as dt
+from ckanext.spatial.validation.validation import ISO19139Schema
 
 from six import text_type
 import sqlalchemy as sa

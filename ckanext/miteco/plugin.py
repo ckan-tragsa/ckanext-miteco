@@ -14,7 +14,9 @@ import ckanext.miteco.inspire.model as insp_model
 import ckanext.miteco.inspire.blueprint as insp_blueprint
 import ckanext.miteco.inspire.logic.action as inspire_api
 import ckanext.miteco.config as miteco_config
+from ckanext.miteco.validation.validation import ISO19139InspireSchema as inspireValidator
 from ckanext.miteco.lib.rdfParser import mitecoRDFParser
+from ckanext.spatial.interfaces import ISpatialHarvester
 
 
 log = logging.getLogger(__name__)
@@ -88,6 +90,7 @@ def _get_logic_functions(module_root, logic_functions={}):
 class InspirePlugin(p.SingletonPlugin, DefaultTranslation):
     p.implements(p.IActions)
     p.implements(p.IConfigurable)
+    p.implements(ISpatialHarvester)
 
     #IConfigurable
     def configure(self, config):
@@ -98,6 +101,16 @@ class InspirePlugin(p.SingletonPlugin, DefaultTranslation):
     def get_actions(self):
         log.debug(inspire_api.all_calls)
         return dict(inspire_api.all_calls)
+
+    #ISpatialHarvester
+    def get_package_dict(self, context, data_dict):
+        return data_dict['package_dict']
+
+    def get_validators(self):
+        return [inspireValidator]
+
+    def transform_to_iso(self, original_document, original_format, harvest_object):
+        return None
  
 def _get_logic_functions(module_root, logic_functions=None, decorator=None):
     """
@@ -136,3 +149,4 @@ def _get_logic_functions(module_root, logic_functions=None, decorator=None):
                     logic_functions[name] = obj
 
     return logic_functions
+
