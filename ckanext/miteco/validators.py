@@ -381,6 +381,6 @@ def miteco_boolean(field, schema):
     Checks if the field is "True" or "False"
     """
     def validator(key, data, errors, context):
-        data[key] = "True"
-        pass 
+        pass
+            
     return validator

@@ -14,18 +14,11 @@
     </div>
 </div>
 
-{# ── Toolbar: download button (only when XML is already saved) ── #}
-{% if current_xml and dataset_name %}
-<div class="d-flex gap-2 mb-2">
-    <button type="button" class="btn btn-sm btn-miteco-primary" id="xml-download-btn">
-        <i class="fa fa-download" aria-hidden="true"></i> {{_("Download XML")}}
-    </button>
-</div>
-{% endif %}
+
 
 {# ── Highlighted read-only preview (shown while textarea is readonly) ── #}
 <pre id="xml-preview-wrapper" class="p-0 mb-1" style="max-height:400px;overflow:auto;border:1px solid #dee2e6;border-radius:4px">
-<code id="xml-preview" class="language-xml" style="font-size:1.05em">{% if current_xml %}{{ current_xml }}{% else %}<?xml version="1.0" encoding="UTF-8"?>
+<code id="xml-preview" class="language-xml" style="font-size:1.05em">{% if current_xml %}{{ h.miteco_get_inspire(current_xml) }}{% else %}<?xml version="1.0" encoding="UTF-8"?>
 <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/gmd.xsd">
   <gmd:fileIdentifier>
     <gco:CharacterString>example-identifier</gco:CharacterString>
@@ -40,7 +33,7 @@
           data-dataset-id="{{ dataset_id }}"
           data-dataset-name="{{ dataset_name }}"
           {{ form.attributes(dict(
-          {"class": "form-control"}, **field.get('form_select_attrs', {}))) }}>{% if current_xml %}{{ current_xml }}{% else %}<?xml version="1.0" encoding="UTF-8"?>
+          {"class": "form-control"}, **field.get('form_select_attrs', {}))) }}>{% if current_xml %}{{ h.miteco_get_inspire(current_xml) }}{% else %}<?xml version="1.0" encoding="UTF-8"?>
 <gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/gmd.xsd">
   <gmd:fileIdentifier>
     <gco:CharacterString>example-identifier</gco:CharacterString>
@@ -123,6 +116,14 @@
 <div class="collapse multi-collapse" id="xmlUploadSection">
     <input id="field-xml-upload" type="file" name="upload" value="" placeholder="" class="form-control mt-2" accept=".xml">
     <button type="button" class="btn btn-link gy-4" id="loadButton" onclick="loadXml()"><i class="fa fa-upload" aria-hidden="true"></i>{{_("import xml")}}</button>
+    {# ── Toolbar: download button (only when XML is already saved) ── #}
+    {% if current_xml and dataset_name %}
+    <div class="d-flex gap-2 mb-2">
+        <button type="button" class="btn btn-sm btn-miteco-primary" id="xml-download-btn">
+            <i class="fa fa-download" aria-hidden="true"></i> {{_("Download XML")}}
+        </button>
+    </div>
+    {% endif %}
 </div>
 
 {# ── Version history panel (always rendered; JS hides it if no dataset id or no versions) ── #}

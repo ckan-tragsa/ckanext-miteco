@@ -5,6 +5,17 @@
   {{ h.build_nav_icon(dataset_type ~ '.groups', h.humanize_entity_type('group', default_group_type, 'content tab') or _('Groups'), id=pkg.name, icon='users') }}
 {% endblock %}
 
+{% block content_action %}
+  {% if h.check_access('package_update', {'id':pkg.id }) %}
+    {{ pkg.is_spatial_advanced }}
+    {% if pkg.is_spatial_advanced == 'True' %}
+      {% link_for _('Manage'), named_route='inspire.inspire_form', id=pkg.name, class_='btn btn-secondary', icon='book-atlas' %}
+    {% else %}
+      {% link_for _('Manage'), named_route=pkg.type ~ '.edit', id=pkg.name, class_='btn btn-secondary', icon='wrench' %}
+    {% endif %}
+  {% endif %}
+{% endblock %}
+
 {% block secondary_content %}
   {% block secondary_help_content %}{% endblock %}
 

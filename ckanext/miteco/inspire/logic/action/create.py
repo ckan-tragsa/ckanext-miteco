@@ -69,7 +69,7 @@ def inspire_push_document(context, data_dict):
     
     d, id_err = p.toolkit.navl_validate({"id":uuid}, {"id":[p.toolkit.get_validator("package_id_exists")]}, context)    
     if valid and not id_err:
-        p.toolkit.get_action('package_patch')(context, {'id':uuid,'spatial_advanced_xml':pk})
+        p.toolkit.get_action('package_patch')(context, {'id':uuid,'spatial_advanced_xml':pk,'is_spatial_advanced':'true'})
     
     if errors:
         return {'success':False, 'msg': f'{errors}'}
@@ -96,7 +96,7 @@ def xsl_fill(xml):
         parsed_dataset = list(parser.datasets())[0]
 
         #escribimos el MD5 en el campo que corresponde
-        parsed_dataset['is_spatial_advanced'] = True
+        parsed_dataset['is_spatial_advanced'] = 'True'
         return (parsed_dataset, errors)
     
     except Exception as e:
