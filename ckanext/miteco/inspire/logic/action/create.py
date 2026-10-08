@@ -44,6 +44,7 @@ def inspire_push_document(context, data_dict):
     uuid = data_dict.get('id')
     xml = data_dict.get('xml')
     org = data_dict.get('org')
+    update = data_dict.get('update')
     pk = insp_model.setDocument(uuid,xml)
 
     user_obj = model.User.get(user)
@@ -51,25 +52,25 @@ def inspire_push_document(context, data_dict):
     #hereda los permisos de package_create
     if not user_obj or not p.toolkit.check_access('package_create', context, {"id":uuid, "owner_org":org}):
         raise p.toolkit.NotAuthorized('User %s not authorized', user)
-
-    #Desactivamos esta funcionalidad hasta el sprint 2
-    '''
-    d, id_err = p.toolkit.navl_validate({"id":data['id']}, {"id":[p.toolkit.get_validator("package_id_exists")]}, context)    
-    data, errors = xsl_fill(xml)
-
-    data['spatial_advanced_xml'] = pk
-    data['owner_org'] =  org
-
-    if id_err:
-        p.toolkit.get_action('package_create')(context, data)
-    else: 
-        p.toolkit.get_action('package_update')(context, data)
-    '''
     valid, errors = validate_insp(xml)
-    
-    d, id_err = p.toolkit.navl_validate({"id":uuid}, {"id":[p.toolkit.get_validator("package_id_exists")]}, context)    
-    if valid and not id_err:
-        p.toolkit.get_action('package_patch')(context, {'id':uuid,'spatial_advanced_xml':pk,'is_spatial_advanced':'true'})
+
+    if update:   
+        data, errors = xsl_fill(xml)
+
+        data['spatial_advanced_xml'] = pk
+        data['owner_org'] =  org
+
+        d, id_err = p.toolkit.navl_validate({"id":data['id']}, {"id":[p.toolkit.get_validator("package_id_exists")]}, context) 
+
+        if id_err:
+            p.toolkit.get_action('package_create')(context, data)
+        else: 
+            p.toolkit.get_action('package_update')(context, data)
+        
+    else:        
+        d, id_err = p.toolkit.navl_validate({"id":uuid}, {"id":[p.toolkit.get_validator("package_id_exists")]}, context)    
+        if valid and not id_err:
+            p.toolkit.get_action('package_patch')(context, {'id':uuid,'spatial_advanced_xml':pk,'is_spatial_advanced':'true'})
     
     if errors:
         return {'success':False, 'msg': f'{errors}'}

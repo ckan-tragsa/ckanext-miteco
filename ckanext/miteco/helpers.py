@@ -4,6 +4,7 @@ import typing
 import datetime
 import calendar
 from functools import lru_cache
+from os import listdir
 
 import ckan.lib.helpers as h
 import ckan.plugins as p
@@ -208,5 +209,15 @@ def miteco_get_calendar(datestr):
     except:
         return None
 
+@helper
+def miteco_get_inspire(id):
+    context = {'model': model, 'session': model.Session}
+    try:
+        log.debug(id)
+        return p.toolkit.get_action('inspire_get_document')(context, {'hash':id})['xml']
+    except:
+        return None
 
-
+@helper 
+def miteco_read_log(route):
+    h.get

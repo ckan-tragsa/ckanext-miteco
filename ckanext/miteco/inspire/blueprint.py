@@ -9,7 +9,8 @@ from ckanext.miteco import utils
 
 from logging import getLogger
 
-logger = getLogger(__name__)
+
+log = getLogger(__name__)
 
 inspire = Blueprint(u'inspire', __name__,
                     url_prefix=u'/inspire')
@@ -17,11 +18,13 @@ inspire = Blueprint(u'inspire', __name__,
 @inspire.route(u'/dataset/new',defaults={'id':''})
 @inspire.route(u'/dataset/<id>')
 def inspire_form(id):
+    log.debug(id)
+    context = {'model': model, 'session': model.Session}
     try:
-        package = toolkit.get_action("package_get")({"id":id})
-        package['Type'] = 'dataset'
+        package = toolkit.get_action("package_show")(context,{"id":id})
     except:
         package = {}
+        log.debug("pipopipopi")
 
     return toolkit.render('miteco/inspire.html',extra_vars={u'pkg_dict':package,
                                                             u'form_vars':{u'field':{u'field_name':"spatial_advanced_xml"}},
