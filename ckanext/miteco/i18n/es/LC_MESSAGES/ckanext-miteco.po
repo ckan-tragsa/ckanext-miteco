@@ -402,5 +402,32 @@ msgstr "Esta funcionalidad es una medida temporal para cumplir con el esquema IN
 msgid "this option can not be undone."
 msgstr "Esta acción no se puede deshacer."
 
-#~ msgid "Groups"
-#~ msgstr "Grupos"
+#: ckanext/miteco/templates/miteco/snippets/miteco_dataset_info.html
+msgid "View INSPIRE XML"
+msgstr "Ver XML INSPIRE"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "Download XML"
+msgstr "Descargar XML"
+
+#: ckanext/miteco/templates/miteco/snippets/miteco_dataset_info.html
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html
+msgid "INSPIRE Metadata"
+msgstr "Metadatos INSPIRE"
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html
+msgid "Geospatial XML"
+msgstr "XML geoespacial"
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html
+msgid "INSPIRE (ISO 19139)"
+msgstr "INSPIRE (ISO 19139)"
+
+#: ckanext/miteco/templates/package/read_base.html
+msgid "XML INSPIRE"
+msgstr "XML INSPIRE"
+
+#: ckanext/miteco/templates/snippets/add_dataset.html:9
+#: ckanext/miteco/templates/snippets/add_dataset.html:12
+msgid "import from INSPIRE XML"
+msgstr "Importar desde XML INSPIRE"

@@ -81,6 +81,16 @@
                 {% for field in filtered_fields %}
                     {{ render_field(field, user_has_role) }}
                 {% endfor %}
+                {% if h.miteco_has_inspire_xml(pkg_dict) %}
+                <tr>
+                    <td>{{ _('INSPIRE Metadata') }}</td>
+                    <td>
+                        <a href="{{ h.url_for('miteco.dataset_inspire_xml', _id=pkg_dict.get('name') or pkg_dict.get('id')) }}" target="_blank" class="btn btn-sm btn-outline-primary">
+                            <i class="fa fa-file-code"></i> {{ _('View INSPIRE XML') }}
+                        </a>
+                    </td>
+                </tr>
+                {% endif %}
             </tbody>
         </table>
     </section>

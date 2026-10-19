@@ -3,6 +3,6 @@
 
 {% block primary_content_inner %}
     {% block form %}
-        {{- h.snippet(form_snippet, pkg_dict=pkg_dict, **form_vars) -}}
+        {{- h.snippet(form_snippet, data=data, pkg_dict=pkg_dict, is_inspire_form=True, **form_vars) -}}
     {% endblock %}
 {% endblock %}

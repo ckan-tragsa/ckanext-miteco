@@ -211,13 +211,47 @@ def miteco_get_calendar(datestr):
 
 @helper
 def miteco_get_inspire(id):
+    if not id:
+        return None
+    # Si el valor ya es un documento XML en texto, devolverlo directamente
+    if isinstance(id, str) and id.strip().startswith('<'):
+        return id
     context = {'model': model, 'session': model.Session}
     try:
         log.debug(id)
-        return p.toolkit.get_action('inspire_get_document')(context, {'hash':id})['xml']
-    except:
+        return p.toolkit.get_action('inspire_get_document')(context, {'hash': id})['xml']
+    except Exception:
         return None
+
+@helper
+def miteco_has_inspire_xml(pkg):
+    """
+    Checks if a dataset has an associated INSPIRE XML.
+    Returns True if spatial_advanced_xml has a value or is_spatial_advanced is true.
+    """
+    if not pkg:
+        return False
+    if isinstance(pkg, dict):
+        is_spatial = pkg.get('is_spatial_advanced')
+        xml_id = pkg.get('spatial_advanced_xml')
+        if not xml_id and 'extras' in pkg:
+            for extra in pkg.get('extras') or []:
+                if isinstance(extra, dict):
+                    if extra.get('key') == 'spatial_advanced_xml':
+                        xml_id = extra.get('value')
+                    elif extra.get('key') == 'is_spatial_advanced':
+                        is_spatial = extra.get('value')
+    else:
+        is_spatial = getattr(pkg, 'is_spatial_advanced', False)
+        xml_id = getattr(pkg, 'spatial_advanced_xml', None)
+
+    if xml_id and str(xml_id).strip() and str(xml_id).strip() not in ('None', 'null', 'false', 'False', ''):
+        return True
+    if is_spatial and h.asbool(is_spatial):
+        return True
+    return False
 
 @helper 
 def miteco_read_log(route):
     h.get
+

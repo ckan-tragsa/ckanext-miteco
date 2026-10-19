@@ -1,10 +1,7 @@
 import ckan.model as model
 import ckan.lib.base as base
 import ckan.logic as logic
-from flask import Blueprint
-from flask import render_template
-from flask import make_response
-from flask import abort
+from flask import Blueprint, render_template, make_response, abort, request  # type: ignore
 from ckanext.miteco import utils
 from ckanext.miteco.inspire import model as insp_model
 
@@ -47,19 +44,26 @@ miteco.add_url_rule('/miteco/dataset/<_id>.atom', view_func=dataset_atom)
 
 # ── Inspire XML endpoints ────────────────────────────────────────────────────
 
-def _resolve_dataset_uuid(_id):
+def _resolve_dataset(_id):
     """
-    Given a dataset slug or UUID, returns the canonical UUID.
-    Raises 404 if the dataset does not exist or the user cannot read it.
+    Given a dataset slug or UUID, returns the package dict.
+    Raises 404 if the dataset does not exist or 403 if user cannot read it.
     """
     try:
         context = {'ignore_auth': False}
-        pkg = get_action('package_show')(context, {'id': _id})
-        return pkg['id']
+        return get_action('package_show')(context, {'id': _id})
     except logic.NotFound:
         abort(404)
     except logic.NotAuthorized:
         abort(403)
+
+
+def _resolve_dataset_uuid(_id):
+    """
+    Given a dataset slug or UUID, returns the canonical UUID.
+    """
+    pkg = _resolve_dataset(_id)
+    return pkg['id']
 
 
 def dataset_inspire_xml(_id):
@@ -68,16 +72,23 @@ def dataset_inspire_xml(_id):
 
     GET /dataset/<slug-or-uuid>/xml
     """
-    uuid = _resolve_dataset_uuid(_id)
+    pkg = _resolve_dataset(_id)
+    uuid = pkg['id']
 
     doc = insp_model.InspireHandler.get(uuid=uuid)
+    if not doc and pkg.get('spatial_advanced_xml'):
+        doc = insp_model.InspireHandler.get(md5=pkg['spatial_advanced_xml'])
+
     if not doc:
         abort(404)
+
+    is_download = request.args.get('download', 'false').lower() in ('true', '1')
+    disposition = 'attachment' if is_download else 'inline'
 
     response = make_response(doc.xml)
     response.headers['Content-Type'] = 'application/xml; charset=utf-8'
     response.headers['Content-Disposition'] = (
-        'inline; filename="{}.xml"'.format(_id)
+        '{}; filename="{}.xml"'.format(disposition, _id)
     )
     return response
 
@@ -94,10 +105,13 @@ def dataset_inspire_xml_version(_id, _hash):
     if not doc:
         abort(404)
 
+    is_download = request.args.get('download', 'false').lower() in ('true', '1')
+    disposition = 'attachment' if is_download else 'inline'
+
     response = make_response(doc.xml)
     response.headers['Content-Type'] = 'application/xml; charset=utf-8'
     response.headers['Content-Disposition'] = (
-        'inline; filename="{}-{}.xml"'.format(_id, _hash[:8])
+        '{}; filename="{}-{}.xml"'.format(disposition, _id, _hash[:8])
     )
     return response
 

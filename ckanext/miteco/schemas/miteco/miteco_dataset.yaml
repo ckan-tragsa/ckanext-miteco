@@ -258,6 +258,13 @@ schema_form_tabs:
     form_group_id:
       - spatial_info
       - inspire
+  - form_tab: spatial_advanced
+    tab_type: dataset_fields
+    label:
+      en: Advanced spatial
+      es: Espacial avanzado
+    form_group_id:
+      - spatial_xml_metadata
   - form_tab: license_tab
     tab_type: dataset_fields
     label:
@@ -4226,6 +4233,7 @@ dataset_fields:
     en: State of spatial advanced metadata
     es: Estado de los metadatos espaciales avanzados
   validators: default(False) miteco_boolean
+  form_snippet: schemingdcat/form_snippets/spatial_advanced.html
   display_snippet: null
   required: False
   form_group_id: spatial_xml_metadata
@@ -4238,6 +4246,7 @@ dataset_fields:
   label: 
     en: Metadata identifier
     es: Identificador de los metadatos
+  form_snippet: schemingdcat/form_snippets/inspire_xml.html
   display_snippet: null
   required: False
   form_group_id: spatial_xml_metadata

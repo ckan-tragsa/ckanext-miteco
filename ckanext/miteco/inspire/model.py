@@ -111,11 +111,20 @@ class InspireHandler(DomainObject):
             raise ValueError
 
     @classmethod
-    def list(cls, uuid=None, offset=0) -> any:
-        """lists all versions of a specific UUID or all documents with an offset"""
-        query = model.Session.query(cls).autoflush(False).with_entities(getattr(cls, 'md5'),getattr(cls, 'uuid'),getattr(cls, 'time'))
+    def list(cls, uuid=None, offset=0, candidates=None) -> any:
+        """lists all versions of a specific UUID, candidates, or all documents with an offset"""
+        query = model.Session.query(cls).autoflush(False).with_entities(
+            getattr(cls, 'md5'), getattr(cls, 'uuid'), getattr(cls, 'time')
+        )
+        all_candidates = set()
+        if candidates:
+            all_candidates.update([str(c) for c in candidates if c])
         if uuid:
-            return query.filter_by(uuid=uuid).order_by(sa.sql.text('inspire_xml.time desc')).all()
+            all_candidates.add(str(uuid))
+
+        if all_candidates:
+            conds = [getattr(cls, 'uuid') == c for c in all_candidates]
+            return query.filter(sa.or_(*conds)).order_by(sa.sql.text('inspire_xml.time desc')).all()
         else:
             return query.order_by(sa.sql.text('inspire_xml.time desc')).limit(20).offset(offset).all()
 
@@ -136,7 +145,7 @@ def setDocument(uuid, xml):
     This is meant to keep copies of old versions of the spatial document in the database
     """
     timestamp = dt.datetime.now()
-    hashstring = uuid + timestamp.isoformat()
+    hashstring = str(uuid or '') + timestamp.isoformat()
     pk = md5(hashstring.encode("utf8"),usedforsecurity=False).hexdigest()
     row = InspireHandler(
         md5=pk,
@@ -192,6 +201,8 @@ def table_dictize(obj_or_list, context):
 
         for field in fields:
             value = getattr(obj, field)
+            if hasattr(value, 'isoformat'):
+                value = value.isoformat()
             result_dict[field] = value
 
         return result_dict

@@ -340,35 +340,54 @@ def miteco_xsl_fill(field, schema):
 @validator
 def miteco_iso_validator(field, schema):
     """
-    Validates the ISO 19139 XML and persists it to the inspire_xml table for versioning.
-    The full XML is kept in the dataset field so the form can reload it correctly.
+    Validates the ISO 19139 XML against INSPIRE schemas and persists it
+    to the inspire_xml table for versioning.
     """
     def validator(key, data, errors, context):
         from ckantoolkit import missing as tk_missing
         from lxml import etree
         from ckanext.miteco.inspire import model as insp_model
+        from ckanext.spatial.harvesters import SpatialHarvester
 
         xml_content = data.get(key)
-        if xml_content is tk_missing or not xml_content or not xml_content.strip():
+        if xml_content is tk_missing or not xml_content or not str(xml_content).strip():
             return
 
-        # Validate well-formed XML
+        xml_str = str(xml_content).strip()
+        from ckanext.miteco.inspire.logic.action.create import extract_md_metadata
+        xml_str = extract_md_metadata(xml_str)
+        data[key] = xml_str
+
+        # 1. Validar sintaxis XML básica
         try:
-            etree.fromstring(xml_content.encode('utf-8'))
+            xml_element = etree.fromstring(xml_str.encode('utf-8'))
         except etree.XMLSyntaxError as e:
-            errors[key].append(_('Invalid XML: %s') % str(e))
+            errors[key].append(_('Invalid XML syntax: %s') % str(e))
             return
 
-        # Retrieve the dataset UUID (available on update, not on create before first save)
+        # 2. Validar esquema formal INSPIRE (ckanext-spatial)
+        try:
+            from ckanext.miteco.inspire.logic.action.create import validate_insp
+            is_valid, val_errors = validate_insp(xml_str)
+            if not is_valid and val_errors:
+                for err in val_errors:
+                    errors[key].append(_('INSPIRE validation error: %s') % str(err))
+                return
+        except Exception as e:
+            log.warning('Could not run spatial validator on field %s: %s', key, e)
+
+        # 3. Obtener o asignar el UUID del dataset para vincular el registro en la BD
         dataset_id = data.get(('id',))
         if not dataset_id or dataset_id is tk_missing:
-            log.debug('miteco_iso_validator: no dataset id yet, skipping inspire_xml persistence')
-            return
+            dataset_id = str(uuid.uuid4())
+            data[('id',)] = dataset_id
+            log.debug('miteco_iso_validator: assigned new dataset id %s for inspire_xml persistence', dataset_id)
 
-        # Persist the XML document to the versioned inspire_xml table
+        # 4. Persistir el documento XML versionado en inspire_xml
         try:
-            insp_model.setDocument(str(dataset_id), xml_content)
-            log.debug('miteco_iso_validator: XML persisted for dataset %s', dataset_id)
+            pk = insp_model.setDocument(str(dataset_id), xml_str)
+            data[('is_spatial_advanced',)] = 'true'
+            log.debug('miteco_iso_validator: XML persisted for dataset %s with hash %s', dataset_id, pk)
         except Exception as e:
             log.error('miteco_iso_validator: error persisting XML for dataset %s: %s', dataset_id, e)
 

@@ -28,12 +28,16 @@
      */
     function getSitePrefix() {
         var path = window.location.pathname;
-        var datasetPos = path.indexOf('/dataset/');
-        if (datasetPos < 0) return '';
-        var prefix = path.substring(0, datasetPos);
-        // Remove trailing language code if present (/es, /ca, /en, etc.)
-        prefix = prefix.replace(/\/[a-z]{2}$/, '');
-        return prefix;
+        var inspirePos = path.indexOf('/inspire/');
+        if (inspirePos >= 0) {
+            path = path.substring(0, inspirePos);
+        } else {
+            var datasetPos = path.indexOf('/dataset/');
+            if (datasetPos >= 0) {
+                path = path.substring(0, datasetPos);
+            }
+        }
+        return path.replace(/\/[a-z]{2}$/, '').replace(/\/$/, '');
     }
 
     // ── Syntax highlighting ──────────────────────────────────────────────────
@@ -89,8 +93,9 @@
     }
 
     function loadVersion(datasetName, hash) {
+        var prefix = getSitePrefix();
         var url = window.location.origin +
-            getSitePrefix() +
+            prefix +
             '/dataset/' + encodeURIComponent(datasetName) + '/xml/' + hash;
 
         fetch(url)
@@ -124,6 +129,7 @@
 
         if (!versions || versions.length === 0) {
             if (empty) empty.style.display = '';
+            tbody.innerHTML = '';
             return;
         }
 
@@ -132,10 +138,11 @@
 
         versions.forEach(function (v, index) {
             var tr = document.createElement('tr');
-            var label = index === 0 ? '<span class="badge bg-success ms-1">actual</span>' : '';
+            var label = index === 0 ? ' <span class="badge bg-success ms-1">actual</span>' : '';
+            var hashStr = v.md5 ? v.md5.substring(0, 12) + '…' : '—';
             tr.innerHTML =
                 '<td>' + formatDate(v.time) + label + '</td>' +
-                '<td><code style="font-size:0.75em">' + v.md5.substring(0, 12) + '…</code></td>' +
+                '<td><code style="font-size:0.75em">' + hashStr + '</code></td>' +
                 '<td>' +
                     '<button type="button" class="btn btn-sm btn-outline-secondary" ' +
                     'data-hash="' + v.md5 + '">' +
@@ -158,19 +165,25 @@
 
         var datasetId   = panel.getAttribute('data-dataset-id');
         var datasetName = panel.getAttribute('data-dataset-name');
-        if (!datasetId) return;  // new dataset, no versions yet
+        var targetId    = datasetId || datasetName;
+        if (!targetId || targetId === 'new') return;  // new dataset, no versions yet
 
-        panel.style.display = '';
+        var prefix = getSitePrefix();
+        var apiUrl = prefix + '/api/3/action/inspire_list_documents?id=' + encodeURIComponent(targetId);
 
-        fetch(getSitePrefix() + '/api/3/action/inspire_list_documents?id=' + encodeURIComponent(datasetId))
-            .then(function (r) { return r.json(); })
+        fetch(apiUrl)
+            .then(function (r) {
+                if (!r.ok) throw new Error('HTTP ' + r.status);
+                return r.json();
+            })
             .then(function (data) {
-                if (data.success) {
-                    renderHistory(data.result, datasetName);
+                if (data.success && data.result) {
+                    renderHistory(data.result, datasetName || datasetId);
+                    panel.style.display = '';
                 }
             })
-            .catch(function () {
-                panel.style.display = 'none';
+            .catch(function (err) {
+                console.warn('Could not load inspire XML version history:', err);
             });
     }
 

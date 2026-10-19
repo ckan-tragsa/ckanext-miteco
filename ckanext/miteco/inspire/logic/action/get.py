@@ -36,26 +36,30 @@ def inspire_get_document(context, data_dict):
 @side_effect_free
 def inspire_list_documents(context, data_dict):
     """
-    Retrieve a list of all versions of a specific UUID.
-
-    Args:
-        context (dict): The context of the API call.
-        data_dict (dict): A dictionary containing the parameters for the API call.
-            id (str): The ID of the document to retrieve
-            start (int): offset of docuements to retrieve
-
-    Returns:
-        list: the raw XML string
-
-    Example:
-        To use this API, you can make a GET request to the following URL:
-        ```
-        http://<your-ckan-instance>/api/3/action/inspire_list_documents?id=<document UUID>
-        ```
+    Retrieve a list of all versions of a specific dataset or UUID.
     """
-    uuid = data_dict.get('id', None)
+    target_id = data_dict.get('id', None)
     start = data_dict.get('start', 0)
 
-    out = insp_model.InspireHandler.list(uuid=uuid, offset=start)
+    candidates = set()
+    if target_id:
+        candidates.add(str(target_id))
+        try:
+            from ckan import model
+            pkg = model.Package.get(target_id)
+            if pkg:
+                if pkg.id:
+                    candidates.add(str(pkg.id))
+                if pkg.name:
+                    candidates.add(str(pkg.name))
+                # Si el paquete tiene un hash MD5 asociado, buscar también el registro del documento
+                if getattr(pkg, 'spatial_advanced_xml', None):
+                    cur_doc = insp_model.InspireHandler.get(md5=pkg.spatial_advanced_xml)
+                    if cur_doc and cur_doc.uuid:
+                        candidates.add(str(cur_doc.uuid))
+        except Exception:
+            pass
+
+    out = insp_model.InspireHandler.list(candidates=list(candidates), offset=start)
     return insp_model.table_dictize(out, context) if out else []
 
