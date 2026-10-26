@@ -403,6 +403,10 @@ msgid "this option can not be undone."
 msgstr "Esta acción no se puede deshacer."
 
 #: ckanext/miteco/templates/miteco/snippets/miteco_dataset_info.html
+msgid "View XML"
+msgstr "Visualizar XML"
+
+#: ckanext/miteco/templates/miteco/snippets/miteco_dataset_info.html
 msgid "View INSPIRE XML"
 msgstr "Ver XML INSPIRE"
 
@@ -431,3 +435,39 @@ msgstr "XML INSPIRE"
 #: ckanext/miteco/templates/snippets/add_dataset.html:12
 msgid "import from INSPIRE XML"
 msgstr "Importar desde XML INSPIRE"
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html
+msgid "INSPIRE XML Template (ISO 19139)"
+msgstr "Plantilla XML INSPIRE (ISO 19139)"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "Download INSPIRE XML template"
+msgstr "Descargar plantilla XML INSPIRE"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "Active INSPIRE Metadata"
+msgstr "Metadatos INSPIRE activos"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "This dataset uses custom advanced spatial metadata."
+msgstr "Este conjunto de datos utiliza metadatos espaciales avanzados personalizados."
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "INSPIRE Template Preview (Draft)"
+msgstr "Previsualización de plantilla INSPIRE"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "Template automatically generated from current metadata. To activate it, download the file, edit if necessary and import it."
+msgstr "Plantilla calculada automáticamente con los metadatos actuales. Para activarla, descargue el fichero, ajústelo si es necesario e impórtelo."
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "Create dataset from INSPIRE XML"
+msgstr "Crear conjunto de datos desde XML INSPIRE"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "Select an ISO 19139 / INSPIRE XML file to create and automatically populate the new dataset."
+msgstr "Seleccione un archivo XML ISO 19139 / INSPIRE para crear y completar automáticamente el nuevo conjunto de datos."
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "Keep current form data and only complement with spatial metadata"
+msgstr "Conservar datos actuales del formulario y solo complementar con metadatos espaciales"

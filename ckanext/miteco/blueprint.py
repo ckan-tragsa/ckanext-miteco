@@ -69,23 +69,51 @@ def _resolve_dataset_uuid(_id):
 def dataset_inspire_xml(_id):
     """
     Returns the latest stored Inspire XML document for a dataset.
+    If the dataset does not yet have a stored XML document, it automatically generates
+    and persists a valid ISO 19139 INSPIRE document using the generator.
 
     GET /dataset/<slug-or-uuid>/xml
     """
     pkg = _resolve_dataset(_id)
     uuid = pkg['id']
 
-    doc = insp_model.InspireHandler.get(uuid=uuid)
-    if not doc and pkg.get('spatial_advanced_xml'):
-        doc = insp_model.InspireHandler.get(md5=pkg['spatial_advanced_xml'])
-
+    xml_key = pkg.get('spatial_advanced_xml')
+    doc = None
+    if xml_key:
+        doc = insp_model.InspireHandler.get(md5=xml_key)
     if not doc:
+        doc = insp_model.InspireHandler.get(uuid=uuid)
+    if not doc and pkg.get('name'):
+        doc = insp_model.InspireHandler.get(uuid=pkg['name'])
+
+    xml_content = None
+    if doc and doc.xml:
+        from ckanext.miteco.inspire.generator import sync_xml_with_package
+        xml_content = sync_xml_with_package(doc.xml, pkg)
+    else:
+        from ckanext.miteco.inspire.generator import generate_inspire_xml, render_inspire_xml
+        success, res, errors = generate_inspire_xml(pkg, persist=True)
+        if success:
+            saved_doc = insp_model.InspireHandler.get(uuid=uuid)
+            if not saved_doc and res:
+                saved_doc = insp_model.InspireHandler.get(uuid=res)
+            if saved_doc and saved_doc.xml:
+                xml_content = saved_doc.xml
+            elif isinstance(res, str) and res.strip().startswith('<'):
+                xml_content = res
+        else:
+            try:
+                xml_content = render_inspire_xml(pkg)
+            except Exception as e_rend:
+                logger.warning(f"Error rendering inspire template for {_id}: {e_rend}")
+
+    if not xml_content:
         abort(404)
 
     is_download = request.args.get('download', 'false').lower() in ('true', '1')
     disposition = 'attachment' if is_download else 'inline'
 
-    response = make_response(doc.xml)
+    response = make_response(xml_content)
     response.headers['Content-Type'] = 'application/xml; charset=utf-8'
     response.headers['Content-Disposition'] = (
         '{}; filename="{}.xml"'.format(disposition, _id)

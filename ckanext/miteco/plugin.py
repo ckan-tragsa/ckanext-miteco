@@ -91,6 +91,7 @@ class InspirePlugin(p.SingletonPlugin, DefaultTranslation):
     p.implements(p.IActions)
     p.implements(p.IConfigurable)
     p.implements(ISpatialHarvester)
+    p.implements(p.IPackageController, inherit=True)
 
     #IConfigurable
     def configure(self, config):
@@ -111,6 +112,79 @@ class InspirePlugin(p.SingletonPlugin, DefaultTranslation):
 
     def transform_to_iso(self, original_document, original_format, harvest_object):
         return None
+
+    # IPackageController
+    def after_dataset_create(self, context, data_dict):
+        self._ensure_inspire_xml(context, data_dict)
+
+    def after_dataset_update(self, context, data_dict):
+        self._ensure_inspire_xml(context, data_dict)
+
+    def _ensure_inspire_xml(self, context, data_dict):
+        if not data_dict:
+            return
+        if context and context.get('_inspire_pushing'):
+            return
+        # Si ya dispone de XML avanzado, sincronizar los campos de formulario (título, resumen, etc.)
+        xml_key = data_dict.get('spatial_advanced_xml')
+        is_adv = data_dict.get('is_spatial_advanced')
+        if not xml_key and 'extras' in data_dict:
+            for extra in data_dict.get('extras') or []:
+                if isinstance(extra, dict):
+                    if extra.get('key') == 'spatial_advanced_xml':
+                        xml_key = extra.get('value')
+                    elif extra.get('key') == 'is_spatial_advanced':
+                        is_adv = extra.get('value')
+
+        if xml_key and (p.toolkit.asbool(is_adv) or str(xml_key).strip()):
+            try:
+                from ckanext.miteco.inspire import model as insp_model
+                from ckanext.miteco.inspire.generator import sync_xml_with_package
+                doc = insp_model.InspireHandler.get(md5=xml_key)
+                if not doc:
+                    doc = insp_model.InspireHandler.get(uuid=data_dict.get('id'))
+                if doc and doc.xml:
+                    synced_xml = sync_xml_with_package(doc.xml, data_dict)
+                    if synced_xml and synced_xml.strip() != doc.xml.strip():
+                        new_pk = insp_model.setDocument(data_dict.get('id'), synced_xml)
+                        pkg_id = data_dict.get('id')
+                        if pkg_id:
+                            pkg_m = model.Package.get(pkg_id)
+                            if pkg_m:
+                                updated_extra = False
+                                for extra in pkg_m.extras_list:
+                                    if extra.key == 'spatial_advanced_xml':
+                                        extra.value = new_pk
+                                        updated_extra = True
+                                        break
+                                if not updated_extra:
+                                    from ckan.model.package_extra import PackageExtra
+                                    pkg_m.extras_list.append(PackageExtra(key='spatial_advanced_xml', value=new_pk))
+                                model.Session.commit()
+                                log.info(f"Synchronized existing advanced XML for {data_dict.get('name')}: {new_pk}")
+            except Exception as e_sync:
+                log.warning(f"Could not synchronize existing advanced XML on dataset update: {e_sync}")
+            return
+
+        dcat_type = str(data_dict.get('dcat_type') or '').lower()
+        is_spatial = (
+            'geospatial' in dcat_type or
+            'dataset' in dcat_type or
+            'service' in dcat_type or
+            data_dict.get('type') == 'service' or
+            data_dict.get('spatial') or
+            data_dict.get('spatial_uri')
+        )
+        if not is_spatial:
+            return
+
+        try:
+            from ckanext.miteco.inspire.generator import generate_inspire_xml
+            success, res, errors = generate_inspire_xml(data_dict, persist=True)
+            if success:
+                log.info(f"Auto-generated and persisted INSPIRE XML for package {data_dict.get('name')}: {res}")
+        except Exception as e:
+            log.warning(f"Could not auto-generate INSPIRE XML for package {data_dict.get('name')}: {e}")
  
 def _get_logic_functions(module_root, logic_functions=None, decorator=None):
     """

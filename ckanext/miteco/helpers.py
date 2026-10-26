@@ -224,6 +224,52 @@ def miteco_get_inspire(id):
         return None
 
 @helper
+def miteco_get_inspire_preview(pkg, current_xml=None):
+    """
+    Returns the XML to display in the XML viewer in dataset edit mode:
+    1. If current_xml is given (raw XML or MD5 hash), retrieves the active custom XML.
+    2. Otherwise, if pkg has an existing XML in DB (inspire_xml table with pkg uuid), returns it.
+    3. Otherwise, generates and renders the official INSPIRE XML template on the fly for pkg.
+    """
+    if current_xml:
+        xml = miteco_get_inspire(current_xml)
+        if xml:
+            return xml
+
+    pkg_dict = None
+    if isinstance(pkg, dict):
+        pkg_dict = pkg
+    elif hasattr(pkg, 'as_dict'):
+        pkg_dict = pkg.as_dict()
+
+    if pkg_dict:
+        xml_key = pkg_dict.get('spatial_advanced_xml')
+        pkg_id = pkg_dict.get('id')
+        pkg_name = pkg_dict.get('name')
+        doc = None
+        try:
+            from ckanext.miteco.inspire import model as insp_model
+            if xml_key:
+                doc = insp_model.InspireHandler.get(md5=xml_key)
+            if not doc and pkg_id:
+                doc = insp_model.InspireHandler.get(uuid=pkg_id)
+            if not doc and pkg_name:
+                doc = insp_model.InspireHandler.get(uuid=pkg_name)
+            if doc and doc.xml:
+                from ckanext.miteco.inspire.generator import sync_xml_with_package
+                return sync_xml_with_package(doc.xml, pkg_dict)
+        except Exception as e_prev:
+            log.debug("Could not get stored XML for preview: %s", e_prev)
+
+        try:
+            from ckanext.miteco.inspire.generator import render_inspire_xml
+            return render_inspire_xml(pkg_dict)
+        except Exception as e:
+            log.warning("Could not render INSPIRE XML preview: %s", e)
+
+    return ""
+
+@helper
 def miteco_has_inspire_xml(pkg):
     """
     Checks if a dataset has an associated INSPIRE XML.

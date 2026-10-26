@@ -306,3 +306,15 @@ msgstr ""
 msgid "Order by"
 msgstr ""
 
+#: ckanext/miteco/templates/miteco/snippets/miteco_dataset_info.html
+msgid "View XML"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html
+msgid "INSPIRE XML Template (ISO 19139)"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html
+msgid "Download INSPIRE XML template"
+msgstr ""
+

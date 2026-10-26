@@ -1,0 +1,35 @@
+{% import "inspire/generator/regulation.j2" as report %}
+{% import "inspire/generator/charstring.j2" as cs %}
+  <gmd:dataQualityInfo>
+    <gmd:DQ_DataQuality>
+      <gmd:scope>
+        <gmd:DQ_Scope>
+          <gmd:level>
+            <gmd:MD_ScopeCode codeList="http://standards.iso.org/iso/19139/resources/gmxCodelists.xml#MD_ScopeCode"
+              codeListValue="{{ record['metadata']['hierarchylevel']['value'] }}">{{ record['metadata']['hierarchylevel']['value'] }}</gmd:MD_ScopeCode>
+          </gmd:level>
+          {% if resource_type == 'service' %}
+          <gmd:levelDescription>
+            <gmd:MD_ScopeDescription>
+              <gmd:other>
+                <gco:CharacterString>Service</gco:CharacterString>
+              </gmd:other>
+            </gmd:MD_ScopeDescription>
+          </gmd:levelDescription>
+          {% endif %}
+        </gmd:DQ_Scope>
+      </gmd:scope>
+      {{ report.get_report_text(record['metadata']['language'], resource_type) }}
+      {% if resource_type != 'service' %}
+      <gmd:lineage>
+        <gmd:LI_Lineage>
+          {% if record.get('dataquality') and record['dataquality'].get('lineage') and record['dataquality']['lineage'].get('statement') %}
+            {{ cs.get_freetext('statement', record['metadata']['language_alternate'], record['dataquality']['lineage']['statement']) }}
+          {% else %}
+            <gmd:statement gco:nilReason="missing"/>
+          {% endif %}
+        </gmd:LI_Lineage>
+      </gmd:lineage>
+      {% endif %}
+    </gmd:DQ_DataQuality>
+  </gmd:dataQualityInfo>

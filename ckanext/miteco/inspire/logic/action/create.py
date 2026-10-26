@@ -110,18 +110,14 @@ def inspire_push_document(context, data_dict):
     if not valid or errors:
         return {'success': False, 'msg': f'{errors}'}
 
-    # Persistir en base de datos una vez validado y autorizado
-    pk = insp_model.setDocument(uuid, xml)
-
     is_update = p.toolkit.asbool(update)
+    pk = None
 
     if is_update:
         data, fill_errors = xsl_fill(xml)
         if fill_errors and not data:
             return {'success': False, 'msg': f'{fill_errors}'}
 
-        data['spatial_advanced_xml'] = pk
-        data['is_spatial_advanced'] = 'true'
         if org:
             data['owner_org'] = org
 
@@ -150,12 +146,54 @@ def inspire_push_document(context, data_dict):
                 pkg_exists = False
 
         pkg_obj = None
+        final_xml = xml
         if pkg_exists:
             if existing_pkg:
                 merged_data = deepcopy(existing_pkg)
+                overwrite_fields = p.toolkit.asbool(data_dict.get('overwrite', True))
+
+                # Metadatos espaciales y de control que siempre deben actualizarse desde el XML
+                always_update_keys = {
+                    'spatial_advanced_xml', 'is_spatial_advanced', 'spatial',
+                    'spatial_uri', 'conforms_to', 'conformance', 'lineage_process_steps'
+                }
+
                 for k, v in data.items():
-                    if v is not None and v != '':
+                    if v is None or v == '':
+                        continue
+                    if overwrite_fields:
+                        # Modo 1: Sobrescritura total (Tarea 3)
                         merged_data[k] = v
+                    else:
+                        # Modo 2: Actualización complementaria / no destructiva (Tarea 5)
+                        cur_val = existing_pkg.get(k)
+                        is_empty = (
+                            cur_val is None or
+                            cur_val == '' or
+                            cur_val == [] or
+                            cur_val == {} or
+                            cur_val in ('[]', "['']", 'None')
+                        )
+                        if k == 'resources' and isinstance(cur_val, list) and cur_val and isinstance(v, list):
+                            existing_urls = {r.get('url') for r in cur_val if isinstance(r, dict) and r.get('url')}
+                            for new_res in v:
+                                if isinstance(new_res, dict) and new_res.get('url') and new_res.get('url') not in existing_urls:
+                                    merged_data['resources'].append(new_res)
+                        elif k in always_update_keys or is_empty:
+                            merged_data[k] = v
+
+                if not overwrite_fields:
+                    try:
+                        from ckanext.miteco.inspire.generator import sync_xml_with_package
+                        synced = sync_xml_with_package(xml, merged_data)
+                        if synced and synced.strip():
+                            final_xml = synced
+                    except Exception as e_sync:
+                        log.warning(f"Could not sync XML with merged metadata: {e_sync}")
+
+                # Guardar en base de datos el XML final una única vez
+                pk = insp_model.setDocument(target_id or uuid, final_xml)
+
                 merged_data['spatial_advanced_xml'] = pk
                 merged_data['is_spatial_advanced'] = 'true'
                 if org:
@@ -165,13 +203,30 @@ def inspire_push_document(context, data_dict):
                         merged_data[k] = deepcopy(v)
                 if not merged_data.get('topic'):
                     merged_data['topic'] = data.get('topic') or 'http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/environment'
+
+                context_up = dict(context)
+                context_up['_inspire_pushing'] = True
                 try:
-                    pkg_obj = p.toolkit.get_action('package_update')(context, merged_data)
+                    pkg_obj = p.toolkit.get_action('package_update')(context_up, merged_data)
                 except Exception as e_up:
                     log.warning(f"package_update failed on merged dict: {e_up}. Trying package_patch...")
-                    pkg_obj = p.toolkit.get_action('package_patch')(context, data)
+                    pkg_obj = p.toolkit.get_action('package_patch')(context_up, data)
             else:
-                pkg_obj = p.toolkit.get_action('package_patch')(context, data)
+                pk = insp_model.setDocument(target_id or uuid, final_xml)
+                data['spatial_advanced_xml'] = pk
+                data['is_spatial_advanced'] = 'true'
+                context_up = dict(context)
+                context_up['_inspire_pushing'] = True
+                pkg_obj = p.toolkit.get_action('package_patch')(context_up, data)
+
+            if isinstance(pkg_obj, dict) and pkg_obj.get('id'):
+                try:
+                    insp_doc = model.Session.query(insp_model.InspireHandler).filter_by(md5=pk).first()
+                    if insp_doc:
+                        insp_doc.uuid = pkg_obj['id']
+                        model.Session.commit()
+                except Exception as e_link:
+                    log.warning(f"Could not link inspire_xml {pk} to dataset id: {e_link}")
         else:
             if not data.get('owner_org'):
                 if org:
@@ -214,6 +269,10 @@ def inspire_push_document(context, data_dict):
                 candidate_name = target_id or data.get('title') or 'inspire-dataset'
                 data['name'] = h.slugify(candidate_name)
 
+            pk = insp_model.setDocument(target_id or uuid, xml)
+            data['spatial_advanced_xml'] = pk
+            data['is_spatial_advanced'] = 'true'
+
             pkg_obj = p.toolkit.get_action('package_create')(context, data)
             if isinstance(pkg_obj, dict) and pkg_obj.get('id'):
                 try:
@@ -226,6 +285,7 @@ def inspire_push_document(context, data_dict):
 
     else:
         pkg_obj = None
+        pk = insp_model.setDocument(uuid, xml)
         if uuid:
             d, id_err = p.toolkit.navl_validate({"id": uuid}, {"id": [p.toolkit.get_validator("package_id_exists")]}, context)
             if not id_err:

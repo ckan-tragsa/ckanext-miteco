@@ -118,11 +118,18 @@ def inspire_upload_xml(id):
         except Exception:
             pass
 
+    overwrite = True
+    if hasattr(request, 'form') and 'overwrite' in request.form:
+        overwrite = toolkit.asbool(request.form.get('overwrite'))
+    elif request.is_json and request.get_json() and 'overwrite' in request.get_json():
+        overwrite = toolkit.asbool(request.get_json().get('overwrite'))
+
     data_dict = {
         'id': id or None,
         'xml': xml_content,
         'org': org,
-        'update': True
+        'update': True,
+        'overwrite': overwrite
     }
 
 

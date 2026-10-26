@@ -126,7 +126,7 @@ class InspireHandler(DomainObject):
             conds = [getattr(cls, 'uuid') == c for c in all_candidates]
             return query.filter(sa.or_(*conds)).order_by(sa.sql.text('inspire_xml.time desc')).all()
         else:
-            return query.order_by(sa.sql.text('inspire_xml.time desc')).limit(20).offset(offset).all()
+            return []
 
     @classmethod
     def delete(cls, md5=None) -> any:
@@ -141,10 +141,10 @@ class InspireHandler(DomainObject):
 def setDocument(uuid, xml):
     """
     loads a single spatial document into the database
-    the primary key is set to the md5 generated from a string created by appending the local time to the UUID
+    the primary key is set to the md5 generated from a string created by appending the UTC time to the UUID
     This is meant to keep copies of old versions of the spatial document in the database
     """
-    timestamp = dt.datetime.now()
+    timestamp = dt.datetime.utcnow()
     hashstring = str(uuid or '') + timestamp.isoformat()
     pk = md5(hashstring.encode("utf8"),usedforsecurity=False).hexdigest()
     row = InspireHandler(
@@ -203,6 +203,8 @@ def table_dictize(obj_or_list, context):
             value = getattr(obj, field)
             if hasattr(value, 'isoformat'):
                 value = value.isoformat()
+                if field == 'time' and not value.endswith('Z') and '+' not in value:
+                    value += 'Z'
             result_dict[field] = value
 
         return result_dict

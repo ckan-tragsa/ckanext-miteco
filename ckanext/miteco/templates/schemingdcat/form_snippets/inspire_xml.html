@@ -2,165 +2,205 @@
 
 {% asset 'ckanext-miteco/miteco-xml-viewer' %}
 
-{# Load existing saved value or fall back to the default ISO 19139 template #}
+{# Load existing saved value or fall back to the live generated ISO 19139 template #}
 {% set current_xml = data.get(field.field_name, '') if data else '' %}
 {% set dataset_id   = data.get('id', '')   if data else '' %}
 {% set dataset_name = data.get('name', '') if data else '' %}
 {% set dataset_org  = data.get('owner_org', '') if data else '' %}
+{% set is_new_dataset = not (dataset_id or dataset_name) or (dataset_id == 'new') %}
+{% set has_custom_xml = h.miteco_has_inspire_xml(data) %}
+{% set display_xml = h.miteco_get_inspire_preview(data, current_xml) if not is_new_dataset else '' %}
 
-<div class="alert alert-warning d-inline-flex align-items-center me-auto" role="alert">
-    <i class="fa-solid fa-triangle-exclamation p-3"></i>
-    <div>
-        {{_("When this functionality is enabled the rest of the form gets ignored, use with caution. <br/>This exists for advanced users who want to fill inspire fields that aren't yet on the main metadata schema or want more control over their metadata")}}
+{% set target_pkg = dataset_name or dataset_id %}
+{% set upload_endpoint = h.url_for('inspire.inspire_upload_xml', id=target_pkg) if target_pkg and target_pkg != 'new' else h.url_for('inspire.inspire_upload_xml') %}
+
+{% if is_new_dataset %}
+    {# ── Vista de creación de dataset desde XML desde cero (/inspire/dataset/new) ── #}
+    <p class="text-muted mb-3">
+        <i class="fa fa-info-circle me-1" aria-hidden="true"></i> {{_("Select an ISO 19139 / INSPIRE XML file to create and automatically populate the new dataset.")}}
+    </p>
+
+    {# ── Sección de subida prominente arriba ── #}
+    <div id="xmlUploadSection" class="d-flex flex-wrap gap-2 align-items-center mb-3" data-upload-url="{{ upload_endpoint }}">
+        <div style="max-width: 450px;" class="flex-grow-1">
+            <input id="field-xml-upload" type="file" name="upload" class="form-control" accept=".xml">
+        </div>
+        <button type="button" class="btn btn-miteco-primary" id="loadButton" onclick="loadXml()">
+            <i class="fa fa-upload" aria-hidden="true"></i> {{_("import xml")}}
+        </button>
+        <span id="xml-upload-status" class="small ms-2"></span>
     </div>
-</div>
 
-{# ── Highlighted read-only preview (shown while textarea is readonly) ── #}
-<pre id="xml-preview-wrapper" class="p-0 mb-1" style="max-height:400px;overflow:auto;border:1px solid #dee2e6;border-radius:4px">
-<code id="xml-preview" class="language-xml" style="font-size:1.05em">{% if current_xml %}{{ h.miteco_get_inspire(current_xml) }}{% else %}<?xml version="1.0" encoding="UTF-8"?>
-<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/gmd.xsd">
-  <gmd:fileIdentifier>
-    <gco:CharacterString>example-identifier</gco:CharacterString>
-  </gmd:fileIdentifier>
-</gmd:MD_Metadata>{% endif %}</code>
+    {# ── Visualizador de previsualización ── #}
+    <pre id="xml-preview-wrapper" class="p-0 mb-1" style="max-height:450px;overflow:auto;border:1px solid #dee2e6;border-radius:4px">
+<code id="xml-preview" class="language-xml" style="font-size:1.05em">&lt;!-- {{_("Seleccione un archivo XML arriba para previsualizar su contenido e importarlo.")}} --&gt;</code>
 </pre>
 
-{# ── Hidden textarea used for form submission ── #}
-<textarea class="form-control" id="xml-text" rows="20"
-          style="display:none"
-          name="{{ field.field_name }}"
-          data-dataset-id="{{ dataset_id }}"
-          data-dataset-name="{{ dataset_name }}"
-          data-dataset-org="{{ dataset_org }}"
-          {{ form.attributes(dict(
-          {"class": "form-control"}, **field.get('form_select_attrs', {}))) }}>{% if current_xml %}{{ h.miteco_get_inspire(current_xml) }}{% else %}<?xml version="1.0" encoding="UTF-8"?>
-<gmd:MD_Metadata xmlns:gmd="http://www.isotc211.org/2005/gmd" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://www.isotc211.org/2005/gmd/gmd.xsd">
-  <gmd:fileIdentifier>
-    <gco:CharacterString>example-identifier</gco:CharacterString>
-  </gmd:fileIdentifier>
-  <gmd:language>
-    <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/" codeListValue="eng">eng</gmd:LanguageCode>
-  </gmd:language>
-  <gmd:characterSet>
-    <gmd:MD_CharacterSetCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8">utf8</gmd:MD_CharacterSetCode>
-  </gmd:characterSet>
-  <gmd:contact>
-    <gmd:CI_ResponsibleParty>
-      <gmd:organisationName>
-        <gco:CharacterString>Example Organization</gco:CharacterString>
-      </gmd:organisationName>
-      <gmd:contactInfo>
-        <gmd:CI_Contact>
-          <gmd:address>
-            <gmd:CI_Address>
-              <gmd:electronicMailAddress>
-                <gco:CharacterString>contact@example.com</gco:CharacterString>
-              </gmd:electronicMailAddress>
-            </gmd:CI_Address>
-          </gmd:address>
-        </gmd:CI_Contact>
-      </gmd:contactInfo>
-      <gmd:role>
-        <gmd:CI_RoleCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_RoleCode" codeListValue="pointOfContact">pointOfContact</gmd:CI_RoleCode>
-      </gmd:role>
-    </gmd:CI_ResponsibleParty>
-  </gmd:contact>
-  <gmd:dateStamp>
-    <gco:Date>2023-01-01</gco:Date>
-  </gmd:dateStamp>
-  <gmd:metadataStandardName>
-    <gco:CharacterString>ISO 19115</gco:CharacterString>
-  </gmd:metadataStandardName>
-  <gmd:metadataStandardVersion>
-    <gco:CharacterString>2003/Cor.1:2006</gco:CharacterString>
-  </gmd:metadataStandardVersion>
-  <gmd:referenceSystemInfo>
-    <gmd:MD_ReferenceSystem>
-      <gmd:referenceSystemIdentifier>
-        <gmd:RS_Identifier>
-          <gmd:code>
-            <gco:CharacterString>EPSG:4326</gco:CharacterString>
-          </gmd:code>
-        </gmd:RS_Identifier>
-      </gmd:referenceSystemIdentifier>
-    </gmd:MD_ReferenceSystem>
-  </gmd:referenceSystemInfo>
-</gmd:MD_Metadata>{% endif %}
-</textarea>
+    <textarea class="form-control" id="xml-text" rows="20" style="display:none"
+              name="{{ field.field_name }}"
+              data-dataset-id=""
+              data-dataset-name=""
+              data-dataset-org="{{ dataset_org }}"></textarea>
 
-{# ── [RESERVADO] Modal de advertencia y confirmación para habilitar XML personalizado (conservado por si se requiere reactivar) ──
-<button type="button" class="btn btn-danger collapse show multi-collapse" id="warnButton" data-bs-toggle="modal" data-bs-target="#xmlWarn">{{_("enable custom xml")}}</button>
-<div class="modal fade" id="xmlWarn" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+{% else %}
+    {# ── Vista de dataset existente (pestaña 'Espacial avanzado' o edición /inspire/<id>) ── #}
+    <p class="text-muted small mb-2">
+      {% if has_custom_xml %}
+        <i class="fa fa-check-circle me-1" aria-hidden="true"></i> <strong>{{_("Active INSPIRE Metadata")}}:</strong> {{_("This dataset uses custom advanced spatial metadata.")}}
+      {% else %}
+        <i class="fa fa-eye me-1" aria-hidden="true"></i> <strong>{{_("INSPIRE Template Preview (Draft)")}}:</strong> {{_("Template automatically generated from current metadata. To activate it, download the file, edit if necessary and import it.")}}
+      {% endif %}
+    </p>
+
+    {# ── Highlighted read-only preview (shown while textarea is readonly) ── #}
+    <pre id="xml-preview-wrapper" class="p-0 mb-1" style="max-height:400px;overflow:auto;border:1px solid #dee2e6;border-radius:4px">
+<code id="xml-preview" class="language-xml" style="font-size:1.05em">{{ display_xml }}</code>
+</pre>
+
+    {# ── Hidden textarea used for form submission ── #}
+    <textarea class="form-control" id="xml-text" rows="20"
+              style="display:none"
+              name="{{ field.field_name }}"
+              data-dataset-id="{{ dataset_id }}"
+              data-dataset-name="{{ dataset_name }}"
+              data-dataset-org="{{ dataset_org }}"
+              {{ form.attributes(dict(
+              {"class": "form-control"}, **field.get('form_select_attrs', {}))) }}>{% if has_custom_xml %}{{ display_xml }}{% endif %}</textarea>
+
+    {# ── Sección de subida e importación / descarga directa ── #}
+    <div id="xmlUploadSection" class="d-flex flex-wrap gap-2 align-items-center mt-2 mb-2" data-upload-url="{{ upload_endpoint }}">
+        <div style="max-width: 400px;" class="flex-grow-1">
+            <input id="field-xml-upload" type="file" name="upload" value="" placeholder="" class="form-control" accept=".xml">
+        </div>
+        <button type="button" class="btn btn-miteco-primary" id="loadButton" onclick="loadXml()">
+            <i class="fa fa-upload" aria-hidden="true"></i> {{_("import xml")}}
+        </button>
+        {% if has_custom_xml and current_xml and dataset_name %}
+        <button type="button" class="btn btn-outline-secondary" id="xml-download-btn">
+            <i class="fa fa-download" aria-hidden="true"></i> {{_("Download XML")}}
+        </button>
+        {% elif target_pkg and target_pkg != 'new' %}
+        <a href="{{ h.url_for('miteco.dataset_inspire_xml', _id=target_pkg, download='true') }}" class="btn btn-outline-secondary" id="xml-template-btn">
+            <i class="fa fa-download" aria-hidden="true"></i> {{_("Download INSPIRE XML template")}}
+        </a>
+        {% endif %}
+        <span id="xml-upload-status" class="small ms-2"></span>
+    </div>
+
+    {# ── Opción de actualización complementaria (oculta pero activa por defecto) ── #}
+    <input type="checkbox" id="field-xml-complement" checked style="display:none;" />
+
+    {# ── Version history panel (solo al editar un dataset existente con XML) ── #}
+    {% if has_custom_xml and not is_new_dataset and (dataset_name or dataset_id) %}
+    <div id="xml-history-panel" class="mt-3"
+         data-dataset-id="{{ dataset_id }}"
+         data-dataset-name="{{ dataset_name }}"
+         data-current-hash="{{ current_xml }}">
+        <button class="btn btn-sm btn-miteco-primary-outline mb-2" type="button"
+                data-bs-toggle="collapse" data-bs-target="#xml-history-collapse">
+            <i class="fa fa-history" aria-hidden="true"></i> {{_("Version history")}}
+        </button>
+        <div class="collapse show" id="xml-history-collapse">
+            <table class="table table-sm table-bordered">
+                <thead><tr><th>{{_("Date")}}</th><th>Hash</th><th></th></tr></thead>
+                <tbody id="xml-history-tbody">
+                    <tr><td colspan="3" class="text-muted small"><i class="fa fa-spinner fa-spin"></i> {{_("Cargando historial de versiones...")}}</td></tr>
+                </tbody>
+            </table>
+            <p id="xml-history-empty" class="text-muted small" style="display:none">
+                {{_("No saved versions yet.")}}
+            </p>
+        </div>
+    </div>
+    {% endif %}
+
+{% endif %}
+
+{# ── Modales Bootstrap 5 para confirmaciones y avisos de XML INSPIRE ── #}
+{# 1. Modal para confirmar importación de XML #}
+<div class="modal fade" id="modal-xml-import-confirm" tabindex="-1" aria-labelledby="modalXmlImportLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-body">
-        <div class="alert alert-danger" role="alert">
-            {{_("Modifiying this field will lock you out of using the form and you will be completely responsible of the contents of the inspire xml metadata.")}}<br/>
-            {{_("This functionality is only a temporal measure to conform with the full inspire schema, and it's only meant for advanced users who are familiar with the iso19139 standard.")}}<br/>
-            {{_("this option can not be undone.")}}<br/>
-            <br/><br/>
-            {{_("do you want to continue?")}}
-        </div>
+      <div class="modal-header border-bottom-0 pb-0">
+        <h5 class="modal-title" id="modalXmlImportLabel" style="color:var(--sct-primary-color); font-weight:600;">
+          <i class="fa fa-upload me-2" aria-hidden="true"></i>{{_("Confirmar importación de XML")}}
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-footer">
-        <div class="collapse show multi-collapse">
-            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{_("Take me back!")}}</button>
-            <button type="button" class="btn btn-miteco-primary" onclick="enableXmlEdit()">{{_("Understood")}}</button>
-        </div>
-        <div class="collapse multi-collapse">
-            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">{{_("custom xml enabled")}}</button>
-        </div>
+      <div class="modal-body py-3">
+        <p class="mb-2">
+          {{_("¿Desea importar el archivo XML seleccionado para este conjunto de datos?")}}
+        </p>
+        <p class="small text-muted mb-0">
+          <i class="fa fa-info-circle me-1" aria-hidden="true"></i>
+          {{_("Se validará la conformidad INSPIRE y se actualizarán los metadatos espaciales del conjunto, conservando los datos editados previamente en el formulario.")}}
+        </p>
+      </div>
+      <div class="modal-footer border-top-0 pt-0">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          {{_("Cancelar")}}
+        </button>
+        <button type="button" class="btn btn-miteco-primary" id="btn-confirm-import-action">
+          <i class="fa fa-check me-1" aria-hidden="true"></i>{{_("Confirmar e importar")}}
+        </button>
       </div>
     </div>
   </div>
 </div>
-── Fin bloque reservado ── #}
 
-{% set target_pkg = dataset_name or dataset_id %}
-{% set upload_endpoint = h.url_for('inspire.inspire_upload_xml', id=target_pkg) if target_pkg else h.url_for('inspire.inspire_upload_xml') %}
-{# ── Sección de subida e importación habilitada directamente ── #}
-<div id="xmlUploadSection" class="d-flex flex-wrap gap-2 align-items-center mt-2 mb-3" data-upload-url="{{ upload_endpoint }}">
-    <div style="max-width: 400px;" class="flex-grow-1">
-        <input id="field-xml-upload" type="file" name="upload" value="" placeholder="" class="form-control" accept=".xml">
-    </div>
-    <button type="button" class="btn btn-miteco-primary" id="loadButton" onclick="loadXml()">
-        <i class="fa fa-upload" aria-hidden="true"></i> {{_("import xml")}}
-    </button>
-    {# ── Botón de descarga directa (visible cuando ya existe un XML guardado) ── #}
-    {% if current_xml and dataset_name %}
-    <button type="button" class="btn btn-outline-secondary" id="xml-download-btn">
-        <i class="fa fa-download" aria-hidden="true"></i> {{_("Download XML")}}
-    </button>
-    {% endif %}
-    <span id="xml-upload-status" class="small ms-2"></span>
-</div>
-
-
-
-{# ── Version history panel (solo al editar un dataset existente en la interfaz de XML INSPIRE) ── #}
-{% set is_inspire_xml_edit = is_inspire_form or (request.blueprint == 'inspire') %}
-{% set dataset_has_xml = h.miteco_has_inspire_xml(data) or (data and data.get('spatial_advanced_xml')) %}
-{% if is_inspire_xml_edit and (dataset_id or dataset_name) and (dataset_has_xml or (dataset_id and dataset_id != 'new')) %}
-<div id="xml-history-panel" class="mt-3"
-     data-dataset-id="{{ dataset_id }}"
-     data-dataset-name="{{ dataset_name }}">
-    <button class="btn btn-sm btn-miteco-primary-outline mb-2" type="button"
-            data-bs-toggle="collapse" data-bs-target="#xml-history-collapse">
-        <i class="fa fa-history" aria-hidden="true"></i> {{_("Version history")}}
-    </button>
-    <div class="collapse show" id="xml-history-collapse">
-        <table class="table table-sm table-bordered">
-            <thead><tr><th>{{_("Date")}}</th><th>Hash</th><th></th></tr></thead>
-            <tbody id="xml-history-tbody">
-                <tr><td colspan="3" class="text-muted small"><i class="fa fa-spinner fa-spin"></i> {{_("Cargando historial de versiones...")}}</td></tr>
-            </tbody>
-        </table>
-        <p id="xml-history-empty" class="text-muted small" style="display:none">
-            {{_("No saved versions yet.")}}
+{# 2. Modal para confirmar carga de versión histórica #}
+<div class="modal fade" id="modal-xml-version-confirm" tabindex="-1" aria-labelledby="modalXmlVersionLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0 pb-0">
+        <h5 class="modal-title" id="modalXmlVersionLabel" style="color:var(--sct-primary-color); font-weight:600;">
+          <i class="fa fa-history me-2" aria-hidden="true"></i>{{_("Cargar versión anterior del XML")}}
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body py-3">
+        <p class="mb-2">
+          {{_("¿Desea cargar esta versión histórica del XML INSPIRE?")}}
         </p>
+        <p class="small text-muted mb-0">
+          <i class="fa fa-exclamation-triangle me-1 text-warning" aria-hidden="true"></i>
+          {{_("El contenido visualizado en el editor se reemplazará por la versión seleccionada.")}}
+        </p>
+      </div>
+      <div class="modal-footer border-top-0 pt-0">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          {{_("Cancelar")}}
+        </button>
+        <button type="button" class="btn btn-miteco-primary" id="btn-confirm-load-version">
+          <i class="fa fa-check me-1" aria-hidden="true"></i>{{_("Cargar versión")}}
+        </button>
+      </div>
     </div>
+  </div>
 </div>
-{% endif %}
+
+{# 3. Modal genérico de aviso / alerta / error #}
+<div class="modal fade" id="modal-xml-dialog" tabindex="-1" aria-labelledby="modalXmlDialogLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0 pb-0">
+        <h5 class="modal-title" id="modalXmlDialogLabel" style="font-weight:600;">
+          <i id="modal-xml-dialog-icon" class="fa fa-info-circle me-2" aria-hidden="true"></i>
+          <span id="modal-xml-dialog-title">{{_("Aviso")}}</span>
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body py-3">
+        <p id="modal-xml-dialog-message" class="mb-0"></p>
+      </div>
+      <div class="modal-footer border-top-0 pt-0">
+        <button type="button" class="btn btn-miteco-primary" id="modal-xml-dialog-ok-btn" data-bs-dismiss="modal">
+          {{_("Aceptar")}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {%- snippet 'scheming/form_snippets/fluent_help_text.html',
     field=field,
