@@ -243,21 +243,11 @@ def miteco_get_inspire_preview(pkg, current_xml=None):
         pkg_dict = pkg.as_dict()
 
     if pkg_dict:
-        xml_key = pkg_dict.get('spatial_advanced_xml')
-        pkg_id = pkg_dict.get('id')
-        pkg_name = pkg_dict.get('name')
-        doc = None
         try:
-            from ckanext.miteco.inspire import model as insp_model
-            if xml_key:
-                doc = insp_model.InspireHandler.get(md5=xml_key)
-            if not doc and pkg_id:
-                doc = insp_model.InspireHandler.get(uuid=pkg_id)
-            if not doc and pkg_name:
-                doc = insp_model.InspireHandler.get(uuid=pkg_name)
+            from ckanext.miteco.inspire.access import find_document
+            doc = find_document(pkg_dict)
             if doc and doc.xml:
-                from ckanext.miteco.inspire.generator import sync_xml_with_package
-                return sync_xml_with_package(doc.xml, pkg_dict)
+                return doc.xml
         except Exception as e_prev:
             log.debug("Could not get stored XML for preview: %s", e_prev)
 

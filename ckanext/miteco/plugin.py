@@ -60,7 +60,10 @@ class MitecoPlugin(p.SingletonPlugin, DefaultTranslation):
 
     # Validators
     def get_validators(self):
-        return dict(validators.all_validators)
+        from ckanext.miteco.inspire.schema import get_import_validators
+        registered = dict(validators.all_validators)
+        registered.update(get_import_validators())
+        return registered
     
     # IActions
     def get_actions(self):
@@ -125,7 +128,7 @@ class InspirePlugin(p.SingletonPlugin, DefaultTranslation):
             return
         if context and context.get('_inspire_pushing'):
             return
-        # Si ya dispone de XML avanzado, sincronizar los campos de formulario (título, resumen, etc.)
+        # Editing CKAN fields must not rewrite an existing XML document.
         xml_key = data_dict.get('spatial_advanced_xml')
         is_adv = data_dict.get('is_spatial_advanced')
         if not xml_key and 'extras' in data_dict:
@@ -137,33 +140,6 @@ class InspirePlugin(p.SingletonPlugin, DefaultTranslation):
                         is_adv = extra.get('value')
 
         if xml_key and (p.toolkit.asbool(is_adv) or str(xml_key).strip()):
-            try:
-                from ckanext.miteco.inspire import model as insp_model
-                from ckanext.miteco.inspire.generator import sync_xml_with_package
-                doc = insp_model.InspireHandler.get(md5=xml_key)
-                if not doc:
-                    doc = insp_model.InspireHandler.get(uuid=data_dict.get('id'))
-                if doc and doc.xml:
-                    synced_xml = sync_xml_with_package(doc.xml, data_dict)
-                    if synced_xml and synced_xml.strip() != doc.xml.strip():
-                        new_pk = insp_model.setDocument(data_dict.get('id'), synced_xml)
-                        pkg_id = data_dict.get('id')
-                        if pkg_id:
-                            pkg_m = model.Package.get(pkg_id)
-                            if pkg_m:
-                                updated_extra = False
-                                for extra in pkg_m.extras_list:
-                                    if extra.key == 'spatial_advanced_xml':
-                                        extra.value = new_pk
-                                        updated_extra = True
-                                        break
-                                if not updated_extra:
-                                    from ckan.model.package_extra import PackageExtra
-                                    pkg_m.extras_list.append(PackageExtra(key='spatial_advanced_xml', value=new_pk))
-                                model.Session.commit()
-                                log.info(f"Synchronized existing advanced XML for {data_dict.get('name')}: {new_pk}")
-            except Exception as e_sync:
-                log.warning(f"Could not synchronize existing advanced XML on dataset update: {e_sync}")
             return
 
         dcat_type = str(data_dict.get('dcat_type') or '').lower()

@@ -4,6 +4,7 @@ import ckan.logic as logic
 from flask import Blueprint, render_template, make_response, abort, request  # type: ignore
 from ckanext.miteco import utils
 from ckanext.miteco.inspire import model as insp_model
+from ckanext.miteco.inspire import access
 
 from logging import getLogger
 
@@ -51,7 +52,7 @@ def _resolve_dataset(_id):
     """
     try:
         context = {'ignore_auth': False}
-        return get_action('package_show')(context, {'id': _id})
+        return access.authorized_package(context, _id)
     except logic.NotFound:
         abort(404)
     except logic.NotAuthorized:
@@ -69,7 +70,7 @@ def _resolve_dataset_uuid(_id):
 def dataset_inspire_xml(_id):
     """
     Returns the latest stored Inspire XML document for a dataset.
-    If the dataset does not yet have a stored XML document, it automatically generates
+    Stored documents are returned unchanged. If no document exists, it generates
     and persists a valid ISO 19139 INSPIRE document using the generator.
 
     GET /dataset/<slug-or-uuid>/xml
@@ -77,19 +78,11 @@ def dataset_inspire_xml(_id):
     pkg = _resolve_dataset(_id)
     uuid = pkg['id']
 
-    xml_key = pkg.get('spatial_advanced_xml')
-    doc = None
-    if xml_key:
-        doc = insp_model.InspireHandler.get(md5=xml_key)
-    if not doc:
-        doc = insp_model.InspireHandler.get(uuid=uuid)
-    if not doc and pkg.get('name'):
-        doc = insp_model.InspireHandler.get(uuid=pkg['name'])
+    doc = access.find_document(pkg)
 
     xml_content = None
     if doc and doc.xml:
-        from ckanext.miteco.inspire.generator import sync_xml_with_package
-        xml_content = sync_xml_with_package(doc.xml, pkg)
+        xml_content = doc.xml
     else:
         from ckanext.miteco.inspire.generator import generate_inspire_xml, render_inspire_xml
         success, res, errors = generate_inspire_xml(pkg, persist=True)
@@ -127,9 +120,8 @@ def dataset_inspire_xml_version(_id, _hash):
 
     GET /dataset/<slug-or-uuid>/xml/<md5-hash>
     """
-    _resolve_dataset_uuid(_id)  # authorisation + existence check
-
-    doc = insp_model.InspireHandler.get(md5=_hash)
+    pkg = _resolve_dataset(_id)
+    doc = access.find_document(pkg, version=_hash)
     if not doc:
         abort(404)
 

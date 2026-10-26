@@ -1,5 +1,5 @@
 from logging import getLogger
-from flask import Blueprint, request, jsonify  # type: ignore
+from flask import Blueprint, request, jsonify, abort  # type: ignore
 from ckan import model  # type: ignore
 import ckan.plugins.toolkit as toolkit  # type: ignore
 
@@ -13,16 +13,20 @@ inspire = Blueprint(u'inspire', __name__,
 def inspire_form(id):
     log.debug(id)
     package = {}
-    if id:
+    # CKAN can resolve the creation URL through /dataset/<id>, passing 'new'.
+    if id and id != 'new':
         context = {
             'model': model,
             'session': model.Session,
-            'ignore_auth': True,
+            'ignore_auth': False,
         }
         try:
-            package = toolkit.get_action("package_show")(context, {"id": id})
-        except Exception as e:
-            log.exception(f"Error loading package {id}: {e}")
+            from ckanext.miteco.inspire.access import authorized_package
+            package = authorized_package(context, id)
+        except toolkit.NotAuthorized:
+            abort(403)
+        except toolkit.ObjectNotFound:
+            abort(404)
 
     return toolkit.render('miteco/inspire.html', extra_vars={
         u'pkg_dict': package,
@@ -67,13 +71,12 @@ def inspire_upload_xml(id):
         return jsonify({'success': False, 'msg': toolkit._('No XML content provided')}), 400
 
     from ckanext.miteco.inspire.logic.action.create import extract_md_metadata
-    xml_content = extract_md_metadata(xml_content)
 
     # Si es un dataset nuevo y no tiene id, intentar extraer fileIdentifier del XML
     if not id:
         try:
             from lxml import etree
-            tree = etree.fromstring(xml_content.encode('utf-8'))
+            tree = etree.fromstring(extract_md_metadata(xml_content).encode('utf-8'))
             namespaces = {'gmd': 'http://www.isotc211.org/2005/gmd', 'gco': 'http://www.isotc211.org/2005/gco'}
             fid_el = tree.xpath('//gmd:fileIdentifier/gco:CharacterString', namespaces=namespaces)
             if fid_el and fid_el[0].text and fid_el[0].text.strip():

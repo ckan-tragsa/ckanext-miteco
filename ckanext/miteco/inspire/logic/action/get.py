@@ -1,5 +1,9 @@
+import logging
 from ckan.logic import side_effect_free, NotFound
 from ckanext.miteco.inspire import model as insp_model
+from ckanext.miteco.inspire import access
+
+log = logging.getLogger(__name__)
 
 @side_effect_free
 def inspire_get_document(context, data_dict):
@@ -26,7 +30,7 @@ def inspire_get_document(context, data_dict):
 
     if not uuid and not md5:
         raise NotFound
-    out = insp_model.InspireHandler.get(uuid=uuid, md5=md5)
+    out = access.get_document(context, identifier=uuid, version=md5)
     if out:
         return insp_model.table_dictize(out, context)
     else:
@@ -45,60 +49,18 @@ def inspire_list_documents(context, data_dict):
         return []
 
     target_id = str(target_id).strip()
-    candidates = set()
-    candidates.add(target_id)
-    try:
-        from ckan import model
-        pkg = model.Package.get(target_id)
-        if pkg:
-            if pkg.id:
-                candidates.add(str(pkg.id).strip())
-            if pkg.name:
-                candidates.add(str(pkg.name).strip())
-            for extra in getattr(pkg, 'extras_list', []):
-                if getattr(extra, 'key', '') == 'spatial_advanced_xml' and extra.value:
-                    cur_doc = insp_model.InspireHandler.get(md5=extra.value)
-                    if cur_doc and cur_doc.uuid:
-                        candidates.add(str(cur_doc.uuid).strip())
-            if hasattr(pkg, 'spatial_advanced_xml') and pkg.spatial_advanced_xml:
-                cur_doc = insp_model.InspireHandler.get(md5=pkg.spatial_advanced_xml)
-                if cur_doc and cur_doc.uuid:
-                    candidates.add(str(cur_doc.uuid).strip())
-    except Exception as e:
-        log.warning(f"Error resolving candidates for inspire_list_documents: {e}")
-
-    valid_candidates = [c for c in candidates if c and c not in ('None', '', 'null', 'new')]
-    if not valid_candidates:
-        return []
+    package = access.authorized_package(context, target_id)
+    valid_candidates = [value for value in (package.get('id'), package.get('name')) if value]
 
     out = insp_model.InspireHandler.list(candidates=valid_candidates, offset=start)
     raw_list = insp_model.table_dictize(out, context) if out else []
 
-    # Deduplicar entradas consecutivas que pertenezcan a la misma operación (diferencia < 5 segundos)
-    import datetime
-    deduped = []
-    seen_times = []
-    seen_md5s = set()
+    # The hash identifies a stored version; elapsed time does not establish
+    # content equivalence. Keep distinct versions, including rapid edits.
+    seen = set()
+    versions = []
     for item in raw_list:
-        md5_val = item.get('md5')
-        if md5_val in seen_md5s:
-            continue
-        t_str = item.get('time')
-        is_dup = False
-        if t_str:
-            try:
-                clean_t = t_str.rstrip('Z')
-                item_dt = datetime.datetime.fromisoformat(clean_t)
-                for s_dt in seen_times:
-                    if abs((item_dt - s_dt).total_seconds()) < 5:
-                        is_dup = True
-                        break
-                if not is_dup:
-                    seen_times.append(item_dt)
-            except Exception:
-                pass
-        if not is_dup:
-            seen_md5s.add(md5_val)
-            deduped.append(item)
-    return deduped
-
+        if item.get('md5') not in seen:
+            seen.add(item.get('md5'))
+            versions.append(item)
+    return versions

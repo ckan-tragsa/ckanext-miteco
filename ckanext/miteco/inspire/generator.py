@@ -293,9 +293,8 @@ def generate_inspire_xml(
 
     # 1. Respetar XML existente subido por el usuario
     if toolkit.asbool(pkg_dict.get('is_spatial_advanced')) and pkg_dict.get('spatial_advanced_xml'):
-        existing_doc = insp_model.InspireHandler.get(uuid=pkg_dict.get('id'))
-        if not existing_doc:
-            existing_doc = insp_model.InspireHandler.get(md5=pkg_dict.get('spatial_advanced_xml'))
+        from ckanext.miteco.inspire.access import find_document
+        existing_doc = find_document(pkg_dict)
         if existing_doc and existing_doc.xml:
             log.info(f"Package {pkg_dict.get('name')} already has user XML. Preserving existing document.")
             return True, existing_doc.xml, []
@@ -349,6 +348,8 @@ def sync_xml_with_package(xml_content, pkg_dict):
             'gmx': 'http://www.isotc211.org/2005/gmx',
         }
 
+        changed = False
+
         # 1. Title
         title_val = pkg_dict.get('title')
         if not title_val and isinstance(pkg_dict.get('title_translated'), dict):
@@ -356,7 +357,9 @@ def sync_xml_with_package(xml_content, pkg_dict):
         if title_val and str(title_val).strip():
             title_nodes = root.xpath('//gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:title/gco:CharacterString', namespaces=ns)
             for node in title_nodes:
-                node.text = str(title_val).strip()
+                if node.text != str(title_val).strip():
+                    node.text = str(title_val).strip()
+                    changed = True
 
         # 2. Abstract / Notes
         notes_val = pkg_dict.get('notes')
@@ -365,13 +368,9 @@ def sync_xml_with_package(xml_content, pkg_dict):
         if notes_val and str(notes_val).strip():
             abstract_nodes = root.xpath('//gmd:identificationInfo/*/gmd:abstract/gco:CharacterString', namespaces=ns)
             for node in abstract_nodes:
-                node.text = str(notes_val).strip()
-
-        # 3. dateStamp
-        today_str = datetime.date.today().isoformat()
-        date_nodes = root.xpath('//gmd:dateStamp/gco:Date | //gmd:dateStamp/gco:DateTime', namespaces=ns)
-        for node in date_nodes:
-            node.text = today_str
+                if node.text != str(notes_val).strip():
+                    node.text = str(notes_val).strip()
+                    changed = True
 
         # 4. Identifier / code
         identifier_val = (
@@ -382,9 +381,21 @@ def sync_xml_with_package(xml_content, pkg_dict):
         if identifier_val and str(identifier_val).strip():
             id_nodes = root.xpath('//gmd:identificationInfo/*/gmd:citation/gmd:CI_Citation/gmd:identifier/gmd:MD_Identifier/gmd:code/gco:CharacterString', namespaces=ns)
             for node in id_nodes:
-                node.text = str(identifier_val).strip()
+                if node.text != str(identifier_val).strip():
+                    node.text = str(identifier_val).strip()
+                    changed = True
 
-        return etree.tostring(root, encoding='utf-8', xml_declaration=True, pretty_print=True).decode('utf-8')
+        if not changed:
+            return xml_content
+        now = datetime.datetime.now(datetime.timezone.utc)
+        for node in root.xpath('//gmd:dateStamp/gco:Date | //gmd:dateStamp/gco:DateTime', namespaces=ns):
+            node.text = now.date().isoformat() if etree.QName(node).localname == 'Date' else now.isoformat().replace('+00:00', 'Z')
+        synced = etree.tostring(root, encoding='utf-8', xml_declaration=True).decode('utf-8')
+        valid, errors = validate_insp(synced)
+        if not valid or errors:
+            log.warning('Synchronized INSPIRE XML failed validation; preserving stored XML')
+            return xml_content
+        return synced
     except Exception as e:
         log.warning(f"Could not synchronize XML with package metadata: {e}")
         return xml_content

@@ -3,3 +3,8 @@ include LICENSE
 include requirements.txt
 recursive-include ckanext/miteco *.html *.json *.js *.less *.css *.mo *.yml
 recursive-include ckanext/miteco/migration *.ini *.py *.mako
+
+recursive-include ckanext/miteco/inspire/xslt *.xsl
+recursive-include ckanext/miteco/templates/inspire/generator *.j2
+recursive-include ckanext/miteco/inspire *.py
+include ckanext/miteco/schemas/miteco/miteco_dataset.yaml

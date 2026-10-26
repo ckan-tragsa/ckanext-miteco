@@ -201,9 +201,13 @@ async function executeXmlImport() {
         }
 
         if (result.success) {
+            var warnings = Array.isArray(result.warnings) ? result.warnings : [];
+            var warningText = warnings.map(function (warning) {
+                return warning.field + ': ' + warning.message + (warning.value ? ' (' + warning.value + ')' : '');
+            }).join('\n');
             if (statusEl) {
-                statusEl.className = 'small ms-2 text-success fw-bold';
-                statusEl.textContent = '¡Importación completada con éxito!';
+                statusEl.className = 'small ms-2 fw-bold ' + (warnings.length ? 'text-warning' : 'text-success');
+                statusEl.textContent = warnings.length ? 'Importación completada con avisos: ' + warningText : '¡Importación completada con éxito!';
             }
 
             // Actualizar vista previa local
@@ -229,9 +233,9 @@ async function executeXmlImport() {
                 (window.location.origin + prefix + '/dataset');
 
             window.showXmlDialog(
-                'Importación completada con éxito',
-                'El archivo XML INSPIRE ha sido validado e importado correctamente en el conjunto de datos.',
-                'success',
+                warnings.length ? 'Importación completada con avisos' : 'Importación completada con éxito',
+                warnings.length ? warningText : 'El archivo XML INSPIRE ha sido validado e importado correctamente en el conjunto de datos.',
+                warnings.length ? 'warning' : 'success',
                 function() {
                     window.location.href = targetRedirect;
                 }

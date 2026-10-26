@@ -247,6 +247,8 @@ def miteco_miteco_dataset_ogc_normalize(field, schema):
     Validator to detect OGC services and rewrite the URL to point towards GetCapabilities request
     """
     def validator(key, data, errors, context):
+        if context.get('preserve_mapped_fields'):
+            return
         if data[(key[0],key[1],'format')]:
             format = data[(key[0],key[1],'format')].upper()
             if format in ["WMS","WFS","WMTS","WCS","WPS"]:
@@ -264,6 +266,8 @@ def miteco_preserve_date_modified(field, schema):
     """
     def validator(key, data, errors, context):
         value = data[key]
+        if context.get('preserve_mapped_fields') and value is not missing:
+            return
         if value is missing or value is None or value == '':
             data[key] = datetime.datetime.now().isoformat()
     return validator

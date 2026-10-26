@@ -1,6 +1,8 @@
 from ckanext.miteco.inspire import model as insp_model
 from ckan.lib.navl.dictization_functions import flatten_dict, unflatten
-from ckanext.schemingdcat.lib.csw_mapper.xslt_transformer import XSLTTransformer
+from ckanext.miteco.inspire.transform import transform
+from ckanext.miteco.inspire.schema import package_action, filter_import_frequency
+from ckanext.miteco.inspire.merge import MULTILINGUAL_FIELDS, has_text, merge_resources
 from ckanext.dcat.processors import RDFParserException, RDFParser
 from ckanext.miteco.lib.rdfParser import mitecoRDFParser
 import logging, traceback, tempfile
@@ -66,15 +68,21 @@ def inspire_push_document(context, data_dict):
         http://<your-ckan-instance>/api/3/action/inspire_push_document?md5=<document md5>
         ```
     """
+    # The import action persists its own XML; the package hooks must not
+    # generate/synchronize it a second time (also on create and update=False).
+    warnings = []
+    context = dict(context, preserve_mapped_fields=True, _inspire_pushing=True,
+                   _inspire_warnings=warnings)
     # Authorization
     user = context.get('user')
     if not user:
         raise p.toolkit.NotAuthorized('User must be logged in to add documents')
 
     uuid = data_dict.get('id')
-    xml = data_dict.get('xml')
-    xml = extract_md_metadata(xml)
-    data_dict['xml'] = xml
+    original_xml = data_dict.get('xml')
+    # Normalize only the working view used for validation and mapping. The
+    # uploaded document (including a CSW envelope) is the stored artifact.
+    xml = extract_md_metadata(original_xml)
     org = data_dict.get('org')
     update = data_dict.get('update')
 
@@ -118,6 +126,9 @@ def inspire_push_document(context, data_dict):
         if fill_errors and not data:
             return {'success': False, 'msg': f'{fill_errors}'}
 
+        warnings.extend(filter_import_frequency(context, data))
+        frequency_omitted = bool(warnings)
+
         if org:
             data['owner_org'] = org
 
@@ -133,6 +144,7 @@ def inspire_push_document(context, data_dict):
             try:
                 pkg_model = model.Package.get(target_id)
                 if pkg_model:
+                    p.toolkit.check_access('package_update', context, {'id': pkg_model.id})
                     pkg_exists = True
                     show_context = {
                         'model': model,
@@ -141,13 +153,16 @@ def inspire_push_document(context, data_dict):
                         'ignore_auth': True,
                     }
                     existing_pkg = p.toolkit.get_action('package_show')(show_context, {'id': target_id})
+            except p.toolkit.NotAuthorized:
+                raise
             except Exception as e_chk:
                 log.warning(f"Error checking existing package {target_id}: {e_chk}")
                 pkg_exists = False
 
         pkg_obj = None
-        final_xml = xml
+        final_xml = original_xml
         if pkg_exists:
+            context['_inspire_existing_pkg'] = existing_pkg
             if existing_pkg:
                 merged_data = deepcopy(existing_pkg)
                 overwrite_fields = p.toolkit.asbool(data_dict.get('overwrite', True))
@@ -159,7 +174,13 @@ def inspire_push_document(context, data_dict):
                 }
 
                 for k, v in data.items():
-                    if v is None or v == '':
+                    if v is None or v == '' or (k in MULTILINGUAL_FIELDS and not has_text(v)):
+                        continue
+                    if k == 'resources':
+                        try:
+                            merged_data[k] = merge_resources(existing_pkg.get(k) or [], v, overwrite_fields)
+                        except ValueError as exc:
+                            raise p.toolkit.ValidationError({'resources': [str(exc)]})
                         continue
                     if overwrite_fields:
                         # Modo 1: Sobrescritura total (Tarea 3)
@@ -174,22 +195,8 @@ def inspire_push_document(context, data_dict):
                             cur_val == {} or
                             cur_val in ('[]', "['']", 'None')
                         )
-                        if k == 'resources' and isinstance(cur_val, list) and cur_val and isinstance(v, list):
-                            existing_urls = {r.get('url') for r in cur_val if isinstance(r, dict) and r.get('url')}
-                            for new_res in v:
-                                if isinstance(new_res, dict) and new_res.get('url') and new_res.get('url') not in existing_urls:
-                                    merged_data['resources'].append(new_res)
-                        elif k in always_update_keys or is_empty:
+                        if k in always_update_keys or is_empty:
                             merged_data[k] = v
-
-                if not overwrite_fields:
-                    try:
-                        from ckanext.miteco.inspire.generator import sync_xml_with_package
-                        synced = sync_xml_with_package(xml, merged_data)
-                        if synced and synced.strip():
-                            final_xml = synced
-                    except Exception as e_sync:
-                        log.warning(f"Could not sync XML with merged metadata: {e_sync}")
 
                 # Guardar en base de datos el XML final una única vez
                 pk = insp_model.setDocument(target_id or uuid, final_xml)
@@ -199,6 +206,8 @@ def inspire_push_document(context, data_dict):
                 if org:
                     merged_data['owner_org'] = org
                 for k, v in RDF_DATASET_TEMPLATE.items():
+                    if k == 'frequency' and frequency_omitted:
+                        continue
                     if k not in merged_data or merged_data[k] is None or merged_data[k] == '':
                         merged_data[k] = deepcopy(v)
                 if not merged_data.get('topic'):
@@ -207,17 +216,17 @@ def inspire_push_document(context, data_dict):
                 context_up = dict(context)
                 context_up['_inspire_pushing'] = True
                 try:
-                    pkg_obj = p.toolkit.get_action('package_update')(context_up, merged_data)
+                    pkg_obj = package_action('package_update', context_up, merged_data)
                 except Exception as e_up:
                     log.warning(f"package_update failed on merged dict: {e_up}. Trying package_patch...")
-                    pkg_obj = p.toolkit.get_action('package_patch')(context_up, data)
+                    pkg_obj = package_action('package_patch', context_up, merged_data)
             else:
                 pk = insp_model.setDocument(target_id or uuid, final_xml)
                 data['spatial_advanced_xml'] = pk
                 data['is_spatial_advanced'] = 'true'
                 context_up = dict(context)
                 context_up['_inspire_pushing'] = True
-                pkg_obj = p.toolkit.get_action('package_patch')(context_up, data)
+                pkg_obj = package_action('package_patch', context_up, data)
 
             if isinstance(pkg_obj, dict) and pkg_obj.get('id'):
                 try:
@@ -247,6 +256,8 @@ def inspire_push_document(context, data_dict):
                         pass
 
             for k, v in RDF_DATASET_TEMPLATE.items():
+                if k == 'frequency' and frequency_omitted:
+                    continue
                 if k not in data or data[k] is None or data[k] == '':
                     data[k] = deepcopy(v)
 
@@ -269,11 +280,11 @@ def inspire_push_document(context, data_dict):
                 candidate_name = target_id or data.get('title') or 'inspire-dataset'
                 data['name'] = h.slugify(candidate_name)
 
-            pk = insp_model.setDocument(target_id or uuid, xml)
+            pk = insp_model.setDocument(target_id or uuid, original_xml)
             data['spatial_advanced_xml'] = pk
             data['is_spatial_advanced'] = 'true'
 
-            pkg_obj = p.toolkit.get_action('package_create')(context, data)
+            pkg_obj = package_action('package_create', context, data)
             if isinstance(pkg_obj, dict) and pkg_obj.get('id'):
                 try:
                     insp_doc = model.Session.query(insp_model.InspireHandler).filter_by(md5=pk).first()
@@ -285,11 +296,14 @@ def inspire_push_document(context, data_dict):
 
     else:
         pkg_obj = None
-        pk = insp_model.setDocument(uuid, xml)
+        existing = model.Package.get(uuid) if uuid else None
+        if existing:
+            p.toolkit.check_access('package_update', context, {'id': existing.id})
+        pk = insp_model.setDocument(uuid, original_xml)
         if uuid:
             d, id_err = p.toolkit.navl_validate({"id": uuid}, {"id": [p.toolkit.get_validator("package_id_exists")]}, context)
             if not id_err:
-                pkg_obj = p.toolkit.get_action('package_patch')(context, {'id': uuid, 'spatial_advanced_xml': pk, 'is_spatial_advanced': 'true'})
+                pkg_obj = package_action('package_patch', context, {'id': uuid, 'spatial_advanced_xml': pk, 'is_spatial_advanced': 'true'})
 
     pkg_name = ''
     if isinstance(pkg_obj, dict):
@@ -297,7 +311,7 @@ def inspire_push_document(context, data_dict):
     elif target_id or uuid:
         pkg_name = target_id or uuid
 
-    return {'success': True, 'md5': pk, 'package': pkg_name}
+    return {'success': True, 'md5': pk, 'package': pkg_name, 'warnings': warnings}
 
 try:
     from ckan.logic import auth_audit_exempt
@@ -309,10 +323,24 @@ except ImportError:
 """
 Fills the rest of fields of the schema based on the provided xml document
 """
+class InspireRDFParser(RDFParser):
+    """Include the primary ISO service without importing nested access services."""
+    def _datasets(self):
+        from rdflib import Namespace, RDF
+        dcat = Namespace('http://www.w3.org/ns/dcat#')
+        foaf = Namespace('http://xmlns.com/foaf/0.1/')
+        seen = set()
+        for kind in (dcat.Dataset, dcat.DataService, dcat.DatasetSeries):
+            for subject in self.g.subjects(RDF.type, kind):
+                if subject not in seen and self.g.value(subject, foaf.isPrimaryTopicOf):
+                    seen.add(subject)
+                    yield subject
+
+
 def xsl_fill(xml):
     errors = []
     xml = extract_md_metadata(xml)
-    parser = RDFParser()
+    parser = InspireRDFParser()
     profiles = ['miteco_dcat_ap']
     #log.debug('Load profiles TO RDFParser: %s', profiles)
     try:
@@ -323,8 +351,7 @@ def xsl_fill(xml):
     parsed_dataset = {}
     try:
         #hacemos la transformación
-        transformer = XSLTTransformer("custom-transform.xsl", None)
-        transformed_xml = transformer.transform(xml)
+        transformed_xml = transform(xml)
         #log.debug(transformed_xml)
 
         parser.parse(transformed_xml, _format='xml')

@@ -130,12 +130,10 @@ class TestMitecoIsoValidator:
         assert len(errors[key]) > 0
         assert 'Invalid XML syntax' in errors[key][0]
 
-    @patch('ckanext.spatial.harvesters.SpatialHarvester._get_validator')
+    @patch('ckanext.miteco.inspire.logic.action.create.validate_insp')
     def test_invalid_inspire_schema_appends_error(self, mock_get_validator):
         """INSPIRE schema validation errors must be added to errors[key]."""
-        mock_val_instance = MagicMock()
-        mock_val_instance.is_valid.return_value = (False, 'iso19139', ['Missing gmd:contact'])
-        mock_get_validator.return_value = mock_val_instance
+        mock_get_validator.return_value = (False, ['Missing gmd:contact'])
 
         val_func = miteco_iso_validator('spatial_advanced_xml', {})
         key = ('spatial_advanced_xml',)
@@ -147,13 +145,11 @@ class TestMitecoIsoValidator:
         assert len(errors[key]) > 0
         assert any('Missing gmd:contact' in err for err in errors[key])
 
-    @patch('ckanext.spatial.harvesters.SpatialHarvester._get_validator')
+    @patch('ckanext.miteco.inspire.logic.action.create.validate_insp')
     @patch('ckanext.miteco.inspire.model.setDocument')
     def test_new_dataset_generates_uuid_and_persists(self, mock_set_doc, mock_get_validator):
         """On package_create where dataset id is not set, a UUID is assigned and persisted."""
-        mock_val_instance = MagicMock()
-        mock_val_instance.is_valid.return_value = (True, 'iso19139', [])
-        mock_get_validator.return_value = mock_val_instance
+        mock_get_validator.return_value = (True, [])
         mock_set_doc.return_value = 'mocked_md5_hash'
 
         val_func = miteco_iso_validator('spatial_advanced_xml', {})
@@ -206,15 +202,15 @@ class TestMitecoHasInspireXmlHelper:
         assert miteco_has_inspire_xml(None) is False
         assert miteco_has_inspire_xml({}) is False
 
-    def test_is_spatial_advanced_false(self):
+    def test_xml_reference_is_enough_without_spatial_flag(self):
         from ckanext.miteco.helpers import miteco_has_inspire_xml
-        assert miteco_has_inspire_xml({'is_spatial_advanced': 'false', 'spatial_advanced_xml': 'abc'}) is False
-        assert miteco_has_inspire_xml({'is_spatial_advanced': False, 'spatial_advanced_xml': 'abc'}) is False
+        assert miteco_has_inspire_xml({'is_spatial_advanced': 'false', 'spatial_advanced_xml': 'abc'}) is True
+        assert miteco_has_inspire_xml({'is_spatial_advanced': False, 'spatial_advanced_xml': 'abc'}) is True
 
-    def test_spatial_advanced_xml_missing(self):
+    def test_spatial_flag_is_enough_without_xml_reference(self):
         from ckanext.miteco.helpers import miteco_has_inspire_xml
-        assert miteco_has_inspire_xml({'is_spatial_advanced': 'true', 'spatial_advanced_xml': ''}) is False
-        assert miteco_has_inspire_xml({'is_spatial_advanced': True, 'spatial_advanced_xml': None}) is False
+        assert miteco_has_inspire_xml({'is_spatial_advanced': 'true', 'spatial_advanced_xml': ''}) is True
+        assert miteco_has_inspire_xml({'is_spatial_advanced': True, 'spatial_advanced_xml': None}) is True
 
     def test_valid_inspire_package(self):
         from ckanext.miteco.helpers import miteco_has_inspire_xml
@@ -231,7 +227,7 @@ class TestExtractMdMetadata:
     def test_csw_get_record_by_id_response_unwrapping(self):
         from ckanext.miteco.inspire.logic.action.create import extract_md_metadata
         csw_wrapped = f"""<csw:GetRecordByIdResponse xmlns:csw="http://www.opengis.net/cat/csw/2.0.2">
-{SAMPLE_VALID_INSPIRE_XML}
+{SAMPLE_VALID_INSPIRE_XML.split('?>', 1)[1]}
 </csw:GetRecordByIdResponse>"""
         extracted = extract_md_metadata(csw_wrapped)
         assert "<csw:GetRecordByIdResponse" not in extracted
