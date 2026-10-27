@@ -1,6 +1,6 @@
 import json
 import logging
-from ckanext.miteco.inspire.fields import read_fields, write_fields
+from ckanext.inspire.fields import read_fields, write_fields
 
 from rdflib import URIRef, BNode, Literal
 from ckanext.dcat.profiles.base import URIRefOrLiteral, CleanedURIRef, Namespace

@@ -17,7 +17,12 @@ from ckan.common import request
 
 log = logging.getLogger(__name__)
 
-all_helpers = {}
+from ckanext.inspire import helpers as _inspire_helpers
+
+all_helpers = {
+    name: getattr(_inspire_helpers, name)
+    for name in ('miteco_get_inspire', 'miteco_get_inspire_preview', 'miteco_has_inspire_xml')
+}
 _high_value_data_statistics = {}
 _hvd_mapping = {'http://data.europa.eu/bna/c_164e0bf5': {'en': 'Meteorological', 'es': 'Meteorología'}, 'http://data.europa.eu/bna/c_13e3cf16': {'en': 'NWP model data', 'es': 'Datos del modelo PMN'}, 'http://data.europa.eu/bna/c_36807466': {'en': 'Climate data: validated observations', 'es': 'Datos climáticos: observaciones validadas'}, 'http://data.europa.eu/bna/c_3af3368c': {'en': 'Observations data measured by weather stations', 'es': 'Datos de observaciones medidos por estaciones meteorológicas'}, 'http://data.europa.eu/bna/c_be47b010': {'en': 'Weather alerts', 'es': 'Avisos meteorológicos'}, 'http://data.europa.eu/bna/c_d13a4420': {'en': 'Radar data', 'es': 'Datos de radares'}, 'http://data.europa.eu/bna/c_a9135398': {'en': 'Companies and company ownership', 'es': 'Sociedades y propiedad de sociedades'}, 'http://data.europa.eu/bna/c_56a1bf47': {'en': 'Basic company information: key attributes', 'es': 'Información de contacto básica: principales atributos'}, 'http://data.europa.eu/bna/c_8f0fac04': {'en': 'Company documents and accounts', 'es': 'Documentos y cuentas de la empresa'}, 'http://data.europa.eu/bna/c_ac64a52d': {'en': 'Geospatial', 'es': 'Geoespacial'}, 'http://data.europa.eu/bna/c_60182062': {'en': 'Buildings', 'es': 'Edificios'}, 'http://data.europa.eu/bna/c_642643e6': {'en': 'Agricultural parcels', 'es': 'Parcelas agrícolas'}, 'http://data.europa.eu/bna/c_6a3f6896': {'en': 'Cadastral parcels', 'es': 'Parcelas catastrales'}, 'http://data.europa.eu/bna/c_6c2bb82d': {'en': 'Geographical names', 'es': 'Nombres geográficos'}, 'http://data.europa.eu/bna/c_9427236f': {'en': 'Administrative units', 'es': 'Unidades administrativas'}, 'http://data.europa.eu/bna/c_c3de25e4': {'en': 'Addresses', 'es': 'Direcciones'}, 'http://data.europa.eu/bna/c_fbd2fc3f': {'en': 'Reference parcels', 'es': 'Parcelas de referencia'}, 'http://data.europa.eu/bna/c_b79e35eb': {'en': 'Mobility', 'es': 'Movilidad'}, 'http://data.europa.eu/bna/c_4b74ea13': {'en': 'Transport networks', 'es': 'Redes de transporte'}, 'http://data.europa.eu/bna/c_b151a0ba': {'en': 'Inland waterways datasets', 'es': 'Conjuntos de datos sobre vías navegables interiores'}, 'http://data.europa.eu/bna/c_dd313021': {'en': 'Earth observation and environment', 'es': 'Observación de la Tierra y medio ambiente'}, 'http://data.europa.eu/bna/c_06b1eec4': {'en': 'Hydrography', 'es': 'Hidrografía'}, 'http://data.europa.eu/bna/c_315692ad': {'en': 'Elevation', 'es': 'Elevaciones'}, 'http://data.europa.eu/bna/c_38933a65': {'en': 'Waste', 'es': 'Residuos'}, 'http://data.europa.eu/bna/c_43f88346': {'en': 'Water', 'es': 'Agua'}, 'http://data.europa.eu/bna/c_4ba9548e': {'en': 'Emissions', 'es': 'Emisiones'}, 'http://data.europa.eu/bna/c_4d63300b': {'en': 'Horizontal legislation', 'es': 'Legislación horizontal'}, 'http://data.europa.eu/bna/c_4dd389c5': {'en': 'Mineral resources', 'es': 'Recursos minerales'}, 'http://data.europa.eu/bna/c_59c93ba5': {'en': 'Production and industrial facilities', 'es': 'Instalaciones de producción e industriales'}, 'http://data.europa.eu/bna/c_59e64dd4': {'en': 'Climate', 'es': 'Clima'}, 'http://data.europa.eu/bna/c_63b37dd4': {'en': 'Air', 'es': 'Aire'}, 'http://data.europa.eu/bna/c_63be22bd': {'en': 'Natural risk zones', 'es': 'Zonas de riesgos naturales'}, 'http://data.europa.eu/bna/c_793164b6': {'en': 'Species distribution', 'es': 'Distribución de las especies'}, 'http://data.europa.eu/bna/c_7b8fbb64': {'en': 'Environmental monitoring facilities', 'es': 'Instalaciones de observación del medio ambiente'}, 'http://data.europa.eu/bna/c_83aa10a6': {'en': 'Protected sites', 'es': 'Lugares protegidos'}, 'http://data.europa.eu/bna/c_87a129d9': {'en': 'Soil', 'es': 'Suelo'}, 'http://data.europa.eu/bna/c_91185a85': {'en': 'Orthoimagery', 'es': 'Ortoimágenes'}, 'http://data.europa.eu/bna/c_ad9ae929': {'en': 'Land use', 'es': 'Uso del suelo'}, 'http://data.europa.eu/bna/c_af646f5b': {'en': 'Area management / restriction / regulation zones & reporting units', 'es': 'Zonas sujetas a ordenación, a restricciones o reglamentaciones y unidades de notificación'}, 'http://data.europa.eu/bna/c_b21e1296': {'en': 'Land cover', 'es': 'Cubierta terrestre'}, 'http://data.europa.eu/bna/c_b40e6d46': {'en': 'Oceanographic geographical features', 'es': 'Rasgos geográficos oceanográficos'}, 'http://data.europa.eu/bna/c_b7de66cd': {'en': 'Energy resources', 'es': 'Recursos energéticos'}, 'http://data.europa.eu/bna/c_b7f6a4f3': {'en': 'Nature preservation and biodiversity', 'es': 'Protección de la naturaleza y biodiversidad'}, 'http://data.europa.eu/bna/c_c3919aec': {'en': 'Habitats and biotopes', 'es': 'Hábitats y biotopos'}, 'http://data.europa.eu/bna/c_c873f344': {'en': 'Bio-geographical regions', 'es': 'Regiones biogeográficas'}, 'http://data.europa.eu/bna/c_e3f55603': {'en': 'Geology', 'es': 'Geología'}, 'http://data.europa.eu/bna/c_e4358335': {'en': 'Noise', 'es': 'Ruido'}, 'http://data.europa.eu/bna/c_f399050e': {'en': 'Sea regions', 'es': 'Regiones marinas'}, 'http://data.europa.eu/bna/c_e1da4e07': {'en': 'Statistics', 'es': 'Estadística'}, 'http://data.europa.eu/bna/c_04bf94a3': {'en': 'Poverty', 'es': 'Pobreza'}, 'http://data.europa.eu/bna/c_20cd11bb': {'en': 'EU International trade in goods statistics – exports and imports breakdowns simultaneously by partner, product and flow', 'es': 'Estadísticas de la UE sobre comercio internacional de bienes: exportaciones e importaciones desgloses simultáneos por socio, producto y flujo'}, 'http://data.europa.eu/bna/c_23385471': {'en': 'Potential labour force', 'es': 'Mano de obra potencial'}, 'http://data.europa.eu/bna/c_2aed31f9': {'en': 'Industrial producer price index breakdowns by activity', 'es': 'Desgloses del índice de precios industriales por actividad'}, 'http://data.europa.eu/bna/c_317b9493': {'en': 'Population, Fertility, Mortality', 'es': 'Población, fertilidad, mortalidad'}, 'http://data.europa.eu/bna/c_34abf8c1': {'en': 'Industrial production', 'es': 'Producción industrial'}, 'http://data.europa.eu/bna/c_424bb0b4': {'en': 'Current healthcare expenditure', 'es': 'Gasto sanitario corriente'}, 'http://data.europa.eu/bna/c_4ac557e7': {'en': 'Government expenditure and revenue', 'es': 'Gastos e ingresos públicos'}, 'http://data.europa.eu/bna/c_4acb6bf3': {'en': 'Mortality', 'es': 'Mortalidad'}, 'http://data.europa.eu/bna/c_59627af3': {'en': 'National accounts – key indicators on households', 'es': 'Cuentas nacionales: principales indicadores sobre los hogares'}, 'http://data.europa.eu/bna/c_6a7250c': {'en': 'Fertility', 'es': 'Fertilidad'}, 'http://data.europa.eu/bna/c_92874eb2': {'en': 'Environmental accounts and statistics', 'es': 'Cuentas y estadísticas medioambientales'}, 'http://data.europa.eu/bna/c_95da87c7': {'en': 'National accounts – key indicators on corporations', 'es': 'Cuentas nacionales: principales indicadores sobre las empresas'}, 'http://data.europa.eu/bna/c_a2c6dcd8': {'en': 'Employment', 'es': 'Empleo'}, 'http://data.europa.eu/bna/c_a3767648': {'en': 'Tourism flows in Europe', 'es': 'Flujos turísticos en Europa'}, 'http://data.europa.eu/bna/c_a49ec591': {'en': 'Volume of sales by activity', 'es': 'Volumen de ventas por actividad'}, 'http://data.europa.eu/bna/c_a8b937c4': {'en': 'Inequality', 'es': 'Desigualdad'}, 'http://data.europa.eu/bna/c_b72b721f': {'en': 'National accounts – GDP main aggregates', 'es': 'Cuentas nacionales — principales agregados del PIB'}, 'http://data.europa.eu/bna/c_c0022235': {'en': 'Harmonised Indices of consumer prices', 'es': 'Índice de precios de consumo armonizados'}, 'http://data.europa.eu/bna/c_dd8f4797': {'en': 'Consolidated government gross debt', 'es': 'Deuda bruta consolidada de las Administraciones Públicas'}, 'http://data.europa.eu/bna/c_f2b50efd': {'en': 'Population', 'es': 'Población'}, 'http://data.europa.eu/bna/c_fd4e881c': {'en': 'Unemployment', 'es': 'Desempleo'}}
 
@@ -110,7 +115,6 @@ def get_hv_datasets(count=10, return_count=True):
         return result['count']
     else:
         return result['results']
-
 
 
 @helper
@@ -209,83 +213,6 @@ def miteco_get_calendar(datestr):
     except:
         return None
 
-@helper
-def miteco_get_inspire(id):
-    if not id:
-        return None
-    # Si el valor ya es un documento XML en texto, devolverlo directamente
-    if isinstance(id, str) and id.strip().startswith('<'):
-        return id
-    context = {'model': model, 'session': model.Session}
-    try:
-        log.debug(id)
-        return p.toolkit.get_action('inspire_get_document')(context, {'hash': id})['xml']
-    except Exception:
-        return None
-
-@helper
-def miteco_get_inspire_preview(pkg, current_xml=None):
-    """
-    Returns the XML to display in the XML viewer in dataset edit mode:
-    1. If current_xml is given (raw XML or MD5 hash), retrieves the active custom XML.
-    2. Otherwise, if pkg has an existing XML in DB (inspire_xml table with pkg uuid), returns it.
-    3. Otherwise, generates and renders the official INSPIRE XML template on the fly for pkg.
-    """
-    if current_xml:
-        xml = miteco_get_inspire(current_xml)
-        if xml:
-            return xml
-
-    pkg_dict = None
-    if isinstance(pkg, dict):
-        pkg_dict = pkg
-    elif hasattr(pkg, 'as_dict'):
-        pkg_dict = pkg.as_dict()
-
-    if pkg_dict:
-        try:
-            from ckanext.miteco.inspire.access import find_document
-            doc = find_document(pkg_dict)
-            if doc and doc.xml:
-                return doc.xml
-        except Exception as e_prev:
-            log.debug("Could not get stored XML for preview: %s", e_prev)
-
-        try:
-            from ckanext.miteco.inspire.generator import render_inspire_xml
-            return render_inspire_xml(pkg_dict)
-        except Exception as e:
-            log.warning("Could not render INSPIRE XML preview: %s", e)
-
-    return ""
-
-@helper
-def miteco_has_inspire_xml(pkg):
-    """
-    Checks if a dataset has an associated INSPIRE XML.
-    Returns True if spatial_advanced_xml has a value or is_spatial_advanced is true.
-    """
-    if not pkg:
-        return False
-    if isinstance(pkg, dict):
-        is_spatial = pkg.get('is_spatial_advanced')
-        xml_id = pkg.get('spatial_advanced_xml')
-        if not xml_id and 'extras' in pkg:
-            for extra in pkg.get('extras') or []:
-                if isinstance(extra, dict):
-                    if extra.get('key') == 'spatial_advanced_xml':
-                        xml_id = extra.get('value')
-                    elif extra.get('key') == 'is_spatial_advanced':
-                        is_spatial = extra.get('value')
-    else:
-        is_spatial = getattr(pkg, 'is_spatial_advanced', False)
-        xml_id = getattr(pkg, 'spatial_advanced_xml', None)
-
-    if xml_id and str(xml_id).strip() and str(xml_id).strip() not in ('None', 'null', 'false', 'False', ''):
-        return True
-    if is_spatial and h.asbool(is_spatial):
-        return True
-    return False
 
 @helper 
 def miteco_read_log(route):
