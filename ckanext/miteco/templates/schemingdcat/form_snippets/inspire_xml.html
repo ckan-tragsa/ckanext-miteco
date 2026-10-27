@@ -2,14 +2,15 @@
 
 {% asset 'ckanext-miteco/miteco-xml-viewer' %}
 
-{# Load existing saved value or fall back to the live generated ISO 19139 template #}
+{# Preview the saved CKAN template; keep the original separate for submission. #}
 {% set current_xml = data.get(field.field_name, '') if data else '' %}
 {% set dataset_id   = data.get('id', '')   if data else '' %}
 {% set dataset_name = data.get('name', '') if data else '' %}
 {% set dataset_org  = data.get('owner_org', '') if data else '' %}
 {% set is_new_dataset = not (dataset_id or dataset_name) or (dataset_id == 'new') %}
 {% set has_custom_xml = h.miteco_has_inspire_xml(data) %}
-{% set display_xml = h.miteco_get_inspire_preview(data, current_xml) if not is_new_dataset else '' %}
+{% set display_xml = h.miteco_get_inspire_preview(data, template=true) if not is_new_dataset else '' %}
+{% set original_xml = h.miteco_get_inspire_preview(data, current_xml) if has_custom_xml and not is_new_dataset else '' %}
 
 {% set target_pkg = dataset_name or dataset_id %}
 {% set upload_endpoint = h.url_for('inspire.inspire_upload_xml', id=target_pkg) if target_pkg and target_pkg != 'new' else h.url_for('inspire.inspire_upload_xml') %}
@@ -45,11 +46,7 @@
 {% else %}
     {# ── Vista de dataset existente (pestaña 'Espacial avanzado' o edición /inspire/<id>) ── #}
     <p class="text-muted small mb-2">
-      {% if has_custom_xml %}
-        <i class="fa fa-check-circle me-1" aria-hidden="true"></i> <strong>{{_("Active INSPIRE Metadata")}}:</strong> {{_("This dataset uses custom advanced spatial metadata.")}}
-      {% else %}
         <i class="fa fa-eye me-1" aria-hidden="true"></i> <strong>{{_("INSPIRE Template Preview (Draft)")}}:</strong> {{_("Template automatically generated from current metadata. To activate it, download the file, edit if necessary and import it.")}}
-      {% endif %}
     </p>
 
     {# ── Highlighted read-only preview (shown while textarea is readonly) ── #}
@@ -65,7 +62,7 @@
               data-dataset-name="{{ dataset_name }}"
               data-dataset-org="{{ dataset_org }}"
               {{ form.attributes(dict(
-              {"class": "form-control"}, **field.get('form_select_attrs', {}))) }}>{% if has_custom_xml %}{{ display_xml }}{% endif %}</textarea>
+              {"class": "form-control"}, **field.get('form_select_attrs', {}))) }}>{{ original_xml }}</textarea>
 
     {# ── Sección de subida e importación / descarga directa ── #}
     <div id="xmlUploadSection" class="d-flex flex-wrap gap-2 align-items-center mt-2 mb-2" data-upload-url="{{ upload_endpoint }}">
@@ -75,11 +72,18 @@
         <button type="button" class="btn btn-miteco-primary" id="loadButton" onclick="loadXml()">
             <i class="fa fa-upload" aria-hidden="true"></i> {{_("import xml")}}
         </button>
-        {% if has_custom_xml and current_xml and dataset_name %}
+        {% if target_pkg and target_pkg != 'new' %}
         <button type="button" class="btn btn-outline-secondary" id="xml-download-btn">
             <i class="fa fa-download" aria-hidden="true"></i> {{_("Download XML")}}
         </button>
         {% endif %}
+        {# Original download reserved for future use. Remove this Jinja comment to enable it.
+        {% if has_custom_xml and target_pkg and target_pkg != 'new' %}
+        <a href="{{ h.url_for('miteco.dataset_inspire_xml', _id=target_pkg, download='true') }}" class="btn btn-outline-secondary" id="xml-original-btn">
+            <i class="fa fa-download" aria-hidden="true"></i> {{ _("Download original XML") }}
+        </a>
+        {% endif %}
+        #}
         {% if target_pkg and target_pkg != 'new' %}
         <a href="{{ h.url_for('miteco.dataset_inspire_xml', _id=target_pkg, download='true', template='true') }}" class="btn btn-outline-secondary" id="xml-template-btn">
             <i class="fa fa-download" aria-hidden="true"></i> {{_("Download INSPIRE XML template")}}

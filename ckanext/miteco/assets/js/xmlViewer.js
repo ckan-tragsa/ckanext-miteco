@@ -53,13 +53,15 @@
 
     function initHighlight() {
         var preview = document.getElementById('xml-preview');
-        if (!preview || typeof hljs === 'undefined') return;
+        if (!preview) return;
 
         var textarea = document.getElementById('xml-text');
-        if (textarea && textarea.value) {
+        // The server renders the saved CKAN template; the hidden field holds
+        // the original XML and must not replace that preview on page load.
+        if (!preview.textContent.trim() && textarea && textarea.value) {
             preview.textContent = textarea.value;
-            hljs.highlightElement(preview);
-        } else if (preview.textContent.trim()) {
+        }
+        if (preview.textContent.trim() && typeof hljs !== 'undefined') {
             hljs.highlightElement(preview);
         }
 
@@ -68,7 +70,7 @@
             textarea.addEventListener('input', function () {
                 preview.textContent = textarea.value;
                 delete preview.dataset.highlighted;
-                hljs.highlightElement(preview);
+                if (typeof hljs !== 'undefined') hljs.highlightElement(preview);
             });
         }
 
@@ -82,7 +84,7 @@
                         preview.textContent = reader.result;
                         if (textarea) textarea.value = reader.result;
                         delete preview.dataset.highlighted;
-                        hljs.highlightElement(preview);
+                        if (typeof hljs !== 'undefined') hljs.highlightElement(preview);
                     };
                     reader.readAsText(fileInput.files[0]);
                 }
@@ -99,8 +101,8 @@
         btn.addEventListener('click', function () {
             var textarea = document.getElementById('xml-text');
             var preview = document.getElementById('xml-preview');
-            var content = (textarea && textarea.value.trim()) || (preview && preview.textContent.trim());
-            if (!content) return;
+            var content = (preview && preview.textContent) || (textarea && textarea.value);
+            if (!content || !content.trim()) return;
 
             var blob = new Blob([content], { type: 'application/xml' });
             var url = URL.createObjectURL(blob);
@@ -157,10 +159,10 @@
 
                 // Refresh preview
                 var preview = document.getElementById('xml-preview');
-                if (preview && typeof hljs !== 'undefined') {
+                if (preview) {
                     preview.textContent = xml;
                     delete preview.dataset.highlighted;
-                    hljs.highlightElement(preview);
+                    if (typeof hljs !== 'undefined') hljs.highlightElement(preview);
                 }
 
                 showDialog(
