@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-miteco 0.1.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-27 08:19+0000\n"
+"POT-Creation-Date: 2026-10-27 12:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -359,115 +359,111 @@ msgstr ""
 msgid "None - top level"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:20
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:21
 msgid ""
 "Select an ISO 19139 / INSPIRE XML file to create and automatically populate "
 "the new dataset."
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:29
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:76
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:30
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:73
 msgid "import xml"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:36
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:37
 msgid "Seleccione un archivo XML arriba para previsualizar su contenido e importarlo."
 msgstr ""
 
 #: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:49
-msgid "Active INSPIRE Metadata"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:49
-msgid "This dataset uses custom advanced spatial metadata."
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:51
 msgid "INSPIRE Template Preview (Draft)"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:51
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:49
 msgid ""
 "Template automatically generated from current metadata. To activate it, "
 "download the file, edit if necessary and import it."
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:80
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:77
 msgid "Download XML"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:85
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:82
+msgid "Download original XML"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:87
 msgid "Download INSPIRE XML template"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:88
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:90
 msgid ""
 "The template is generated from the metadata saved in CKAN. Save your form "
 "changes before downloading it."
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:103
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:105
 msgid "Version history"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:107
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:109
 msgid "Date"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:109
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:111
 msgid "Cargando historial de versiones..."
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:113
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:115
 msgid "No saved versions yet."
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:128
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:130
 msgid "Confirmar importación de XML"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:134
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:136
 msgid "¿Desea importar el archivo XML seleccionado para este conjunto de datos?"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:138
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:140
 msgid ""
 "Se validará la conformidad INSPIRE y se actualizarán los metadatos espaciales"
 " del conjunto, conservando los datos editados previamente en el formulario."
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:143
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:174
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:145
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:176
 msgid "Cancelar"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:146
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:148
 msgid "Confirmar e importar"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:159
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:161
 msgid "Cargar versión anterior del XML"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:165
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:167
 msgid "¿Desea cargar esta versión histórica del XML INSPIRE?"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:169
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:171
 msgid ""
 "El contenido visualizado en el editor se reemplazará por la versión "
 "seleccionada."
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:177
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:179
 msgid "Cargar versión"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:191
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:193
 msgid "Aviso"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:200
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:202
 msgid "Aceptar"
 msgstr ""
 

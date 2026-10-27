@@ -224,13 +224,28 @@ def miteco_get_inspire(id):
         return None
 
 @helper
-def miteco_get_inspire_preview(pkg, current_xml=None):
+def miteco_get_inspire_preview(pkg, current_xml=None, template=False):
     """
     Returns the XML to display in the XML viewer in dataset edit mode:
     1. If current_xml is given (raw XML or MD5 hash), retrieves the active custom XML.
     2. Otherwise, if pkg has an existing XML in DB (inspire_xml table with pkg uuid), returns it.
     3. Otherwise, generates and renders the official INSPIRE XML template on the fly for pkg.
+
+    With template=True, use saved CKAN metadata just like the template download.
     """
+    if template:
+        from ckanext.miteco.inspire.access import authorized_package
+        from ckanext.miteco.inspire.generator import render_inspire_xml
+        pkg_dict = pkg if isinstance(pkg, dict) else pkg.as_dict() if hasattr(pkg, 'as_dict') else {}
+        identifier = pkg_dict.get('id') or pkg_dict.get('name')
+        if not identifier:
+            return ''
+        try:
+            return render_inspire_xml(authorized_package({}, identifier))
+        except Exception as e:
+            log.warning('Could not render saved INSPIRE template preview: %s', e)
+            return ''
+
     if current_xml:
         xml = miteco_get_inspire(current_xml)
         if xml:
