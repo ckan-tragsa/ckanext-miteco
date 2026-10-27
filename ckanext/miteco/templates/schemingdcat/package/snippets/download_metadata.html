@@ -57,12 +57,13 @@
                                 <span class="metadata-download_info_label"><strong>XML</strong> {{ _('INSPIRE (ISO 19139)') }}</span>
                             </a>
                         </li>
-                    {% elif pkg.dcat_type in inspire_metadata_values or pkg.spatial or pkg.spatial_uri %}
+                    {% endif %}
+                    {% if h.miteco_has_inspire_xml(pkg) or pkg.dcat_type in inspire_metadata_values or pkg.spatial or pkg.spatial_uri %}
                         <li class="dropdown-header" title="{{ _('INSPIRE Metadata') }}">
                             <i class="fa fa-file-code"></i> INSPIRE - {{ _('Geospatial XML') }}
                         </li>
                         <li>
-                            <a href="{{ h.url_for('miteco.dataset_inspire_xml', _id=pkg.name, download='true') }}" download="{{ pkg.name }}.xml">
+                            <a href="{{ h.url_for('miteco.dataset_inspire_xml', _id=pkg.name, download='true', template='true') }}" download="{{ pkg.name }}.xml">
                                 <span class="metadata-download_info_label"><strong>XML</strong> {{ _('INSPIRE XML Template (ISO 19139)') }}</span>
                             </a>
                         </li>

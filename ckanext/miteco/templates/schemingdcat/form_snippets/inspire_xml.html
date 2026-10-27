@@ -79,11 +79,13 @@
         <button type="button" class="btn btn-outline-secondary" id="xml-download-btn">
             <i class="fa fa-download" aria-hidden="true"></i> {{_("Download XML")}}
         </button>
-        {% elif target_pkg and target_pkg != 'new' %}
-        <a href="{{ h.url_for('miteco.dataset_inspire_xml', _id=target_pkg, download='true') }}" class="btn btn-outline-secondary" id="xml-template-btn">
+        {% endif %}
+        {% if target_pkg and target_pkg != 'new' %}
+        <a href="{{ h.url_for('miteco.dataset_inspire_xml', _id=target_pkg, download='true', template='true') }}" class="btn btn-outline-secondary" id="xml-template-btn">
             <i class="fa fa-download" aria-hidden="true"></i> {{_("Download INSPIRE XML template")}}
         </a>
         {% endif %}
+        <span class="text-muted small">{{ _("The template is generated from the metadata saved in CKAN. Save your form changes before downloading it.") }}</span>
         <span id="xml-upload-status" class="small ms-2"></span>
     </div>
 

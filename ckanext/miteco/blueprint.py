@@ -73,15 +73,22 @@ def dataset_inspire_xml(_id):
     Stored documents are returned unchanged. If no document exists, it generates
     and persists a valid ISO 19139 INSPIRE document using the generator.
 
+    Add template=true to render a draft from the current saved CKAN fields,
+    independently of the stored original and without persisting the draft.
+
     GET /dataset/<slug-or-uuid>/xml
     """
     pkg = _resolve_dataset(_id)
     uuid = pkg['id']
 
-    doc = access.find_document(pkg)
+    is_template = request.args.get('template', 'false').lower() in ('true', '1')
+    doc = None if is_template else access.find_document(pkg)
 
     xml_content = None
-    if doc and doc.xml:
+    if is_template:
+        from ckanext.miteco.inspire.generator import render_inspire_xml
+        xml_content = render_inspire_xml(pkg)
+    elif doc and doc.xml:
         xml_content = doc.xml
     else:
         from ckanext.miteco.inspire.generator import generate_inspire_xml, render_inspire_xml
