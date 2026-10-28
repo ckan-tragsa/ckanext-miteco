@@ -20,6 +20,14 @@
 ## Overview
 `ckanext-miteco` extension is a tool designed to extend and customise the CKAN metadata and Open Data catalogue for the Spanish Ministry for Ecological Transition and Demographic Challenge ([MITECO](https://www.miteco.gob.es/)). This extension provides specific and thematic functionalities that allow a better management, visualisation and analysis of data related to the ecological transition and the demographic challenge. 
 
+## INSPIRE XML integration
+
+The `miteco` plugin and its ordinary catalog schema operate independently of XML management. The former `miteco_inspire` registration is replaced by the `inspire` and `inspire_spatial` plugins supplied by `ckanext-inspire`.
+
+For the combined catalog, install that package and assemble the ordinary schema with its XML definitions using `python -m ckanext.inspire.schema_compose BASE OUTPUT`. Configure the generated schema in `scheming.dataset_schemas`, put the XML plugins before `miteco` in the existing plugin list, and use `miteco_dcat_ap inspire_compat_fields` as the RDF profile chain. Keep the other plugins and schemas required by the deployment. The XML package documents installation and the schema compatibility requirements.
+
+Without XML management, use `miteco` with its ordinary schema and `miteco_dcat_ap`; the XML package and its profiles are not required. The ordinary date and OGC URL validators remain in the theme; import-specific exceptions belong to the XML package's adapters.
+
 ## TODO: Requirements
 ### Compatibility
 Compatibility with core CKAN versions:
