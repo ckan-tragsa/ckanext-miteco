@@ -170,10 +170,6 @@ async function executeXmlImport() {
     if (datasetOrg) {
         formData.append('org', datasetOrg);
     }
-    var complementCheckbox = document.getElementById('field-xml-complement');
-    if (complementCheckbox) {
-        formData.append('overwrite', complementCheckbox.checked ? 'false' : 'true');
-    }
 
     var uploadSection = document.getElementById('xmlUploadSection');
     var uploadUrl = uploadSection ? uploadSection.getAttribute('data-upload-url') : '';

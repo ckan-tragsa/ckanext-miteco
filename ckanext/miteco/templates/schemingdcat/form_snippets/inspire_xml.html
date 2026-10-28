@@ -93,9 +93,6 @@
         <span id="xml-upload-status" class="small ms-2"></span>
     </div>
 
-    {# ── Opción de actualización complementaria (oculta pero activa por defecto) ── #}
-    <input type="checkbox" id="field-xml-complement" checked style="display:none;" />
-
     {# ── Version history panel (solo al editar un dataset existente con XML) ── #}
     {% if has_custom_xml and not is_new_dataset and (dataset_name or dataset_id) %}
     <div id="xml-history-panel" class="mt-3"
@@ -139,7 +136,7 @@
         </p>
         <p class="small text-muted mb-0">
           <i class="fa fa-info-circle me-1" aria-hidden="true"></i>
-          {{_("Se validará la conformidad INSPIRE y se actualizarán los metadatos espaciales del conjunto, conservando los datos editados previamente en el formulario.")}}
+          {{_("Se validará la conformidad INSPIRE y se actualizarán los metadatos del conjunto de datos con la información del archivo XML.")}}
         </p>
       </div>
       <div class="modal-footer border-top-0 pt-0">

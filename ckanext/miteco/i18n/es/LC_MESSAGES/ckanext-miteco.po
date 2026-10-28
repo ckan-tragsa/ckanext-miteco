@@ -467,11 +467,10 @@ msgstr ""
 msgid "¿Desea importar el archivo XML seleccionado para este conjunto de datos?"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:140
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:139
 msgid ""
-"Se validará la conformidad INSPIRE y se actualizarán los metadatos "
-"espaciales del conjunto, conservando los datos editados previamente en el"
-" formulario."
+"Se validará la conformidad INSPIRE y se actualizarán los metadatos del "
+"conjunto de datos con la información del archivo XML."
 msgstr ""
 
 #: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:145
