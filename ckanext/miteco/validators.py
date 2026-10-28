@@ -271,15 +271,3 @@ def miteco_preserve_date_modified(field, schema):
         if value is missing or value is None or value == '':
             data[key] = datetime.datetime.now().isoformat()
     return validator
-
-
-@scheming_validator
-@validator
-def miteco_boolean(field, schema):
-    """
-    Checks if the field is "True" or "False"
-    """
-    def validator(key, data, errors, context):
-        pass
-            
-    return validator
