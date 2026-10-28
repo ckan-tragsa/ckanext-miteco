@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+{% import "inspire/generator/charstring.j2" as cs %}
+{% set resource_type = record['metadata']['hierarchylevel']['value'] %}
+<gmd:MD_Metadata 
+    xmlns:gmd="http://www.isotc211.org/2005/gmd"
+    xmlns:gco="http://www.isotc211.org/2005/gco"
+    xmlns:gmx="http://www.isotc211.org/2005/gmx"
+    xmlns:srv="http://www.isotc211.org/2005/srv"
+    xmlns:gml="http://www.opengis.net/gml/3.2"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.isotc211.org/2005/gmd http://schemas.opengis.net/csw/2.0.2/profiles/apiso/1.0.0/apiso.xsd">
+  <gmd:fileIdentifier>
+    <gco:CharacterString>{{ record['metadata']['identifier'] }}</gco:CharacterString>
+  </gmd:fileIdentifier>
+  <gmd:language>
+    <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/php/code_list.php" codeListValue="{{ record['metadata']['language'] }}">{{ record['metadata']['language'] }}</gmd:LanguageCode>
+  </gmd:language>
+  <gmd:characterSet>
+    <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="{{ record['metadata']['charset'] }}">{{ record['metadata']['charset'] }}</gmd:MD_CharacterSetCode>
+  </gmd:characterSet>
+  <gmd:hierarchyLevel>
+    <gmd:MD_ScopeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="{{ resource_type }}">{{ resource_type }}</gmd:MD_ScopeCode>
+  </gmd:hierarchyLevel>
+  {% if resource_type == 'service' %}
+  <gmd:hierarchyLevelName>
+    <gco:CharacterString>Service</gco:CharacterString>
+  </gmd:hierarchyLevelName>
+  {% endif %}
+  {% for role, contact in record.get('contact', {}).items() %}
+  <gmd:contact>
+    {% include "inspire/generator/contact.j2" %}
+  </gmd:contact>
+  {% endfor %}
+  <gmd:dateStamp>
+    <gco:Date>{{ record['metadata']['datestamp'] }}</gco:Date>
+  </gmd:dateStamp>
+  <gmd:metadataStandardName>
+    <gco:CharacterString>Reglamento (CE) Nº 1205/2008 de INSPIRE</gco:CharacterString>
+  </gmd:metadataStandardName>
+  <gmd:metadataStandardVersion>
+    <gco:CharacterString>1.0</gco:CharacterString>
+  </gmd:metadataStandardVersion>
+  {% if record.get('spatial') and record['spatial'].get('crs') %}
+  <gmd:referenceSystemInfo>
+    <gmd:MD_ReferenceSystem>
+      <gmd:referenceSystemIdentifier>
+        <gmd:RS_Identifier>
+          <gmd:code>
+            <gmx:Anchor xlink:href="{{ record['spatial']['crs'].get('uri', 'http://www.opengis.net/def/crs/EPSG/0/4258') }}">EPSG:{{ record['spatial']['crs'].get('value', '4258') }}</gmx:Anchor>
+          </gmd:code>
+        </gmd:RS_Identifier>
+      </gmd:referenceSystemIdentifier>
+    </gmd:MD_ReferenceSystem>
+  </gmd:referenceSystemInfo>
+  {% endif %}
+  <gmd:identificationInfo>
+  {% if resource_type == 'service' %}
+    <srv:SV_ServiceIdentification>
+      <gmd:citation>
+        <gmd:CI_Citation>
+          <gmd:title>
+            <gco:CharacterString>{{ record['identification']['title']|e }}</gco:CharacterString>
+          </gmd:title>
+          {% for date_item in record['identification'].get('dates', []) %}
+          <gmd:date>
+            <gmd:CI_Date>
+              <gmd:date>
+                <gco:Date>{{ date_item.date }}</gco:Date>
+              </gmd:date>
+              <gmd:dateType>
+                <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="{{ date_item.type }}">{{ date_item.type }}</gmd:CI_DateTypeCode>
+              </gmd:dateType>
+            </gmd:CI_Date>
+          </gmd:date>
+          {% endfor %}
+          {% if record['identification'].get('identifier') %}
+          <gmd:identifier>
+            <gmd:MD_Identifier>
+              <gmd:code>
+                <gco:CharacterString>{{ record['identification']['identifier']|e }}</gco:CharacterString>
+              </gmd:code>
+            </gmd:MD_Identifier>
+          </gmd:identifier>
+          {% endif %}
+        </gmd:CI_Citation>
+      </gmd:citation>
+      <gmd:abstract>
+        <gco:CharacterString>{{ record['identification']['abstract']|e }}</gco:CharacterString>
+      </gmd:abstract>
+      {% for role, contact in record.get('contact', {}).items() %}
+      <gmd:pointOfContact>
+        {% include "inspire/generator/contact.j2" %}
+      </gmd:pointOfContact>
+      {% endfor %}
+      {% if record['identification'].get('keywords') %}
+      {% for kw_block in record['identification']['keywords'] %}
+      <gmd:descriptiveKeywords>
+        <gmd:MD_Keywords>
+          {% for kw in kw_block.get('keywords', []) %}
+          <gmd:keyword>
+            {% if kw_block.get('thesaurus_uri') %}
+            <gmx:Anchor xlink:href="{{ kw.get('uri') or kw_block.thesaurus_uri }}">{% if kw is mapping %}{{ kw.name|e }}{% else %}{{ kw|e }}{% endif %}</gmx:Anchor>
+            {% else %}
+            <gco:CharacterString>{% if kw is mapping %}{{ kw.name|e }}{% else %}{{ kw|e }}{% endif %}</gco:CharacterString>
+            {% endif %}
+          </gmd:keyword>
+          {% endfor %}
+          {% if kw_block.get('thesaurus_title') %}
+          <gmd:thesaurusName>
+            <gmd:CI_Citation>
+              <gmd:title>
+                {% if kw_block.get('thesaurus_uri') %}
+                <gmx:Anchor xlink:href="{{ kw_block.thesaurus_uri }}">{{ kw_block.thesaurus_title|e }}</gmx:Anchor>
+                {% else %}
+                <gco:CharacterString>{{ kw_block.thesaurus_title|e }}</gco:CharacterString>
+                {% endif %}
+              </gmd:title>
+              <gmd:date>
+                <gmd:CI_Date>
+                  <gmd:date>
+                    <gco:Date>{{ kw_block.get('thesaurus_date', '2008-06-01') }}</gco:Date>
+                  </gmd:date>
+                  <gmd:dateType>
+                    <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+                  </gmd:dateType>
+                </gmd:CI_Date>
+              </gmd:date>
+            </gmd:CI_Citation>
+          </gmd:thesaurusName>
+          {% endif %}
+        </gmd:MD_Keywords>
+      </gmd:descriptiveKeywords>
+      {% endfor %}
+      {% endif %}
+      <gmd:resourceConstraints>
+        <gmd:MD_LegalConstraints>
+          <gmd:useLimitation>
+            <gco:CharacterString>{{ record['identification'].get('license_title', 'Condiciones de uso abiertas')|e }}</gco:CharacterString>
+          </gmd:useLimitation>
+          <gmd:accessConstraints>
+            <gmd:MD_RestrictionCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode" codeListValue="otherRestrictions">otherRestrictions</gmd:MD_RestrictionCode>
+          </gmd:accessConstraints>
+          <gmd:otherConstraints>
+            <gmx:Anchor xlink:href="{{ record['identification'].get('access_rights', 'http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations') }}">Sin limitaciones de acceso público</gmx:Anchor>
+          </gmd:otherConstraints>
+        </gmd:MD_LegalConstraints>
+      </gmd:resourceConstraints>
+      <srv:serviceType>
+        <gco:LocalName>{{ record['identification'].get('service_type', 'OGC:WMS') }}</gco:LocalName>
+      </srv:serviceType>
+      {% if record['identification'].get('service_type_version') %}
+      <srv:serviceTypeVersion>
+        <gco:CharacterString>{{ record['identification']['service_type_version'] }}</gco:CharacterString>
+      </srv:serviceTypeVersion>
+      {% endif %}
+      {% if record.get('spatial') and record['spatial'].get('bbox') %}
+      <srv:extent>
+        <gmd:EX_Extent>
+          <gmd:geographicElement>
+            <gmd:EX_GeographicBoundingBox>
+              <gmd:westBoundLongitude>
+                <gco:Decimal>{{ record['spatial']['bbox'][0] }}</gco:Decimal>
+              </gmd:westBoundLongitude>
+              <gmd:eastBoundLongitude>
+                <gco:Decimal>{{ record['spatial']['bbox'][2] }}</gco:Decimal>
+              </gmd:eastBoundLongitude>
+              <gmd:southBoundLatitude>
+                <gco:Decimal>{{ record['spatial']['bbox'][1] }}</gco:Decimal>
+              </gmd:southBoundLatitude>
+              <gmd:northBoundLatitude>
+                <gco:Decimal>{{ record['spatial']['bbox'][3] }}</gco:Decimal>
+              </gmd:northBoundLatitude>
+            </gmd:EX_GeographicBoundingBox>
+          </gmd:geographicElement>
+        </gmd:EX_Extent>
+      </srv:extent>
+      {% endif %}
+    </srv:SV_ServiceIdentification>
+  {% else %}
+    <gmd:MD_DataIdentification>
+      <gmd:citation>
+        <gmd:CI_Citation>
+          <gmd:title>
+            <gco:CharacterString>{{ record['identification']['title']|e }}</gco:CharacterString>
+          </gmd:title>
+          {% for date_item in record['identification'].get('dates', []) %}
+          <gmd:date>
+            <gmd:CI_Date>
+              <gmd:date>
+                <gco:Date>{{ date_item.date }}</gco:Date>
+              </gmd:date>
+              <gmd:dateType>
+                <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="{{ date_item.type }}">{{ date_item.type }}</gmd:CI_DateTypeCode>
+              </gmd:dateType>
+            </gmd:CI_Date>
+          </gmd:date>
+          {% endfor %}
+          {% if record['identification'].get('identifier') %}
+          <gmd:identifier>
+            <gmd:MD_Identifier>
+              <gmd:code>
+                <gco:CharacterString>{{ record['identification']['identifier']|e }}</gco:CharacterString>
+              </gmd:code>
+            </gmd:MD_Identifier>
+          </gmd:identifier>
+          {% endif %}
+        </gmd:CI_Citation>
+      </gmd:citation>
+      <gmd:abstract>
+        <gco:CharacterString>{{ record['identification']['abstract']|e }}</gco:CharacterString>
+      </gmd:abstract>
+      {% for role, contact in record.get('contact', {}).items() %}
+      <gmd:pointOfContact>
+        {% include "inspire/generator/contact.j2" %}
+      </gmd:pointOfContact>
+      {% endfor %}
+      {% if record['identification'].get('keywords') %}
+      {% for kw_block in record['identification']['keywords'] %}
+      <gmd:descriptiveKeywords>
+        <gmd:MD_Keywords>
+          {% for kw in kw_block.get('keywords', []) %}
+          <gmd:keyword>
+            {% if kw_block.get('thesaurus_uri') %}
+            <gmx:Anchor xlink:href="{{ kw.get('uri') or kw_block.thesaurus_uri }}">{% if kw is mapping %}{{ kw.name|e }}{% else %}{{ kw|e }}{% endif %}</gmx:Anchor>
+            {% else %}
+            <gco:CharacterString>{% if kw is mapping %}{{ kw.name|e }}{% else %}{{ kw|e }}{% endif %}</gco:CharacterString>
+            {% endif %}
+          </gmd:keyword>
+          {% endfor %}
+          {% if kw_block.get('thesaurus_title') %}
+          <gmd:thesaurusName>
+            <gmd:CI_Citation>
+              <gmd:title>
+                {% if kw_block.get('thesaurus_uri') %}
+                <gmx:Anchor xlink:href="{{ kw_block.thesaurus_uri }}">{{ kw_block.thesaurus_title|e }}</gmx:Anchor>
+                {% else %}
+                <gco:CharacterString>{{ kw_block.thesaurus_title|e }}</gco:CharacterString>
+                {% endif %}
+              </gmd:title>
+              <gmd:date>
+                <gmd:CI_Date>
+                  <gmd:date>
+                    <gco:Date>{{ kw_block.get('thesaurus_date', '2008-06-01') }}</gco:Date>
+                  </gmd:date>
+                  <gmd:dateType>
+                    <gmd:CI_DateTypeCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode" codeListValue="publication">publication</gmd:CI_DateTypeCode>
+                  </gmd:dateType>
+                </gmd:CI_Date>
+              </gmd:date>
+            </gmd:CI_Citation>
+          </gmd:thesaurusName>
+          {% endif %}
+        </gmd:MD_Keywords>
+      </gmd:descriptiveKeywords>
+      {% endfor %}
+      {% endif %}
+      <gmd:resourceConstraints>
+        <gmd:MD_LegalConstraints>
+          <gmd:useLimitation>
+            <gco:CharacterString>{{ record['identification'].get('license_title', 'Condiciones de uso abiertas')|e }}</gco:CharacterString>
+          </gmd:useLimitation>
+          <gmd:accessConstraints>
+            <gmd:MD_RestrictionCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#MD_RestrictionCode" codeListValue="otherRestrictions">otherRestrictions</gmd:MD_RestrictionCode>
+          </gmd:accessConstraints>
+          <gmd:otherConstraints>
+            <gmx:Anchor xlink:href="{{ record['identification'].get('access_rights', 'http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations') }}">Sin limitaciones de acceso público</gmx:Anchor>
+          </gmd:otherConstraints>
+        </gmd:MD_LegalConstraints>
+      </gmd:resourceConstraints>
+      {% if record.get('spatial') and record['spatial'].get('spatialresolution') %}
+      <gmd:spatialResolution>
+        <gmd:MD_Resolution>
+          <gmd:equivalentScale>
+            <gmd:MD_RepresentativeFraction>
+              <gmd:denominator>
+                <gco:Integer>{{ record['spatial']['spatialresolution'] }}</gco:Integer>
+              </gmd:denominator>
+            </gmd:MD_RepresentativeFraction>
+          </gmd:equivalentScale>
+        </gmd:MD_Resolution>
+      </gmd:spatialResolution>
+      {% endif %}
+      <gmd:language>
+        <gmd:LanguageCode codeList="http://www.loc.gov/standards/iso639-2/php/code_list.php" codeListValue="{{ record['identification'].get('language', 'spa') }}">{{ record['identification'].get('language', 'spa') }}</gmd:LanguageCode>
+      </gmd:language>
+      <gmd:characterSet>
+        <gmd:MD_CharacterSetCode codeList="http://standards.iso.org/ittf/PubliclyAvailableStandards/ISO_19139_Schemas/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="{{ record['metadata']['charset'] }}">{{ record['metadata']['charset'] }}</gmd:MD_CharacterSetCode>
+      </gmd:characterSet>
+      {% for topic in record['identification'].get('topiccategory', ['environment']) %}
+      <gmd:topicCategory>
+        <gmd:MD_TopicCategoryCode>{{ topic }}</gmd:MD_TopicCategoryCode>
+      </gmd:topicCategory>
+      {% endfor %}
+      {% if record.get('spatial') and record['spatial'].get('bbox') %}
+      <gmd:extent>
+        <gmd:EX_Extent>
+          <gmd:geographicElement>
+            <gmd:EX_GeographicBoundingBox>
+              <gmd:westBoundLongitude>
+                <gco:Decimal>{{ record['spatial']['bbox'][0] }}</gco:Decimal>
+              </gmd:westBoundLongitude>
+              <gmd:eastBoundLongitude>
+                <gco:Decimal>{{ record['spatial']['bbox'][2] }}</gco:Decimal>
+              </gmd:eastBoundLongitude>
+              <gmd:southBoundLatitude>
+                <gco:Decimal>{{ record['spatial']['bbox'][1] }}</gco:Decimal>
+              </gmd:southBoundLatitude>
+              <gmd:northBoundLatitude>
+                <gco:Decimal>{{ record['spatial']['bbox'][3] }}</gco:Decimal>
+              </gmd:northBoundLatitude>
+            </gmd:EX_GeographicBoundingBox>
+          </gmd:geographicElement>
+          {% if record.get('temporal') and (record['temporal'].get('begin') or record['temporal'].get('end')) %}
+          <gmd:temporalElement>
+            <gmd:EX_TemporalExtent>
+              <gmd:extent>
+                <gml:TimePeriod gml:id="temporal_extent_{{ record['metadata']['identifier'] }}">
+                  <gml:beginPosition>{{ record['temporal'].get('begin', '') }}</gml:beginPosition>
+                  <gml:endPosition>{{ record['temporal'].get('end', '') }}</gml:endPosition>
+                </gml:TimePeriod>
+              </gmd:extent>
+            </gmd:EX_TemporalExtent>
+          </gmd:temporalElement>
+          {% endif %}
+        </gmd:EX_Extent>
+      </gmd:extent>
+      {% endif %}
+    </gmd:MD_DataIdentification>
+  {% endif %}
+  </gmd:identificationInfo>
+  {% include "inspire/generator/distribution.j2" %}
+  {% include "inspire/generator/dataquality.j2" %}
+</gmd:MD_Metadata>

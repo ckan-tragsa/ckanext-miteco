@@ -1,0 +1,7 @@
+{% macro get_freetext(element, language_alternate, text) -%}
+{% if text and text|string|trim != "None" and text|string|trim != "" %}
+  <gmd:{{ element }}>
+    <gco:CharacterString>{{ text|string|trim|e }}</gco:CharacterString>
+  </gmd:{{ element }}>
+{% endif %}
+{%- endmacro %}

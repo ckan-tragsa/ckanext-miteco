@@ -1,0 +1,32 @@
+<div class="accordion-item">
+  <div class="accordion-heading">
+    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-python" aria-expanded="false" aria-controls="collapse-python">{{ _('Example') }}: Python &raquo;</button>
+  </div>
+  <div id="collapse-python" class="accordion-collapse collapse" aria-labelledby="collapse-python" data-bs-parent="#accordion2">
+    <div class="accordion-body">
+      <p>{{ _('A simple request to the data API using Python.') }}</p>
+      <pre class="ft-syntax-highlight" data-bs-syntax="python" data-bs-syntax-theme="one-dark" style="font-size:12px">
+<code class="language-python">
+  <span class="keyword">import</span> <span class="identifier">urllib.request</span>
+  <span class="keyword">import</span> <span class="identifier">urllib.parse</span>
+
+  <span class="identifier">base_url</span> = <span class="string">'{{ h.url_for('api.action', ver=3, logic_function='datastore_search', qualified=True) }}'</span>
+  <span class="identifier">params</span> = {
+    <span class="string">'resource_id'</span>: <span class="string">'{{resource_id}}'</span>, <span class="comment"># the resource id</span>
+    <span class="string">'limit'</span>: <span class="number">5</span>, <span class="comment"># get 5 results</span>
+    <span class="string">'q'</span>: <span class="string">'medio-ambiente'</span> <span class="comment"># query for 'medio-ambiente'</span>
+  }
+
+  <span class="identifier">query_string</span> = <span class="identifier">urllib.parse.urlencode</span>(<span class="identifier">params</span>)
+  <span class="identifier">url</span> = <span class="identifier">base_url</span> + <span class="string">'?'</span> + <span class="identifier">query_string</span>
+
+  <span class="keyword">try</span>:
+    <span class="identifier">fileobj</span> = <span class="identifier">urllib.request.urlopen</span>(<span class="identifier">url</span>)
+    <span class="identifier">print</span>(<span class="identifier">fileobj.read</span>().<span class="identifier">decode</span>(<span class="string">'utf-8'</span>))
+  <span class="keyword">except</span> <span class="identifier">urllib.error.URLError</span> <span class="keyword">as</span> <span class="identifier">e</span>:
+    <span class="identifier">print</span>(<span class="string">f"Error al contactar la URL: {e.reason}"</span>)
+</code>
+      </pre>
+    </div>
+  </div>
+</div>
