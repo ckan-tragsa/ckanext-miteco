@@ -2,12 +2,18 @@ import logging
 import uuid
 import datetime
 from urllib.parse import urlparse
+from ckan.lib.navl.dictization_functions import flatten_dict, unflatten
+from ckanext.dcat.processors import RDFParserException, RDFParser
 
 import ckan.plugins as p
 from ckan.common import _
 from ckantoolkit import missing
 
 from ckanext.schemingdcat.utils import _load_yaml
+from ckanext.schemingdcat.lib.csw_mapper.xslt_transformer import XSLTTransformer
+from ckanext.dcat.processors import RDFParserException, RDFParser
+from ckanext.miteco.lib.rdfParser import mitecoRDFParser
+
 
 from ckanext.schemingdcat.config import (
     INSPIRE_HVD_CATEGORY,
@@ -17,9 +23,11 @@ import ckanext.miteco.helpers as miteco_helpers
 from ckanext.miteco.config import (
     MITECO_DEFAULT_HVD_CATEGORY,   
     MITECO_DEFAULT_GENERAL_TYPE_HVDS,
-    MITECO_INSPIRE_GENERAL_TYPE
+    MITECO_INSPIRE_GENERAL_TYPE,
+    miteco_rdf_parser
     
 )
+
 
 from ckan.lib.navl.dictization_functions import Missing
 
@@ -28,6 +36,9 @@ log = logging.getLogger(__name__)
 all_validators = {}
 
 FORM_EXTRAS = ('__extras',)
+
+DEFAULT_RDF_PROFILES = ['eu_geodcat_ap_3']
+DEBUG_MODE = p.toolkit.asbool(p.toolkit.config.get('debug', False))
 
 def validator(fn):
     """
@@ -158,7 +169,7 @@ def miteco_uuid_identifier(field, schema):
             if id_value != identifier_value or id_value != name_value:
                 data[identifier_key] = id_value
                 data[name_key] = id_value
-
+        #log.debug(data)
     return validator
 
 @scheming_validator
@@ -236,10 +247,13 @@ def miteco_miteco_dataset_ogc_normalize(field, schema):
     Validator to detect OGC services and rewrite the URL to point towards GetCapabilities request
     """
     def validator(key, data, errors, context):
-        format = data[(key[0],key[1],'format')].upper()
-        if format in ["WMS","WFS","WMTS","WCS","WPS"]:
-            url = urlparse(data[key])
-            data[key] = url.scheme+"://"+url.netloc+url.path+"?request=GetCapabilities&service="+format
+        if context.get('preserve_mapped_fields'):
+            return
+        if data[(key[0],key[1],'format')]:
+            format = data[(key[0],key[1],'format')].upper()
+            if format in ["WMS","WFS","WMTS","WCS","WPS"]:
+                url = urlparse(data[key])
+                data[key] = url.scheme+"://"+url.netloc+url.path+"?request=GetCapabilities&service="+format
         
     return validator
 
@@ -252,6 +266,144 @@ def miteco_preserve_date_modified(field, schema):
     """
     def validator(key, data, errors, context):
         value = data[key]
+        if context.get('preserve_mapped_fields') and value is not missing:
+            return
         if value is missing or value is None or value == '':
             data[key] = datetime.datetime.now().isoformat()
+    return validator
+
+@scheming_validator
+@validator
+def miteco_xsl_fill(field, schema):
+    """
+    Fills the rest of fields of the schema based on the provided xml document
+    """
+    def validator(key, data, errors, context):
+        log.debug("Filling dataset fields")
+        if True:
+        #if data['is_spatial_advanced'] != "True":
+            parser = RDFParser()
+            profiles = ['miteco_dcat_ap']
+            log.debug('Load profiles TO RDFParser: %s', profiles)
+            parser._profiles = parser._load_profiles(profiles)
+
+            #hacemos la transformación
+            transformer = XSLTTransformer("semiceu.xsl", None)
+            transformed_xml = transformer.transform(data[('spatial_advanced_xml',)])
+            #log.debug(transformed_xml)
+            try:
+                parser.parse(transformed_xml, _format='xml')            
+                parsed_dataset = list(parser.datasets())[0]
+            except Exception as e:
+                errors[key].append(f'Error parsing the RDF file in upload: {e}')
+                return None
+
+            data_unflattened = unflatten(data)
+            for extra in parsed_dataset.pop('extras',[]):
+                if 'extras' in data_unflattened:
+                    for index in range(0,len(data_unflattened['extras'])):
+                        if data_unflattened['extras'][index]['key'] == extra['key']:
+                            data_unflattened['extras'][index]['value'] = extra['value']
+                            break
+                    else:
+                        data_unflattened['extras'].append(extra)
+                else:
+                    data_unflattened['extras'] = [extra]
+            data = flatten_dict(data_unflattened)
+            
+            flat_dataset = flatten_dict(parsed_dataset)
+            for k in list(flat_dataset.keys()):
+                if not flat_dataset[k]:
+                    flat_dataset.pop(k,None)
+                data.update(flat_dataset)        
+            data[('name',)] = data[('title',)]
+
+
+
+            
+            for kextra, kdict in (
+                ('notes_translated-es', [('notes_translated',),'es']),
+                ('notes_translated-en', [('notes_translated',),'en']),
+                ('title_translated-es', [('title_translated',),'es']),
+                ('title_translated-en', [('title_translated',),'en']),
+                ('tags', ('tags',)),
+                ('pkg_name', ('id',))
+                ):
+                if isinstance(kdict,list):
+                    data[('__extras',)][kextra] = data[kdict[0]][kdict[1]]
+                else:
+                    data[('__extras',)][kextra] = data[kdict]
+
+
+        #log.debug(data[('topic',)])
+        
+
+    return validator
+ 
+@scheming_validator
+@validator
+def miteco_iso_validator(field, schema):
+    """
+    Validates the ISO 19139 XML against INSPIRE schemas and persists it
+    to the inspire_xml table for versioning.
+    """
+    def validator(key, data, errors, context):
+        from ckantoolkit import missing as tk_missing
+        from lxml import etree
+        from ckanext.miteco.inspire import model as insp_model
+        from ckanext.spatial.harvesters import SpatialHarvester
+
+        xml_content = data.get(key)
+        if xml_content is tk_missing or not xml_content or not str(xml_content).strip():
+            return
+
+        xml_str = str(xml_content).strip()
+        from ckanext.miteco.inspire.logic.action.create import extract_md_metadata
+        xml_str = extract_md_metadata(xml_str)
+        data[key] = xml_str
+
+        # 1. Validar sintaxis XML básica
+        try:
+            xml_element = etree.fromstring(xml_str.encode('utf-8'))
+        except etree.XMLSyntaxError as e:
+            errors[key].append(_('Invalid XML syntax: %s') % str(e))
+            return
+
+        # 2. Validar esquema formal INSPIRE (ckanext-spatial)
+        try:
+            from ckanext.miteco.inspire.logic.action.create import validate_insp
+            is_valid, val_errors = validate_insp(xml_str)
+            if not is_valid and val_errors:
+                for err in val_errors:
+                    errors[key].append(_('INSPIRE validation error: %s') % str(err))
+                return
+        except Exception as e:
+            log.warning('Could not run spatial validator on field %s: %s', key, e)
+
+        # 3. Obtener o asignar el UUID del dataset para vincular el registro en la BD
+        dataset_id = data.get(('id',))
+        if not dataset_id or dataset_id is tk_missing:
+            dataset_id = str(uuid.uuid4())
+            data[('id',)] = dataset_id
+            log.debug('miteco_iso_validator: assigned new dataset id %s for inspire_xml persistence', dataset_id)
+
+        # 4. Persistir el documento XML versionado en inspire_xml
+        try:
+            pk = insp_model.setDocument(str(dataset_id), xml_str)
+            data[('is_spatial_advanced',)] = 'true'
+            log.debug('miteco_iso_validator: XML persisted for dataset %s with hash %s', dataset_id, pk)
+        except Exception as e:
+            log.error('miteco_iso_validator: error persisting XML for dataset %s: %s', dataset_id, e)
+
+    return validator
+
+@scheming_validator
+@validator
+def miteco_boolean(field, schema):
+    """
+    Checks if the field is "True" or "False"
+    """
+    def validator(key, data, errors, context):
+        pass
+            
     return validator

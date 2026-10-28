@@ -4,6 +4,7 @@ import typing
 import datetime
 import calendar
 from functools import lru_cache
+from os import listdir
 
 import ckan.lib.helpers as h
 import ckan.plugins as p
@@ -207,3 +208,101 @@ def miteco_get_calendar(datestr):
         return [date.day, cal.monthdayscalendar(date.year,date.month),date.strftime("%Y-%m")]
     except:
         return None
+
+@helper
+def miteco_get_inspire(id):
+    if not id:
+        return None
+    # Si el valor ya es un documento XML en texto, devolverlo directamente
+    if isinstance(id, str) and id.strip().startswith('<'):
+        return id
+    context = {'model': model, 'session': model.Session}
+    try:
+        log.debug(id)
+        return p.toolkit.get_action('inspire_get_document')(context, {'hash': id})['xml']
+    except Exception:
+        return None
+
+@helper
+def miteco_get_inspire_preview(pkg, current_xml=None, template=False):
+    """
+    Returns the XML to display in the XML viewer in dataset edit mode:
+    1. If current_xml is given (raw XML or MD5 hash), retrieves the active custom XML.
+    2. Otherwise, if pkg has an existing XML in DB (inspire_xml table with pkg uuid), returns it.
+    3. Otherwise, generates and renders the official INSPIRE XML template on the fly for pkg.
+
+    With template=True, use saved CKAN metadata just like the template download.
+    """
+    if template:
+        from ckanext.miteco.inspire.access import authorized_package
+        from ckanext.miteco.inspire.generator import render_inspire_xml
+        pkg_dict = pkg if isinstance(pkg, dict) else pkg.as_dict() if hasattr(pkg, 'as_dict') else {}
+        identifier = pkg_dict.get('id') or pkg_dict.get('name')
+        if not identifier:
+            return ''
+        try:
+            return render_inspire_xml(authorized_package({}, identifier))
+        except Exception as e:
+            log.warning('Could not render saved INSPIRE template preview: %s', e)
+            return ''
+
+    if current_xml:
+        xml = miteco_get_inspire(current_xml)
+        if xml:
+            return xml
+
+    pkg_dict = None
+    if isinstance(pkg, dict):
+        pkg_dict = pkg
+    elif hasattr(pkg, 'as_dict'):
+        pkg_dict = pkg.as_dict()
+
+    if pkg_dict:
+        try:
+            from ckanext.miteco.inspire.access import find_document
+            doc = find_document(pkg_dict)
+            if doc and doc.xml:
+                return doc.xml
+        except Exception as e_prev:
+            log.debug("Could not get stored XML for preview: %s", e_prev)
+
+        try:
+            from ckanext.miteco.inspire.generator import render_inspire_xml
+            return render_inspire_xml(pkg_dict)
+        except Exception as e:
+            log.warning("Could not render INSPIRE XML preview: %s", e)
+
+    return ""
+
+@helper
+def miteco_has_inspire_xml(pkg):
+    """
+    Checks if a dataset has an associated INSPIRE XML.
+    Returns True if spatial_advanced_xml has a value or is_spatial_advanced is true.
+    """
+    if not pkg:
+        return False
+    if isinstance(pkg, dict):
+        is_spatial = pkg.get('is_spatial_advanced')
+        xml_id = pkg.get('spatial_advanced_xml')
+        if not xml_id and 'extras' in pkg:
+            for extra in pkg.get('extras') or []:
+                if isinstance(extra, dict):
+                    if extra.get('key') == 'spatial_advanced_xml':
+                        xml_id = extra.get('value')
+                    elif extra.get('key') == 'is_spatial_advanced':
+                        is_spatial = extra.get('value')
+    else:
+        is_spatial = getattr(pkg, 'is_spatial_advanced', False)
+        xml_id = getattr(pkg, 'spatial_advanced_xml', None)
+
+    if xml_id and str(xml_id).strip() and str(xml_id).strip() not in ('None', 'null', 'false', 'False', ''):
+        return True
+    if is_spatial and h.asbool(is_spatial):
+        return True
+    return False
+
+@helper 
+def miteco_read_log(route):
+    h.get
+

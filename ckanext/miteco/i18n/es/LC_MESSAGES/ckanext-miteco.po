@@ -10,17 +10,48 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-miteco 0.0.1\n"
 "Report-Msgid-Bugs-To: mnl.janez@gmail.com\n"
-"POT-Creation-Date: 2025-10-16 08:14+0000\n"
+"POT-Creation-Date: 2026-10-27 12:36+0000\n"
 "PO-Revision-Date: 2025-10-16 11:44+0200\n"
 "Last-Translator: mnl.janez@gmail.com\n"
-"Language-Team: \n"
 "Language: es\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.10.3\n"
-"X-Generator: Poedit 3.8\n"
+
+#: ckanext/miteco/validators.py:369
+#, python-format
+msgid "Invalid XML syntax: %s"
+msgstr ""
+
+#: ckanext/miteco/validators.py:378
+#, python-format
+msgid "INSPIRE validation error: %s"
+msgstr ""
+
+#: ckanext/miteco/inspire/blueprint.py:49
+msgid "User must be logged in to import XML"
+msgstr ""
+
+#: ckanext/miteco/inspire/blueprint.py:71
+msgid "No XML content provided"
+msgstr ""
+
+#: ckanext/miteco/inspire/schema.py:104
+msgid ""
+"El valor del XML no es representable en este campo de CKAN y se ha "
+"omitido. Se conserva el valor CKAN existente, si lo hay, y el dato "
+"original permanece en el XML descargable."
+msgstr ""
+
+#: ckanext/miteco/inspire/schema.py:135
+msgid ""
+"The XML update frequency cannot be represented in the CKAN schema. It has"
+" been omitted from the imported fields and remains unchanged in the "
+"original XML. Any existing CKAN frequency is preserved."
+msgstr ""
 
 #: ckanext/miteco/templates/header.html:19
 #: ckanext/miteco/templates/home/snippets/about_portal.html:39
@@ -50,16 +81,16 @@ msgstr "API de datos CKAN"
 #: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:25
 msgid "Access resource data via a web API with powerful query support"
 msgstr ""
-"Acceda a los datos de los recursos a través de una API web con un "
-"potente soporte de consultas"
+"Acceda a los datos de los recursos a través de una API web con un potente"
+" soporte de consultas"
 
 #: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:27
 msgid ""
 "In order to facilitate integration with our service, we have provided a "
 "set of sample API Data calls. These examples demonstrate how to access "
 "and query the data resource via its identifier and can serve as a "
-"reference for constructing API calls tailored to various requirements "
-"and programming languages."
+"reference for constructing API calls tailored to various requirements and"
+" programming languages."
 msgstr ""
 "Para facilitar la integración con nuestro servicio, hemos proporcionado "
 "un conjunto de ejemplos de llamadas a la API de datos. Estos ejemplos "
@@ -69,79 +100,110 @@ msgstr ""
 
 #: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:30
 msgid "The portal's API section can be found at the following link:"
-msgstr ""
-"La sección API del portal puede consultarse en el siguiente enlace:"
+msgstr "La sección API del portal puede consultarse en el siguiente enlace:"
 
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:32
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:88
+# | msgid "OpenAPI Endpoints"
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:33
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:89
 #, fuzzy
-#| msgid "OpenAPI Endpoints"
 msgid "Endpoints"
 msgstr "Puntos finales de OpenAPI"
 
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:33
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:92
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:34
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:93
 msgid ""
-"The Data API can be accessed via the following actions of the CKAN "
-"action API."
+"The Data API can be accessed via the following actions of the CKAN action"
+" API."
 msgstr ""
-"Se puede acceder a la API de datos a través de las siguientes acciones "
-"de CKAN."
+"Se puede acceder a la API de datos a través de las siguientes acciones de"
+" CKAN."
 
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:39
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:98
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:40
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:99
 msgid "Create"
 msgstr "Crear"
 
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:43
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:102
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:44
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:103
 msgid "Update / Insert"
 msgstr "Actualizar / Insertar"
 
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:48
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:107
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:49
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:108
 msgid "Query"
 msgstr "Consulta"
 
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:53
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:112
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:54
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:113
 msgid "Query (via SQL)"
 msgstr "Consulta (via SQL)"
 
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:60
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:124
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:61
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:125
 msgid "Querying"
 msgstr "Consultas"
 
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:62
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:63
 msgid "Query example with resource identifier"
 msgstr "Ejemplo de consulta con el identificador del recurso"
 
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:67
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:128
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:68
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:129
+#: ckanext/miteco/templates/api_examples/curl.html:10
+#: ckanext/miteco/templates/api_examples/curl_v2.10.html:7
+#: ckanext/miteco/templates/api_examples/javascript.html:10
+#: ckanext/miteco/templates/api_examples/python.html:17
+#: ckanext/miteco/templates/api_examples/r.html:12
+#: ckanext/miteco/templates/api_examples/r_v2.10.html:7
 msgid "Query example (first 5 results)"
 msgstr "Ejemplo de consulta obteniendo los 5 primeros resultados"
 
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:72
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:133
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:73
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:134
+#: ckanext/miteco/templates/api_examples/curl.html:29
+#: ckanext/miteco/templates/api_examples/javascript.html:35
+#: ckanext/miteco/templates/api_examples/python.html:40
+#: ckanext/miteco/templates/api_examples/r.html:37
 msgid "Query example (results containing 'medio-ambiente')"
-msgstr ""
-"Ejemplo de consulta con resultados que contengan \"medio-ambiente\""
+msgstr "Ejemplo de consulta con resultados que contengan \"medio-ambiente\""
 
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:78
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:138
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:79
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:139
+#: ckanext/miteco/templates/api_examples/curl.html:51
+#: ckanext/miteco/templates/api_examples/javascript.html:63
+#: ckanext/miteco/templates/api_examples/python.html:66
+#: ckanext/miteco/templates/api_examples/r.html:63
 msgid "Query example (via SQL statement)"
 msgstr "Ejemplo de consulta a través de SQL"
 
-#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:166
+#: ckanext/miteco/templates/ajax_snippets/scd_api_info.html:167
 msgid ""
-"Further information in the <a href=\"http://docs.ckan.org/en/latest/"
-"maintaining/datastore.html\" target=\"_blank\">main CKAN Data API and "
-"DataStore documentation</a>."
+"Further information in the <a "
+"href=\"http://docs.ckan.org/en/latest/maintaining/datastore.html\" "
+"target=\"_blank\">main CKAN Data API and DataStore documentation</a>."
 msgstr ""
-"Más información en la <a href=\"http://docs.ckan.org/en/latest/"
-"maintaining/datastore.html\" target=\"_blank\">documentación de API de "
-"datos de CKAN y DataStore</a>."
+"Más información en la <a "
+"href=\"http://docs.ckan.org/en/latest/maintaining/datastore.html\" "
+"target=\"_blank\">documentación de API de datos de CKAN y DataStore</a>."
+
+#: ckanext/miteco/templates/api_examples/curl.html:3
+#: ckanext/miteco/templates/api_examples/curl_v2.10.html:3
+#: ckanext/miteco/templates/api_examples/javascript.html:3
+#: ckanext/miteco/templates/api_examples/javascript_v2.10.html:3
+#: ckanext/miteco/templates/api_examples/python.html:5
+#: ckanext/miteco/templates/api_examples/python_v2.10.html:3
+#: ckanext/miteco/templates/api_examples/r.html:5
+#: ckanext/miteco/templates/api_examples/r_v2.10.html:3
+msgid "Example"
+msgstr ""
+
+#: ckanext/miteco/templates/api_examples/javascript_v2.10.html:7
+msgid "A simple ajax (JSONP) request to the data API using jQuery."
+msgstr ""
+
+#: ckanext/miteco/templates/api_examples/python_v2.10.html:7
+msgid "A simple request to the data API using Python."
+msgstr ""
 
 #: ckanext/miteco/templates/home/tags.html:6
 msgid "¿Que son las palabras clave?"
@@ -170,6 +232,7 @@ msgid "Explore and use Open Data"
 msgstr "Explora y utiliza datos abiertos"
 
 #: ckanext/miteco/templates/home/snippets/about_portal.html:39
+#: ckanext/miteco/templates/package/read_base.html:4
 msgid "Dataset"
 msgstr "Conjuntos de datos"
 
@@ -189,9 +252,9 @@ msgstr "Conjunto de datos de alto valor"
 msgid "High value datasets"
 msgstr "Conjuntos de datos de alto valor"
 
+# | msgid "Organizations"
 #: ckanext/miteco/templates/home/snippets/about_portal.html:45
 #, fuzzy
-#| msgid "Organizations"
 msgid "Organization"
 msgstr "Organizaciones"
 
@@ -221,8 +284,8 @@ msgstr "Portal de Datos Abiertos"
 
 #: ckanext/miteco/templates/home/snippets/search.html:18
 msgid ""
-"Find data published by various organizations to help you develop "
-"products and services."
+"Find data published by various organizations to help you develop products"
+" and services."
 msgstr ""
 "Encontrar datos publicados por diversas organizaciones para ayudarte a "
 "desarrollar productos y servicios."
@@ -231,13 +294,17 @@ msgstr ""
 msgid "Search datasets"
 msgstr "Buscar conjuntos de datos"
 
-#: ckanext/miteco/templates/home/snippets/search.html:30
+#: ckanext/miteco/templates/home/snippets/search.html:31
 msgid "Search"
 msgstr "Buscar"
 
-#: ckanext/miteco/templates/home/snippets/search.html:34
+#: ckanext/miteco/templates/home/snippets/search.html:36
 msgid "Popular tags"
 msgstr "Etiquetas populares"
+
+#: ckanext/miteco/templates/miteco/log.html:5
+msgid "Ckan logs"
+msgstr ""
 
 #: ckanext/miteco/templates/miteco/form_snippets/miteco_identifier.html:2
 msgid "This field is required"
@@ -255,6 +322,16 @@ msgstr "Esperando los campos de metadatos"
 msgid "Dataset information"
 msgstr "Información del conjunto de datos"
 
+#: ckanext/miteco/templates/miteco/snippets/miteco_dataset_info.html:86
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:52
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:62
+msgid "INSPIRE Metadata"
+msgstr "Metadatos INSPIRE"
+
+#: ckanext/miteco/templates/miteco/snippets/miteco_dataset_info.html:89
+msgid "View XML"
+msgstr "Visualizar XML"
+
 #: ckanext/miteco/templates/openapi/index.html:9
 #: ckanext/miteco/templates/openapi/index.html:16
 #: ckanext/miteco/templates/openapi/index.html:41
@@ -264,17 +341,17 @@ msgstr "Puntos finales de OpenAPI"
 #: ckanext/miteco/templates/openapi/index.html:21
 msgid ""
 "The OpenAPI Specification (OAS) defines a standard, language-agnostic "
-"interface to HTTP APIs which allows both humans and computers to "
-"discover and understand the capabilities of the service without access "
-"to source code, documentation, or through network traffic inspection. "
-"When properly defined, a consumer can understand and interact with the "
-"remote service with a minimal amount of implementation logic."
+"interface to HTTP APIs which allows both humans and computers to discover"
+" and understand the capabilities of the service without access to source "
+"code, documentation, or through network traffic inspection. When properly"
+" defined, a consumer can understand and interact with the remote service "
+"with a minimal amount of implementation logic."
 msgstr ""
 "La especificación OpenAPI (OAS) define una interfaz estándar e "
 "independiente del idioma para las APIs HTTP que permite tanto a humanos "
 "como a ordenadores descubrir y comprender las capacidades del servicio "
-"sin necesidad de acceder al código fuente, la documentación o mediante "
-"la inspección del tráfico de red. Cuando se define correctamente, un "
+"sin necesidad de acceder al código fuente, la documentación o mediante la"
+" inspección del tráfico de red. Cuando se define correctamente, un "
 "consumidor puede entender e interactuar con el servicio remoto con una "
 "cantidad mínima de lógica de implementación."
 
@@ -291,12 +368,21 @@ msgid ""
 "To retrieve them, check the <code>ckan.ini</code> config file and "
 "documentation of"
 msgstr ""
-"Para recuperarlos, consulte el archivo de configuración <code>ckan.ini</"
-"code> y la documentación de"
+"Para recuperarlos, consulte el archivo de configuración "
+"<code>ckan.ini</code> y la documentación de"
 
 #: ckanext/miteco/templates/package/base.html:22
 msgid "Create Dataset"
 msgstr "Crear conjunto de datos"
+
+#: ckanext/miteco/templates/package/read_base.html:5
+msgid "Groups"
+msgstr ""
+
+#: ckanext/miteco/templates/package/read_base.html:11
+#: ckanext/miteco/templates/package/read_base.html:13
+msgid "Manage"
+msgstr ""
 
 #: ckanext/miteco/templates/scheming/form_snippets/org_hierarchy.html:3
 msgid "Parent"
@@ -306,6 +392,122 @@ msgstr "Padre"
 msgid "None - top level"
 msgstr "Ninguno - nivel superior"
 
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:21
+msgid ""
+"Select an ISO 19139 / INSPIRE XML file to create and automatically "
+"populate the new dataset."
+msgstr ""
+"Seleccione un archivo XML ISO 19139 / INSPIRE para crear y completar "
+"automáticamente el nuevo conjunto de datos."
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:30
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:73
+msgid "import xml"
+msgstr "importar XML"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:37
+msgid ""
+"Seleccione un archivo XML arriba para previsualizar su contenido e "
+"importarlo."
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:49
+msgid "INSPIRE Template Preview (Draft)"
+msgstr "Previsualización de plantilla INSPIRE"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:49
+msgid ""
+"Template automatically generated from current metadata. To activate it, "
+"download the file, edit if necessary and import it."
+msgstr ""
+"Plantilla calculada automáticamente con los metadatos actuales. Para "
+"activarla, descargue el fichero, ajústelo si es necesario e impórtelo."
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:77
+msgid "Download XML"
+msgstr "Descargar XML"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:82
+msgid "Download original XML"
+msgstr "Descargar XML original"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:87
+msgid "Download INSPIRE XML template"
+msgstr "Descargar plantilla XML INSPIRE"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:90
+msgid ""
+"The template is generated from the metadata saved in CKAN. Save your form"
+" changes before downloading it."
+msgstr ""
+"La plantilla se genera con los metadatos guardados en CKAN. Guarde los "
+"cambios del formulario antes de descargarla."
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:105
+msgid "Version history"
+msgstr "Historial de versiones"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:109
+msgid "Date"
+msgstr "Fecha"
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:111
+msgid "Cargando historial de versiones..."
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:115
+msgid "No saved versions yet."
+msgstr "Aún no hay versiones guardadas."
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:130
+msgid "Confirmar importación de XML"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:136
+msgid "¿Desea importar el archivo XML seleccionado para este conjunto de datos?"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:139
+msgid ""
+"Se validará la conformidad INSPIRE y se actualizarán los metadatos del "
+"conjunto de datos con la información del archivo XML."
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:145
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:176
+msgid "Cancelar"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:148
+msgid "Confirmar e importar"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:161
+msgid "Cargar versión anterior del XML"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:167
+msgid "¿Desea cargar esta versión histórica del XML INSPIRE?"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:171
+msgid ""
+"El contenido visualizado en el editor se reemplazará por la versión "
+"seleccionada."
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:179
+msgid "Cargar versión"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:193
+msgid "Aviso"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:202
+msgid "Aceptar"
+msgstr ""
+
 #: ckanext/miteco/templates/schemingdcat/package/snippets/data_api_button.html:7
 msgid "Loading..."
 msgstr "Cargando..."
@@ -314,28 +516,69 @@ msgstr "Cargando..."
 msgid "API usage"
 msgstr "Uso de API"
 
-#: ckanext/miteco/templates/schemingdcat/package/snippets/metadata_info.html:27
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:24
+msgid "{metadata_format} Metadata"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:42
+msgid "Download"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:53
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:63
+msgid "Geospatial XML"
+msgstr "XML geoespacial"
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:57
+msgid "INSPIRE (ISO 19139)"
+msgstr "INSPIRE (ISO 19139)"
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:67
+msgid "INSPIRE XML Template (ISO 19139)"
+msgstr "Plantilla XML INSPIRE (ISO 19139)"
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:73
+msgid "CSW Endpoint"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:73
+msgid "Geospatial Metadata"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:85
+msgid "RDF DCAT Endpoint"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:86
+msgid "Linked Data"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/metadata_info.html:26
 msgid "Metadata"
 msgstr "Metadatos"
 
-#: ckanext/miteco/templates/schemingdcat/package/snippets/metadata_info.html:45
+# | msgid "Dataset information"
+#: ckanext/miteco/templates/schemingdcat/package/snippets/metadata_info.html:44
 #, fuzzy
-#| msgid "Dataset information"
 msgid "Basic information"
 msgstr "Información del conjunto de datos"
 
-#: ckanext/miteco/templates/schemingdcat/package/snippets/metadata_info.html:104
+# | msgid "Dataset information"
+#: ckanext/miteco/templates/schemingdcat/package/snippets/metadata_info.html:103
 #, fuzzy
-#| msgid "Dataset information"
 msgid "Spatial information"
 msgstr "Información del conjunto de datos"
 
-#: ckanext/miteco/templates/schemingdcat/package/snippets/metadata_info.html:163
+#: ckanext/miteco/templates/schemingdcat/package/snippets/metadata_info.html:162
 msgid "Provenance"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/package/snippets/metadata_info.html:222
+#: ckanext/miteco/templates/schemingdcat/package/snippets/metadata_info.html:221
 msgid "Responsible party"
+msgstr ""
+
+#: ckanext/miteco/templates/schemingdcat/package/snippets/package_form.html:57
+msgid "There are required fields in this category"
 msgstr ""
 
 #: ckanext/miteco/templates/schemingdcat/snippets/search_form.html:8
@@ -346,5 +589,97 @@ msgstr ""
 msgid "Order by"
 msgstr ""
 
-#~ msgid "Groups"
-#~ msgstr "Grupos"
+#: ckanext/miteco/templates/snippets/add_dataset.html:4
+msgid "Add Dataset"
+msgstr ""
+
+#: ckanext/miteco/templates/snippets/add_dataset.html:9
+#: ckanext/miteco/templates/snippets/add_dataset.html:12
+msgid "import from INSPIRE XML"
+msgstr "Importar desde XML INSPIRE"
+
+#: ckanext/miteco/templates/user/edit_user_form.html:3
+msgid "Password self service is not authorized, contact with your administrator"
+msgstr ""
+
+#~ msgid "enable custom xml"
+#~ msgstr "habilitar XML personalizado"
+
+#~ msgid "Take me back!"
+#~ msgstr "¡Volver atrás!"
+
+#~ msgid "Understood"
+#~ msgstr "Entendido"
+
+#~ msgid "custom xml enabled"
+#~ msgstr "XML personalizado habilitado"
+
+#~ msgid "do you want to continue?"
+#~ msgstr "¿Desea continuar?"
+
+#~ msgid ""
+#~ "When this functionality is enabled the"
+#~ " rest of the form gets ignored, "
+#~ "use with caution. <br/>This exists for"
+#~ " advanced users who want to fill "
+#~ "inspire fields that aren't yet on "
+#~ "the main metadata schema or want "
+#~ "more control over their metadata"
+#~ msgstr ""
+#~ "Al habilitar esta funcionalidad, el "
+#~ "resto del formulario se ignora. Úsela"
+#~ " con precaución. <br/>Está destinada a "
+#~ "usuarios avanzados que deseen rellenar "
+#~ "campos INSPIRE que aún no están en"
+#~ " el esquema principal de metadatos."
+
+#~ msgid ""
+#~ "Modifiying this field will lock you "
+#~ "out of using the form and you "
+#~ "will be completely responsible of the"
+#~ " contents of the inspire xml "
+#~ "metadata."
+#~ msgstr ""
+#~ "Modificar este campo bloqueará el acceso"
+#~ " al formulario y usted será "
+#~ "completamente responsable del contenido del"
+#~ " XML de metadatos INSPIRE."
+
+#~ msgid ""
+#~ "This functionality is only a temporal"
+#~ " measure to conform with the full "
+#~ "inspire schema, and it's only meant "
+#~ "for advanced users who are familiar "
+#~ "with the iso19139 standard."
+#~ msgstr ""
+#~ "Esta funcionalidad es una medida "
+#~ "temporal para cumplir con el esquema "
+#~ "INSPIRE completo, y está destinada "
+#~ "únicamente a usuarios avanzados familiarizados"
+#~ " con el estándar ISO 19139."
+
+#~ msgid "this option can not be undone."
+#~ msgstr "Esta acción no se puede deshacer."
+
+#~ msgid "View INSPIRE XML"
+#~ msgstr "Ver XML INSPIRE"
+
+#~ msgid "XML INSPIRE"
+#~ msgstr "XML INSPIRE"
+
+#~ msgid "Create dataset from INSPIRE XML"
+#~ msgstr "Crear conjunto de datos desde XML INSPIRE"
+
+#~ msgid "Keep current form data and only complement with spatial metadata"
+#~ msgstr ""
+#~ "Conservar datos actuales del formulario "
+#~ "y solo complementar con metadatos "
+#~ "espaciales"
+
+#~ msgid "Active INSPIRE Metadata"
+#~ msgstr "Metadatos INSPIRE activos"
+
+#~ msgid "This dataset uses custom advanced spatial metadata."
+#~ msgstr ""
+#~ "Este conjunto de datos utiliza metadatos"
+#~ " espaciales avanzados personalizados."

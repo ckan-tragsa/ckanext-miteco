@@ -11,6 +11,7 @@ schema_title: MITECO Metadata Profile
 schema_description: "Geospatial extension to the DCAT application profile for data portals in Europe (GeoDCAT-AP). It is adapted to the Spanish context and includes compatibility with the Technical Interoperability Standard (NTI-RISP), the open data profile for Spain: https://datos.gob.es/en/documentacion/guia-de-aplicacion-de-la-norma-tecnica-de-interoperabilidad-de-reutilizacion-de"
 schema_profile_version: 3.0.0
 schema_profile_url: https://semiceu.github.io/GeoDCAT-AP/releases/3.0.0
+#before_validators:  miteco_xsl_fill
 schema_form_groups:
   # Basic Info parties form_page (#1)
   - form_group_id: title
@@ -177,6 +178,11 @@ schema_form_groups:
       en: Related resources
       es: Recursos relacionados
     fa_icon: fa-code-fork
+  - form_group_id: spatial_xml_metadata
+    label:
+      en: Inspire metadata (XML)
+      es: Metadato inspire (XML)
+    fa_icon: fa-file-code
 schema_form_tabs:
   # Dataset tabs
   - form_tab: basic_tab
@@ -252,6 +258,13 @@ schema_form_tabs:
     form_group_id:
       - spatial_info
       - inspire
+  - form_tab: spatial_advanced
+    tab_type: dataset_fields
+    label:
+      en: Advanced spatial
+      es: Espacial avanzado
+    form_group_id:
+      - spatial_xml_metadata
   - form_tab: license_tab
     tab_type: dataset_fields
     label:
@@ -260,6 +273,7 @@ schema_form_tabs:
     form_group_id:
       - license_info
       - version_notes
+
   # Distribution tabs
   - form_tab: resource_basic_tab
     tab_type: resource_fields
@@ -509,6 +523,7 @@ dataset_fields:
     en: Dataset landing page
     es: Página de acceso al conjunto de datos
   preset: dataset_url
+  validators: miteco_inspire_dataset_url unicode_safe
   help_text:
     en: Web page that can be navigated to gain access to the dataset, its distributions and/or additional information.
     es: Página web por la que se puede navegar para acceder al conjunto de datos, sus distribuciones y/o información adicional.
@@ -1669,6 +1684,7 @@ dataset_fields:
     es: Fecha de creación
   display_property: dct:created
   preset: date_created
+  validators: miteco_inspire_if_empty_datenow scheming_required isodate convert_to_json_if_date miteco_inspire_omit_invalid
   form_group_id: identification
 
 # Date of last revision (O)
@@ -1679,7 +1695,7 @@ dataset_fields:
   display_snippet: schemingdcat/display_snippets/last_update.html
   display_property: dct:modified
   form_snippet: null
-  validators: miteco_preserve_date_modified scheming_required isodate convert_to_json_if_date
+  validators: miteco_preserve_date_modified scheming_required isodate convert_to_json_if_date miteco_inspire_omit_invalid
   form_group_id: identification
 
 # MITECO Schema: file identifier (M)
@@ -1717,6 +1733,7 @@ dataset_fields:
 
 # (O) MITECO Schema: Date of publication
 - field_name: miteco_publication_date
+  validators: ignore_missing isodate convert_to_json_if_date miteco_inspire_omit_invalid
   label: 
     en: Date of publication
     es: Fecha de publicación
@@ -1860,7 +1877,7 @@ dataset_fields:
   display_property: dcat:keyword
   display_snippet: schemingdcat/display_snippets/link_schema.html
   form_include_blank_choice: False
-  required: True
+  required: False
   sorted_choices: True
   choices:
   - label: 
@@ -1985,7 +2002,7 @@ dataset_fields:
     field_name: contact
     subfields:
       - field_name: uri
-  validators: schemingdcat_contact_as_default_publisher schemingdcat_fill_dependent_fields
+  validators: miteco_inspire_contact_as_default_publisher miteco_inspire_fill_dependent_fields
   display_snippet: schemingdcat/display_snippets/link_name.html
   form_placeholder: http://orgs.vocab.org/some-org
   form_group_id: contact
@@ -1999,7 +2016,7 @@ dataset_fields:
     field_name: contact
     subfields:
       - field_name: name
-  validators: schemingdcat_contact_as_default_publisher schemingdcat_fill_dependent_fields
+  validators: miteco_inspire_contact_as_default_publisher miteco_inspire_fill_dependent_fields
   display_property: dcat:contactPoint
   form_placeholder: José Blanco
   form_group_id: contact
@@ -2013,7 +2030,7 @@ dataset_fields:
     field_name: contact
     subfields:
       - field_name: email
-  validators: schemingdcat_contact_as_default_publisher not_empty scheming_required schemingdcat_valid_email schemingdcat_fill_dependent_fields
+  validators: miteco_inspire_contact_as_default_publisher not_empty scheming_required schemingdcat_valid_email miteco_inspire_fill_dependent_fields
   required: False
   display_property: vcard:hasEmail
   display_snippet: email.html
@@ -2029,7 +2046,7 @@ dataset_fields:
     field_name: contact
     subfields:
       - field_name: url
-  validators: schemingdcat_contact_as_default_publisher ignore_missing schemingdcat_valid_url schemingdcat_fill_dependent_fields
+  validators: miteco_inspire_contact_as_default_publisher ignore_missing schemingdcat_valid_url miteco_inspire_fill_dependent_fields
   display_snippet: schemingdcat/display_snippets/link.html
   display_property: vcard:hasURL
   form_placeholder: http://www.example.com
@@ -2045,7 +2062,7 @@ dataset_fields:
     field_name: contact
     subfields:
       - field_name: role
-  validators: schemingdcat_contact_as_default_publisher scheming_required scheming_choices schemingdcat_fill_dependent_fields
+  validators: miteco_inspire_contact_as_default_publisher scheming_required scheming_choices miteco_inspire_fill_dependent_fields
   form_snippet: select.html
   display_snippet: schemingdcat/display_snippets/link_schema.html
   choices:
@@ -2164,7 +2181,7 @@ dataset_fields:
     field_name: publisher
     subfields:
       - field_name: name
-  validators: schemingdcat_fill_dependent_fields
+  validators: miteco_inspire_fill_dependent_fields
   form_snippet: schemingdcat/form_snippets/publisher_name.html
   help_text:
     en: "A party that makes a dataset available to others."
@@ -2180,7 +2197,7 @@ dataset_fields:
     field_name: publisher
     subfields:
       - field_name: identifier
-  validators: schemingdcat_fill_dependent_fields
+  validators: miteco_inspire_fill_dependent_fields
   display_property: dct:identifier
   form_placeholder: http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001
   form_snippet: schemingdcat/form_snippets/publisher_identifier.html
@@ -2199,7 +2216,7 @@ dataset_fields:
     field_name: publisher
     subfields:
       - field_name: uri
-  validators: schemingdcat_fill_dependent_fields
+  validators: miteco_inspire_fill_dependent_fields
   display_snippet: schemingdcat/display_snippets/link_name.html
   form_placeholder: http://orgs.vocab.org/some-org
   form_snippet: schemingdcat/form_snippets/publisher_uri.html
@@ -2218,6 +2235,7 @@ dataset_fields:
     subfields:
       - field_name: email
   preset: schemingdcat_valid_email_dependent_fields
+  validators: ignore_missing schemingdcat_valid_email miteco_inspire_fill_dependent_fields
   display_property: foaf:mbox
   form_placeholder: joseblanco@example.com
   form_snippet: schemingdcat/form_snippets/publisher_email.html
@@ -2235,6 +2253,7 @@ dataset_fields:
     subfields:
       - field_name: url
   preset: valid_url_dependent_fields
+  validators: ignore_missing schemingdcat_valid_url miteco_inspire_fill_dependent_fields
   form_snippet: schemingdcat/form_snippets/publisher_url.html
   help_text:
     en: Esta propiedad se refiere a una página web que actúa como página principal del publicador. URL
@@ -2251,6 +2270,7 @@ dataset_fields:
     subfields:
       - field_name: type
   preset: select_dependent_fields
+  validators: scheming_required scheming_choices miteco_inspire_fill_dependent_fields
   display_property: dct:type
   display_snippet: schemingdcat/display_snippets/link_schema.html
   form_snippet: schemingdcat/form_snippets/publisher_type.html
@@ -2431,7 +2451,7 @@ dataset_fields:
     field_name: creator
     subfields:
       - field_name: name
-  validators: if_empty_same_as(author) schemingdcat_fill_dependent_fields
+  validators: if_empty_same_as(author) miteco_inspire_fill_dependent_fields
   preset: hide_fallback
   form_group_id: author
 
@@ -2444,7 +2464,7 @@ dataset_fields:
     field_name: creator
     subfields:
       - field_name: uri
-  validators: schemingdcat_fill_dependent_fields
+  validators: miteco_inspire_fill_dependent_fields
   display_snippet: schemingdcat/display_snippets/link_name.html
   form_placeholder: http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001
   help_text:
@@ -2463,6 +2483,7 @@ dataset_fields:
     subfields:
       - field_name: email
   preset: schemingdcat_valid_email_dependent_fields
+  validators: ignore_missing schemingdcat_valid_email miteco_inspire_fill_dependent_fields
   display_property: vcard:hasEmail
   form_placeholder: joseblanco@example.com
   form_group_id: author
@@ -2477,6 +2498,7 @@ dataset_fields:
     subfields:
       - field_name: url
   preset: valid_url_dependent_fields
+  validators: ignore_missing schemingdcat_valid_url miteco_inspire_fill_dependent_fields
   display_property: foaf:homepage
   form_placeholder: http://www.example.com
   help_text:
@@ -2494,6 +2516,7 @@ dataset_fields:
     subfields:
       - field_name: type
   preset: select_dependent_fields
+  validators: scheming_required scheming_choices miteco_inspire_fill_dependent_fields
   display_property: dct:type
   display_snippet: schemingdcat/display_snippets/link_schema.html
   choices:
@@ -2679,6 +2702,7 @@ dataset_fields:
       - field_name: start
   display_property: dct:temporal
   preset: date_dependent_fields
+  validators: scheming_required isodate convert_to_json_if_date miteco_inspire_fill_dependent_fields
   form_group_id: temporal_info
 
 # Temporal end (O)
@@ -2692,6 +2716,7 @@ dataset_fields:
       - field_name: end
   display_property: dct:temporal
   preset: date_dependent_fields
+  validators: scheming_required isodate convert_to_json_if_date miteco_inspire_fill_dependent_fields
   form_group_id: temporal_info
 
 # TO MIGRATE: Temporal coverage dict. Filling with temporal_* values
@@ -3292,7 +3317,7 @@ dataset_fields:
   label:
     en: Coordinate Reference System
     es: Sistema de Referencia de Coordenadas
-  validators: ignore_missing schemingdcat_valid_url
+  validators: ignore_missing schemingdcat_valid_url miteco_inspire_omit_invalid
   display_snippet: schemingdcat/display_snippets/link_epsg.html
   form_placeholder: http://www.opengis.net/def/crs/EPSG/0/4326
   help_text:
@@ -3307,6 +3332,7 @@ dataset_fields:
     en: Bounding Box
     es: Extensión espacial
   preset: spatial_dependent_fields
+  validators: schemingdcat_spatial_uri_validator ignore_missing schemingdcat_valid_json_object miteco_inspire_fill_spatial_dependent_fields
   dependent_fields:
     field_name: spatial_coverage
     subfields:
@@ -4037,6 +4063,7 @@ dataset_fields:
 
 # Spatial representation type (O)
 - field_name: representation_type
+  validators: scheming_required scheming_choices miteco_inspire_omit_invalid
   label: 
     en: Spatial representation Type
     es: Tipo de representación espacial
@@ -4103,6 +4130,7 @@ dataset_fields:
 
 # Conditions for access and use and limitations on public access (M)
 - field_name: access_rights
+  validators: default(http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations) scheming_required scheming_choices miteco_inspire_omit_invalid
   label:
     en: Access Rights
     es: Derechos de acceso
@@ -4214,6 +4242,29 @@ dataset_fields:
   preset: date
   form_group_id: version_notes
 
+- field_name: is_spatial_advanced
+  label: 
+    en: State of spatial advanced metadata
+    es: Estado de los metadatos espaciales avanzados
+  validators: default(False) miteco_boolean
+  form_snippet: schemingdcat/form_snippets/spatial_advanced.html
+  display_snippet: null
+  required: False
+  form_group_id: spatial_xml_metadata
+  choices:
+    - value: False
+    - value: True
+  
+
+- field_name: spatial_advanced_xml
+  label: 
+    en: Metadata identifier
+    es: Identificador de los metadatos
+  form_snippet: schemingdcat/form_snippets/inspire_xml.html
+  display_snippet: null
+  required: False
+  form_group_id: spatial_xml_metadata
+
 #--Resource/Distribution (dcat:Distribution) fields--#
 resource_fields:
 
@@ -4231,7 +4282,7 @@ resource_fields:
   label:
     en: Access URL
     es: URL de acceso
-  validators: schemingdcat_access_url_if_empty_same_as_url unicode_safe miteco_miteco_dataset_ogc_normalize
+  validators: miteco_inspire_access_url_if_empty_same_as_url unicode_safe miteco_miteco_dataset_ogc_normalize
   form_snippet: null
   display_property: dcat:accessURL
   display_snippet: schemingdcat/display_snippets/link.html
@@ -4245,7 +4296,7 @@ resource_fields:
   label:
     en: Download URL
     es: URL de descarga
-  validators: schemingdcat_download_url_if_empty_same_as_url unicode_safe
+  validators: miteco_inspire_download_url_if_empty_same_as_url unicode_safe
   display_property: dcat:downloadURL
   display_snippet: schemingdcat/display_snippets/link.html
   help_text:
@@ -4321,6 +4372,7 @@ resource_fields:
     es: Fecha de creación
   display_property: dct:created
   preset: date_created
+  validators: miteco_inspire_if_empty_datenow scheming_required isodate convert_to_json_if_date miteco_inspire_omit_invalid
   form_group_id: resource_identification
 
 # Date of last revision (M)
@@ -4330,7 +4382,7 @@ resource_fields:
     es: Fecha de última modificación
   display_property: dct:modified
   form_snippet: null
-  validators: miteco_preserve_date_modified scheming_required isodate convert_to_json_if_date
+  validators: miteco_preserve_date_modified scheming_required isodate convert_to_json_if_date miteco_inspire_omit_invalid
   form_group_id: resource_identification
 
 # Resource character encoding (C)
@@ -4691,6 +4743,7 @@ resource_fields:
 
 # Resource limitations on public access (M)
 - field_name: rights
+  validators: scheming_required scheming_choices miteco_inspire_omit_invalid
   label:
     en: Resource access Rights
     es: Derechos de acceso del recurso
@@ -4793,7 +4846,7 @@ resource_fields:
   label:
     en: Coordinate Reference System
     es: Sistema de Referencia de Coordenadas
-  validators: ignore_missing schemingdcat_valid_url
+  validators: ignore_missing schemingdcat_valid_url miteco_inspire_omit_invalid
   display_snippet: schemingdcat/display_snippets/link_epsg.html
   form_placeholder: http://www.opengis.net/def/crs/EPSG/0/4326
   help_text:
