@@ -33,9 +33,7 @@ from ckan.lib.navl.dictization_functions import Missing
 
 log = logging.getLogger(__name__)
 
-from ckanext.inspire.validators import all_validators as _inspire_validators
-
-all_validators = dict(_inspire_validators)
+all_validators = {}
 
 FORM_EXTRAS = ('__extras',)
 

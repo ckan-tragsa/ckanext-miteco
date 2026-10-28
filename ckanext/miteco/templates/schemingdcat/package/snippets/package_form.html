@@ -3,13 +3,11 @@
 {% block secondary_content %}
   {% set schema = h.schemingdcat_get_cached_schema(dataset_type) %}
   {% set form_groups = h.schemingdcat_get_dataset_type_form_groups(dataset_type) %}
-  {% set is_dataset_edit = (form_style == 'edit' or (data and (data.get('id') or data.get('name')))) %}
-  {% set has_inspire_xml = h.miteco_has_inspire_xml(data) %}
   <ul>
     {% for form_group in form_groups %}
-      {% if form_group.form_group_id != 'spatial_xml_metadata' or (is_dataset_edit and not has_inspire_xml) %}
+      {% block dataset_navigation_item scoped %}
         <li><a href="#{{ form_group.form_group_id }}" class="secondary-link">{{ h.scheming_language_text(form_group.label) }}</a></li>
-      {% endif %}
+      {% endblock %}
     {% endfor %}
   </ul>
 {% endblock %}
@@ -29,18 +27,11 @@
     {% set user_is_org_admin = (data.owner_org and h.check_access('organization_update', {'id':data.owner_org})) %}
     {% set user_is_admin = h.check_access('sysadmin') or user_is_org_admin %}
 
-    {# Filtrar tabs: 'spatial_advanced' solo debe aparecer en la edición de datasets no-inspire (sin XML) #}
-    {% set is_dataset_edit = (form_style == 'edit' or (data and (data.get('id') or data.get('name')))) %}
-    {% set has_inspire_xml = h.miteco_has_inspire_xml(data) %}
     {% set all_tabs = [] %}
     {% for tab in raw_tabs %}
-        {% if tab.form_tab == 'spatial_advanced' %}
-            {% if is_dataset_edit and not has_inspire_xml %}
-                {% set _ = all_tabs.append(tab) %}
-            {% endif %}
-        {% else %}
+        {% block dataset_form_tab scoped %}
             {% set _ = all_tabs.append(tab) %}
-        {% endif %}
+        {% endblock %}
     {% endfor %}
 
     {% if not all_tabs %}

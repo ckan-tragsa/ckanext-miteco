@@ -10,14 +10,8 @@ from ckan import logic
 
 from ckanext.miteco import helpers, validators, blueprint, config
 import ckanext.miteco.logic.auth.ckan as ckan_auth 
-import ckanext.inspire.model as insp_model
-import ckanext.inspire.blueprint as insp_blueprint
-import ckanext.inspire.logic.action as inspire_api
 import ckanext.miteco.config as miteco_config
-from ckanext.inspire.validation.validation import ISO19139InspireSchema as inspireValidator
 from ckanext.miteco.lib.rdfParser import mitecoRDFParser
-from ckanext.spatial.interfaces import ISpatialHarvester
-from ckanext.inspire.plugin import InspirePlugin as _InspireHooks, add_template_directory as _add_inspire_templates
 
 
 log = logging.getLogger(__name__)
@@ -33,6 +27,7 @@ except AttributeError:
 @config_declarations
 class MitecoPlugin(p.SingletonPlugin, DefaultTranslation):
     p.implements(p.IConfigurer)
+    p.implements(p.IConfigurable)
     p.implements(p.IActions)
     p.implements(p.IAuthFunctions)
     p.implements(p.IBlueprint)
@@ -43,9 +38,11 @@ class MitecoPlugin(p.SingletonPlugin, DefaultTranslation):
     # IConfigurer
     def update_config(self, config_):
         p.toolkit.add_template_directory(config_, 'templates')
-        _add_inspire_templates(config_)
         p.toolkit.add_public_directory(config_, 'public')
         p.toolkit.add_resource("assets", "ckanext-miteco")
+
+    def configure(self, config):
+        miteco_config.miteco_rdf_parser = mitecoRDFParser()
 
     # Auth functions
     def get_auth_functions(self) -> typing.Dict[str, typing.Callable]:
@@ -53,7 +50,7 @@ class MitecoPlugin(p.SingletonPlugin, DefaultTranslation):
 
     # Blueprints
     def get_blueprint(self):
-        return [blueprint.miteco, insp_blueprint.inspire]
+        return [blueprint.miteco]
 
     # Helpers
     def get_helpers(self):
@@ -62,10 +59,7 @@ class MitecoPlugin(p.SingletonPlugin, DefaultTranslation):
 
     # Validators
     def get_validators(self):
-        from ckanext.inspire.schema import get_import_validators
-        registered = dict(validators.all_validators)
-        registered.update(get_import_validators())
-        return registered
+        return dict(validators.all_validators)
     
     # IActions
     def get_actions(self):
@@ -92,39 +86,6 @@ def _get_logic_functions(module_root, logic_functions={}):
     return logic_functions
     '''
 
-class InspirePlugin(p.SingletonPlugin, DefaultTranslation):
-    p.implements(p.IActions)
-    p.implements(p.IConfigurable)
-    p.implements(ISpatialHarvester)
-    p.implements(p.IPackageController, inherit=True)
-
-    #IConfigurable
-    def configure(self, config):
-        miteco_config.miteco_rdf_parser = mitecoRDFParser() 
-        insp_model.setup()
-
-    #IActions
-    def get_actions(self):
-        log.debug(inspire_api.all_calls)
-        return dict(inspire_api.all_calls)
-
-    #ISpatialHarvester
-    def get_package_dict(self, context, data_dict):
-        return data_dict['package_dict']
-
-    def get_validators(self):
-        return [inspireValidator]
-
-    def transform_to_iso(self, original_document, original_format, harvest_object):
-        return None
-
-    # IPackageController: implementation owned by ckanext.inspire.
-    after_dataset_create = _InspireHooks.after_dataset_create
-    after_dataset_update = _InspireHooks.after_dataset_update
-    _ensure_inspire_xml = _InspireHooks._ensure_inspire_xml
-
-
- 
 def _get_logic_functions(module_root, logic_functions=None, decorator=None):
     """
     Retrieves and aggregates logic functions from specified submodules, filtering by decorator.

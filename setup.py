@@ -85,7 +85,6 @@ setup(
     entry_points='''
         [ckan.plugins]
         miteco=ckanext.miteco.plugin:MitecoPlugin
-        miteco_inspire=ckanext.miteco.plugin:InspirePlugin
 
         [ckan.rdf.profiles]
         miteco_dcat_ap=ckanext.miteco.profiles:MitecoDCATAPProfile

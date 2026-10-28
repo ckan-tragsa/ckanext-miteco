@@ -1,6 +1,5 @@
 import json
 import logging
-from ckanext.inspire.fields import read_fields, write_fields
 
 from rdflib import URIRef, BNode, Literal
 from ckanext.dcat.profiles.base import URIRefOrLiteral, CleanedURIRef, Namespace
@@ -60,13 +59,12 @@ class MitecoDCATAPProfile(EuGeoDCATAP2Profile, EuDCATAP3Profile, EuDCATAPSchemin
 
         self._miteco_map_values(dataset_dict, dataset_ref)
 
-        return read_fields(self, dataset_dict, dataset_ref)
+        return dataset_dict
 
     def graph_from_dataset(self, dataset_dict, dataset_ref):
 
         EuGeoDCATAP2Profile.graph_from_dataset(self, dataset_dict, dataset_ref)
         self._graph_from_dataset_v2_scheming(dataset_dict, dataset_ref)
-        write_fields(self, dataset_dict, dataset_ref)
 
     def _miteco_dataset_set_defaults(self, dataset_dict, dataset_ref):
         dataset_dict.update(RDF_DATASET_TEMPLATE)
