@@ -47,7 +47,9 @@ class MitecoPlugin(p.SingletonPlugin, DefaultTranslation):
 
     # Auth functions
     def get_auth_functions(self) -> typing.Dict[str, typing.Callable]:
-        return {}
+        return {
+            "package_activity_list": ckan_auth.package_activity_list,
+        }
 
     # Blueprints
     def get_blueprint(self):
