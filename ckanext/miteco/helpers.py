@@ -306,3 +306,14 @@ def miteco_has_inspire_xml(pkg):
 def miteco_read_log(route):
     h.get
 
+
+@helper
+@p.toolkit.chained_helper
+def build_nav_icon(next_func, menu_item, title, **kw):
+    if menu_item == 'activity.package_activity':
+        pkg_id = kw.get('id')
+        if not pkg_id or not h.check_access('package_update', {'id': pkg_id}):
+            return ''
+    return next_func(menu_item, title, **kw)
+
+
