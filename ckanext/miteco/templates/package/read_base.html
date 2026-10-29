@@ -1,13 +1,5 @@
 {% ckan_extends %}
 
-{% block content_primary_nav %}
-  {{ h.build_nav_icon(dataset_type ~ '.read', _('Dataset'),  id=pkg.name, icon='sitemap') }}
-  {{ h.build_nav_icon(dataset_type ~ '.groups', h.humanize_entity_type('group', default_group_type, 'content tab') or _('Groups'), id=pkg.name, icon='users') }}
-  {% if h.check_access('package_update', {'id': pkg.id }) %}
-    {{ h.build_nav_icon('activity.package_activity', _('Activity Stream'), id=pkg.name, icon='clock') }}
-  {% endif %}
-{% endblock %}
-
 {% block content_action %}
   {% if h.check_access('package_update', {'id':pkg.id }) %}
     {% if h.miteco_has_inspire_xml(pkg) %}
