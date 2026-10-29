@@ -28,6 +28,8 @@ For the combined catalog, install that package and assemble the ordinary schema 
 
 Without XML management, use `miteco` with its ordinary schema and `miteco_dcat_ap`; the XML package and its profiles are not required. The ordinary date and OGC URL validators remain in the theme; import-specific exceptions belong to the XML package's adapters.
 
+When the `activity` plugin is enabled, place `miteco` before `activity` in `ckan.plugins` so the theme controls dataset navigation and applies its visibility rules. In the combined configuration, preserve the order `inspire inspire_spatial miteco activity` within the existing plugin list.
+
 ## TODO: Requirements
 ### Compatibility
 Compatibility with core CKAN versions:
