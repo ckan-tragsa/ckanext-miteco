@@ -86,12 +86,11 @@ setup(
         [ckan.plugins]
         miteco=ckanext.miteco.plugin:MitecoPlugin
 
-        [ckan.rdf.profiles]
-        miteco_dcat_ap=ckanext.miteco.profiles:MitecoDCATAPProfile
-
-
         # Harvesters
         miteco_csw_harvester=ckanext.miteco.harvesters:MITECOCSWHarvester
+
+        [ckan.rdf.profiles]
+        miteco_dcat_ap=ckanext.miteco.profiles:MitecoDCATAPProfile
 
         [babel.extractors]
         ckan = ckan.lib.extract:extract_ckan
