@@ -2,17 +2,11 @@ import logging
 import uuid
 import datetime
 from urllib.parse import urlparse
-from ckan.lib.navl.dictization_functions import flatten_dict, unflatten
-from ckanext.dcat.processors import RDFParserException, RDFParser
 
 import ckan.plugins as p
-from ckan.common import _
 from ckantoolkit import missing
 
 from ckanext.schemingdcat.utils import _load_yaml
-from ckanext.schemingdcat.lib.csw_mapper.xslt_transformer import XSLTTransformer
-from ckanext.dcat.processors import RDFParserException, RDFParser
-from ckanext.miteco.lib.rdfParser import mitecoRDFParser
 
 
 from ckanext.schemingdcat.config import (
@@ -24,7 +18,6 @@ from ckanext.miteco.config import (
     MITECO_DEFAULT_HVD_CATEGORY,   
     MITECO_DEFAULT_GENERAL_TYPE_HVDS,
     MITECO_INSPIRE_GENERAL_TYPE,
-    miteco_rdf_parser
     
 )
 

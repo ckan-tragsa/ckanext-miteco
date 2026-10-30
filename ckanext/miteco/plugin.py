@@ -10,8 +10,6 @@ from ckan import logic
 
 from ckanext.miteco import helpers, validators, blueprint, config
 import ckanext.miteco.logic.auth.ckan as ckan_auth 
-import ckanext.miteco.config as miteco_config
-from ckanext.miteco.lib.rdfParser import mitecoRDFParser
 
 
 log = logging.getLogger(__name__)
@@ -27,7 +25,6 @@ except AttributeError:
 @config_declarations
 class MitecoPlugin(p.SingletonPlugin, DefaultTranslation):
     p.implements(p.IConfigurer)
-    p.implements(p.IConfigurable)
     p.implements(p.IActions)
     p.implements(p.IAuthFunctions)
     p.implements(p.IBlueprint)
@@ -40,9 +37,6 @@ class MitecoPlugin(p.SingletonPlugin, DefaultTranslation):
         p.toolkit.add_template_directory(config_, 'templates')
         p.toolkit.add_public_directory(config_, 'public')
         p.toolkit.add_resource("assets", "ckanext-miteco")
-
-    def configure(self, config):
-        miteco_config.miteco_rdf_parser = mitecoRDFParser()
 
     # Auth functions
     def get_auth_functions(self) -> typing.Dict[str, typing.Callable]:
