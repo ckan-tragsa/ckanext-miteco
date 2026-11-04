@@ -25,7 +25,7 @@ from ckanext.schemingdcat.profiles.dcat_config import (
     )
 DCTERMS = Namespace("http://purl.org/dc/terms/")
 
-from ckanext.miteco.config import RDF_DATASET_TEMPLATE, RDF_PREFIX
+from ckanext.miteco.config import RDF_DATASET_TEMPLATE
 
 log = logging.getLogger(__name__)
 
@@ -55,10 +55,6 @@ class MitecoDCATAPProfile(EuGeoDCATAP2Profile, EuDCATAP3Profile, EuDCATAPSchemin
         # GeoDCAT-AP 2 properties
         dataset_dict = self._parse_dataset_geodcat_ap_v2(dataset_dict, dataset_ref)
 
-        dataset_dict = self._parse_dataset_miteco(dataset_dict, dataset_ref)
-
-        self._miteco_map_values(dataset_dict, dataset_ref)
-
         return dataset_dict
 
     def graph_from_dataset(self, dataset_dict, dataset_ref):
@@ -70,37 +66,6 @@ class MitecoDCATAPProfile(EuGeoDCATAP2Profile, EuDCATAP3Profile, EuDCATAPSchemin
         dataset_dict.update(RDF_DATASET_TEMPLATE)
         return dataset_dict
     
-    def _parse_dataset_miteco(self, dataset_dict, dataset_ref):
-        #log.debug(dataset_dict)
-        value = self.g.query("".join([RDF_PREFIX,
-                             f"""
-                                SELECT ?id
-                                WHERE{{
-                                    <{dataset_ref}> foaf:isPrimaryTopicOf ?node .
-                                    ?node dct:identifier ?id
-                                }}
-                                """]))
-        if value:
-            for row in value:
-                dataset_dict['id'] = str(row['id'])
-
-        for key, predicate in (
-            ("topic", GEODCATAP.topicCategory),
-        ):
-            value = self._object_value(dataset_ref, predicate)
-            if value:
-                dataset_dict[key] = value
-
-        return dataset_dict
-    
-    def _miteco_map_values(self, dataset_dict, dataset_ref):
-        rules = {
-            "inspire_id": "identifier"
-        }
-        for rule in rules.keys():
-            dataset_dict[rule] = dataset_dict.pop(rules[rule], None)
-            
-
     @staticmethod
     def _not_empty_dict(data_dict):
         return any(data_dict.values())

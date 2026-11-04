@@ -94,22 +94,6 @@ OGC2CKAN_HARVESTER_MD_CONFIG = {
     'valid': None
 }
 
-RDF_PREFIX = f"""
-PREFIX dct: <http://purl.org/dc/terms/>
-PREFIX hydra: <http://www.w3.org/ns/hydra/core#>
-PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
-PREFIX spdx: <http://spdx.org/rdf/terms#>
-PREFIX dcat: <http://www.w3.org/ns/dcat#>
-PREFIX adms: <http://www.w3.org/ns/adms#>
-PREFIX locn: <http://www.w3.org/ns/locn#>
-PREFIX cnt: <http://www.w3.org/2011/content#>
-PREFIX dcatap: <http://data.europa.eu/r5r/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
-PREFIX eli: <http://data.europa.eu/eli/ontology#>
-"""
 
 RDF_DATASET_TEMPLATE = {
     "access_rights": "http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations",
