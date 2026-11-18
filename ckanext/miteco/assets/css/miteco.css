@@ -2,12 +2,12 @@
 @import url('/catalogo/static/fonts/icomoon.ttf');
 
 /* ── Inspire XML viewer buttons ───────────────────────────────────────────── */
-.btn-miteco-primary {
+body .btn.btn-inspire-primary {
     color: #fff;
     background-color: var(--sct-primary-color);
     border-color: var(--sct-primary-color);
 }
-.btn-miteco-primary:hover, .btn-miteco-primary:focus {
+body .btn.btn-inspire-primary:hover, body .btn.btn-inspire-primary:focus {
     color: #fff;
     background-color: var(--miteco-flag-primary-color);
     border-color: var(--miteco-flag-primary-color);
@@ -32,12 +32,12 @@
     background-color: var(--sct-secondary-color);
     border-color: var(--sct-secondary-color);
 }
-.btn-miteco-primary-outline {
+body .btn.btn-inspire-primary-outline {
     color: var(--sct-primary-color);
     background-color: transparent;
     border-color: var(--sct-primary-color);
 }
-.btn-miteco-primary-outline:hover, .btn-miteco-primary-outline:focus {
+body .btn.btn-inspire-primary-outline:hover, body .btn.btn-inspire-primary-outline:focus {
     color: #fff;
     background-color: var(--sct-primary-color);
     border-color: var(--sct-primary-color);
