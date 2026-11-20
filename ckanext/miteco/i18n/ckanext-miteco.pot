@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-miteco 0.1.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-10-27 12:36+0000\n"
+"POT-Creation-Date: 2026-10-28 09:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,38 +16,6 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.10.3\n"
-
-#: ckanext/miteco/validators.py:369
-#, python-format
-msgid "Invalid XML syntax: %s"
-msgstr ""
-
-#: ckanext/miteco/validators.py:378
-#, python-format
-msgid "INSPIRE validation error: %s"
-msgstr ""
-
-#: ckanext/miteco/inspire/blueprint.py:49
-msgid "User must be logged in to import XML"
-msgstr ""
-
-#: ckanext/miteco/inspire/blueprint.py:71
-msgid "No XML content provided"
-msgstr ""
-
-#: ckanext/miteco/inspire/schema.py:104
-msgid ""
-"El valor del XML no es representable en este campo de CKAN y se ha omitido. "
-"Se conserva el valor CKAN existente, si lo hay, y el dato original permanece "
-"en el XML descargable."
-msgstr ""
-
-#: ckanext/miteco/inspire/schema.py:135
-msgid ""
-"The XML update frequency cannot be represented in the CKAN schema. It has "
-"been omitted from the imported fields and remains unchanged in the original "
-"XML. Any existing CKAN frequency is preserved."
-msgstr ""
 
 #: ckanext/miteco/templates/header.html:19
 #: ckanext/miteco/templates/home/snippets/about_portal.html:39
@@ -298,16 +266,6 @@ msgstr ""
 msgid "Dataset information"
 msgstr ""
 
-#: ckanext/miteco/templates/miteco/snippets/miteco_dataset_info.html:86
-#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:52
-#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:62
-msgid "INSPIRE Metadata"
-msgstr ""
-
-#: ckanext/miteco/templates/miteco/snippets/miteco_dataset_info.html:89
-msgid "View XML"
-msgstr ""
-
 #: ckanext/miteco/templates/openapi/index.html:9
 #: ckanext/miteco/templates/openapi/index.html:16
 #: ckanext/miteco/templates/openapi/index.html:41
@@ -359,114 +317,6 @@ msgstr ""
 msgid "None - top level"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:21
-msgid ""
-"Select an ISO 19139 / INSPIRE XML file to create and automatically populate "
-"the new dataset."
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:30
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:73
-msgid "import xml"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:37
-msgid "Seleccione un archivo XML arriba para previsualizar su contenido e importarlo."
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:49
-msgid "INSPIRE Template Preview (Draft)"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:49
-msgid ""
-"Template automatically generated from current metadata. To activate it, "
-"download the file, edit if necessary and import it."
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:77
-msgid "Download XML"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:82
-msgid "Download original XML"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:87
-msgid "Download INSPIRE XML template"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:90
-msgid ""
-"The template is generated from the metadata saved in CKAN. Save your form "
-"changes before downloading it."
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:105
-msgid "Version history"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:109
-msgid "Date"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:111
-msgid "Cargando historial de versiones..."
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:115
-msgid "No saved versions yet."
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:130
-msgid "Confirmar importación de XML"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:136
-msgid "¿Desea importar el archivo XML seleccionado para este conjunto de datos?"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:139
-msgid ""
-"Se validará la conformidad INSPIRE y se actualizarán los metadatos del "
-"conjunto de datos con la información del archivo XML."
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:145
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:176
-msgid "Cancelar"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:148
-msgid "Confirmar e importar"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:161
-msgid "Cargar versión anterior del XML"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:167
-msgid "¿Desea cargar esta versión histórica del XML INSPIRE?"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:171
-msgid ""
-"El contenido visualizado en el editor se reemplazará por la versión "
-"seleccionada."
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:179
-msgid "Cargar versión"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:193
-msgid "Aviso"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/form_snippets/inspire_xml.html:202
-msgid "Aceptar"
-msgstr ""
-
 #: ckanext/miteco/templates/schemingdcat/package/snippets/data_api_button.html:7
 msgid "Loading..."
 msgstr ""
@@ -484,31 +334,18 @@ msgid "Download"
 msgstr ""
 
 #: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:53
-#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:63
-msgid "Geospatial XML"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:57
-msgid "INSPIRE (ISO 19139)"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:67
-msgid "INSPIRE XML Template (ISO 19139)"
-msgstr ""
-
-#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:73
 msgid "CSW Endpoint"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:73
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:53
 msgid "Geospatial Metadata"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:85
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:65
 msgid "RDF DCAT Endpoint"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:86
+#: ckanext/miteco/templates/schemingdcat/package/snippets/download_metadata.html:66
 msgid "Linked Data"
 msgstr ""
 
@@ -532,7 +369,7 @@ msgstr ""
 msgid "Responsible party"
 msgstr ""
 
-#: ckanext/miteco/templates/schemingdcat/package/snippets/package_form.html:57
+#: ckanext/miteco/templates/schemingdcat/package/snippets/package_form.html:48
 msgid "There are required fields in this category"
 msgstr ""
 
@@ -542,15 +379,6 @@ msgstr ""
 
 #: ckanext/miteco/templates/schemingdcat/snippets/search_form.html:19
 msgid "Order by"
-msgstr ""
-
-#: ckanext/miteco/templates/snippets/add_dataset.html:4
-msgid "Add Dataset"
-msgstr ""
-
-#: ckanext/miteco/templates/snippets/add_dataset.html:9
-#: ckanext/miteco/templates/snippets/add_dataset.html:12
-msgid "import from INSPIRE XML"
 msgstr ""
 
 #: ckanext/miteco/templates/user/edit_user_form.html:3

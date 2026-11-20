@@ -20,6 +20,18 @@
 ## Overview
 `ckanext-miteco` extension is a tool designed to extend and customise the CKAN metadata and Open Data catalogue for the Spanish Ministry for Ecological Transition and Demographic Challenge ([MITECO](https://www.miteco.gob.es/)). This extension provides specific and thematic functionalities that allow a better management, visualisation and analysis of data related to the ecological transition and the demographic challenge. 
 
+## INSPIRE XML integration
+
+The `miteco` plugin and its ordinary catalog schema operate independently of XML management. The former `miteco_inspire` registration is replaced by the `inspire` and `inspire_spatial` plugins supplied by `ckanext-inspire`.
+
+For the combined catalog, install that package and assemble the ordinary schema with its XML definitions using `python -m ckanext.inspire.schema_compose BASE OUTPUT`. Configure the generated schema in `scheming.dataset_schemas`, put the XML plugins before `miteco` in the existing plugin list, and use `miteco_dcat_ap inspire_compat_fields` as the RDF profile chain. Keep the other plugins and schemas required by the deployment. The XML package documents installation and the schema compatibility requirements.
+
+The INSPIRE package also owns the spatial form group and the `topic`, `theme`, `inspire_id`, `reference_system`, `representation_type` and `spatial_resolution_in_meters` field definitions. Regenerate the combined schema after updating both extensions. The `inspire_compat_fields` profile supplies metadata-record identity, topic mapping and the resource identifier mapping; `miteco_dcat_ap` keeps catalog defaults and the underlying GeoDCAT reader. Existing datasets are not migrated or rewritten by this change. Keep the combined schema configured for catalogs that already use these spatial fields; switching to the ordinary schema alone is not a migration procedure.
+
+Without XML management, use `miteco` with its ordinary schema and `miteco_dcat_ap`; the XML package and its profiles are not required. The ordinary date and OGC URL validators remain in the theme; import-specific exceptions belong to the XML package's adapters.
+
+When the `activity` plugin is enabled, place `miteco` before `activity` in `ckan.plugins` so the theme controls dataset navigation and applies its visibility rules. In the combined configuration, preserve the order `inspire inspire_spatial miteco activity` within the existing plugin list.
+
 ## TODO: Requirements
 ### Compatibility
 Compatibility with core CKAN versions:
